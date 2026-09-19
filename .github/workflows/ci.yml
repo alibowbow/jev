@@ -16,7 +16,9 @@ jobs:
         with:
           node-version: '22'
       - name: Validate catalogue and static entry points
-        run: npm test
+        run: |
+          npm ci
+          npm test
       - name: Check JavaScript syntax
         run: |
           node --check assets/data.js
