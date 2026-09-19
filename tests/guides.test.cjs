@@ -55,22 +55,22 @@ test('scenario diagrams expose only the selected scenario and keep the simulated
   assert.match(d.querySelector('.example-disclosure').textContent, /실제 Jev 호출.*일어나지 않습니다/);
 });
 
-test('idea categories show their matching cards, update the count and reset to all eighteen', t => {
+test('idea categories show their matching cards, update the count and reset to all fourteen', t => {
   const d = setup(t, 'ideas.html');
   const cards = [...d.querySelectorAll('[data-idea-category]')];
-  assert.equal(cards.length, 18);
+  assert.equal(cards.length, 14);
   for (const button of d.querySelectorAll('[data-idea-filter]:not([data-idea-filter="all"])')) {
     button.click();
     const visible = cards.filter(card => !card.hidden);
-    const expected = button.dataset.ideaFilter === 'medical' ? 6 : 3;
+    const expected = button.dataset.ideaFilter === 'medical' ? 2 : 3;
     assert.equal(visible.length, expected);
     assert.ok(visible.every(card => card.dataset.ideaCategory === button.dataset.ideaFilter));
     assert.equal(d.getElementById('idea-count').textContent, `${expected}개 아이디어`);
     assert.equal(d.querySelectorAll('[data-idea-filter][aria-pressed="true"]').length, 1);
   }
   d.querySelector('[data-idea-filter="all"]').click();
-  assert.equal(cards.filter(card => !card.hidden).length, 18);
-  assert.equal(d.getElementById('idea-count').textContent, '18개 아이디어');
+  assert.equal(cards.filter(card => !card.hidden).length, 14);
+  assert.equal(d.getElementById('idea-count').textContent, '14개 아이디어');
 });
 
 
@@ -91,11 +91,11 @@ test('probability comparison updates all marks, percentages, routing and accessi
   }
 });
 
-test('medical deep link exposes six proposals with review scope and resets without leaving stale state', t => {
+test('medical deep link exposes two proposals with review scope and resets without leaving stale state', t => {
   const d = setup(t, 'ideas.html', '#medical');
   assert.equal(d.getElementById('medical').hidden, false);
-  assert.equal(d.querySelectorAll('[data-idea-category="medical"]:not([hidden])').length, 6);
-  assert.equal(d.querySelectorAll('[data-idea-category]:not([hidden])').length, 6);
+  assert.equal(d.querySelectorAll('[data-idea-category="medical"]:not([hidden])').length, 2);
+  assert.equal(d.querySelectorAll('[data-idea-category]:not([hidden])').length, 2);
   assert.equal(d.querySelector('[data-idea-filter="medical"]').getAttribute('aria-pressed'), 'true');
   for (const card of d.querySelectorAll('[data-idea-category="medical"]')) {
     assert.ok(card.querySelector('.clinical-boundary').textContent.length > 20);
