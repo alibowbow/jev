@@ -1,0 +1,8 @@
+{
+  "name": "jev-atlas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An independent Korean-language Jev use-case atlas.",
+  "scripts": { "test": "node --test tests/catalog.test.cjs" },
+  "engines": { "node": ">=18" }
+}
