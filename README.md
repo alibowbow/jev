@@ -4,7 +4,9 @@ A Korean, video-first collection of published Jev demonstrations. Independent of
 
 ## Features
 
-- 24 distinct video cases across six categories, with large desktop cards and a single-column mobile layout.
+- 36 distinct video cases across seven categories, with large desktop cards and a single-column mobile layout.
+- A beginner guide (`learn.html`) with interactive examples and official references.
+- Twelve implementation ideas (`ideas.html`) with category filters, first steps and related demos.
 - Korean and English keyword search, category filters, title sorting, result counts and empty states.
 - Browser-local bookmarks, including storage-denied fallback and synchronization between tabs.
 - Shareable `#case=<id>` links that highlight a card without automatically loading a third-party player.
@@ -20,19 +22,20 @@ npm ci
 npm test
 node --check assets/app.js
 node --check assets/data.js
+node --check assets/guide.js
 python3 -m http.server 8080
 ```
 
 Open `http://localhost:8080`. The test dependency is development-only; publish the repository's static entry point and assets.
 
-The 15 automated checks cover catalogue structure and actual DOM interactions, including filtering, search, sorting, bookmarks, sharing, playback errors, retry, modal cleanup, stale asynchronous callbacks and safe text/URL handling. GitHub Actions runs these checks and JavaScript syntax validation. These tests simulate media responses; they do not establish that every external video can play in every browser.
+The automated checks cover catalogue structure and actual DOM interactions, including filtering, search, sorting, bookmarks, sharing, playback errors, retry, modal cleanup, stale asynchronous callbacks and safe text/URL handling. GitHub Actions runs these checks and JavaScript syntax validation. These tests simulate media responses; they do not establish that every external video can play in every browser.
 
 ## Catalogue and attribution
 
-`assets/data.js` contains 24 distinct cases: two publisher-hosted MP4s and 22 X video posts. Records are not duplicated to reach a target count. Video evidence and author-reported performance figures are not independent performance verification. Source links, creator credits and scope notes are retained per case.
+`assets/data.js` contains 36 distinct cases: two publisher-hosted MP4s and 34 X video posts. Records are not duplicated to reach a target count. Video evidence and author-reported performance figures are not independent performance verification. Source links, creator credits and scope notes are retained per case.
 
 The Browser Use demo shows flight search, not completed ticket purchase. DroidRun shows the payment-method screen, not a completed ride order.
 
 Thumbnails load from the publishers' external hosts. Players load only after a user selects a video; bookmarks stay in this browser. Third-party media is linked from original publishers, not copied or rehosted. Availability depends on each publisher and the user's network or content-blocking settings. The source link remains available when an embed fails.
 
-See [integration and validation notes](docs/video-first-review.md).
+See [guide and catalogue update](docs/catalogue-update-2026-09-19.md) and [integration and validation notes](docs/video-first-review.md).

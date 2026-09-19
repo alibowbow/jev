@@ -46,10 +46,10 @@ function setup(t, options = {}) {
   };
 }
 
-test('new shell boots all 24 cards without loading players; filters, search, sorting and reset work', t => {
+test('new shell boots all catalogue cards without loading players; filters, search, sorting and reset work', t => {
   const { d, w, count, input, click } = setup(t);
-  assert.equal(count(), 24);
-  assert.equal(d.getElementById('total-count').textContent, '24');
+  assert.equal(count(), w.JEV_ATLAS.cases.length);
+  assert.equal(d.getElementById('total-count').textContent, String(w.JEV_ATLAS.cases.length));
   assert.equal(d.querySelectorAll('iframe, video, script[src*="widgets.js"]').length, 0);
   click('[data-category="browser"]');
   assert.equal(count(), w.JEV_ATLAS.cases.filter(c => c.category === 'browser').length);
@@ -60,7 +60,7 @@ test('new shell boots all 24 cards without loading players; filters, search, sor
   assert.equal(count(), 0);
   assert.equal(d.getElementById('empty').hidden, false);
   click('#empty-reset');
-  assert.equal(count(), 24);
+  assert.equal(count(), w.JEV_ATLAS.cases.length);
   const select = d.getElementById('sort');
   select.value = 'title'; select.dispatchEvent(new w.Event('change'));
   const titles = [...d.querySelectorAll('.card h2')].map(n => n.textContent);
@@ -90,8 +90,8 @@ test('bookmarks validate IDs, persist, remove from saved view and handle storage
 
 test('unavailable or malformed browser storage never prevents browsing', t => {
   for (const options of [{ saved: '{bad' }, { saved: '{}' }, { blockStorage: true }]) {
-    const { d, count, click } = setup(t, options);
-    assert.equal(count(), 24);
+    const { d, w, count, click } = setup(t, options);
+    assert.equal(count(), w.JEV_ATLAS.cases.length);
     click('[data-save="flight-search"]');
     assert.equal(d.getElementById('saved-count').textContent, '1');
     if (options.blockStorage) assert.match(d.getElementById('toast').textContent, /이 창에만/);

@@ -22,4 +22,5 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check assets/data.js
+          node --check assets/guide.js
           node --check assets/app.js
