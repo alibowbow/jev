@@ -3,7 +3,7 @@
 'use strict';
 const cats = [
  ['browser','브라우저·컴퓨터'], ['work','업무·자동화'], ['data','검색·데이터'],
- ['content','콘텐츠·마케팅'], ['interface','새로운 인터페이스'], ['games','게임']
+ ['content','콘텐츠·마케팅'], ['interface','새로운 인터페이스'], ['games','게임'], ['markets','시장·트레이딩']
 ].map(([id,name]) => ({id,name}));
 // id, category, title, summary, metrics, author, handle, post ID, poster path, source directory slug, note
 const rows = [
@@ -31,6 +31,21 @@ const rows = [
 ['tetris','games','테트리스의 다음 수를, 약 0.3초에.','블록을 어디에 놓을지 빠르게 선택합니다. 제작자는 2분 동안 357개 블록을 놓고 134줄을 지운 플레이 결과를 공개했습니다.',['약 0.3초|한 수 판단','134줄|2분간 공개된 결과'],'Alan Daitch','AlanDaitch','2100438353946513815','ext_tw_video_thumb/2100438029299040256/pu/img/s_cly7mjSq3voOC3','jev-plays-tetris','게임 구현·속도 설정에 따른 제작자 시연 결과이며 표준 게임 벤치마크는 아닙니다.'],
 ['slay-spire','games','카드 게임의 다음 행동을, 0.7초에.','Slay the Spire 2에서 다음 수를 고르는 에이전트를 시험했습니다. 빠른 행동 선택을 게임 조작에 연결한 플레이 영상입니다.',['0.7초|제작자가 공개한 한 수 판단'],'Paul Wei','coolish','2100570517954838897','amplify_video_thumb/2100569632482746369/img/TPuOBiHYCWUWxNOc','slay-the-spire-2','제작자의 개별 실행 결과입니다. 승률이나 전략의 우수성을 입증한 비교가 아닙니다.']
 ];
+// Added after source and published-video checks on 2026-09-19.
+rows.push(
+["x-post-firewall","content","보고 싶지 않은 글, 말로 정해 접어 둔다.","“이런 주제의 글은 숨겨 줘.” 자연어로 정한 기준에 따라 X 게시물을 접는 브라우저 확장 프로그램입니다. 사용자의 기준을 글마다 적용합니다.",["자연어 규칙|X 피드 필터"],"Marcel Pociot","marcelpociot","2100520134481735729","amplify_video_thumb/2100519256425140224/img/-A44e4qCo8mVP8ws","x-post-firewall","제작자의 브라우저 확장 시연입니다. 분류 기준에 따라 보고 싶은 글까지 숨길 수 있으며 모든 게시물의 정확한 필터링을 보장하지 않습니다."],
+["instant-compaction","work","에이전트 기록에서, 필요한 맥락만 남긴다.","쌓인 도구 호출 기록을 관련성으로 평가하고 불필요한 항목을 덜어 냅니다. 긴 요약문을 만드는 대신 남길 기록을 고르는 컨텍스트 정리 실험입니다.",["관련성 평가|에이전트 기록 정리"],"Tamara Tran","tamarajtran","2100694549362553153","amplify_video_thumb/2100694537672998912/img/OF8vottg6-45ZgNl","instant-compaction","기록을 선택·제거하는 방식의 데모입니다. 원문을 요약하는 기능이나 중요한 정보가 전혀 손실되지 않는다는 보장은 아닙니다."],
+["jev-review","work","코딩 에이전트의 작업을, 기준별로 다시 점검.","Jev Review는 코딩 에이전트의 결과를 여러 기준으로 평가하는 실험적 MCP 플러그인입니다. 작성한 코드를 점검하고 개선하는 흐름에 판단을 더합니다.",["MCP 플러그인|코드 평가 루프"],"Niaz Morshed","niazmorshed_","2100465662867218857","amplify_video_thumb/2100465308519759872/img/2uIG43VFGvWzku0s","jev-review","실험적 도구의 제작자 시연입니다. 평가 점수가 테스트 통과, 보안 검증 또는 코드의 정확성을 대신하지 않습니다."],
+["computer-use-without-screenshots","browser","화면을 텍스트로 바꿔, 클릭할 곳을 고른다.","로컬 UI 탐지와 OCR이 화면의 요소와 글자를 추출합니다. Jev가 그 정보를 바탕으로 대상을 선택하면 실행 코드가 컴퓨터를 조작합니다.",["UI 탐지 + OCR|컴퓨터 제어"],"Milind S","milindlabs","2100631847155994852","amplify_video_thumb/2100629037790183424/img/NR6wQpZiC-xjCEsC","computer-use-without-screenshots","Jev가 스크린샷을 직접 읽는 방식이 아닙니다. 제작자가 언급한 약 90ms는 판단 단계에 대한 수치이며 전체 작업 시간은 아닙니다."],
+["jev-trader","markets","시장 상태를 읽고, 매매 행동을 선택하는 봇.","Monad의 Kuru MON–USDC 시장에서 매 블록마다 상태를 읽고 거래 행동을 고르는 공개 실험입니다. Jev의 선택을 실제 거래 코드에 연결합니다.",["매 블록 판단|공개 트레이딩 실험"],"Jarrod Watts","jarrodwatts","2100356151468585346","amplify_video_thumb/2100355999064379392/img/BiAbeDjN57avf2VK","jev-trader","제작자의 코드·영상 공개 사례이며 수익성을 검증한 결과가 아닙니다. 300ms는 설명에 등장하는 블록 간격으로 전체 판단 지연이나 수익률을 뜻하지 않습니다."],
+["predictive-launcher","interface","“방금 받은 PDF”, 이렇게 말해도 찾는다.","파일이나 앱을 정확한 이름 대신 원하는 상황으로 찾습니다. 입력하는 문장에 맞춰 후보 순서를 바꾸는 예측형 런처 시연입니다.",["자연어 → 후보|파일·앱 런처"],"Nader Dabit","dabit3","2100756930054504776","amplify_video_thumb/2100756324845862913/img/8ew1NdHs6k5cReoF","predictive-launcher","파일 메타데이터를 제공하는 앱과 결합한 데모입니다. Jev 자체가 사용자의 디스크를 직접 탐색하는 기능은 아닙니다."],
+["invoice-finder","work","여러 서비스의 송장, 한곳으로 모으기.","서비스의 청구 페이지를 찾아 송장을 목록으로 모으고 내려받는 흐름을 보여 줍니다. 청구서 위치를 찾는 브라우저 작업에 Jev를 연결합니다.",["청구 페이지 탐색|송장 수집"],"Farouq Aldori","FarouqAldori","2100711180704641520","amplify_video_thumb/2100710351536840705/img/716A3kUOeRsyb0eG","invoice-finder","제작자가 공개한 서비스·청구 포털에서의 시연입니다. 모든 웹사이트나 계정에서의 호환성은 검증하지 않았습니다."],
+["realtime-game-levels","games","게임 레벨 구성에, 실시간 판단을 더하다.","Jev의 구조화된 결과를 게임 레벨 구성에 연결한 제작자 시연입니다. 게임을 만드는 코드와 모델의 결과가 함께 움직이는 실험을 살펴봅니다.",["게임 레벨 구성|실시간 시연"],"Hugo Duprez","HugoDuprez","2100953089003921543","amplify_video_thumb/2100952449661992960/img/GEVdw9BvAW7Dv2Gx","realtime-game-levels","제작자가 공개한 게임 구성 데모입니다. Jev가 게임 그래픽이나 자유 형식의 코드를 직접 생성한다는 의미는 아닙니다."],
+["subway-surfers","games","Subway Surfers, 여러 판을 동시에 달린다.","Jev의 행동 선택을 Subway Surfers 플레이에 연결했습니다. 제작자는 여러 게임을 한꺼번에 실행하는 화면과 플레이 결과를 공개했습니다.",["50개 동시 실행|제작자가 공개한 구성"],"Max Blade","_MaxBlade","2100634359099232678","amplify_video_thumb/2100633400717565952/img/KlytLNSLCQA-yY2E","subway-surfers","게임 구현과 속도 설정에 따른 제작자 시연입니다. 표준 벤치마크나 사람보다 우수한 플레이 성능을 입증한 비교는 아닙니다."],
+["ocr-image-classifier","data","이미지 약 900장, 읽은 글자로 분류한다.","OCR로 이미지 속 텍스트를 먼저 추출하고 Jev가 분류를 맡습니다. 문서성 이미지를 빠르게 정리하는 두 단계 파이프라인입니다.",["약 900장|제작자가 공개한 분류량","40초|공개된 처리 시간"],"Fayaz Ahmed","fayazara","2100953838891192789","amplify_video_thumb/2100953271238320128/img/vzUjAo15Bg8tVa_q","ocr-image-classifier","OCR과 Jev를 결합한 제작자 실행 결과입니다. Jev의 직접 이미지 인식 시연이 아니며 독립 정확도 평가는 확인하지 않았습니다."],
+["ai-slop-detector","content","글의 상투적인 표현을, 35가지 기준으로.","반복되는 문구나 과장된 표현 등 글쓰기의 특징을 점검하는 도구입니다. AI처럼 느껴지는 문체를 여러 항목으로 나눠 평가합니다.",["35개 기준|문체 점검"],"Jon Kraayenbrink","kraayenJon","2101157548346794059","amplify_video_thumb/2101157511579508736/img/Ssx23uOBOnKsJyaJ","ai-slop-detector","문체에 대한 휴리스틱 평가입니다. AI 작성 여부, 표절 또는 실제 작성자의 신원을 입증하는 탐지 결과가 아닙니다."],
+["doomscroll-filter","content","관심 주제는 남기고, 낚시성 글은 걸러 보기.","주제를 정해 최근 X 게시물을 모으고 글마다 여러 질문으로 평가합니다. 원하는 내용과 홍보·낚시성 표현을 구분해 피드를 정리하는 시연입니다.",["8개 질문|게시물별 평가"],"Rob Hallam","robj3d3","2101074194260000982","amplify_video_thumb/2101071392385236992/img/CEKcs7SuhRGA5TTV","doomscroll-filter","제작자가 정한 기준과 텍스트·반응 정보를 이용하는 데모입니다. 모든 광고나 낚시성 게시물을 정확하게 탐지한다는 뜻은 아닙니다."]
+);
 const cases = rows.map(([id,category,title,summary,metrics,author,handle,post,poster,slug,note]) => ({
  id,category,title,summary,metrics:metrics.map(s=>{const [value,label]=s.split('|');return {value,label};}),
  author,handle,source:`https://x.com/${handle}/status/${post}`,
@@ -42,5 +57,6 @@ cases[0].media = {...cases[0].media,type:'mp4',url:'https://raw.githubuserconten
 cases[0].code = 'https://github.com/browser-use/jev-ultrafast';
 cases.find(c=>c.id==='sponsor-skip').code = 'https://github.com/trungdq88/youtube-sponsor-detection';
 cases.push({id:'mobile-uber',category:'browser',title:'스마트폰에서 목적지 입력까지, 21초.',summary:'실제 Android의 Uber 앱을 열고 공항에서 금문교까지의 경로를 입력합니다. Jev가 탭할 곳을 결정하며 결제 수단 선택 화면까지 진행합니다.',metrics:[{value:'약 21초',label:'기록된 작업 시간'},{value:'9번',label:'실행한 행동'}],author:'DroidRun / Mobilerun',handle:'droidrun',source:'https://github.com/droidrun/mobile-jev/blob/main/docs/media/uber-demo.mp4',code:'https://github.com/droidrun/mobile-jev',research:'https://github.com/droidrun/mobile-jev',reviewed:'2026-09-19',note:'차량 호출이나 결제 완료를 보여 주는 영상이 아닙니다.',media:{type:'mp4',url:'https://raw.githubusercontent.com/droidrun/mobile-jev/main/docs/media/uber-demo.mp4',poster:'https://raw.githubusercontent.com/droidrun/mobile-jev/main/docs/media/uber-demo.gif',evidence:'publisher-video-file'}});
-window.JEV_ATLAS = Object.freeze({version:2,reviewed:'2026-09-19',categories:cats,cases});
+cases.find(c=>c.id==='jev-trader').code = 'https://github.com/jarrodwatts/jev-trader';
+window.JEV_ATLAS = Object.freeze({version:3,reviewed:'2026-09-19',categories:cats,cases});
 })();
