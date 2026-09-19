@@ -2,3 +2,7 @@
 
 /* Keep the fallback message clear of the play control. */
 .image-failed .image-fallback{padding-bottom:85px}
+.tweet-mount{width:100%;min-width:0}.player-host.x-host{flex-direction:column}
+.share-link{display:block;width:100%;padding:12px;margin-bottom:18px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--ink)}
+.metric strong{white-space:normal;overflow-wrap:anywhere}.metric{flex:0 1 auto}
+@media(max-width:360px){.metric{margin-right:10px;padding-right:10px}.metric strong{font-size:17px}.card-actions{gap:8px}.author{max-width:35%}}

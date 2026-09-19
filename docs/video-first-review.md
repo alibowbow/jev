@@ -1,31 +1,28 @@
-# Video-first showcase review
+# Video-first runtime integration
 
-This branch stages the video-first redesign for review. It is not ready to merge or deploy.
+## Resolved problem
 
-## Intended interface
+PR #1 replaced the page, styles and catalogue, but retained the old `assets/app.js`. The old runtime expected removed DOM IDs and fields such as `flow` and `sources`, causing startup to fail and leaving the published catalogue empty.
 
-- Large cards in a two-column desktop grid and a one-column mobile grid.
-- Compact category buttons above the grid instead of a sidebar.
-- A result-focused headline, short Korean summary, large video preview, author-reported figures, and original source on each card.
-- Search, local bookmarks, shareable case anchors, and on-demand video dialogs.
-- Publisher MP4 playback and official X embeds, with original links retained when playback is unavailable.
+The replacement runtime uses the current schema and native DOM construction. No catalogue string is inserted as HTML. External links, images and media are restricted to the expected HTTPS publisher hosts.
 
-## Catalogue scope
+## Completed integration
 
-The prepared dataset contains 24 distinct cases across six categories, including two publisher-hosted MP4s and 22 X video posts. Published video evidence is not an end-to-end playback verification. The catalogue does not claim 100 verified videos, and no cases were invented to reach that number.
+- [x] Render all 24 existing cases and six category filters.
+- [x] Search, title sorting, reset, empty states and result counts.
+- [x] Local bookmarks with valid-ID filtering, storage-denied fallback and cross-tab updates.
+- [x] Share-link copying and a visible manual-copy fallback.
+- [x] Case anchors highlight and focus a card without automatically loading a player.
+- [x] On-demand MP4 playback and X `createTweet` embeds.
+- [x] Permanent original-source link, loading timeout and retry.
+- [x] Epoch guards and per-request widget containers prevent stale responses from replacing newer media.
+- [x] Closing a dialog releases videos/iframes and restores keyboard focus.
+- [x] Asset version updated so browsers request the integrated runtime.
+- [x] Existing seven structural tests and eight DOM behavior tests pass (15 total).
+- [x] JavaScript syntax checks pass; CI installs its locked test dependency.
 
-## Blocking integration task
+## Validation boundaries
 
-The connection security check rejected the write for the prepared `assets/app.js`. That replacement is not included in this branch. The existing runtime expects the old page structure and must not be used to validate the redesigned shell. Do not merge this draft until the matching runtime has been added through an authorized write and the combined result has been tested.
+The DOM tests simulate widget and media success, failure, timeout and late callbacks. Native browser layout, media decoding and external-service availability require browser verification. The catalogue contains 24 published video references; this is not a claim that all 24 external videos have played successfully or that their reported performance has been independently reproduced.
 
-## Review checklist
-
-- [ ] Add the matching video-first `assets/app.js` runtime.
-- [ ] Confirm the shell, stylesheet, dataset, and runtime use the same DOM IDs and schema.
-- [ ] Run the updated catalogue tests and JavaScript syntax checks on the combined branch.
-- [ ] Test category filtering, search, bookmarks, share links, dialogs, and keyboard navigation.
-- [ ] Check desktop and mobile layouts.
-- [ ] Verify actual external video playback; record blocked or unavailable videos as failures.
-- [ ] Remove this integration blocker only after verification, then mark the PR ready for review.
-
-No merge, production branch update, or deployment is part of this draft review.
+Desktop and mobile responsive rules remain in `assets/styles.css`; narrow-screen metric wrapping and the manual share-link field are included in this integration.

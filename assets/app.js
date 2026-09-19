@@ -1,75 +1,398 @@
-/* Jev Atlas: dependency-free, local-first catalogue UI. */
+/* Jev Atlas: static catalogue, browser-local bookmarks, on-demand media. */
 (() => {
-'use strict';
-const data=window.JEV_ATLAS;
-if(!data){document.getElementById('cards').textContent='목록을 불러오지 못했습니다. 페이지를 새로고침해 주세요.';return;}
-const $=(selector,root=document)=>root.querySelector(selector);
-const $$=(selector,root=document)=>Array.from(root.querySelectorAll(selector));
-const esc=value=>String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-const paths={
- search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/>',
- bookmark:'<path d="M6 4h12v17l-6-4-6 4z"/>',
- grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
- workflow:'<rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M9 6h7a2 2 0 0 1 2 2v7M6 9v9h9"/>',
- monitor:'<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/>',
- shield:'<path d="m12 2 8 4v6c0 5-8 10-8 10S4 17 4 12V6zM8 12l3 3 5-6"/>',
- file:'<path d="M14 2H5v20h14V7zM14 2v5h5M8 12h8m-8 4h6"/>',
- headphones:'<path d="M4 15v-4a8 8 0 0 1 16 0v7a3 3 0 0 1-3 3h-3"/><rect x="2" y="11" width="4" height="7" rx="2"/><rect x="18" y="11" width="4" height="7" rx="2"/>',
- bag:'<path d="M4 7h16l-1 14H5zM8 8V6a4 4 0 0 1 8 0v2"/>',
- layers:'<path d="m12 2 10 5-10 5L2 7zm-10 10 10 5 10-5M2 17l10 5 10-5"/>',
- code:'<path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18"/>',
- book:'<path d="M12 5C9 2 4 3 2 4v16c3-2 7-2 10 0 3-2 7-2 10 0V4c-2-1-7-2-10 1zm0 0v15"/>',
- pen:'<path d="m16 3 5 5L8 21H3v-5zM13 6l5 5M3 21h18"/>',
- game:'<path d="M7 6h10c3 0 4 4 5 10s-3 7-6 2H8c-3 5-7 4-6-2S4 6 7 6zM7 10v6m-3-3h6m7-2h.01M19 14h.01"/>',
- play:'<path d="m8 5 11 7-11 7z"/>',
- link:'<path d="M15 3h6v6m0-6L10 14M11 4H4v16h16v-7"/>',
- arrow:'<path d="M4 12h16m-5-5 5 5-5 5"/>',
- close:'<path d="m6 6 12 12M6 18 18 6"/>',
- info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/>',
- sparkles:'<path d="m12 2 2.8 7.2L22 12l-7.2 2.8L12 22l-2.8-7.2L2 12l7.2-2.8z"/>',
- copy:'<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V3H3v13h5"/>'
-};
-const icon=name=>'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">'+(paths[name]||paths.layers)+'</svg>';
-$$('[data-icon]').forEach(el=>{if(el.classList.length){el.innerHTML=icon(el.dataset.icon);el.removeAttribute('data-icon');}else el.outerHTML=icon(el.dataset.icon);});
-const evidenceNames={demo:'공개 데모',example:'공식 예제',concept:'응용 시나리오'};
-const explanations={demo:'제작자의 공개 시연 또는 공개 실행 기록을 요약했습니다. 제시된 작업 범위 밖의 성능이나 범용 성공률을 입증하는 것은 아닙니다.',example:'공식 문서·통합 안내에서 확인되는 구현 패턴입니다. 이 아카이브가 별도로 실행해 성능을 검증한 결과는 아닙니다.',concept:'공개 문서의 판단 패턴을 확장한 설계 아이디어입니다. 개별 서비스의 도입 실적이나 성능이 확인된 사례는 아닙니다.'};
-const colors={agents:['#f6ece1','#9c713f'],browser:['#e8eef8','#6280a4'],search:['#ecf0dd','#7b8e43'],safety:['#e7eee5','#507457'],documents:['#f1eaf5','#9670a8'],support:['#e5f0ec','#60887a'],commerce:['#f8ede3','#b07b45'],operations:['#eeeae1','#8c7e5d'],development:['#e6edf2','#5c7e94'],research:['#e9edde','#7b8a56'],content:['#f5e9e5','#aa7766'],games:['#ece9f4','#82739e']};
-const categoryMap=new Map(data.categories.map(c=>[c.id,c]));
-const caseMap=new Map(data.cases.map(c=>[c.id,c]));
-const storageKey='jev-atlas:saved:v1';
-let saved=new Set();
-try{const raw=JSON.parse(localStorage.getItem(storageKey)||'[]');if(Array.isArray(raw))saved=new Set(raw.filter(id=>caseMap.has(id)));}catch{/* Storage is optional; browsing must still work. */}
-const state={category:'all',evidence:'all',query:'',sort:'curated',media:false,savedOnly:false};
-let activeCase=null,previousFocus=null,toastTimer=null;
-const dialog=$('#detail');
-const searchIndex=new Map(data.cases.map(c=>[c.id,[c.title,c.summary,c.jev,c.llm,...c.flow,...c.primitives,categoryMap.get(c.category).name,...c.sources.map(s=>data.sources[s][0])].join(' ').toLocaleLowerCase('ko')]));
-function notify(message){const el=$('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('visible'),2400);}
-function categoryButtons(){if($('#categories').children.length){$$('[data-category]').forEach(b=>{const on=b.dataset.category===state.category;b.classList.toggle('selected',on);b.setAttribute('aria-pressed',String(on));});return;}const entries=[{id:'all',name:'전체 컬렉션',icon:'grid'},...data.categories];$('#categories').innerHTML=entries.map(c=>'<button class="category'+(state.category===c.id?' selected':'')+'" data-category="'+c.id+'" aria-pressed="'+(state.category===c.id)+'">'+icon(c.icon)+'<span>'+esc(c.name)+'</span><span>'+(c.id==='all'?data.cases.length:data.cases.filter(x=>x.category===c.id).length)+'</span></button>').join('');}
-function card(c){const cat=categoryMap.get(c.category),tint=colors[c.category],m=c.media?data.media[c.media]:null;const isSaved=saved.has(c.id);return '<article class="card" data-id="'+c.id+'" style="--card-bg:'+tint[0]+';--card-color:'+tint[1]+'"><div class="card-top"><span class="category-icon">'+icon(cat.icon)+'</span><span class="card-number">CASE '+String(c.number).padStart(3,'0')+'</span><button class="save" data-save="'+c.id+'" aria-label="'+esc(c.title)+' '+(isSaved?'저장 취소':'저장')+'" aria-pressed="'+isSaved+'">'+icon('bookmark')+'</button></div><div class="card-badges"><span class="evidence '+c.evidence+'">'+evidenceNames[c.evidence]+'</span><span class="card-category-name">'+esc(cat.name)+'</span></div><h3><button class="title-button" data-open="'+c.id+'">'+esc(c.title)+'</button></h3><p class="card-summary">'+esc(c.summary)+'</p><div class="primitive-tags">'+c.primitives.map(p=>'<span class="primitive-tag">'+p+'</span>').join('')+'</div><div class="card-bottom"><button class="detail-button" data-open="'+c.id+'">패턴 살펴보기 '+icon('arrow')+'</button>'+(m&&m.type==='video'?'<button class="source-link video-button" data-open="'+c.id+'">'+icon('play')+'영상 보기</button>':'<a class="source-link" href="'+esc(m?m.page:data.sources[c.sources[0]][1])+'" target="_blank" rel="noopener noreferrer">'+(m?'데모 원문':'근거 원문')+icon('link')+'</a>')+'</div></article>';}
-function updateSavedUI(){ $('#saved-count').textContent=String(saved.size);$('#saved-top').setAttribute('aria-pressed',String(state.savedOnly));$$('[data-save]').forEach(button=>{const id=button.dataset.save,c=caseMap.get(id),on=saved.has(id);button.setAttribute('aria-pressed',String(on));if(button.classList.contains('save'))button.setAttribute('aria-label',c.title+' '+(on?'저장 취소':'저장'));else button.innerHTML=icon('bookmark')+(on?'저장됨':'저장하기');});}
-function filtered(){const words=state.query.toLocaleLowerCase('ko').trim().split(/\s+/).filter(Boolean);const items=data.cases.filter(c=>(state.category==='all'||c.category===state.category)&&(state.evidence==='all'||c.evidence===state.evidence)&&(!state.media||c.media!==null)&&(!state.savedOnly||saved.has(c.id))&&words.every(w=>searchIndex.get(c.id).includes(w)));return state.sort==='title'?items.sort((a,b)=>a.title.localeCompare(b.title,'ko')):items;}
-function render(){const items=filtered();$('#cards').innerHTML=items.map(card).join('');$('#empty').hidden=items.length>0;const label=state.category==='all'?'전체 컬렉션':categoryMap.get(state.category).name;$('#result-status').innerHTML=esc(label)+(state.savedOnly?' · 저장한 사례':'')+' <span aria-hidden="true">/</span> <strong>'+items.length+'</strong>개 사례';$('#reset').hidden=state.category==='all'&&state.evidence==='all'&&!state.query&&!state.media&&!state.savedOnly;$$('[data-evidence]').forEach(el=>{const on=el.dataset.evidence===state.evidence;el.classList.toggle('selected',on);el.setAttribute('aria-pressed',String(on));});$('#media-filter').setAttribute('aria-pressed',String(state.media));categoryButtons();updateSavedUI();}
-function reset(){Object.assign(state,{category:'all',evidence:'all',query:'',sort:'curated',media:false,savedOnly:false});$('#search').value='';$('#sort').value='curated';render();}
-function toggleSave(id){if(!caseMap.has(id))return;const had=saved.has(id);had?saved.delete(id):saved.add(id);let persisted=true;try{localStorage.setItem(storageKey,JSON.stringify([...saved]));}catch{persisted=false;}if(state.savedOnly)render();else updateSavedUI();notify(persisted?(had?'저장한 사례에서 제거했습니다.':'이 브라우저에 저장했습니다.'):'이 창에서 저장했습니다. 브라우저 저장소를 사용할 수 없습니다.');}
-function mediaBlock(m){if(m.type==='link')return '<a class="source-demo" href="'+esc(m.page)+'" target="_blank" rel="noopener noreferrer">'+icon('play')+'<div><b>'+esc(m.title)+'</b><p>'+esc(m.note)+'</p></div>'+icon('link')+'</a>';return '<div class="media-player" id="media-player"><button class="media-placeholder" id="start-media">'+icon('play')+'<span>공개 영상 재생</span><small>'+esc(m.credit)+'</small></button></div><a class="media-fallback" href="'+esc(m.page)+'" target="_blank" rel="noopener noreferrer">원본에서 영상 보기 '+icon('link')+'</a><p class="media-credit">'+esc(m.note)+' · 영상: '+esc(m.credit)+'</p>';}
-function openShell(){if(!dialog.open){previousFocus=document.activeElement;dialog.showModal();document.body.style.overflow='hidden';}dialog.scrollTop=0;$('#close-dialog').focus({preventScroll:true});}
-function openCase(id,setHash=true){const c=caseMap.get(id);if(!c)return;activeCase=id;const cat=categoryMap.get(c.category),m=c.media?data.media[c.media]:null;$('#detail-content').innerHTML='<div class="dialog-meta"><span class="evidence '+c.evidence+'">'+evidenceNames[c.evidence]+'</span><span>'+esc(cat.name)+'</span><span>CASE '+String(c.number).padStart(3,'0')+'</span></div><h2 id="dialog-title">'+esc(c.title)+'</h2><p class="dialog-summary">'+esc(c.summary)+'</p>'+(m?mediaBlock(m):'')+'<div class="dialog-roles"><div class="role-box"><small>JEV / DECISION</small><p>'+esc(c.jev)+'</p></div><div class="role-box"><small>LLM / GENERATION</small><p>'+esc(c.llm)+'</p></div></div><h3 class="detail-heading">이렇게 연결합니다</h3><div class="flow">'+c.flow.map((step,i)=>(i?'<i aria-hidden="true">→</i>':'')+'<span>'+esc(step)+'</span>').join('')+'</div><div class="caution">'+icon('info')+'<p>'+esc(c.caution)+'</p></div><p class="evidence-explanation">'+explanations[c.evidence]+'</p><h3 class="detail-heading">근거와 더 읽을 자료</h3><div class="detail-sources">'+c.sources.map(ref=>'<a href="'+esc(data.sources[ref][1])+'" target="_blank" rel="noopener noreferrer">'+icon('link')+esc(data.sources[ref][0])+'</a>').join('')+'</div><div class="dialog-footer"><span>REVIEWED '+c.reviewedAt+'</span><div><button class="mini-button" id="copy-link">'+icon('copy')+'링크 복사</button><button class="mini-button" data-save="'+c.id+'" aria-pressed="'+saved.has(c.id)+'">'+icon('bookmark')+(saved.has(c.id)?'저장됨':'저장하기')+'</button></div></div>';openShell();if(setHash)history.replaceState(null,'','#case='+encodeURIComponent(id));const start=$('#start-media');if(start&&m)start.addEventListener('click',()=>startVideo(m));$('#copy-link').addEventListener('click',copyLink);}
-function startVideo(m){const holder=$('#media-player');if(!holder)return;const video=document.createElement('video');video.controls=true;video.playsInline=true;video.preload='metadata';video.setAttribute('aria-label',m.title);video.src=m.url;holder.replaceChildren(video);video.addEventListener('error',()=>{if(holder.querySelector('.media-error'))return;const note=document.createElement('p');note.className='media-error';note.textContent='외부 영상을 불러올 수 없습니다. 아래 원본 링크에서 확인해 주세요.';holder.append(note);});video.play().catch(()=>{/* Controls and the permanent source link remain available. */});}
-async function copyLink(){const url=new URL(location.href);url.hash='case='+activeCase;try{await navigator.clipboard.writeText(url.href);notify('사례 링크를 복사했습니다.');}catch{const input=document.createElement('textarea');input.value=url.href;input.setAttribute('aria-label','복사할 사례 링크');input.style.cssText='position:fixed;left:-9999px';dialog.append(input);input.select();let ok=false;try{ok=document.execCommand('copy');}catch{}input.remove();if(ok)notify('사례 링크를 복사했습니다.');else{const row=document.createElement('input');row.value=url.href;row.readOnly=true;row.setAttribute('aria-label','사례 링크 — 선택하여 복사');row.style.cssText='width:100%;padding:10px;margin-top:12px';$('#detail-content').append(row);row.focus();row.select();notify('링크를 선택했습니다. 직접 복사해 주세요.');}}}
-function closeDialog(){if(dialog.open)dialog.close();}
-dialog.addEventListener('close',()=>{$$('video',dialog).forEach(v=>{v.pause();v.removeAttribute('src');v.load();});$$('iframe',dialog).forEach(f=>f.remove());document.body.style.overflow='';activeCase=null;if(location.hash.startsWith('#case='))history.replaceState(null,'','#explore');if(previousFocus&&previousFocus.isConnected)previousFocus.focus({preventScroll:true});});
-$('#close-dialog').addEventListener('click',closeDialog);
-dialog.addEventListener('click',event=>{if(event.target!==dialog)return;const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)closeDialog();});
-document.addEventListener('click',event=>{const el=event.target.closest('button');if(!el)return;if(el.dataset.open){openCase(el.dataset.open);return;}if(el.dataset.save){toggleSave(el.dataset.save);return;}if(el.dataset.category){state.category=el.dataset.category;render();return;}if(el.dataset.evidence){state.evidence=el.dataset.evidence;render();}});
-$('#search').addEventListener('input',event=>{state.query=event.target.value;render();});
-$('#sort').addEventListener('change',event=>{state.sort=event.target.value;render();});
-$('#media-filter').addEventListener('click',()=>{state.media=!state.media;render();});
-$('#saved-top').addEventListener('click',()=>{const next=!state.savedOnly;reset();state.savedOnly=next;render();$('#explore').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});});
-$('#reset').addEventListener('click',reset);$('#empty-reset').addEventListener('click',reset);
-$('#about-evidence').addEventListener('click',()=>{activeCase=null;$('#detail-content').innerHTML='<div class="eyebrow">READING THE INDEX</div><h2 id="dialog-title">사례의 근거를 구분합니다.</h2>'+Object.entries(evidenceNames).map(([key,name])=>'<h3 class="detail-heading"><span class="evidence '+key+'">'+name+'</span></h3><p class="dialog-summary">'+explanations[key]+'</p>').join('')+'<p class="evidence-explanation">한 저장소나 문서에서 여러 작업을 소개한 경우 작업별로 카드를 나눴습니다. 카드 수는 독립적인 도입 기업 수나 영상 수가 아닙니다.</p>';openShell();});
-$('#overview-video').addEventListener('click',()=>{activeCase=null;$('#detail-content').innerHTML='<div class="eyebrow">LANGCHAIN / TECHNICAL OVERVIEW</div><h2 id="dialog-title">Jev의 판단 계층 이해하기</h2><p class="dialog-summary">LangChain이 소개하는 Jev의 역할과 생성 모델과의 협업. 개별 활용 카드의 실행 영상이 아닌 기술 해설입니다.</p><div class="media-player" id="media-player"><button class="media-placeholder" id="start-overview">'+icon('play')+'<span>YouTube 영상 재생</span><small>LANGCHAIN · JEV BREAKDOWN</small></button></div><a class="media-fallback" href="https://www.youtube.com/watch?v=2Bs0Ink_-Uo" target="_blank" rel="noopener noreferrer">YouTube에서 영상 보기 '+icon('link')+'</a><p class="media-credit">JEV Breakdown: The First AI Model Built For Code · LangChain</p><h3 class="detail-heading">함께 읽기</h3><div class="detail-sources"><a href="'+esc(data.sources.langchain[1])+'" target="_blank" rel="noopener noreferrer">'+icon('link')+esc(data.sources.langchain[0])+'</a></div>';openShell();$('#start-overview').addEventListener('click',()=>{const iframe=document.createElement('iframe');iframe.src='https://www.youtube-nocookie.com/embed/2Bs0Ink_-Uo?autoplay=1';iframe.title='LangChain — JEV Breakdown';iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';iframe.allowFullscreen=true;iframe.referrerPolicy='strict-origin-when-cross-origin';$('#media-player').replaceChildren(iframe);});});
-document.addEventListener('keydown',event=>{if(event.key==='/'&&!dialog.open&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)&&!document.activeElement.isContentEditable){event.preventDefault();$('#search').focus();}});
-window.addEventListener('storage',event=>{if(event.key!==storageKey)return;try{const value=JSON.parse(event.newValue||'[]');saved=new Set(Array.isArray(value)?value.filter(id=>caseMap.has(id)):[]);if(state.savedOnly)render();else updateSavedUI();}catch{/* Ignore malformed external state. */}});
-function readHash(){if(location.hash.startsWith('#case=')){let id;try{id=decodeURIComponent(location.hash.slice(6));}catch{return;}if(caseMap.has(id))openCase(id,false);else notify('이 사례 링크를 찾을 수 없습니다.');}else if(dialog.open)closeDialog();}
-window.addEventListener('hashchange',readHash);render();readHash();
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const data = window.JEV_ATLAS;
+  if (!data) {
+    $('cards').textContent = '목록을 불러오지 못했습니다. 페이지를 새로고침해 주세요.';
+    return;
+  }
+
+  function element(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+  const paths = {
+    search: 'M21 21l-5-5M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0',
+    bookmark: 'M6 4h12v17l-6-4-6 4z',
+    close: 'M6 6l12 12M6 18 18 6',
+    play: 'M8 5l11 7-11 7z',
+    share: 'M15 3h6v6m0-6L10 14M11 4H4v16h16v-7'
+  };
+  function icon(name) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('aria-hidden', 'true');
+    const path = document.createElementNS(svg.namespaceURI, 'path');
+    path.setAttribute('d', paths[name] || paths.play);
+    svg.append(path);
+    return svg;
+  }
+  document.querySelectorAll('[data-icon]').forEach(node => node.replaceChildren(icon(node.dataset.icon)));
+
+  // Only catalogue publishers are used for links and media. Never insert HTML from data.
+  function safeUrl(value, hosts) {
+    try {
+      const url = new URL(value);
+      return url.protocol === 'https:' && !url.username && !url.password && hosts.includes(url.hostname) ? url.href : null;
+    } catch { return null; }
+  }
+  function externalLink(label, value) {
+    const link = element('a', '', label);
+    const url = safeUrl(value, ['x.com', 'github.com', 'madewithjev.com']);
+    if (url) link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    return link;
+  }
+  function button(className, label, action, id) {
+    const node = element('button', className);
+    node.type = 'button';
+    node.setAttribute('aria-label', label);
+    node.dataset[action] = id;
+    return node;
+  }
+
+  const categoryMap = new Map(data.categories.map(c => [c.id, c]));
+  const caseMap = new Map(data.cases.map(c => [c.id, c]));
+  const validIds = new Set(caseMap.keys());
+  const storageKey = 'jev-atlas:saved:v1';
+  function readSaved(raw) {
+    try {
+      const values = JSON.parse(raw || '[]');
+      return new Set(Array.isArray(values) ? values.filter(id => validIds.has(id)) : []);
+    } catch { return new Set(); }
+  }
+  let saved = new Set();
+  try { saved = readSaved(localStorage.getItem(storageKey)); } catch { /* Storage is optional. */ }
+  const state = { category: 'all', query: '', sort: 'curated', savedOnly: false };
+  const normalize = value => String(value).normalize('NFKC').toLocaleLowerCase('ko');
+  const searchIndex = new Map(data.cases.map(c => [c.id, normalize([
+    c.title, c.summary, c.author, c.handle, categoryMap.get(c.category).name,
+    ...c.metrics.map(m => `${m.value} ${m.label}`)
+  ].join(' '))]));
+  let toastTimer;
+  function notify(message) {
+    $('toast').textContent = message;
+    $('toast').classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => $('toast').classList.remove('show'), 2800);
+  }
+  function updateSavedUI() {
+    $('saved-count').textContent = String(saved.size);
+    $('saved-toggle').setAttribute('aria-pressed', String(state.savedOnly));
+    document.querySelectorAll('[data-save]').forEach(node => {
+      const on = saved.has(node.dataset.save);
+      node.setAttribute('aria-pressed', String(on));
+      node.setAttribute('aria-label', `${caseMap.get(node.dataset.save).title} ${on ? '저장 취소' : '저장'}`);
+    });
+  }
+  function renderCategories() {
+    for (const category of [{ id: 'all', name: '전체' }, ...data.categories]) {
+      const node = button('category', category.name, 'category', category.id);
+      node.append(element('span', '', category.name), element('span', 'category-count', String(
+        category.id === 'all' ? data.cases.length : data.cases.filter(c => c.category === category.id).length
+      )));
+      $('categories').append(node);
+    }
+  }
+  function card(c) {
+    const article = element('article', 'card');
+    article.id = `case-${c.id}`;
+    article.dataset.id = c.id;
+    const head = element('div', 'card-head');
+    const top = element('div', 'card-top');
+    const save = button('save-button', `${c.title} 저장`, 'save', c.id);
+    save.append(icon('bookmark'));
+    top.append(element('span', 'category-label', categoryMap.get(c.category).name),
+      element('span', 'card-number', String(data.cases.indexOf(c) + 1).padStart(2, '0')), save);
+    head.append(top, element('h2', '', c.title), element('p', 'summary', c.summary));
+    const preview = button('media-preview', `${c.title} 영상 보기`, 'play', c.id);
+    const poster = safeUrl(c.media.poster, ['pbs.twimg.com', 'raw.githubusercontent.com']);
+    if (poster) {
+      const img = element('img');
+      img.alt = '';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.addEventListener('error', () => preview.classList.add('image-failed'), { once: true });
+      img.src = poster;
+      preview.append(img);
+    } else preview.classList.add('image-failed');
+    preview.append(element('span', 'image-fallback', '미리보기 없이 영상 열기'), element('span', 'media-shade'));
+    const play = element('span', 'play-circle');
+    play.append(icon('play'));
+    const mediaBottom = element('span', 'media-bottom');
+    mediaBottom.append(element('span', 'video-label', c.media.type === 'x' ? 'X에서 공개한 시연' : '공개 시연 영상'),
+      element('span', 'media-credit', c.author));
+    preview.append(play, mediaBottom);
+    const bottom = element('div', 'card-bottom');
+    const metrics = element('div', 'metrics');
+    for (const m of c.metrics) {
+      const metric = element('div', 'metric');
+      metric.append(element('strong', '', m.value), element('span', '', m.label));
+      metrics.append(metric);
+    }
+    const footer = element('div', 'card-footer');
+    const actions = element('div', 'card-actions');
+    if (c.code) actions.append(externalLink('코드 ↗', c.code));
+    actions.append(externalLink('원본 ↗', c.source));
+    const share = button('share-button', `${c.title} 링크 복사`, 'share', c.id);
+    share.append(icon('share'));
+    actions.append(share);
+    footer.append(element('span', 'author-mark', Array.from(c.author)[0]), element('span', 'author', c.author), actions);
+    bottom.append(metrics, element('p', 'metric-disclosure', '제작자 공개 수치 · 독립 재현 아님'), footer);
+    article.append(head, preview, bottom);
+    return article;
+  }
+  function render() {
+    const words = normalize(state.query).trim().split(/\s+/).filter(Boolean);
+    const items = data.cases.filter(c => (state.category === 'all' || c.category === state.category) &&
+      (!state.savedOnly || saved.has(c.id)) && words.every(word => searchIndex.get(c.id).includes(word)));
+    if (state.sort === 'title') items.sort((a, b) => a.title.localeCompare(b.title, 'ko'));
+    $('cards').replaceChildren(...items.map(card));
+    $('empty').hidden = items.length > 0;
+    $('empty-title').textContent = state.savedOnly && !saved.size ? '아직 저장한 사례가 없습니다.' : '일치하는 사례가 없습니다.';
+    $('empty-text').textContent = state.savedOnly && !saved.size ? '카드의 북마크 버튼으로 관심 있는 사례를 모아 보세요.' : '검색어를 바꾸거나 다른 분야를 선택해 보세요.';
+    const label = state.category === 'all' ? '전체' : categoryMap.get(state.category).name;
+    $('result-status').replaceChildren(document.createTextNode(`${label}${state.savedOnly ? ' · 저장한 사례' : ''} `),
+      element('b', '', String(items.length)), document.createTextNode('개 사례'));
+    $('reset').hidden = state.category === 'all' && !state.query && !state.savedOnly && state.sort === 'curated';
+    document.querySelectorAll('[data-category]').forEach(node => node.setAttribute('aria-pressed', String(node.dataset.category === state.category)));
+    updateSavedUI();
+  }
+  function reset() {
+    Object.assign(state, { category: 'all', query: '', sort: 'curated', savedOnly: false });
+    $('search').value = '';
+    $('sort').value = 'curated';
+    render();
+  }
+  function toggleSave(id) {
+    if (!validIds.has(id)) return;
+    const had = saved.has(id);
+    had ? saved.delete(id) : saved.add(id);
+    let persisted = true;
+    try { localStorage.setItem(storageKey, JSON.stringify([...saved])); } catch { persisted = false; }
+    if (state.savedOnly) {
+      render();
+      ($('cards').querySelector('[data-save]') || $('empty-reset')).focus({ preventScroll: true });
+    } else updateSavedUI();
+    notify(persisted ? (had ? '저장한 사례에서 제거했습니다.' : '이 브라우저에 저장했습니다.') : '이 창에만 반영했습니다. 브라우저 저장소를 사용할 수 없습니다.');
+  }
+  async function shareCase(id) {
+    if (!validIds.has(id)) return;
+    const url = new URL(location.href);
+    url.hash = `case=${id}`;
+    try {
+      await navigator.clipboard.writeText(url.href);
+      notify('사례 링크를 복사했습니다.');
+    } catch {
+      let field = $('share-link');
+      if (!field) {
+        field = element('input', 'share-link');
+        field.id = 'share-link';
+        field.readOnly = true;
+        field.setAttribute('aria-label', '사례 링크 — 선택하여 복사');
+        $('cards').before(field);
+      }
+      field.value = url.href;
+      field.focus();
+      field.select();
+      notify('선택된 링크를 직접 복사해 주세요.');
+    }
+  }
+
+  const player = $('player-dialog');
+  const about = $('about-dialog');
+  let activeCase = null;
+  let playerEpoch = 0;
+  let playerTimer;
+  let widgetsPromise = null;
+  let mediaCleanup = () => {};
+  const previousFocus = new Map();
+  function openDialog(dialog) {
+    if (dialog.open) return;
+    previousFocus.set(dialog, document.activeElement);
+    dialog.showModal();
+    document.body.classList.add('modal-open');
+    dialog.scrollTop = 0;
+    dialog.querySelector('button').focus({ preventScroll: true });
+  }
+  function stopPlayer() {
+    ++playerEpoch;
+    clearTimeout(playerTimer);
+    mediaCleanup();
+    mediaCleanup = () => {};
+    $('player-host').querySelectorAll('video').forEach(video => {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    });
+    $('player-host').replaceChildren();
+  }
+  const isCurrent = epoch => epoch === playerEpoch && player.open;
+  function failedPlayer(epoch) {
+    if (!isCurrent(epoch)) return;
+    stopPlayer();
+    $('player-host').append(element('p', 'player-placeholder', '영상을 불러오지 못했습니다.'));
+    $('player-status').textContent = '외부 서비스에서 응답하지 않습니다. 원본에서 보거나 다시 불러와 주세요.';
+    $('retry-player').hidden = false;
+  }
+  function loadWidgets() {
+    if (window.twttr?.widgets?.createTweet) return Promise.resolve(window.twttr);
+    if (widgetsPromise) return widgetsPromise;
+    widgetsPromise = new Promise((resolve, reject) => {
+      const script = element('script');
+      script.src = 'https://platform.twitter.com/widgets.js';
+      script.async = true;
+      let settled = false;
+      const finish = error => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        script.onload = script.onerror = null;
+        if (error) { script.remove(); reject(error); } else resolve(window.twttr);
+      };
+      const timer = setTimeout(() => finish(new Error('Widget timeout')), 12000);
+      script.onerror = () => finish(new Error('Widget unavailable'));
+      script.onload = () => window.twttr?.widgets?.createTweet ? finish() : finish(new Error('Widget API unavailable'));
+      document.head.append(script);
+    }).catch(error => { widgetsPromise = null; throw error; });
+    return widgetsPromise;
+  }
+  async function startPlayer(c) {
+    stopPlayer();
+    const epoch = playerEpoch;
+    const host = $('player-host');
+    host.classList.toggle('x-host', c.media.type === 'x');
+    $('retry-player').hidden = true;
+    $('player-status').textContent = '영상을 불러오는 중입니다…';
+    const placeholder = element('div', 'player-placeholder');
+    placeholder.append(element('span', 'loader'), document.createTextNode('공개 시연을 불러오고 있습니다.'));
+    host.append(placeholder);
+    playerTimer = setTimeout(() => failedPlayer(epoch), 18000);
+    if (c.media.type === 'mp4') {
+      const url = safeUrl(c.media.url, ['raw.githubusercontent.com']);
+      if (!url || !new URL(url).pathname.endsWith('.mp4')) { failedPlayer(epoch); return; }
+      const video = element('video');
+      video.controls = true;
+      video.playsInline = true;
+      video.preload = 'metadata';
+      video.setAttribute('aria-label', `${c.title} 시연 영상`);
+      const ready = () => {
+        if (!isCurrent(epoch)) return;
+        clearTimeout(playerTimer);
+        $('player-status').textContent = '재생 버튼을 눌러 영상을 볼 수 있습니다.';
+      };
+      const error = () => failedPlayer(epoch);
+      video.addEventListener('loadedmetadata', ready);
+      video.addEventListener('error', error);
+      mediaCleanup = () => {
+        video.removeEventListener('loadedmetadata', ready);
+        video.removeEventListener('error', error);
+      };
+      video.src = url;
+      host.replaceChildren(video);
+      // Native controls work even when autoplay is denied by browser policy.
+      video.play().catch(() => {});
+      return;
+    }
+    if (c.media.type !== 'x' || !/^\d{15,22}$/.test(c.media.id)) { failedPlayer(epoch); return; }
+    try {
+      const twitter = await loadWidgets();
+      if (!isCurrent(epoch)) return;
+      const mount = element('div', 'tweet-mount');
+      // Each request owns its container. Late widget callbacks cannot replace a newer player.
+      host.append(mount);
+      const tweet = await twitter.widgets.createTweet(c.media.id, mount, { dnt: true, conversation: 'none', theme: 'light', lang: 'ko' });
+      if (!isCurrent(epoch)) { mount.remove(); return; }
+      if (!tweet) { failedPlayer(epoch); return; }
+      clearTimeout(playerTimer);
+      placeholder.remove();
+      $('player-status').textContent = 'X 게시물의 재생 버튼을 눌러 주세요. 재생이 안 되면 원본에서 볼 수 있습니다.';
+    } catch { failedPlayer(epoch); }
+  }
+  function openPlayer(id) {
+    const c = caseMap.get(id);
+    if (!c) return;
+    activeCase = c;
+    $('player-title').textContent = c.title;
+    $('player-category').textContent = categoryMap.get(c.category).name;
+    $('player-note').textContent = c.note;
+    const source = safeUrl(c.source, ['x.com', 'github.com']);
+    if (source) $('player-source').href = source;
+    else $('player-source').removeAttribute('href');
+    openDialog(player);
+    startPlayer(c);
+  }
+  for (const dialog of [player, about]) {
+    dialog.addEventListener('close', () => {
+      if (dialog === player) { stopPlayer(); activeCase = null; }
+      if (!player.open && !about.open) document.body.classList.remove('modal-open');
+      const focus = previousFocus.get(dialog);
+      if (focus?.isConnected) focus.focus({ preventScroll: true });
+    });
+    dialog.addEventListener('click', event => {
+      if (event.target !== dialog) return;
+      const r = dialog.getBoundingClientRect();
+      if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close();
+    });
+  }
+  $('close-player').addEventListener('click', () => player.close());
+  $('retry-player').addEventListener('click', () => { if (activeCase) startPlayer(activeCase); });
+  $('about').addEventListener('click', () => openDialog(about));
+  $('close-about').addEventListener('click', () => about.close());
+  $('cards').addEventListener('click', event => {
+    const target = event.target.closest('button');
+    if (!target) return;
+    if (target.dataset.save) toggleSave(target.dataset.save);
+    if (target.dataset.play) openPlayer(target.dataset.play);
+    if (target.dataset.share) shareCase(target.dataset.share);
+  });
+  $('categories').addEventListener('click', event => {
+    const target = event.target.closest('[data-category]');
+    if (!target) return;
+    state.category = target.dataset.category;
+    render();
+  });
+  $('search').addEventListener('input', event => { state.query = event.target.value; render(); });
+  $('sort').addEventListener('change', event => { state.sort = event.target.value; render(); });
+  $('saved-toggle').addEventListener('click', () => {
+    const next = !state.savedOnly;
+    reset();
+    state.savedOnly = next;
+    render();
+  });
+  $('reset').addEventListener('click', () => { reset(); $('search').focus(); });
+  $('empty-reset').addEventListener('click', () => { reset(); $('search').focus(); });
+  document.addEventListener('keydown', event => {
+    if (event.key === '/' && !event.ctrlKey && !event.metaKey && !event.altKey && !player.open && !about.open &&
+        !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable) {
+      event.preventDefault();
+      $('search').focus();
+    }
+  });
+  window.addEventListener('storage', event => {
+    if (event.key !== storageKey && event.key !== null) return;
+    saved = readSaved(event.newValue);
+    if (state.savedOnly) render(); else updateSavedUI();
+  });
+  function readHash() {
+    if (!location.hash.startsWith('#case=')) return;
+    let id;
+    try { id = decodeURIComponent(location.hash.slice(6)); } catch { notify('올바르지 않은 사례 링크입니다.'); return; }
+    if (!validIds.has(id)) { notify('이 사례 링크를 찾을 수 없습니다.'); return; }
+    reset();
+    const article = $(`case-${id}`);
+    article.classList.add('highlight');
+    article.scrollIntoView({ block: 'center', behavior: 'instant' });
+    article.querySelector('[data-play]').focus({ preventScroll: true });
+    // A shared link highlights its card; third-party players still require a click.
+  }
+  window.addEventListener('hashchange', readHash);
+  $('total-count').textContent = String(data.cases.length);
+  renderCategories();
+  render();
+  readHash();
 })();
