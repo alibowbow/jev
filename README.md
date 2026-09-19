@@ -6,7 +6,8 @@ A Korean, video-first collection of published Jev demonstrations. Independent of
 
 - 36 distinct video cases across seven categories, with large desktop cards and a single-column mobile layout.
 - A visual beginner guide (`learn.html`): typed-output illustrations, four scenario flows including a fictional intake response, interactive probability comparisons and a tool-role map.
-- Eighteen implementation ideas (`ideas.html`), including six medical/dental workflow proposals with clinician-review boundaries and a shareable `#medical` filter.
+- A sourced Jev/LLM comparison, a publisher-demo latency chart and a USD token-cost calculator with explicit input/output assumptions and dated promotional terms.
+- Fourteen implementation ideas (`ideas.html`), including two focused medical/dental workflow proposals with clinician-review boundaries and a shareable `#medical` filter.
 - Korean and English keyword search, category filters, title sorting, result counts and empty states.
 - Browser-local bookmarks, including storage-denied fallback and synchronization between tabs.
 - Shareable `#case=<id>` links that highlight a card without automatically loading a third-party player.
@@ -23,6 +24,7 @@ npm test
 node --check assets/app.js
 node --check assets/data.js
 node --check assets/guide.js
+node --check assets/comparison.js
 python3 -m http.server 8080
 ```
 
