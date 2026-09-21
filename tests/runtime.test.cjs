@@ -127,7 +127,7 @@ test('MP4 errors and timeouts show a source and retry; closing removes media and
   assert.equal(d.querySelector('video'), null);
   click('#retry-player');
   video = d.querySelector('video'); assert.ok(video);
-  await timeout(18000);
+  await timeout(45000);
   assert.equal(d.getElementById('retry-player').hidden, false);
   click('#retry-player'); click('#close-player');
   assert.equal(d.querySelector('video'), null);
@@ -138,6 +138,7 @@ test('MP4 errors and timeouts show a source and retry; closing removes media and
 test('X widgets load only after click, recover from failure and do not replace a newer MP4', async t => {
   const { d, w, click } = setup(t);
   click('[data-play="voice-mac"]');
+  assert.equal(d.getElementById('player-file').hidden, true);
   const script = d.querySelector('script[src="https://platform.twitter.com/widgets.js"]');
   assert.ok(script);
   script.dispatchEvent(new w.Event('error')); await flush();
@@ -199,6 +200,8 @@ test('Jevable projects are searchable by original names and play original CDN vi
   click('[data-play="drape-try-on"]');
   const video = d.querySelector('video');
   assert.equal(new URL(video.src).hostname, 'video.twimg.com');
+  assert.equal(d.getElementById('player-file').href, video.src);
+  assert.equal(d.getElementById('player-file').hidden, false);
   video.dispatchEvent(new w.Event('loadedmetadata'));
   assert.equal(d.getElementById('retry-player').hidden, true);
   assert.equal(d.querySelector('script[src*="widgets.js"]'), null);
@@ -218,6 +221,8 @@ test('publisher video CDN allowlist rejects lookalike hosts and credentials', t 
     } });
     click('[data-play="drape-try-on"]');
     assert.equal(d.querySelector('video'), null);
+    assert.equal(d.getElementById('player-file').hidden, true);
+    assert.equal(d.getElementById('player-file').hasAttribute('href'), false);
     assert.equal(d.getElementById('retry-player').hidden, false);
   }
 });

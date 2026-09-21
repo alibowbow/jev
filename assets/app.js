@@ -236,7 +236,7 @@
     if (!isCurrent(epoch)) return;
     stopPlayer();
     $('player-host').append(element('p', 'player-placeholder', '영상을 불러오지 못했습니다.'));
-    $('player-status').textContent = '외부 서비스에서 응답하지 않습니다. 원본에서 보거나 다시 불러와 주세요.';
+    $('player-status').textContent = '영상 로딩이 지연되거나 재생할 수 없습니다. 영상 파일이나 원본을 열거나 다시 불러와 주세요.';
     $('retry-player').hidden = false;
   }
   function loadWidgets() {
@@ -271,7 +271,8 @@
     const placeholder = element('div', 'player-placeholder');
     placeholder.append(element('span', 'loader'), document.createTextNode('공개 시연을 불러오고 있습니다.'));
     host.append(placeholder);
-    playerTimer = setTimeout(() => failedPlayer(epoch), 18000);
+    // First-time publisher CDN requests can take longer than a cached embed.
+    playerTimer = setTimeout(() => failedPlayer(epoch), c.media.type === 'mp4' ? 45000 : 18000);
     if (c.media.type === 'mp4') {
       const url = safeUrl(c.media.url, ['raw.githubusercontent.com', 'video.twimg.com']);
       if (!url || !new URL(url).pathname.endsWith('.mp4')) { failedPlayer(epoch); return; }
@@ -323,6 +324,11 @@
     const source = safeUrl(c.source, ['x.com', 'github.com']);
     if (source) $('player-source').href = source;
     else $('player-source').removeAttribute('href');
+    const file = c.media.type === 'mp4' && safeUrl(c.media.url, ['raw.githubusercontent.com', 'video.twimg.com']);
+    const fileLink = $('player-file');
+    fileLink.hidden = !file;
+    if (file) fileLink.href = file;
+    else fileLink.removeAttribute('href');
     openDialog(player);
     startPlayer(c);
   }
