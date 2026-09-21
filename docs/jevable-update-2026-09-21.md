@@ -70,3 +70,7 @@ Duplicate checks compare original post URLs and underlying video IDs across all 
 | `prompt-difficulty` | A prompt difficulty classifier | [@k_grajeda](https://x.com/k_grajeda/status/2101021361351131464) | [Jevable](https://jevable.com/project/2101021361351131464) |
 | `seo-internal-links` | An internal-link SEO audit | [@borjafat](https://x.com/borjafat/status/2101018783976722479) | [Jevable](https://jevable.com/project/2101018783976722479) |
 | `jevton-town` | Jevton: a town of 120 people | [@chiziaruhoma](https://x.com/chiziaruhoma/status/2100878555047514390) | [Jevable](https://jevable.com/project/2100878555047514390) |
+
+## Post-deployment browser checks
+
+The public site displayed 86 cards, original-name search returned Drape, and the robotics filter returned four cases. The Drape MP4 played directly in the browser (31.3 seconds, 1278-pixel video width); the first embedded attempts did not complete. The existing flight MP4 played in-page. To accommodate slow initial CDN loads, native MP4 loading allows 45 seconds, with an always-available direct-file link alongside the original post. Availability checks do not establish universal embedded playback.
