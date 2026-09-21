@@ -29,7 +29,6 @@ function setup(t, options = {}) {
   w.HTMLMediaElement.prototype.load = function () {};
   if (options.saved) w.localStorage.setItem('jev-atlas:saved:v1', options.saved);
   if (options.blockStorage) Object.defineProperty(w, 'localStorage', { get() { throw new Error('Storage blocked'); } });
-  if (options.twitter) w.twttr = options.twitter;
   w.eval(source('assets/data.js'));
   if (options.mutate) options.mutate(w.JEV_ATLAS);
   w.eval(source('assets/app.js'));
@@ -124,8 +123,8 @@ test('MP4 errors and timeouts show a source and retry; closing removes media and
   assert.equal(d.body.classList.contains('modal-open'), false);
   assert.match(d.getElementById('player-source').href, /^https:\/\/x.com\//);
   let video = d.querySelector('video');
-  video.dispatchEvent(new w.Event('loadedmetadata'));
-  assert.match(d.getElementById('player-status').textContent, /재생 버튼/);
+  video.dispatchEvent(new w.Event('canplay'));
+  assert.equal(d.getElementById('player-status').hidden, true);
   video.dispatchEvent(new w.Event('error'));
   assert.equal(d.getElementById('retry-player').hidden, false);
   assert.equal(d.querySelector('video'), null);
@@ -143,53 +142,28 @@ test('MP4 errors and timeouts show a source and retry; closing removes media and
   assert.equal(d.activeElement, trigger);
 });
 
-test('X widgets load only after click, recover from failure and do not replace a newer MP4', async t => {
+test('switching video cards stops the old file and never inserts a social post', t => {
   const { d, w, click } = setup(t);
-  click('[data-play="voice-mac"]');
-  assert.equal(d.getElementById('player-file').hidden, true);
-  const script = d.querySelector('script[src="https://platform.twitter.com/widgets.js"]');
-  assert.ok(script);
-  script.dispatchEvent(new w.Event('error')); await flush();
-  assert.equal(d.getElementById('retry-player').hidden, false);
-  const calls = [];
-  w.twttr = { widgets: { createTweet: (id, mount, options) => new Promise(resolve => calls.push({ id, mount, options, resolve })) } };
-  click('#retry-player'); await flush();
-  assert.equal(calls.length, 1);
-  assert.equal(calls[0].options.dnt, true);
-  click('[data-play="flight-search"]');
-  const currentVideo = d.querySelector('video');
-  const iframe = d.createElement('iframe'); calls[0].mount.append(iframe); calls[0].resolve(iframe);
-  await flush();
-  assert.equal(d.querySelector('video'), currentVideo);
-  assert.equal(d.querySelector('#player-host iframe'), null);
-  assert.equal(d.getElementById('inline-player').closest('.card').id, 'case-flight-search');
-  assert.equal(d.querySelector('[data-play="voice-mac"]').hidden, false);
-  assert.match(d.getElementById('player-title').textContent, /항공편/);
-});
-
-test('switching cards stops native playback, removes an existing X frame and Escape restores the preview', async t => {
-  const { d, w, click } = setup(t, { twitter: { widgets: { createTweet: async (id, mount) => {
-    const frame = d.createElement('iframe'); mount.append(frame); return frame;
-  } } } });
-  click('[data-play="flight-search"]');
-  const video = d.querySelector('video');
-  let paused = 0;
-  video.pause = () => ++paused;
-  click('[data-play="voice-mac"]'); await flush();
+  click('[data-play="drape-try-on"]');
+  const first = d.querySelector('video');
+  let paused = 0; first.pause = () => ++paused;
+  click('[data-play="proq-plan-classifier"]');
+  const second = d.querySelector('video');
   assert.equal(paused, 1);
-  assert.equal(video.hasAttribute('src'), false);
-  assert.equal(video.isConnected, false);
-  const frame = d.querySelector('#case-voice-mac iframe');
-  assert.ok(frame);
-  click('[data-play="drape-try-on"]'); await flush();
-  assert.equal(frame.isConnected, false);
-  assert.equal(d.querySelectorAll('#cards iframe').length, 1);
-  assert.equal(d.querySelectorAll('.is-playing').length, 1);
-  assert.ok(d.querySelector('#case-drape-try-on iframe'));
-  d.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Escape' }));
-  assert.equal(d.querySelectorAll('#cards iframe, #cards video, .is-playing').length, 0);
-  assert.equal(d.activeElement.dataset.play, 'drape-try-on');
+  assert.equal(first.hasAttribute('src'), false);
+  assert.equal(first.isConnected, false);
+  assert.equal(second.closest('.card').id, 'case-proq-plan-classifier');
+  assert.equal(d.querySelectorAll('#cards video, .is-playing').length, 2);
   assert.equal(d.querySelector('[data-play="drape-try-on"]').hidden, false);
+  first.dispatchEvent(new w.Event('error'));
+  first.dispatchEvent(new w.Event('canplay'));
+  assert.equal(d.querySelector('video'), second);
+  assert.equal(d.getElementById('player-status').hidden, false);
+  assert.equal(d.getElementById('retry-player').hidden, true);
+  assert.equal(d.querySelectorAll('iframe, script[src*="widgets.js"], dialog[open]').length, 0);
+  d.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Escape' }));
+  assert.equal(d.querySelectorAll('#cards video, .is-playing').length, 0);
+  assert.equal(d.activeElement.dataset.play, 'proq-plan-classifier');
 });
 
 test('search, category, sort and saved-view changes stop media without stealing filter focus', async t => {
@@ -216,36 +190,35 @@ test('search, category, sort and saved-view changes stop media without stealing 
   assert.equal(d.activeElement.id, 'search');
 });
 
-test('filtering during an X request cannot revive a hidden player or replace a later card', async t => {
-  const pending = [];
-  const { d, click, input } = setup(t, { twitter: { widgets: { createTweet: (id, mount) => new Promise(resolve => pending.push({ mount, resolve })) } } });
-  click('[data-play="voice-mac"]'); await flush();
+test('late media callbacks and timeouts cannot replace a newer card after filtering', t => {
+  const { d, w, click, input, timers } = setup(t);
+  click('[data-play="voice-mac"]');
+  const first = d.querySelector('video');
+  const oldTimeout = [...timers.values()].find(timer => timer.ms === 45000).fn;
   input('Drape');
-  click('[data-play="drape-try-on"]'); await flush();
-  const current = d.createElement('iframe'); pending[1].mount.append(current); pending[1].resolve(current); await flush();
-  const late = d.createElement('iframe'); pending[0].mount.append(late); pending[0].resolve(late); await flush();
-  assert.equal(late.isConnected, false);
-  assert.equal(d.querySelector('#player-host iframe'), current);
-  assert.equal(d.getElementById('inline-player').closest('.card').id, 'case-drape-try-on');
+  click('[data-play="drape-try-on"]');
+  const current = d.querySelector('video');
+  current.dispatchEvent(new w.Event('canplay'));
+  oldTimeout();
+  first.dispatchEvent(new w.Event('error'));
+  first.dispatchEvent(new w.Event('playing'));
+  assert.equal(d.querySelector('video'), current);
+  assert.equal(d.getElementById('player-status').hidden, true);
+  assert.equal(d.getElementById('retry-player').hidden, true);
+  assert.equal(current.closest('.card').id, 'case-drape-try-on');
 });
 
-test('X timeout invalidates late success; successful embeds and about dialog remain usable', async t => {
-  const pending = [];
-  const { d, w, click, timeout } = setup(t, { twitter: { widgets: { createTweet: (id, mount) => new Promise(resolve => pending.push({ mount, resolve })) } } });
-  click('[data-play="voice-mac"]'); await flush(); await timeout(18000);
-  const late = d.createElement('iframe'); pending[0].mount.append(late); pending[0].resolve(late); await flush();
-  assert.equal(d.querySelector('#player-host iframe'), null);
-  assert.equal(d.getElementById('retry-player').hidden, false);
-  click('#retry-player'); await flush();
-  const current = d.createElement('iframe'); pending[1].mount.append(current); pending[1].resolve(current); await flush();
-  assert.equal(d.querySelector('#player-host iframe'), current);
-  assert.equal(d.querySelector('.player-placeholder'), null);
-  click('#close-player'); click('#about');
+test('source-information dialog remains usable with inline playback', t => {
+  const { d, w, click } = setup(t);
+  click('[data-play="voice-mac"]');
+  click('#about');
   assert.equal(d.getElementById('about-dialog').open, true);
   d.dispatchEvent(new w.KeyboardEvent('keydown', { key: '/' }));
   assert.notEqual(d.activeElement.id, 'search');
   click('#close-about');
   assert.equal(d.body.classList.contains('modal-open'), false);
+  click('#close-player');
+  assert.equal(d.querySelector('video'), null);
 });
 
 test('catalogue text is rendered literally and unsafe media URLs are refused', t => {
@@ -263,44 +236,36 @@ test('catalogue text is rendered literally and unsafe media URLs are refused', t
   assert.equal(d.getElementById('retry-player').hidden, false);
 });
 
-test('all 50 Jevable cards load their official post on demand without native CDN video', async t => {
-  const calls = [];
-  const { d, w, count, input, click } = setup(t, { twitter: { widgets: {
-    createTweet: async (id, mount, options) => {
-      calls.push({ id, options });
-      const frame = d.createElement('iframe'); mount.append(frame); return frame;
-    }
-  } } });
-  assert.equal(calls.length, 0);
+test('every card opens one video with native controls and no expanded X post', t => {
+  const { d, w, count, input, click } = setup(t);
+  let playCalls = 0;
+  w.HTMLMediaElement.prototype.play = () => { ++playCalls; return Promise.resolve(); };
   input('Drape');
   assert.equal(count(), 1);
-  assert.equal(d.querySelector('.card').dataset.id, 'drape-try-on');
   click('#reset');
-  const added = w.JEV_ATLAS.cases.filter(c => new URL(c.research).hostname === 'jevable.com');
-  assert.equal(added.length, 50);
-  for (const c of added) {
-    click(`[data-play="${c.id}"]`); await flush();
-    assert.equal(calls.at(-1).id, c.source.split('/').pop());
-    assert.equal(calls.at(-1).options.dnt, true);
-    assert.equal(d.querySelector('video'), null);
-    assert.ok(d.querySelector('#player-host iframe'));
-    assert.equal(d.getElementById('inline-player').closest('.card').id, `case-${c.id}`);
-    assert.equal(d.querySelector('dialog[open]'), null);
-    assert.equal(d.getElementById('player-file').hidden, true);
-    assert.equal(d.getElementById('player-file').hasAttribute('href'), false);
+  for (const c of w.JEV_ATLAS.cases) {
+    click(`[data-play="${c.id}"]`);
+    const video = d.querySelector('video');
+    assert.ok(video, c.id);
+    assert.equal(video.src, c.media.url);
+    assert.equal(video.controls, true);
+    assert.equal(video.playsInline, true);
+    assert.equal(video.closest('.card').id, `case-${c.id}`);
+    assert.equal(d.querySelectorAll('video').length, 1);
+    assert.equal(d.querySelectorAll('iframe, script[src*="widgets.js"], dialog[open]').length, 0);
+    assert.equal(d.getElementById('player-file').href, c.media.url);
     assert.equal(d.getElementById('retry-player').hidden, true);
-    click('#close-player');
-    assert.equal(d.querySelector('#player-host iframe'), null);
   }
-  assert.equal(calls.length, 50);
+  assert.equal(playCalls, w.JEV_ATLAS.cases.length);
+  click('#close-player');
+  assert.equal(d.querySelector('video'), null);
   click('[data-category="simulation"]');
   assert.equal(count(), w.JEV_ATLAS.cases.filter(c => c.category === 'simulation').length);
   input('MuJoCo');
   assert.equal(count(), 1);
-  assert.equal(d.querySelector('.card').dataset.id, 'mujoco-robot-arm');
 });
 
-test('native player rejects X CDN renditions, lookalike hosts and credentials', t => {
+test('native player rejects unverified video paths, lookalike hosts and credentials', t => {
   for (const url of ['https://video.twimg.com/demo.mp4', 'https://raw.githubusercontent.com.evil.example/demo.mp4', 'https://raw.githubusercontent.com@evil.example/demo.mp4', 'https://user:pass@raw.githubusercontent.com/demo.mp4']) {
     const { d, click } = setup(t, { mutate: data => {
       data.cases.find(c => c.id === 'flight-search').media.url = url;
@@ -308,6 +273,24 @@ test('native player rejects X CDN renditions, lookalike hosts and credentials', 
     click('[data-play="flight-search"]');
     assert.equal(d.querySelector('video'), null);
     assert.equal(d.getElementById('player-file').hidden, true);
+    assert.equal(d.getElementById('player-file').hasAttribute('href'), false);
+    assert.equal(d.getElementById('retry-player').hidden, false);
+  }
+});
+
+test('directory media must match the current post and publisher media must match its thumbnail', t => {
+  for (const url of [
+    'https://jevable.com/media/2101118529936519453/0',
+    'https://jevable.com/media/2101388186916454439/0?url=https://evil.example/video',
+    'https://jevable.com/project/2101388186916454439',
+    'https://jevable.com.evil.example/media/2101388186916454439/0',
+    'https://video.twimg.com/amplify_video/2101118259076734976/vid/avc1/640x360/test.mp4'
+  ]) {
+    const { d, click } = setup(t, { mutate: data => {
+      data.cases.find(c => c.id === 'drape-try-on').media.url = url;
+    } });
+    click('[data-play="drape-try-on"]');
+    assert.equal(d.querySelector('video'), null);
     assert.equal(d.getElementById('player-file').hasAttribute('href'), false);
     assert.equal(d.getElementById('retry-player').hidden, false);
   }

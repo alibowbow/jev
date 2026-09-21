@@ -127,7 +127,7 @@
     const play = element('span', 'play-circle');
     play.append(icon('play'));
     const mediaBottom = element('span', 'media-bottom');
-    mediaBottom.append(element('span', 'video-label', c.media.type === 'x' ? 'X에서 공개한 시연' : '공개 시연 영상'),
+    mediaBottom.append(element('span', 'video-label', '공개 시연 영상'),
       element('span', 'media-credit', c.author));
     preview.append(play, mediaBottom);
     const bottom = element('div', 'card-bottom');
@@ -215,7 +215,6 @@
   let activePreview = null;
   let playerEpoch = 0;
   let playerTimer;
-  let widgetsPromise = null;
   let mediaCleanup = () => {};
   const previousFocus = new Map();
   function openDialog(dialog) {
@@ -256,83 +255,58 @@
     if (!isCurrent(epoch)) return;
     stopPlayer();
     $('player-host').append(element('p', 'player-placeholder', '영상을 불러오지 못했습니다.'));
-    $('player-status').textContent = '영상 로딩이 지연되거나 재생할 수 없습니다. 영상 파일이나 원본을 열거나 다시 불러와 주세요.';
+    $('player-status').hidden = false;
+    $('player-status').textContent = '다시 불러오거나 원본에서 영상을 확인해 주세요.';
     $('retry-player').hidden = false;
   }
-  function loadWidgets() {
-    if (window.twttr?.widgets?.createTweet) return Promise.resolve(window.twttr);
-    if (widgetsPromise) return widgetsPromise;
-    widgetsPromise = new Promise((resolve, reject) => {
-      const script = element('script');
-      script.src = 'https://platform.twitter.com/widgets.js';
-      script.async = true;
-      let settled = false;
-      const finish = error => {
-        if (settled) return;
-        settled = true;
-        clearTimeout(timer);
-        script.onload = script.onerror = null;
-        if (error) { script.remove(); reject(error); } else resolve(window.twttr);
-      };
-      const timer = setTimeout(() => finish(new Error('Widget timeout')), 12000);
-      script.onerror = () => finish(new Error('Widget unavailable'));
-      script.onload = () => window.twttr?.widgets?.createTweet ? finish() : finish(new Error('Widget API unavailable'));
-      document.head.append(script);
-    }).catch(error => { widgetsPromise = null; throw error; });
-    return widgetsPromise;
+  function mediaUrl(c) {
+    const value = safeUrl(c.media.url, ['raw.githubusercontent.com', 'jevable.com', 'video.twimg.com']);
+    if (!value || c.media.type !== 'mp4') return null;
+    const url = new URL(value);
+    if (url.hostname === 'raw.githubusercontent.com') return url.pathname.endsWith('.mp4') ? value : null;
+    if (url.hostname === 'jevable.com') {
+      return /^\d{15,22}$/.test(c.media.id) && url.pathname === `/media/${c.media.id}/0` && !url.search && !url.hash ? value : null;
+    }
+    const videoId = url.pathname.match(/^\/(?:amplify_video|ext_tw_video)\/(\d+)\/(?:pu\/)?vid\/avc1\/\d+x\d+\/[\w-]+\.mp4$/)?.[1];
+    const posterId = c.media.poster?.match(/\/(?:amplify_video_thumb|ext_tw_video_thumb)\/(\d+)\//)?.[1];
+    return videoId && videoId === posterId ? value : null;
   }
-  async function startPlayer(c) {
+  function startPlayer(c) {
     stopPlayer();
     const epoch = playerEpoch;
     const host = $('player-host');
-    host.classList.toggle('x-host', c.media.type === 'x');
     $('retry-player').hidden = true;
+    $('player-status').hidden = false;
     $('player-status').textContent = '영상을 불러오는 중입니다…';
-    const placeholder = element('div', 'player-placeholder');
-    placeholder.append(element('span', 'loader'), document.createTextNode('공개 시연을 불러오고 있습니다.'));
-    host.append(placeholder);
-    // Native publisher files and the official social player have separate loading budgets.
-    playerTimer = setTimeout(() => failedPlayer(epoch), c.media.type === 'mp4' ? 45000 : 18000);
-    if (c.media.type === 'mp4') {
-      const url = safeUrl(c.media.url, ['raw.githubusercontent.com']);
-      if (!url || !new URL(url).pathname.endsWith('.mp4')) { failedPlayer(epoch); return; }
-      const video = element('video');
-      video.controls = true;
-      video.playsInline = true;
-      video.preload = 'metadata';
-      video.setAttribute('aria-label', `${c.title} 시연 영상`);
-      const ready = () => {
-        if (!isCurrent(epoch)) return;
-        clearTimeout(playerTimer);
-        $('player-status').textContent = '재생 버튼을 눌러 영상을 볼 수 있습니다.';
-      };
-      const error = () => failedPlayer(epoch);
-      video.addEventListener('loadedmetadata', ready);
-      video.addEventListener('error', error);
-      mediaCleanup = () => {
-        video.removeEventListener('loadedmetadata', ready);
-        video.removeEventListener('error', error);
-      };
-      video.src = url;
-      host.replaceChildren(video);
-      // Native controls work even when autoplay is denied by browser policy.
-      video.play().catch(() => {});
-      return;
-    }
-    if (c.media.type !== 'x' || !/^\d{15,22}$/.test(c.media.id)) { failedPlayer(epoch); return; }
-    try {
-      const twitter = await loadWidgets();
+    const url = mediaUrl(c);
+    if (!url) { failedPlayer(epoch); return; }
+    const video = element('video');
+    video.controls = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    const poster = safeUrl(c.media.poster, ['pbs.twimg.com', 'raw.githubusercontent.com']);
+    if (poster) video.poster = poster;
+    video.setAttribute('aria-label', `${c.title} 시연 영상`);
+    const ready = () => {
       if (!isCurrent(epoch)) return;
-      const mount = element('div', 'tweet-mount');
-      // Each request owns its container. Late widget callbacks cannot replace a newer player.
-      host.append(mount);
-      const tweet = await twitter.widgets.createTweet(c.media.id, mount, { dnt: true, conversation: 'none', theme: 'light', lang: 'ko' });
-      if (!isCurrent(epoch)) { mount.remove(); return; }
-      if (!tweet) { failedPlayer(epoch); return; }
       clearTimeout(playerTimer);
-      placeholder.remove();
-      $('player-status').textContent = 'X 게시물의 재생 버튼을 눌러 주세요. 재생이 안 되면 원본에서 볼 수 있습니다.';
-    } catch { failedPlayer(epoch); }
+      $('player-status').textContent = '';
+      $('player-status').hidden = true;
+    };
+    const error = () => failedPlayer(epoch);
+    video.addEventListener('canplay', ready);
+    video.addEventListener('playing', ready);
+    video.addEventListener('error', error);
+    mediaCleanup = () => {
+      video.removeEventListener('canplay', ready);
+      video.removeEventListener('playing', ready);
+      video.removeEventListener('error', error);
+    };
+    playerTimer = setTimeout(() => failedPlayer(epoch), 45000);
+    video.src = url;
+    host.replaceChildren(video);
+    // Start from the user's card click; native controls remain available if autoplay is denied.
+    video.play().catch(() => {});
   }
   function openPlayer(id) {
     const c = caseMap.get(id);
@@ -352,7 +326,7 @@
     const source = safeUrl(c.source, ['x.com', 'github.com']);
     if (source) $('player-source').href = source;
     else $('player-source').removeAttribute('href');
-    const file = c.media.type === 'mp4' && safeUrl(c.media.url, ['raw.githubusercontent.com']);
+    const file = mediaUrl(c);
     const fileLink = $('player-file');
     fileLink.hidden = !file;
     if (file) fileLink.href = file;

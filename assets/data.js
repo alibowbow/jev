@@ -58,7 +58,7 @@ cases[0].code = 'https://github.com/browser-use/jev-ultrafast';
 cases.find(c=>c.id==='sponsor-skip').code = 'https://github.com/trungdq88/youtube-sponsor-detection';
 cases.push({id:'mobile-uber',category:'browser',title:'스마트폰에서 목적지 입력까지, 21초.',summary:'실제 Android의 Uber 앱을 열고 공항에서 금문교까지의 경로를 입력합니다. Jev가 탭할 곳을 결정하며 결제 수단 선택 화면까지 진행합니다.',metrics:[{value:'약 21초',label:'기록된 작업 시간'},{value:'9번',label:'실행한 행동'}],author:'DroidRun / Mobilerun',handle:'droidrun',source:'https://github.com/droidrun/mobile-jev/blob/main/docs/media/uber-demo.mp4',code:'https://github.com/droidrun/mobile-jev',research:'https://github.com/droidrun/mobile-jev',reviewed:'2026-09-19',note:'차량 호출이나 결제 완료를 보여 주는 영상이 아닙니다.',media:{type:'mp4',url:'https://raw.githubusercontent.com/droidrun/mobile-jev/main/docs/media/uber-demo.mp4',poster:'https://raw.githubusercontent.com/droidrun/mobile-jev/main/docs/media/uber-demo.gif',evidence:'publisher-video-file'}});
 cases.find(c=>c.id==='jev-trader').code = 'https://github.com/jarrodwatts/jev-trader';
-// Jevable discoveries: use official X players; CDN file URLs are not stable embed endpoints.
+// Jevable discoveries, with independent Korean descriptions and original-post attribution.
 cases.unshift(...[
   {
     "id": "drape-try-on",
@@ -1530,5 +1530,96 @@ cases.unshift(...[
     }
   }
 ]);
-window.JEV_ATLAS = Object.freeze({version:5,reviewed:'2026-09-21',categories:cats,cases});
+// Video-only media from the public players on Jevable and Made with Jev.
+// Keep the original post IDs and credits; never inject a full social-post widget.
+const videoFiles = {
+  "drape-try-on": "https://jevable.com/media/2101388186916454439/0",
+  "proq-plan-classifier": "https://jevable.com/media/2101118529936519453/0",
+  "jevform": "https://jevable.com/media/2101079101997982037/0",
+  "mujoco-robot-arm": "https://jevable.com/media/2101018760371171420/0",
+  "voice-figma": "https://jevable.com/media/2100845388655960112/0",
+  "live-3d-expressions": "https://jevable.com/media/2101019513676345555/0",
+  "semantic-sheet-formatting": "https://jevable.com/media/2100601420395282695/0",
+  "pdf-ocr-router": "https://jevable.com/media/2100979972194369925/0",
+  "bannerbear-field-mapping": "https://jevable.com/media/2100801037192024478/0",
+  "higgsfield-model-routing": "https://jevable.com/media/2101022133753430365/0",
+  "upweight-hacker-news": "https://jevable.com/media/2100536228827496721/0",
+  "gmail-intent-search": "https://jevable.com/media/2100960281769738433/0",
+  "ui-flow-capture": "https://jevable.com/media/2101047036863037753/0",
+  "json-render-ui": "https://jevable.com/media/2101022101750571357/0",
+  "moss-litter-pickup": "https://jevable.com/media/2101021471644733867/0",
+  "session-replay-triage": "https://jevable.com/media/2101012033340571952/0",
+  "postgres-query-planner": "https://jevable.com/media/2101001041903009987/0",
+  "agent-environment-router": "https://jevable.com/media/2100994779291259187/0",
+  "box-incident-triage": "https://jevable.com/media/2100993278955188320/0",
+  "slack-skill-router": "https://jevable.com/media/2100987661926252737/0",
+  "jev-reviewer-papers": "https://jevable.com/media/2100985031703269425/0",
+  "plain-english-logic": "https://jevable.com/media/2100985027093749764/0",
+  "supabase-rls-linter": "https://jevable.com/media/2100981707105284255/0",
+  "library-index-search": "https://jevable.com/media/2100975114753892550/0",
+  "tax-document-classifier": "https://jevable.com/media/2100973868324417852/0",
+  "jevals-workbench": "https://jevable.com/media/2100968892591968320/0",
+  "wakeword-free-assistant": "https://jevable.com/media/2100967959879471519/0",
+  "driving-decision-simulator": "https://jevable.com/media/2100965547454374316/0",
+  "brand-news-matching": "https://jevable.com/media/2100951347080421409/0",
+  "asteroid-drone": "https://jevable.com/media/2100950317852455039/0",
+  "focus-rail": "https://jevable.com/media/2101035079149449398/0",
+  "abide-agent-rules": "https://jevable.com/media/2101034822760288452/0",
+  "agentrun-workflows": "https://jevable.com/media/2101033282414768456/0",
+  "android-e2e-testing": "https://jevable.com/media/2101032931456168098/0",
+  "voice-beatmaking": "https://jevable.com/media/2101023899265692100/0",
+  "contextual-autofill": "https://jevable.com/media/2100928133608472817/0",
+  "cascade-search": "https://jevable.com/media/2100910232255992032/0",
+  "clipboard-quick-actions": "https://jevable.com/media/2100907261593829675/0",
+  "cal-team-scheduling": "https://jevable.com/media/2100902559313502602/0",
+  "maxfusion-ad-shots": "https://jevable.com/media/2100870244004683886/0",
+  "orus-strategy-review": "https://jevable.com/media/2100859259915227358/0",
+  "jevcal-thresholds": "https://jevable.com/media/2100850610962919551/0",
+  "action-label-quality": "https://jevable.com/media/2100807905859739779/0",
+  "mario-branch-retry": "https://jevable.com/media/2101095181382721998/0",
+  "jev-board": "https://jevable.com/media/2100681083176226921/0",
+  "simulated-audience": "https://jevable.com/media/2100713197502173373/0",
+  "whale-city": "https://jevable.com/media/2101022590722810271/0",
+  "prompt-difficulty": "https://jevable.com/media/2101021361351131464/0",
+  "seo-internal-links": "https://jevable.com/media/2101018783976722479/0",
+  "jevton-town": "https://jevable.com/media/2100878555047514390/0",
+  "voice-mac": "https://jevable.com/media/2100814590300889426/0",
+  "job-match": "https://jevable.com/media/2100980770206879849/0",
+  "superx": "https://jevable.com/media/2100722975645598191/0",
+  "fraud-cascade": "https://jevable.com/media/2100614659690713543/0",
+  "predictive-sheet": "https://jevable.com/media/2100780008193020049/0",
+  "download-sort": "https://jevable.com/media/2100906882365788167/0",
+  "email-500": "https://jevable.com/media/2100404532119269426/0",
+  "stagehand": "https://jevable.com/media/2100622054945095934/0",
+  "postgres": "https://jevable.com/media/2100679300756435135/0",
+  "email-1500": "https://jevable.com/media/2100042788851101842/0",
+  "instant-compaction": "https://jevable.com/media/2100694549362553153/0",
+  "jev-review": "https://jevable.com/media/2100465662867218857/0",
+  "computer-use-without-screenshots": "https://jevable.com/media/2100631847155994852/0",
+  "jev-trader": "https://jevable.com/media/2100356151468585346/0",
+  "realtime-game-levels": "https://jevable.com/media/2100953089003921543/0",
+  "ocr-image-classifier": "https://jevable.com/media/2100953838891192789/0",
+  "ad-teardown": "https://video.twimg.com/amplify_video/2100654321792684032/vid/avc1/640x360/KUagVXwb-SSHp1TY.mp4",
+  "sponsor-skip": "https://video.twimg.com/amplify_video/2100792834526007296/vid/avc1/570x360/gskXXEggT9IaRAHT.mp4",
+  "paper-atlas": "https://video.twimg.com/amplify_video/2100425141947604992/vid/avc1/486x360/D4f1Ou22ZW45hlI3.mp4",
+  "lead-fit": "https://video.twimg.com/amplify_video/2100891566340501504/vid/avc1/640x360/49MTyZIvwe3t4oSM.mp4",
+  "post-analysis": "https://video.twimg.com/amplify_video/2100668725737213952/vid/avc1/524x360/H60EZdX5rjJXxwoT.mp4",
+  "gesture-canvas": "https://video.twimg.com/amplify_video/2100729243185324032/vid/avc1/474x360/nLpMqywXTPRVxKYg.mp4",
+  "reference-finder": "https://video.twimg.com/amplify_video/2100720525739687936/vid/avc1/320x568/QnWf-pVb6KpSZpvo.mp4",
+  "clippy": "https://video.twimg.com/amplify_video/2100700282434826240/vid/avc1/562x360/TMm5MksXFfTGCiQF.mp4",
+  "mario": "https://video.twimg.com/amplify_video/2100085174826647552/vid/avc1/640x360/lrPaXa-jly9ZrKaE.mp4",
+  "doom": "https://video.twimg.com/amplify_video/2099924592534183936/vid/avc1/586x360/BRwXZhNNv-q4Do5h.mp4",
+  "tetris": "https://video.twimg.com/ext_tw_video/2100438029299040256/pu/vid/avc1/760x360/pMnxzXWpVRxOmCAq.mp4?tag=12",
+  "slay-spire": "https://video.twimg.com/amplify_video/2100569632482746369/vid/avc1/320x568/FVP3i4_liPcaojvz.mp4",
+  "x-post-firewall": "https://video.twimg.com/amplify_video/2100519256425140224/vid/avc1/500x360/_SoZRXrArj4LeF1B.mp4",
+  "predictive-launcher": "https://video.twimg.com/amplify_video/2100756324845862913/vid/avc1/640x360/S7b4BiG1wv1cBXje.mp4",
+  "invoice-finder": "https://video.twimg.com/amplify_video/2100710351536840705/vid/avc1/558x360/3SbPwaVAB__QxUy7.mp4",
+  "subway-surfers": "https://video.twimg.com/amplify_video/2100633400717565952/vid/avc1/640x360/hRa7TkUdZ-9COBJd.mp4",
+  "ai-slop-detector": "https://video.twimg.com/amplify_video/2101157511579508736/vid/avc1/680x360/g7Wbr5p1VgW6Z7Aj.mp4?tag=14",
+  "doomscroll-filter": "https://video.twimg.com/amplify_video/2101071392385236992/vid/avc1/640x360/RiTZE48Nad0UQ_hY.mp4"
+};
+for (const c of cases) {
+  if (videoFiles[c.id]) c.media = {...c.media, type:'mp4', url:videoFiles[c.id]};
+}
+window.JEV_ATLAS = Object.freeze({version:6,reviewed:'2026-09-21',categories:cats,cases});
 })();
