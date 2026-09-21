@@ -11,7 +11,7 @@ A Korean, video-first collection of published Jev demonstrations. Independent of
 - Korean and English keyword search, category filters, title sorting, result counts and empty states.
 - Browser-local bookmarks, including storage-denied fallback and synchronization between tabs.
 - Shareable `#case=<id>` links that highlight a card without automatically loading a third-party player.
-- In-card playback for publisher MP4s and official X embeds, with original-source links, timeout handling and retry. Only one card plays at a time; filtering or sorting stops the previous player.
+- In-card playback for public video files with native controls, with original-source links, timeout handling and retry. Only one card plays at a time; filtering or sorting stops the previous player.
 - Keyboard-accessible playback controls, Escape to collapse a video, focus restoration, `/` to search, a native source-information dialog and reduced-motion support.
 
 The video-first runtime is integrated with the current page and data schema. No API key, account system, backend or production build step is required. This site collects demonstrations; it does not call the Jev inference API.
@@ -30,18 +30,20 @@ python3 -m http.server 8080
 
 Open `http://localhost:8080`. The test dependency is development-only; publish the repository's static entry point and assets.
 
-The automated checks cover catalogue structure and actual DOM interactions, including filtering, search, sorting, bookmarks, sharing, playback errors, retry, inline-player cleanup on switching/filtering, stale asynchronous callbacks and safe text/URL handling. GitHub Actions runs these checks and JavaScript syntax validation. These tests simulate media responses; they do not establish that every external video can play in every browser.
+The automated checks cover catalogue structure and actual DOM interactions, including filtering, search, sorting, bookmarks, sharing, playback errors, retry, inline-player cleanup on switching/filtering, stale media callbacks and safe text/URL handling. GitHub Actions runs these checks and JavaScript syntax validation. These tests simulate media responses; they do not establish that every external video can play in every browser.
 
 ## Catalogue and attribution
 
-`assets/data.js` contains 86 distinct cases: two GitHub-hosted publisher MP4s and 84 official X embeds. Records are not duplicated to reach a target count. Video evidence and author-reported performance figures are not independent performance verification. Source links, creator credits and scope notes are retained per case.
+`assets/data.js` contains 86 distinct cases: 66 Jevable video files, 18 publisher video files referenced by Made with Jev, and two GitHub-hosted publisher MP4s. Records are not duplicated to reach a target count. Video evidence and author-reported performance figures are not independent performance verification. Source links, creator credits and scope notes are retained per case.
 
 The Browser Use demo shows flight search, not completed ticket purchase. DroidRun shows the payment-method screen, not a completed ride order.
 
-Thumbnails load from the publishers' external hosts. Players load only after a user selects a video; bookmarks stay in this browser. Third-party media is linked from original publishers, not copied or rehosted. Availability depends on each publisher and the user's network or content-blocking settings. The source link remains available when an embed fails.
+Thumbnails load from the publishers' external hosts. Players load only after a user selects a video; bookmarks stay in this browser. Third-party media is linked from the publisher or discovery site; this repository does not copy or rehost the files. Availability depends on each publisher and the user's network or content-blocking settings. The source link remains available when an embed fails.
 
 The September 21 selection adds 50 projects discovered through [Jevable](https://jevable.com/), with independently written Korean descriptions, original English project-name search and a robotics/simulation category. Per-card research URLs preserve discovery attribution alongside primary publisher links.
 
 See [Jevable selection and media checks](docs/jevable-update-2026-09-21.md), [guide and catalogue update](docs/catalogue-update-2026-09-19.md) and [integration and validation notes](docs/video-first-review.md).
 
-X video posts use the official player resolved from their post IDs. Captured `video.twimg.com` rendition URLs are not used for native playback or direct-file links: an available CDN file does not establish that third-party in-page playback is supported.
+The card play button starts a native video in the thumbnail area. Full X post widgets are never loaded, including on failure. Source links remain available outside the player. The player reserves the same 16:9 space and contains portrait/square videos without cropping. Only one media element is active; switching, filtering, sorting or collapsing stops and unloads it.
+
+Jevable's public card player supplies a `/media/<post ID>/0` video route alongside its CDN source. Those published video endpoints are used for the 66 matching records. The other 18 publisher URLs are extracted from their original Made with Jev build pages and matched against each existing thumbnail's video ID. No iframe clipping, referrer spoofing or new media proxy is used.
