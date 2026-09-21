@@ -4,7 +4,7 @@ A Korean, video-first collection of published Jev demonstrations. Independent of
 
 ## Features
 
-- 36 distinct video cases across seven categories, with large desktop cards and a single-column mobile layout.
+- 86 distinct video cases across eight categories, with large desktop cards and a single-column mobile layout.
 - A visual beginner guide (`learn.html`): typed-output illustrations, four scenario flows including a fictional intake response, interactive probability comparisons and a tool-role map.
 - A sourced Jev/LLM comparison, a publisher-demo latency chart and a USD token-cost calculator comparing GPT-5.6 Luna, Gemini 3.8 Flash, GPT-6 Astra and Claude Fable 5.1, with explicit input/output assumptions and dated promotional terms.
 - Fourteen implementation ideas (`ideas.html`), including two focused medical/dental workflow proposals with clinician-review boundaries and a shareable `#medical` filter.
@@ -34,10 +34,12 @@ The automated checks cover catalogue structure and actual DOM interactions, incl
 
 ## Catalogue and attribution
 
-`assets/data.js` contains 36 distinct cases: two publisher-hosted MP4s and 34 X video posts. Records are not duplicated to reach a target count. Video evidence and author-reported performance figures are not independent performance verification. Source links, creator credits and scope notes are retained per case.
+`assets/data.js` contains 86 distinct cases: 52 original-publisher MP4 links and 34 X embeds. Records are not duplicated to reach a target count. Video evidence and author-reported performance figures are not independent performance verification. Source links, creator credits and scope notes are retained per case.
 
 The Browser Use demo shows flight search, not completed ticket purchase. DroidRun shows the payment-method screen, not a completed ride order.
 
 Thumbnails load from the publishers' external hosts. Players load only after a user selects a video; bookmarks stay in this browser. Third-party media is linked from original publishers, not copied or rehosted. Availability depends on each publisher and the user's network or content-blocking settings. The source link remains available when an embed fails.
 
-See [guide and catalogue update](docs/catalogue-update-2026-09-19.md) and [integration and validation notes](docs/video-first-review.md).
+The September 21 selection adds 50 projects discovered through [Jevable](https://jevable.com/), with independently written Korean descriptions, original English project-name search and a robotics/simulation category. Per-card research URLs preserve discovery attribution alongside primary publisher links.
+
+See [Jevable selection and media checks](docs/jevable-update-2026-09-21.md), [guide and catalogue update](docs/catalogue-update-2026-09-19.md) and [integration and validation notes](docs/video-first-review.md).

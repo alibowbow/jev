@@ -177,14 +177,47 @@ test('X timeout invalidates late success; successful embeds and about dialog rem
 
 test('catalogue text is rendered literally and unsafe media URLs are refused', t => {
   const { d, click } = setup(t, { mutate: data => {
-    data.cases[0].title = '<img src=x onerror=alert(1)>';
-    data.cases[0].media.url = 'https://raw.githubusercontent.com.evil.example/demo.mp4';
-    data.cases[0].source = 'javascript:alert(1)';
+    const flight = data.cases.find(c => c.id === 'flight-search');
+    flight.title = '<img src=x onerror=alert(1)>';
+    flight.media.url = 'https://raw.githubusercontent.com.evil.example/demo.mp4';
+    flight.source = 'javascript:alert(1)';
   } });
-  assert.equal(d.querySelector('.card h2').textContent, '<img src=x onerror=alert(1)>');
-  assert.equal(d.querySelector('.card h2 img'), null);
+  assert.equal(d.querySelector('#case-flight-search h2').textContent, '<img src=x onerror=alert(1)>');
+  assert.equal(d.querySelector('#case-flight-search h2 img'), null);
   assert.equal(d.querySelector('a[href^="javascript:"]'), null);
   click('[data-play="flight-search"]');
   assert.equal(d.querySelector('video'), null);
   assert.equal(d.getElementById('retry-player').hidden, false);
+});
+
+test('Jevable projects are searchable by original names and play original CDN videos only on demand', t => {
+  const { d, w, count, input, click } = setup(t);
+  input('Drape');
+  assert.equal(count(), 1);
+  assert.equal(d.querySelector('.card').dataset.id, 'drape-try-on');
+  assert.equal(d.querySelector('video'), null);
+  click('[data-play="drape-try-on"]');
+  const video = d.querySelector('video');
+  assert.equal(new URL(video.src).hostname, 'video.twimg.com');
+  video.dispatchEvent(new w.Event('loadedmetadata'));
+  assert.equal(d.getElementById('retry-player').hidden, true);
+  assert.equal(d.querySelector('script[src*="widgets.js"]'), null);
+  click('#close-player');
+  click('#reset');
+  click('[data-category="simulation"]');
+  assert.equal(count(), w.JEV_ATLAS.cases.filter(c => c.category === 'simulation').length);
+  input('MuJoCo');
+  assert.equal(count(), 1);
+  assert.equal(d.querySelector('.card').dataset.id, 'mujoco-robot-arm');
+});
+
+test('publisher video CDN allowlist rejects lookalike hosts and credentials', t => {
+  for (const url of ['https://video.twimg.com.evil.example/demo.mp4', 'https://video.twimg.com@evil.example/demo.mp4', 'https://user:pass@video.twimg.com/demo.mp4']) {
+    const { d, click } = setup(t, { mutate: data => {
+      data.cases.find(c => c.id === 'drape-try-on').media.url = url;
+    } });
+    click('[data-play="drape-try-on"]');
+    assert.equal(d.querySelector('video'), null);
+    assert.equal(d.getElementById('retry-player').hidden, false);
+  }
 });

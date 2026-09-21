@@ -71,7 +71,7 @@
   const normalize = value => String(value).normalize('NFKC').toLocaleLowerCase('ko');
   const searchIndex = new Map(data.cases.map(c => [c.id, normalize([
     c.title, c.summary, c.author, c.handle, categoryMap.get(c.category).name,
-    ...c.metrics.map(m => `${m.value} ${m.label}`)
+    ...c.metrics.map(m => `${m.value} ${m.label}`), ...(c.keywords || [])
   ].join(' '))]));
   let toastTimer;
   function notify(message) {
@@ -142,7 +142,7 @@
     share.append(icon('share'));
     actions.append(share);
     footer.append(element('span', 'author-mark', Array.from(c.author)[0]), element('span', 'author', c.author), actions);
-    bottom.append(metrics, element('p', 'metric-disclosure', '제작자 공개 수치 · 독립 재현 아님'), footer);
+    bottom.append(metrics, element('p', 'metric-disclosure', '제작자 공개 시연 · 독립 재현 아님'), footer);
     article.append(head, preview, bottom);
     return article;
   }
@@ -273,7 +273,7 @@
     host.append(placeholder);
     playerTimer = setTimeout(() => failedPlayer(epoch), 18000);
     if (c.media.type === 'mp4') {
-      const url = safeUrl(c.media.url, ['raw.githubusercontent.com']);
+      const url = safeUrl(c.media.url, ['raw.githubusercontent.com', 'video.twimg.com']);
       if (!url || !new URL(url).pathname.endsWith('.mp4')) { failedPlayer(epoch); return; }
       const video = element('video');
       video.controls = true;
