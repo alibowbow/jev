@@ -58,7 +58,7 @@ cases[0].code = 'https://github.com/browser-use/jev-ultrafast';
 cases.find(c=>c.id==='sponsor-skip').code = 'https://github.com/trungdq88/youtube-sponsor-detection';
 cases.push({id:'mobile-uber',category:'browser',title:'스마트폰에서 목적지 입력까지, 21초.',summary:'실제 Android의 Uber 앱을 열고 공항에서 금문교까지의 경로를 입력합니다. Jev가 탭할 곳을 결정하며 결제 수단 선택 화면까지 진행합니다.',metrics:[{value:'약 21초',label:'기록된 작업 시간'},{value:'9번',label:'실행한 행동'}],author:'DroidRun / Mobilerun',handle:'droidrun',source:'https://github.com/droidrun/mobile-jev/blob/main/docs/media/uber-demo.mp4',code:'https://github.com/droidrun/mobile-jev',research:'https://github.com/droidrun/mobile-jev',reviewed:'2026-09-19',note:'차량 호출이나 결제 완료를 보여 주는 영상이 아닙니다.',media:{type:'mp4',url:'https://raw.githubusercontent.com/droidrun/mobile-jev/main/docs/media/uber-demo.mp4',poster:'https://raw.githubusercontent.com/droidrun/mobile-jev/main/docs/media/uber-demo.gif',evidence:'publisher-video-file'}});
 cases.find(c=>c.id==='jev-trader').code = 'https://github.com/jarrodwatts/jev-trader';
-// Jevable discoveries: individually sourced, independently edited, original publisher media.
+// Jevable discoveries: use official X players; CDN file URLs are not stable embed endpoints.
 cases.unshift(...[
   {
     "id": "drape-try-on",
@@ -84,11 +84,10 @@ cases.unshift(...[
     ],
     "note": "Jev는 옷을 선택하는 판단을 맡습니다. 음성 전사와 착장 이미지 표현은 별도 시스템의 역할입니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101388186916454439",
-      "url": "https://video.twimg.com/amplify_video/2101384523124740096/vid/avc1/1278x720/6u9oqUGUZP5-mfY_.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101384523124740096/img/1Q6moTMdLcZ-mJ3r.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -119,11 +118,10 @@ cases.unshift(...[
     ],
     "note": "도면 분류 단계의 제작자 시연입니다. 자재 산출 전체가 2.9초에 끝나거나 도면 이미지를 Jev가 직접 이해한다는 뜻은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101118529936519453",
-      "url": "https://video.twimg.com/amplify_video/2101118259076734976/vid/avc1/1318x720/9Lzo61AWxQL_9Obt.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101118259076734976/img/JId8Xua4ypyd342R.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -150,11 +148,10 @@ cases.unshift(...[
     ],
     "note": "Jev와 json-render를 결합한 제작자 시연입니다. 질문 선택과 화면 렌더링은 각각의 구성 요소가 맡습니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101079101997982037",
-      "url": "https://video.twimg.com/amplify_video/2101079056540139521/vid/avc1/1328x720/IsjTxTeSkEJgP1Z2.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101079056540139521/img/IYIVL8ehM6E2HcyL.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -180,11 +177,10 @@ cases.unshift(...[
     ],
     "note": "시뮬레이션 데모입니다. 실제 로봇에서의 안전성·정밀도 검증이나 Jev의 직접 영상 인식 사례가 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101018760371171420",
-      "url": "https://video.twimg.com/amplify_video/2101017646154366976/vid/avc1/1280x720/-lYEavfPF_VnI4k2.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101017646154366976/img/02bH3Hxy9l0qEffS.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -210,11 +206,10 @@ cases.unshift(...[
     ],
     "note": "음성 인식과 Figma 실행 도구를 결합한 실험입니다. Jev 자체가 음성을 직접 인식하거나 완성된 디자인을 생성하는 기능은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100845388655960112",
-      "url": "https://video.twimg.com/amplify_video/2100844622213959680/vid/avc1/1148x720/cTgoqRNj25-pO1aw.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100844622213959680/img/yPzf2Js8iJLezbtu.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -241,11 +236,10 @@ cases.unshift(...[
     ],
     "note": "가상 캐릭터의 표현을 만드는 제작자 실험입니다. 실제 사람의 감정을 판별하거나 정해진 정확도로 모사한다는 뜻은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101019513676345555",
-      "url": "https://video.twimg.com/amplify_video/2101017687044366336/vid/avc1/1296x720/Moe_NRJlE8_gbJez.mp4?tag=14",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101017687044366336/img/i9QnHKeZumFnNMCB.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -272,11 +266,10 @@ cases.unshift(...[
     ],
     "note": "제작자의 실험과 통합 제안입니다. Shortcut에 정식 출시된 기능으로 확인한 사례는 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100601420395282695",
-      "url": "https://video.twimg.com/amplify_video/2100477859018272768/vid/avc1/902x720/91jpb13CYpPiTtm6.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100477859018272768/img/XiwQwp3fqCnc1ZYz.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -303,11 +296,10 @@ cases.unshift(...[
     ],
     "note": "Jev는 처리 경로를 분류합니다. OCR 인식 품질과 전체 비용 절감은 문서 구성과 사용 도구에 따라 달라집니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100979972194369925",
-      "url": "https://video.twimg.com/amplify_video/2100978985480167424/vid/avc1/1200x676/C-nOdUJ3ziN5R5e1.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100978985480167424/img/Qcx8F-7plQRcpzqg.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -333,11 +325,10 @@ cases.unshift(...[
     ],
     "note": "제작자가 공개한 템플릿 매핑 사례입니다. 임의의 데이터 구조에서 모든 필드를 정확히 연결한다는 보장은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100801037192024478",
-      "url": "https://video.twimg.com/amplify_video/2100800207256756224/vid/avc1/1444x720/Y-gxOQFNLKP-_vI2.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100800207256756224/img/qfKKxj1Oh8pHHnD7.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -364,11 +355,10 @@ cases.unshift(...[
     ],
     "note": "Jev의 역할은 모델 선택입니다. 이미지·영상 생성은 선택된 별도 모델이 수행합니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101022133753430365",
-      "url": "https://video.twimg.com/amplify_video/2101022052279058432/vid/avc1/1280x720/yAG0tstXkAidaJky.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101022052279058432/img/9UB9da_sc74S_NtV.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -395,11 +385,10 @@ cases.unshift(...[
     ],
     "note": "선호 기준에 따른 순위 조정 데모입니다. 기사 내용의 사실 여부나 객관적 품질을 인증하는 기능은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100536228827496721",
-      "url": "https://video.twimg.com/amplify_video/2100535993141239808/vid/avc1/1340x720/8WSFlg7TRe1wvYKF.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100535993141239808/img/Q_giQHiIdU-aAvI6.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -424,11 +413,10 @@ cases.unshift(...[
     ],
     "note": "제작자의 메일 검색 데모입니다. 큰 받은편지함에는 임베딩 등 후보 검색 단계가 추가로 필요할 수 있습니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100960281769738433",
-      "url": "https://video.twimg.com/amplify_video/2100959260616151040/vid/avc1/1280x720/RUXV4DhBpPa_mPg4.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100959260616151040/img/nb1GFqB_cwNesugB.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -455,11 +443,10 @@ cases.unshift(...[
     ],
     "note": "Jev와 브라우저 조작 도구를 결합한 제작자 시연입니다. 모든 서비스의 화면 흐름을 자동으로 수집할 수 있다는 뜻은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101047036863037753",
-      "url": "https://video.twimg.com/amplify_video/2101046478685007872/vid/avc1/1058x720/6nM6q7KGzbiOunEb.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101046478685007872/img/gR52RkPOJb99hnPD.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -486,11 +473,10 @@ cases.unshift(...[
     ],
     "note": "미리 제공한 컴포넌트와 동작을 구성하는 방식입니다. Jev가 자유 형식의 HTML이나 앱 코드를 직접 작성하는 사례가 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101022101750571357",
-      "url": "https://video.twimg.com/amplify_video/2101022081810911232/vid/avc1/720x720/UafSqlv3vkLW2zFx.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101022081810911232/img/3tKdQ3Y2_ZGSg3Q7.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -516,11 +502,10 @@ cases.unshift(...[
     ],
     "note": "판단을 시뮬레이션에 재생한 데모입니다. 실제 야외 로봇의 자율 수거나 현장 안전성을 입증한 사례가 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101021471644733867",
-      "url": "https://video.twimg.com/amplify_video/2101021391575457792/vid/avc1/1280x720/FRvjE_0cIVJPzdGs.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101021391575457792/img/x227ubbFebYxck1p.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -546,11 +531,10 @@ cases.unshift(...[
     ],
     "note": "이벤트 기록과 개발 도구를 결합한 워크플로 데모입니다. Jev가 영상을 직접 시청하거나 수정 코드를 단독으로 작성하는 방식은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101012033340571952",
-      "url": "https://video.twimg.com/amplify_video/2101011544515526656/vid/avc1/1280x720/FYbd0SOrgm2vBRUi.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101011544515526656/img/iSFydnTHWxsRx9hy.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -576,11 +560,10 @@ cases.unshift(...[
     ],
     "note": "제작자의 쿼리 플래너 실험입니다. 공개된 개별 벤치마크의 개선을 모든 쿼리와 데이터베이스 규모에 일반화할 수 없습니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101001041903009987",
-      "url": "https://video.twimg.com/amplify_video/2100995303935791105/vid/avc1/1280x720/Aylab6RPWEsIWpZ_.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100995303935791105/img/eK9B54C5duJ9b-Od.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -606,11 +589,10 @@ cases.unshift(...[
     ],
     "note": "선택된 에이전트와 컴퓨터가 실제 작업을 수행합니다. Jev가 직접 코드를 고치거나 운영체제를 실행한다는 의미는 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100994779291259187",
-      "url": "https://video.twimg.com/amplify_video/2100990656252661760/vid/avc1/1112x720/OgoSGNORFCHF0fLU.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100990656252661760/img/ceUStNdfX7n8-khU.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -636,11 +618,10 @@ cases.unshift(...[
     ],
     "note": "Box가 공개한 워크플로 시연입니다. 운영 장애를 자동으로 해결하거나 대응 정확도를 독립 검증한 결과는 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100993278955188320",
-      "url": "https://video.twimg.com/amplify_video/2100986163511357440/vid/avc1/1100x720/v02Lv9o1NIYVlvao.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100986163511357440/img/o0Yzl7VqISwchxkk.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -666,11 +647,10 @@ cases.unshift(...[
     ],
     "note": "선행 라우팅 단계의 제작자 시연입니다. 실제 도구 호출과 작업 수행 시간은 연결된 서비스에 따라 달라집니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100987661926252737",
-      "url": "https://video.twimg.com/amplify_video/2100986453845028864/vid/avc1/1762x720/I7Urj9eDRfdz9s1Y.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100986453845028864/img/YknQ8SR5kudv19m-.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -696,11 +676,10 @@ cases.unshift(...[
     ],
     "note": "연구 자료 탐색·추출을 지원하는 제작자 시연입니다. 추출 결과의 원문 대조와 최종 연구 판단은 검토자가 수행해야 합니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100985031703269425",
-      "url": "https://video.twimg.com/amplify_video/2100984949104836608/vid/avc1/1280x720/4Cl9nu5Vp0ppybSR.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100984949104836608/img/grrFxuawHqVXDVSV.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -726,11 +705,10 @@ cases.unshift(...[
     ],
     "note": "인터프리터와 Jev를 결합한 시스템 데모입니다. 임의의 자연어 규칙을 항상 올바르게 해석하거나 추론한다는 보장은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100985027093749764",
-      "url": "https://video.twimg.com/amplify_video/2100984200820121600/vid/avc1/892x720/_SQLga4pjOTrJfZL.mp4?tag=14",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100984200820121600/img/dXya52zCSiVBJVaF.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -757,11 +735,10 @@ cases.unshift(...[
     ],
     "note": "제작자의 실험적 점검 도구입니다. 보안 감사, 접근 제어 테스트 또는 취약점 부재의 증명을 대신하지 않습니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100981707105284255",
-      "url": "https://video.twimg.com/amplify_video/2100981261007507456/vid/avc1/1020x720/FthE1f0ZUZOtpnA7.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100981261007507456/img/FLs24JzKRsdrrFER.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -787,11 +764,10 @@ cases.unshift(...[
     ],
     "note": "색인에 기반한 후보 페이지 선택입니다. 책 전체 내용을 읽고 답변을 생성하거나 해당 페이지에 정답이 있음을 보장하는 방식은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100975114753892550",
-      "url": "https://video.twimg.com/amplify_video/2100974992653500416/vid/avc1/1418x720/DVDF6NSTFR4DGb9b.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100974992653500416/img/7rTO_q-ntbWDGTuR.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -817,11 +793,10 @@ cases.unshift(...[
     ],
     "note": "문서 분류 사례입니다. 세액 계산, 세법 해석 또는 신고 내용의 적정성을 판단한 사례가 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100973868324417852",
-      "url": "https://video.twimg.com/amplify_video/2100973360989773825/vid/avc1/910x720/faIjT1_ejvMXatdy.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100973360989773825/img/yMtL6CxrKMVXQEHV.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -848,11 +823,10 @@ cases.unshift(...[
     ],
     "note": "개발용 평가 도구의 제작자 시연입니다. 도구를 사용하는 것만으로 운영 정확도나 확률 보정이 확보되는 것은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100968892591968320",
-      "url": "https://video.twimg.com/amplify_video/2100965288850145280/vid/avc1/1280x720/zXh33y6lqdagtBJf.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100965288850145280/img/Ik0MohKW-MEyT6p4.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -878,11 +852,10 @@ cases.unshift(...[
     ],
     "note": "음성 수집과 전사는 별도 구성 요소가 맡습니다. 주변 대화를 명령으로 오인할 수 있는 실험적 인터페이스입니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100967959879471519",
-      "url": "https://video.twimg.com/amplify_video/2100966551826444288/vid/avc1/1268x720/XAnyA47uXJwbzPJs.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100966551826444288/img/i2s52ZeMNTOO-IRD.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -908,11 +881,10 @@ cases.unshift(...[
     ],
     "note": "가상 환경의 의사결정 데모입니다. 실제 도로의 자율주행이나 차량 안전 제어에 사용할 수 있음을 입증한 사례가 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100965547454374316",
-      "url": "https://video.twimg.com/amplify_video/2100965500314615808/vid/avc1/1280x624/6JYYPkuqgGn_n3Bi.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100965500314615808/img/19kMbu9jghFUkaBs.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -938,11 +910,10 @@ cases.unshift(...[
     ],
     "note": "내용과 브랜드의 적합성 평가입니다. 뉴스의 진위 검증이나 해당 주제로 만든 콘텐츠의 성과를 보장하지 않습니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100951347080421409",
-      "url": "https://video.twimg.com/amplify_video/2100951319108567040/vid/avc1/1280x720/3zaGFvgW2W4JTrZ2.mp4?tag=16",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100951319108567040/img/AZ1jFv9ySdRV-JYE.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -968,11 +939,10 @@ cases.unshift(...[
     ],
     "note": "시뮬레이션과 모델 라우팅 실험입니다. 실제 비행의 충돌 회피 성능이나 확률 점수의 안전성을 검증한 사례가 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100950317852455039",
-      "url": "https://video.twimg.com/amplify_video/2100950290618867712/vid/avc1/1280x720/YK3DyW5oTyUuREea.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100950290618867712/img/FY-SPST7ifK3ls5W.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -998,11 +968,10 @@ cases.unshift(...[
     ],
     "note": "게임 환경의 행동 선택 데모입니다. 실제 철도 운행이나 안전 제어를 위한 시스템이 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101035079149449398",
-      "url": "https://video.twimg.com/amplify_video/2101034877193740288/vid/avc1/720x1280/V4BV3YNfN_q3K-u9.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101034877193740288/img/BZfW41He6nNwOkLN.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1028,11 +997,10 @@ cases.unshift(...[
     ],
     "note": "자연어 지침 준수를 평가하는 제작자 실험입니다. 컴파일러, 테스트, 코드 리뷰를 대신하지 않습니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101034822760288452",
-      "url": "https://video.twimg.com/amplify_video/2101034808826851328/vid/avc1/720x720/Vb325UXGTY3bmMCU.mp4?tag=16",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101034808826851328/img/I9qffLGFLpK0-4Tn.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1058,11 +1026,10 @@ cases.unshift(...[
     ],
     "note": "여러 구성 요소를 결합한 에이전트 시스템입니다. Jev 단독으로 코드를 생성하거나 모든 반복 작업을 자동 학습하는 기능은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101033282414768456",
-      "url": "https://video.twimg.com/amplify_video/2101032781270917120/vid/avc1/1280x720/oWpgyoF2DlXo7Q8a.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101032781270917120/img/8tGv1qWQd8M9mEec.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1088,11 +1055,10 @@ cases.unshift(...[
     ],
     "note": "제작자가 공개한 특정 앱·기기 환경의 실행입니다. 모든 Android 앱에서의 호환성이나 기존 테스트 대비 일반적인 속도 우위를 뜻하지 않습니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101032931456168098",
-      "url": "https://video.twimg.com/amplify_video/2101032303396790272/vid/avc1/1280x720/WXeNlwWL3KjDJIo8.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101032303396790272/img/RbVCCv2UgU7Jox4h.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1118,11 +1084,10 @@ cases.unshift(...[
     ],
     "note": "음성 인식과 음악 제작 도구를 결합한 데모입니다. Jev가 오디오 파형이나 완성된 음악을 직접 생성하는 기능은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101023899265692100",
-      "url": "https://video.twimg.com/amplify_video/2101023732634427392/vid/avc1/1208x720/Sjus3O6MW10lEatb.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101023732634427392/img/Lw8PZXdVXHBvuawd.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1148,11 +1113,10 @@ cases.unshift(...[
     ],
     "note": "제작자의 앱 인터페이스 데모입니다. 자동 입력 제안의 적합성은 앱이 제공하는 맥락과 선택지에 따라 달라집니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100928133608472817",
-      "url": "https://video.twimg.com/amplify_video/2100928115648405506/vid/avc1/1060x720/7Ynuvs0K9iLohY5p.mp4?tag=14",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100928115648405506/img/1ddfEiaKJLPA4Xuh.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1178,11 +1142,10 @@ cases.unshift(...[
     ],
     "note": "제작자가 언급한 0.25ms는 로컬 모델 단계의 수치입니다. Jev 호출이나 전체 검색의 지연 시간으로 해석하면 안 됩니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100910232255992032",
-      "url": "https://video.twimg.com/amplify_video/2100910214530953216/vid/avc1/1280x720/JJClsqHG4jMBohIf.mp4?tag=16",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100910214530953216/img/pZDYHLcrOl_f0pWI.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1208,11 +1171,10 @@ cases.unshift(...[
     ],
     "note": "동작을 제안하는 인터페이스 시연입니다. 복사한 모든 명령을 자동 실행하거나 명령의 안전성을 보장하는 기능은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100907261593829675",
-      "url": "https://video.twimg.com/amplify_video/2100907154752282625/vid/avc1/1280x720/PzCsgJIqFAOpOp-8.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100907154752282625/img/ymaN0AxIqCG4H4yU.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1238,11 +1200,10 @@ cases.unshift(...[
     ],
     "note": "전체 응답 시간에는 캘린더 API 왕복도 포함됩니다. 모델 판단 속도를 그대로 회의 예약 완료 시간으로 볼 수 없습니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100902559313502602",
-      "url": "https://video.twimg.com/amplify_video/2100902393894342656/vid/avc1/1012x720/dSXSKXOZIuSHITYW.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100902393894342656/img/22LO2K2E8E9JAhMB.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1268,11 +1229,10 @@ cases.unshift(...[
     ],
     "note": "영상 처리와 Jev를 결합한 파이프라인입니다. Jev가 영상을 직접 입력받는 기능이나 광고 매출·전환율을 예측한 검증 결과가 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100870244004683886",
-      "url": "https://video.twimg.com/amplify_video/2100856866427256833/vid/avc1/1144x720/Q2H7ae2b80gWWLxX.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100856866427256833/img/C3ods4J011QCJLCP.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1298,11 +1258,10 @@ cases.unshift(...[
     ],
     "note": "전략 검토 도구의 제작자 시연입니다. 실거래 수익성이나 손실 방지 성능을 검증한 투자 추천이 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100859259915227358",
-      "url": "https://video.twimg.com/amplify_video/2100852121105006592/vid/avc1/1104x720/PAClylbI7JdtmxEz.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100852121105006592/img/NlvQ4G9nQNYzq8zZ.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1328,11 +1287,10 @@ cases.unshift(...[
     ],
     "note": "평가 데이터에 대한 보정 실험입니다. 선택한 임계값이 새 운영 데이터에서도 같은 정확도를 유지한다는 보장은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100850610962919551",
-      "url": "https://video.twimg.com/amplify_video/2100850405668491264/vid/avc1/1280x720/SqQU35q2yaE2fSF-.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100850405668491264/img/f4I89LjtDpd8cdBF.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1358,11 +1316,10 @@ cases.unshift(...[
     ],
     "note": "행동 라벨 품질 점검 데모입니다. Jev가 원본 영상을 직접 인식하거나 로봇의 행동 성능을 검증한 결과는 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100807905859739779",
-      "url": "https://video.twimg.com/amplify_video/2100807113576693760/vid/avc1/1280x720/wZJXUzna2aBRFg1g.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100807113576693760/img/8lI0CmDrKghq79Z5.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1389,11 +1346,10 @@ cases.unshift(...[
     ],
     "note": "샌드박스 분기와 게임 복구를 결합한 데모입니다. 처음부터 실패 없이 플레이하거나 최적 전략을 찾았다는 뜻은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101095181382721998",
-      "url": "https://video.twimg.com/amplify_video/2101094095808847872/vid/avc1/1268x720/OqZP0osmxRHKMOCs.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101094095808847872/img/3gUUWv-2l7gtBJLH.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1420,11 +1376,10 @@ cases.unshift(...[
     ],
     "note": "제작자가 공개한 인터페이스 탐색 실험입니다. 지원 기능의 범위와 일반 환경에서의 동작은 별도로 검증하지 않았습니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100681083176226921",
-      "url": "https://video.twimg.com/amplify_video/2100679218455789568/vid/avc1/720x1280/9ipUE1IqrbPy1Qc0.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100679218455789568/img/zy8kM6C3lA-2EyJa.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1451,11 +1406,10 @@ cases.unshift(...[
     ],
     "note": "설정된 캐릭터들의 모의 반응입니다. 실제 청중의 감정, 주의력, 설득 효과를 측정하거나 예측한 결과가 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100713197502173373",
-      "url": "https://video.twimg.com/amplify_video/2100711545218924544/vid/avc1/1280x720/NMvzmS1Jwo9BkfQQ.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100711545218924544/img/R3UxL8HSq04FnC4R.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1482,11 +1436,10 @@ cases.unshift(...[
     ],
     "note": "여러 모델을 결합한 제작자 데모입니다. Jev 자체가 세계관이나 영상을 생성하는 기능은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101022590722810271",
-      "url": "https://video.twimg.com/amplify_video/2101020230071803904/vid/avc1/1280x720/1t6IqPmETDfleBP-.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101020230071803904/img/FWi7MqiT0DI2iQJ9.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1512,11 +1465,10 @@ cases.unshift(...[
     ],
     "note": "난이도 추정에 따른 제안이며 사용자가 모드를 선택합니다. 빠른 모델이 같은 답변 품질을 낸다는 보장은 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101021361351131464",
-      "url": "https://video.twimg.com/amplify_video/2101018655794331648/vid/avc1/1426x720/xwwK-VI6311LloAg.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101018655794331648/img/xm_XTf33FJqqEmIb.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1542,11 +1494,10 @@ cases.unshift(...[
     ],
     "note": "페이지 관련성에 따른 추천 데모입니다. 검색 순위 상승이나 트래픽 증가를 측정한 성과는 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2101018783976722479",
-      "url": "https://video.twimg.com/amplify_video/2101018477087592448/vid/avc1/1280x720/8eXtOAxGjTxSVL5Z.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2101018477087592448/img/9YlAHKLLo_h6rgtK.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   },
   {
@@ -1572,13 +1523,12 @@ cases.unshift(...[
     ],
     "note": "설정된 게임 세계의 행동 선택 시연입니다. 실제 주민 행동이나 지역 경제를 예측하는 모델이 아닙니다.",
     "media": {
-      "type": "mp4",
+      "type": "x",
       "id": "2100878555047514390",
-      "url": "https://video.twimg.com/amplify_video/2100876059709149184/vid/avc1/1052x720/sXyD3UTnPZN49a2z.mp4",
       "poster": "https://pbs.twimg.com/amplify_video_thumb/2100876059709149184/img/jYoCG-SwxUKhp2pf.jpg",
-      "evidence": "publisher-video-file"
+      "evidence": "published-video-thumbnail"
     }
   }
 ]);
-window.JEV_ATLAS = Object.freeze({version:4,reviewed:'2026-09-21',categories:cats,cases});
+window.JEV_ATLAS = Object.freeze({version:5,reviewed:'2026-09-21',categories:cats,cases});
 })();
