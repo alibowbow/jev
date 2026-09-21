@@ -34,7 +34,7 @@ The automated checks cover catalogue structure and actual DOM interactions, incl
 
 ## Catalogue and attribution
 
-`assets/data.js` contains 86 distinct cases: 52 original-publisher MP4 links and 34 X embeds. Records are not duplicated to reach a target count. Video evidence and author-reported performance figures are not independent performance verification. Source links, creator credits and scope notes are retained per case.
+`assets/data.js` contains 86 distinct cases: two GitHub-hosted publisher MP4s and 84 official X embeds. Records are not duplicated to reach a target count. Video evidence and author-reported performance figures are not independent performance verification. Source links, creator credits and scope notes are retained per case.
 
 The Browser Use demo shows flight search, not completed ticket purchase. DroidRun shows the payment-method screen, not a completed ride order.
 
@@ -43,3 +43,5 @@ Thumbnails load from the publishers' external hosts. Players load only after a u
 The September 21 selection adds 50 projects discovered through [Jevable](https://jevable.com/), with independently written Korean descriptions, original English project-name search and a robotics/simulation category. Per-card research URLs preserve discovery attribution alongside primary publisher links.
 
 See [Jevable selection and media checks](docs/jevable-update-2026-09-21.md), [guide and catalogue update](docs/catalogue-update-2026-09-19.md) and [integration and validation notes](docs/video-first-review.md).
+
+X video posts use the official player resolved from their post IDs. Captured `video.twimg.com` rendition URLs are not used for native playback or direct-file links: an available CDN file does not establish that third-party in-page playback is supported.

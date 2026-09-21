@@ -74,3 +74,9 @@ Duplicate checks compare original post URLs and underlying video IDs across all 
 ## Post-deployment browser checks
 
 The public site displayed 86 cards, original-name search returned Drape, and the robotics filter returned four cases. The Drape MP4 played directly in the browser (31.3 seconds, 1278-pixel video width); the first embedded attempts did not complete. The existing flight MP4 played in-page. To accommodate slow initial CDN loads, native MP4 loading allows 45 seconds, with an always-available direct-file link alongside the original post. Availability checks do not establish universal embedded playback.
+
+## Playback correction after the user report
+
+The initial direct-CDN implementation was not reliable: the Drape and Proq video requests later returned HTTP 403, and the in-page failure reproduced. Increasing the timeout and exposing a direct-file link did not solve the issue. Historical HTTP 200 checks above only describe that earlier observation.
+
+All 50 additions now use the existing official X widget path keyed by the original post ID. Captured CDN rendition URLs have been removed from the catalogue and from the native-player allowlist. No proxy, referrer spoofing or rehosting is used. The full catalogue is now 84 official X embeds plus the two existing publisher-hosted GitHub MP4s. Regression coverage walks every new card, checks the exact post requested, confirms the absence of a native video or stale direct-file link, and verifies iframe cleanup when closing.

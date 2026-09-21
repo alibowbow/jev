@@ -271,10 +271,10 @@
     const placeholder = element('div', 'player-placeholder');
     placeholder.append(element('span', 'loader'), document.createTextNode('공개 시연을 불러오고 있습니다.'));
     host.append(placeholder);
-    // First-time publisher CDN requests can take longer than a cached embed.
+    // Native publisher files and the official social player have separate loading budgets.
     playerTimer = setTimeout(() => failedPlayer(epoch), c.media.type === 'mp4' ? 45000 : 18000);
     if (c.media.type === 'mp4') {
-      const url = safeUrl(c.media.url, ['raw.githubusercontent.com', 'video.twimg.com']);
+      const url = safeUrl(c.media.url, ['raw.githubusercontent.com']);
       if (!url || !new URL(url).pathname.endsWith('.mp4')) { failedPlayer(epoch); return; }
       const video = element('video');
       video.controls = true;
@@ -324,7 +324,7 @@
     const source = safeUrl(c.source, ['x.com', 'github.com']);
     if (source) $('player-source').href = source;
     else $('player-source').removeAttribute('href');
-    const file = c.media.type === 'mp4' && safeUrl(c.media.url, ['raw.githubusercontent.com', 'video.twimg.com']);
+    const file = c.media.type === 'mp4' && safeUrl(c.media.url, ['raw.githubusercontent.com']);
     const fileLink = $('player-file');
     fileLink.hidden = !file;
     if (file) fileLink.href = file;

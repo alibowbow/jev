@@ -191,22 +191,34 @@ test('catalogue text is rendered literally and unsafe media URLs are refused', t
   assert.equal(d.getElementById('retry-player').hidden, false);
 });
 
-test('Jevable projects are searchable by original names and play original CDN videos only on demand', t => {
-  const { d, w, count, input, click } = setup(t);
+test('all 50 Jevable cards load their official post on demand without native CDN video', async t => {
+  const calls = [];
+  const { d, w, count, input, click } = setup(t, { twitter: { widgets: {
+    createTweet: async (id, mount, options) => {
+      calls.push({ id, options });
+      const frame = d.createElement('iframe'); mount.append(frame); return frame;
+    }
+  } } });
+  assert.equal(calls.length, 0);
   input('Drape');
   assert.equal(count(), 1);
   assert.equal(d.querySelector('.card').dataset.id, 'drape-try-on');
-  assert.equal(d.querySelector('video'), null);
-  click('[data-play="drape-try-on"]');
-  const video = d.querySelector('video');
-  assert.equal(new URL(video.src).hostname, 'video.twimg.com');
-  assert.equal(d.getElementById('player-file').href, video.src);
-  assert.equal(d.getElementById('player-file').hidden, false);
-  video.dispatchEvent(new w.Event('loadedmetadata'));
-  assert.equal(d.getElementById('retry-player').hidden, true);
-  assert.equal(d.querySelector('script[src*="widgets.js"]'), null);
-  click('#close-player');
   click('#reset');
+  const added = w.JEV_ATLAS.cases.filter(c => new URL(c.research).hostname === 'jevable.com');
+  assert.equal(added.length, 50);
+  for (const c of added) {
+    click(`[data-play="${c.id}"]`); await flush();
+    assert.equal(calls.at(-1).id, c.source.split('/').pop());
+    assert.equal(calls.at(-1).options.dnt, true);
+    assert.equal(d.querySelector('video'), null);
+    assert.ok(d.querySelector('#player-host iframe'));
+    assert.equal(d.getElementById('player-file').hidden, true);
+    assert.equal(d.getElementById('player-file').hasAttribute('href'), false);
+    assert.equal(d.getElementById('retry-player').hidden, true);
+    click('#close-player');
+    assert.equal(d.querySelector('#player-host iframe'), null);
+  }
+  assert.equal(calls.length, 50);
   click('[data-category="simulation"]');
   assert.equal(count(), w.JEV_ATLAS.cases.filter(c => c.category === 'simulation').length);
   input('MuJoCo');
@@ -214,12 +226,12 @@ test('Jevable projects are searchable by original names and play original CDN vi
   assert.equal(d.querySelector('.card').dataset.id, 'mujoco-robot-arm');
 });
 
-test('publisher video CDN allowlist rejects lookalike hosts and credentials', t => {
-  for (const url of ['https://video.twimg.com.evil.example/demo.mp4', 'https://video.twimg.com@evil.example/demo.mp4', 'https://user:pass@video.twimg.com/demo.mp4']) {
+test('native player rejects X CDN renditions, lookalike hosts and credentials', t => {
+  for (const url of ['https://video.twimg.com/demo.mp4', 'https://raw.githubusercontent.com.evil.example/demo.mp4', 'https://raw.githubusercontent.com@evil.example/demo.mp4', 'https://user:pass@raw.githubusercontent.com/demo.mp4']) {
     const { d, click } = setup(t, { mutate: data => {
-      data.cases.find(c => c.id === 'drape-try-on').media.url = url;
+      data.cases.find(c => c.id === 'flight-search').media.url = url;
     } });
-    click('[data-play="drape-try-on"]');
+    click('[data-play="flight-search"]');
     assert.equal(d.querySelector('video'), null);
     assert.equal(d.getElementById('player-file').hidden, true);
     assert.equal(d.getElementById('player-file').hasAttribute('href'), false);
