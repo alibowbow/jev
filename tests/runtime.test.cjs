@@ -116,8 +116,12 @@ test('share link copies, has a visible manual fallback and highlights without lo
 test('MP4 errors and timeouts show a source and retry; closing removes media and restores focus', async t => {
   const { d, w, click, timeout } = setup(t);
   const trigger = d.querySelector('[data-play="flight-search"]'); trigger.focus(); trigger.click();
-  assert.ok(d.getElementById('player-dialog').open);
-  assert.ok(d.body.classList.contains('modal-open'));
+  assert.equal(d.getElementById('inline-player').closest('.card').id, 'case-flight-search');
+  assert.equal(d.getElementById('inline-player').hidden, false);
+  assert.equal(trigger.hidden, true);
+  assert.equal(trigger.getAttribute('aria-expanded'), 'true');
+  assert.equal(d.querySelector('dialog[open]'), null);
+  assert.equal(d.body.classList.contains('modal-open'), false);
   assert.match(d.getElementById('player-source').href, /^https:\/\/x.com\//);
   let video = d.querySelector('video');
   video.dispatchEvent(new w.Event('loadedmetadata'));
@@ -132,6 +136,10 @@ test('MP4 errors and timeouts show a source and retry; closing removes media and
   click('#retry-player'); click('#close-player');
   assert.equal(d.querySelector('video'), null);
   assert.equal(d.body.classList.contains('modal-open'), false);
+  assert.equal(d.getElementById('inline-player').parentElement.id, 'player-parking');
+  assert.equal(d.getElementById('inline-player').hidden, true);
+  assert.equal(trigger.hidden, false);
+  assert.equal(trigger.getAttribute('aria-expanded'), 'false');
   assert.equal(d.activeElement, trigger);
 });
 
@@ -148,13 +156,77 @@ test('X widgets load only after click, recover from failure and do not replace a
   click('#retry-player'); await flush();
   assert.equal(calls.length, 1);
   assert.equal(calls[0].options.dnt, true);
-  click('#close-player'); click('[data-play="flight-search"]');
+  click('[data-play="flight-search"]');
   const currentVideo = d.querySelector('video');
   const iframe = d.createElement('iframe'); calls[0].mount.append(iframe); calls[0].resolve(iframe);
   await flush();
   assert.equal(d.querySelector('video'), currentVideo);
   assert.equal(d.querySelector('#player-host iframe'), null);
+  assert.equal(d.getElementById('inline-player').closest('.card').id, 'case-flight-search');
+  assert.equal(d.querySelector('[data-play="voice-mac"]').hidden, false);
   assert.match(d.getElementById('player-title').textContent, /항공편/);
+});
+
+test('switching cards stops native playback, removes an existing X frame and Escape restores the preview', async t => {
+  const { d, w, click } = setup(t, { twitter: { widgets: { createTweet: async (id, mount) => {
+    const frame = d.createElement('iframe'); mount.append(frame); return frame;
+  } } } });
+  click('[data-play="flight-search"]');
+  const video = d.querySelector('video');
+  let paused = 0;
+  video.pause = () => ++paused;
+  click('[data-play="voice-mac"]'); await flush();
+  assert.equal(paused, 1);
+  assert.equal(video.hasAttribute('src'), false);
+  assert.equal(video.isConnected, false);
+  const frame = d.querySelector('#case-voice-mac iframe');
+  assert.ok(frame);
+  click('[data-play="drape-try-on"]'); await flush();
+  assert.equal(frame.isConnected, false);
+  assert.equal(d.querySelectorAll('#cards iframe').length, 1);
+  assert.equal(d.querySelectorAll('.is-playing').length, 1);
+  assert.ok(d.querySelector('#case-drape-try-on iframe'));
+  d.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Escape' }));
+  assert.equal(d.querySelectorAll('#cards iframe, #cards video, .is-playing').length, 0);
+  assert.equal(d.activeElement.dataset.play, 'drape-try-on');
+  assert.equal(d.querySelector('[data-play="drape-try-on"]').hidden, false);
+});
+
+test('search, category, sort and saved-view changes stop media without stealing filter focus', async t => {
+  const { d, w, click, input } = setup(t);
+  const checks = [
+    () => { d.getElementById('search').focus(); input('Browser'); assert.equal(d.activeElement.id, 'search'); },
+    () => click('[data-category="browser"]'),
+    () => { const sort = d.getElementById('sort'); sort.value = 'title'; sort.dispatchEvent(new w.Event('change')); },
+    () => click('#saved-toggle')
+  ];
+  for (const update of checks) {
+    click('[data-play="flight-search"]');
+    const video = d.querySelector('video');
+    let paused = 0; video.pause = () => ++paused;
+    update();
+    assert.equal(paused, 1);
+    assert.equal(video.hasAttribute('src'), false);
+    assert.equal(d.querySelectorAll('#cards video, #cards iframe, .is-playing').length, 0);
+    assert.equal(d.getElementById('inline-player').parentElement.id, 'player-parking');
+    click('#reset');
+  }
+  click('[data-play="flight-search"]');
+  d.dispatchEvent(new w.KeyboardEvent('keydown', { key: '/' }));
+  assert.equal(d.activeElement.id, 'search');
+});
+
+test('filtering during an X request cannot revive a hidden player or replace a later card', async t => {
+  const pending = [];
+  const { d, click, input } = setup(t, { twitter: { widgets: { createTweet: (id, mount) => new Promise(resolve => pending.push({ mount, resolve })) } } });
+  click('[data-play="voice-mac"]'); await flush();
+  input('Drape');
+  click('[data-play="drape-try-on"]'); await flush();
+  const current = d.createElement('iframe'); pending[1].mount.append(current); pending[1].resolve(current); await flush();
+  const late = d.createElement('iframe'); pending[0].mount.append(late); pending[0].resolve(late); await flush();
+  assert.equal(late.isConnected, false);
+  assert.equal(d.querySelector('#player-host iframe'), current);
+  assert.equal(d.getElementById('inline-player').closest('.card').id, 'case-drape-try-on');
 });
 
 test('X timeout invalidates late success; successful embeds and about dialog remain usable', async t => {
@@ -212,6 +284,8 @@ test('all 50 Jevable cards load their official post on demand without native CDN
     assert.equal(calls.at(-1).options.dnt, true);
     assert.equal(d.querySelector('video'), null);
     assert.ok(d.querySelector('#player-host iframe'));
+    assert.equal(d.getElementById('inline-player').closest('.card').id, `case-${c.id}`);
+    assert.equal(d.querySelector('dialog[open]'), null);
     assert.equal(d.getElementById('player-file').hidden, true);
     assert.equal(d.getElementById('player-file').hasAttribute('href'), false);
     assert.equal(d.getElementById('retry-player').hidden, true);

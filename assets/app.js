@@ -109,7 +109,10 @@
     top.append(element('span', 'category-label', categoryMap.get(c.category).name),
       element('span', 'card-number', String(data.cases.indexOf(c) + 1).padStart(2, '0')), save);
     head.append(top, element('h2', '', c.title), element('p', 'summary', c.summary));
-    const preview = button('media-preview', `${c.title} 영상 보기`, 'play', c.id);
+    const media = element('div', 'card-media');
+    const preview = button('media-preview', `${c.title} 영상 재생`, 'play', c.id);
+    preview.setAttribute('aria-expanded', 'false');
+    preview.setAttribute('aria-controls', 'inline-player');
     const poster = safeUrl(c.media.poster, ['pbs.twimg.com', 'raw.githubusercontent.com']);
     if (poster) {
       const img = element('img');
@@ -143,10 +146,13 @@
     actions.append(share);
     footer.append(element('span', 'author-mark', Array.from(c.author)[0]), element('span', 'author', c.author), actions);
     bottom.append(metrics, element('p', 'metric-disclosure', '제작자 공개 시연 · 독립 재현 아님'), footer);
-    article.append(head, preview, bottom);
+    media.append(preview);
+    article.append(head, media, bottom);
     return article;
   }
   function render() {
+    // Filtering or sorting removes cards, so stop playback before rebuilding the grid.
+    closePlayer(false);
     const words = normalize(state.query).trim().split(/\s+/).filter(Boolean);
     const items = data.cases.filter(c => (state.category === 'all' || c.category === state.category) &&
       (!state.savedOnly || saved.has(c.id)) && words.every(word => searchIndex.get(c.id).includes(word)));
@@ -203,9 +209,10 @@
     }
   }
 
-  const player = $('player-dialog');
+  const player = $('inline-player');
   const about = $('about-dialog');
   let activeCase = null;
+  let activePreview = null;
   let playerEpoch = 0;
   let playerTimer;
   let widgetsPromise = null;
@@ -231,7 +238,20 @@
     });
     $('player-host').replaceChildren();
   }
-  const isCurrent = epoch => epoch === playerEpoch && player.open;
+  function closePlayer(restoreFocus = true) {
+    if (!activeCase) return;
+    stopPlayer();
+    const preview = activePreview;
+    preview.hidden = false;
+    preview.setAttribute('aria-expanded', 'false');
+    preview.closest('.card').classList.remove('is-playing');
+    player.hidden = true;
+    $('player-parking').append(player);
+    activeCase = null;
+    activePreview = null;
+    if (restoreFocus && preview.isConnected) preview.focus({ preventScroll: true });
+  }
+  const isCurrent = epoch => epoch === playerEpoch && activeCase && !player.hidden && player.isConnected;
   function failedPlayer(epoch) {
     if (!isCurrent(epoch)) return;
     stopPlayer();
@@ -316,11 +336,19 @@
   }
   function openPlayer(id) {
     const c = caseMap.get(id);
-    if (!c) return;
+    const article = $(`case-${id}`);
+    if (!c || !article) return;
+    closePlayer(false);
     activeCase = c;
+    activePreview = article.querySelector('[data-play]');
+    activePreview.hidden = true;
+    activePreview.setAttribute('aria-expanded', 'true');
+    article.classList.add('is-playing');
+    article.querySelector('.card-media').append(player);
+    player.hidden = false;
     $('player-title').textContent = c.title;
-    $('player-category').textContent = categoryMap.get(c.category).name;
     $('player-note').textContent = c.note;
+    $('player-details').open = false;
     const source = safeUrl(c.source, ['x.com', 'github.com']);
     if (source) $('player-source').href = source;
     else $('player-source').removeAttribute('href');
@@ -329,23 +357,20 @@
     fileLink.hidden = !file;
     if (file) fileLink.href = file;
     else fileLink.removeAttribute('href');
-    openDialog(player);
     startPlayer(c);
+    $('close-player').focus({ preventScroll: true });
   }
-  for (const dialog of [player, about]) {
-    dialog.addEventListener('close', () => {
-      if (dialog === player) { stopPlayer(); activeCase = null; }
-      if (!player.open && !about.open) document.body.classList.remove('modal-open');
-      const focus = previousFocus.get(dialog);
-      if (focus?.isConnected) focus.focus({ preventScroll: true });
-    });
-    dialog.addEventListener('click', event => {
-      if (event.target !== dialog) return;
-      const r = dialog.getBoundingClientRect();
-      if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close();
-    });
-  }
-  $('close-player').addEventListener('click', () => player.close());
+  about.addEventListener('close', () => {
+    document.body.classList.remove('modal-open');
+    const focus = previousFocus.get(about);
+    if (focus?.isConnected) focus.focus({ preventScroll: true });
+  });
+  about.addEventListener('click', event => {
+    if (event.target !== about) return;
+    const r = about.getBoundingClientRect();
+    if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) about.close();
+  });
+  $('close-player').addEventListener('click', () => closePlayer());
   $('retry-player').addEventListener('click', () => { if (activeCase) startPlayer(activeCase); });
   $('about').addEventListener('click', () => openDialog(about));
   $('close-about').addEventListener('click', () => about.close());
@@ -373,7 +398,11 @@
   $('reset').addEventListener('click', () => { reset(); $('search').focus(); });
   $('empty-reset').addEventListener('click', () => { reset(); $('search').focus(); });
   document.addEventListener('keydown', event => {
-    if (event.key === '/' && !event.ctrlKey && !event.metaKey && !event.altKey && !player.open && !about.open &&
+    if (event.key === 'Escape' && activeCase && !about.open) {
+      event.preventDefault();
+      closePlayer();
+    }
+    if (event.key === '/' && !event.ctrlKey && !event.metaKey && !event.altKey && !about.open &&
         !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable) {
       event.preventDefault();
       $('search').focus();

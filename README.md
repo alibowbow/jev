@@ -11,8 +11,8 @@ A Korean, video-first collection of published Jev demonstrations. Independent of
 - Korean and English keyword search, category filters, title sorting, result counts and empty states.
 - Browser-local bookmarks, including storage-denied fallback and synchronization between tabs.
 - Shareable `#case=<id>` links that highlight a card without automatically loading a third-party player.
-- On-demand publisher MP4s and official X embeds, with original-source links, timeout handling and retry.
-- Keyboard-accessible native dialogs, focus restoration, `/` to search and reduced-motion support.
+- In-card playback for publisher MP4s and official X embeds, with original-source links, timeout handling and retry. Only one card plays at a time; filtering or sorting stops the previous player.
+- Keyboard-accessible playback controls, Escape to collapse a video, focus restoration, `/` to search, a native source-information dialog and reduced-motion support.
 
 The video-first runtime is integrated with the current page and data schema. No API key, account system, backend or production build step is required. This site collects demonstrations; it does not call the Jev inference API.
 
@@ -30,7 +30,7 @@ python3 -m http.server 8080
 
 Open `http://localhost:8080`. The test dependency is development-only; publish the repository's static entry point and assets.
 
-The automated checks cover catalogue structure and actual DOM interactions, including filtering, search, sorting, bookmarks, sharing, playback errors, retry, modal cleanup, stale asynchronous callbacks and safe text/URL handling. GitHub Actions runs these checks and JavaScript syntax validation. These tests simulate media responses; they do not establish that every external video can play in every browser.
+The automated checks cover catalogue structure and actual DOM interactions, including filtering, search, sorting, bookmarks, sharing, playback errors, retry, inline-player cleanup on switching/filtering, stale asynchronous callbacks and safe text/URL handling. GitHub Actions runs these checks and JavaScript syntax validation. These tests simulate media responses; they do not establish that every external video can play in every browser.
 
 ## Catalogue and attribution
 
