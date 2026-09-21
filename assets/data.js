@@ -3,7 +3,7 @@
 'use strict';
 const cats = [
  ['browser','브라우저·컴퓨터'], ['work','업무·자동화'], ['data','검색·데이터'],
- ['content','콘텐츠·마케팅'], ['interface','새로운 인터페이스'], ['games','게임'], ['markets','시장·트레이딩']
+ ['content','콘텐츠·마케팅'], ['interface','새로운 인터페이스'], ['games','게임'], ['simulation','로봇·시뮬레이션'], ['markets','시장·트레이딩']
 ].map(([id,name]) => ({id,name}));
 // id, category, title, summary, metrics, author, handle, post ID, poster path, source directory slug, note
 const rows = [
@@ -58,5 +58,1527 @@ cases[0].code = 'https://github.com/browser-use/jev-ultrafast';
 cases.find(c=>c.id==='sponsor-skip').code = 'https://github.com/trungdq88/youtube-sponsor-detection';
 cases.push({id:'mobile-uber',category:'browser',title:'스마트폰에서 목적지 입력까지, 21초.',summary:'실제 Android의 Uber 앱을 열고 공항에서 금문교까지의 경로를 입력합니다. Jev가 탭할 곳을 결정하며 결제 수단 선택 화면까지 진행합니다.',metrics:[{value:'약 21초',label:'기록된 작업 시간'},{value:'9번',label:'실행한 행동'}],author:'DroidRun / Mobilerun',handle:'droidrun',source:'https://github.com/droidrun/mobile-jev/blob/main/docs/media/uber-demo.mp4',code:'https://github.com/droidrun/mobile-jev',research:'https://github.com/droidrun/mobile-jev',reviewed:'2026-09-19',note:'차량 호출이나 결제 완료를 보여 주는 영상이 아닙니다.',media:{type:'mp4',url:'https://raw.githubusercontent.com/droidrun/mobile-jev/main/docs/media/uber-demo.mp4',poster:'https://raw.githubusercontent.com/droidrun/mobile-jev/main/docs/media/uber-demo.gif',evidence:'publisher-video-file'}});
 cases.find(c=>c.id==='jev-trader').code = 'https://github.com/jarrodwatts/jev-trader';
-window.JEV_ATLAS = Object.freeze({version:3,reviewed:'2026-09-19',categories:cats,cases});
+// Jevable discoveries: individually sourced, independently edited, original publisher media.
+cases.unshift(...[
+  {
+    "id": "drape-try-on",
+    "category": "interface",
+    "title": "말로 고른 옷을, 내 모습에 입혀 본다.",
+    "summary": "Drape는 말에서 추출한 요청과 현재 착장 정보를 읽고 옷장 속 후보를 고릅니다. Jev의 선택을 가상 피팅 화면에 연결한 실시간 스타일링 실험입니다.",
+    "metrics": [
+      {
+        "value": "옷 선택 → 가상 피팅",
+        "label": "Drape"
+      }
+    ],
+    "author": "Nailthy Tang",
+    "handle": "nailthy62",
+    "source": "https://x.com/nailthy62/status/2101388186916454439",
+    "research": "https://jevable.com/project/2101388186916454439",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Drape real-time virtual try-on",
+      "virtual-try-on",
+      "fashion",
+      "voice"
+    ],
+    "note": "Jev는 옷을 선택하는 판단을 맡습니다. 음성 전사와 착장 이미지 표현은 별도 시스템의 역할입니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101388186916454439",
+      "url": "https://video.twimg.com/amplify_video/2101384523124740096/vid/avc1/1278x720/6u9oqUGUZP5-mfY_.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101384523124740096/img/1Q6moTMdLcZ-mJ3r.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "proq-plan-classifier",
+    "category": "data",
+    "title": "건설 도면 26장을, 먼저 종류별로 나눈다.",
+    "summary": "Proq의 자재 명세서 작성 흐름에 도면 분류를 더했습니다. Jev가 도면 묶음을 분류하고, 기존 LLM 파이프라인이 후속 작업을 이어가는 구성입니다.",
+    "metrics": [
+      {
+        "value": "26장",
+        "label": "공개된 도면 묶음"
+      },
+      {
+        "value": "2.9초",
+        "label": "제작자가 보고한 분류 시간"
+      }
+    ],
+    "author": "Trinay Hari",
+    "handle": "hari_trinay",
+    "source": "https://x.com/hari_trinay/status/2101118529936519453",
+    "research": "https://jevable.com/project/2101118529936519453",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Proq construction-plan classification",
+      "construction",
+      "document-classification",
+      "plan-sets"
+    ],
+    "note": "도면 분류 단계의 제작자 시연입니다. 자재 산출 전체가 2.9초에 끝나거나 도면 이미지를 Jev가 직접 이해한다는 뜻은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101118529936519453",
+      "url": "https://video.twimg.com/amplify_video/2101118259076734976/vid/avc1/1318x720/9Lzo61AWxQL_9Obt.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101118259076734976/img/JId8Xua4ypyd342R.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "jevform",
+    "category": "interface",
+    "title": "답변에 따라, 다음 질문이 달라지는 설문.",
+    "summary": "JevForm은 사용자가 방금 입력한 답을 바탕으로 이어질 질문을 고릅니다. 정해진 문항을 끝까지 보여 주는 대신 응답에 맞춰 폼의 흐름을 바꾸는 데모입니다.",
+    "metrics": [
+      {
+        "value": "응답 → 다음 문항",
+        "label": "동적 설문"
+      }
+    ],
+    "author": "Tamir",
+    "handle": "tamirspiritt",
+    "source": "https://x.com/tamirspiritt/status/2101079101997982037",
+    "research": "https://jevable.com/project/2101079101997982037",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "JevForm",
+      "forms",
+      "adaptive-ui",
+      "json-render"
+    ],
+    "note": "Jev와 json-render를 결합한 제작자 시연입니다. 질문 선택과 화면 렌더링은 각각의 구성 요소가 맡습니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101079101997982037",
+      "url": "https://video.twimg.com/amplify_video/2101079056540139521/vid/avc1/1328x720/IsjTxTeSkEJgP1Z2.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101079056540139521/img/IYIVL8ehM6E2HcyL.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "mujoco-robot-arm",
+    "category": "simulation",
+    "title": "로봇 팔의 다음 움직임을, 텍스트 상태로 선택.",
+    "summary": "MuJoCo 시뮬레이터의 물체 배치와 접촉 정보를 간단한 텍스트로 전달합니다. 다음 작업과 팔·그리퍼의 움직임을 두 단계로 고르는 로봇 제어 실험입니다.",
+    "metrics": [
+      {
+        "value": "상태 → 동작",
+        "label": "MuJoCo 로봇 팔"
+      }
+    ],
+    "author": "Dmytro Hrybov",
+    "handle": "dimentary",
+    "source": "https://x.com/dimentary/status/2101018760371171420",
+    "research": "https://jevable.com/project/2101018760371171420",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "MuJoCo robot-arm control",
+      "simulation",
+      "robot-arm"
+    ],
+    "note": "시뮬레이션 데모입니다. 실제 로봇에서의 안전성·정밀도 검증이나 Jev의 직접 영상 인식 사례가 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101018760371171420",
+      "url": "https://video.twimg.com/amplify_video/2101017646154366976/vid/avc1/1280x720/-lYEavfPF_VnI4k2.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101017646154366976/img/02bH3Hxy9l0qEffS.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "voice-figma",
+    "category": "interface",
+    "title": "마우스 대신 말로, Figma를 조작한다.",
+    "summary": "디자인 작업 중 음성 요청을 Figma의 동작으로 연결합니다. 입력한 말을 바탕으로 도구가 실행할 행동을 고르는 인터페이스 시연입니다.",
+    "metrics": [
+      {
+        "value": "음성 → 디자인 동작",
+        "label": "Figma 제어"
+      }
+    ],
+    "author": "mikegee",
+    "handle": "mikegee",
+    "source": "https://x.com/mikegee/status/2100845388655960112",
+    "research": "https://jevable.com/project/2100845388655960112",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Voice-controlled Figma",
+      "Figma",
+      "voice"
+    ],
+    "note": "음성 인식과 Figma 실행 도구를 결합한 실험입니다. Jev 자체가 음성을 직접 인식하거나 완성된 디자인을 생성하는 기능은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100845388655960112",
+      "url": "https://video.twimg.com/amplify_video/2100844622213959680/vid/avc1/1148x720/cTgoqRNj25-pO1aw.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100844622213959680/img/yPzf2Js8iJLezbtu.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "live-3d-expressions",
+    "category": "interface",
+    "title": "표정 하나 대신, 눈·입·시선을 따로 움직인다.",
+    "summary": "Mutuals의 3D 캐릭터가 메시지마다 여러 판단을 조합해 반응합니다. 입과 눈썹, 시선, 몸짓을 나눠 선택해 캐릭터의 표현을 구성하는 데모입니다.",
+    "metrics": [
+      {
+        "value": "메시지당 10개 판단",
+        "label": "3D 캐릭터 반응"
+      }
+    ],
+    "author": "Joao Bortotti",
+    "handle": "john_bortotti",
+    "source": "https://x.com/john_bortotti/status/2101019513676345555",
+    "research": "https://jevable.com/project/2101019513676345555",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Live 3D character expressions",
+      "3d",
+      "characters",
+      "animation"
+    ],
+    "note": "가상 캐릭터의 표현을 만드는 제작자 실험입니다. 실제 사람의 감정을 판별하거나 정해진 정확도로 모사한다는 뜻은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101019513676345555",
+      "url": "https://video.twimg.com/amplify_video/2101017687044366336/vid/avc1/1296x720/Moe_NRJlE8_gbJez.mp4?tag=14",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101017687044366336/img/i9QnHKeZumFnNMCB.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "semantic-sheet-formatting",
+    "category": "interface",
+    "title": "셀의 의미에 맞춰, 표의 서식을 바꾼다.",
+    "summary": "값의 크기뿐 아니라 셀에 담긴 내용을 기준으로 스프레드시트의 서식을 고르는 실험입니다. 의미를 읽는 조건부 서식을 Shortcut에 연결하는 구상을 보여 줍니다.",
+    "metrics": [
+      {
+        "value": "의미 기반 서식",
+        "label": "스프레드시트"
+      }
+    ],
+    "author": "Robert Yang",
+    "handle": "GuangyuRobert",
+    "source": "https://x.com/GuangyuRobert/status/2100601420395282695",
+    "research": "https://jevable.com/project/2100601420395282695",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Semantic spreadsheet formatting",
+      "spreadsheets",
+      "formatting",
+      "semantic-classification"
+    ],
+    "note": "제작자의 실험과 통합 제안입니다. Shortcut에 정식 출시된 기능으로 확인한 사례는 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100601420395282695",
+      "url": "https://video.twimg.com/amplify_video/2100477859018272768/vid/avc1/902x720/91jpb13CYpPiTtm6.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100477859018272768/img/XiwQwp3fqCnc1ZYz.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "pdf-ocr-router",
+    "category": "data",
+    "title": "PDF에서 OCR이 필요한 페이지만 골라낸다.",
+    "summary": "문서의 각 페이지를 살펴 OCR로 보낼지, 로컬 텍스트 추출로 처리할지 나눕니다. 읽을 수 있는 페이지까지 비싼 처리 경로에 보내지 않도록 경로를 고르는 데모입니다.",
+    "metrics": [
+      {
+        "value": "페이지별 경로 선택",
+        "label": "OCR · 텍스트 추출"
+      }
+    ],
+    "author": "Misbah Syed",
+    "handle": "MisbahSy",
+    "source": "https://x.com/MisbahSy/status/2100979972194369925",
+    "research": "https://jevable.com/project/2100979972194369925",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "A page-by-page OCR router",
+      "pdf",
+      "ocr",
+      "routing"
+    ],
+    "note": "Jev는 처리 경로를 분류합니다. OCR 인식 품질과 전체 비용 절감은 문서 구성과 사용 도구에 따라 달라집니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100979972194369925",
+      "url": "https://video.twimg.com/amplify_video/2100978985480167424/vid/avc1/1200x676/C-nOdUJ3ziN5R5e1.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100978985480167424/img/Qcx8F-7plQRcpzqg.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "bannerbear-field-mapping",
+    "category": "work",
+    "title": "서로 다른 필드 이름을, 의미로 연결한다.",
+    "summary": "Bannerbear 템플릿의 사진·이름·회사 칸을 데이터의 avatar·full_name·business에 대응시킵니다. 이름이 정확히 같지 않아도 채울 위치를 고르는 필드 매핑 시연입니다.",
+    "metrics": [
+      {
+        "value": "데이터 → 템플릿",
+        "label": "Bannerbear 필드 연결"
+      }
+    ],
+    "author": "Jon Yongfook",
+    "handle": "yongfook",
+    "source": "https://x.com/yongfook/status/2100801037192024478",
+    "research": "https://jevable.com/project/2100801037192024478",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Bannerbear instant field mapping",
+      "automation",
+      "data mapping"
+    ],
+    "note": "제작자가 공개한 템플릿 매핑 사례입니다. 임의의 데이터 구조에서 모든 필드를 정확히 연결한다는 보장은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100801037192024478",
+      "url": "https://video.twimg.com/amplify_video/2100800207256756224/vid/avc1/1444x720/Y-gxOQFNLKP-_vI2.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100800207256756224/img/qfKKxj1Oh8pHHnD7.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "higgsfield-model-routing",
+    "category": "content",
+    "title": "프롬프트에 맞는 영상·이미지 모델을 고른다.",
+    "summary": "Higgsfield는 요청에 어울리는 생성 모델을 선택하는 단계에 Jev를 연결했습니다. 사용자가 적은 내용을 보고 실제 생성 작업을 맡길 경로를 정하는 사례입니다.",
+    "metrics": [
+      {
+        "value": "요청 → 모델 선택",
+        "label": "Higgsfield 라우팅"
+      }
+    ],
+    "author": "Higgsfield AI 🧩",
+    "handle": "higgsfield_ai",
+    "source": "https://x.com/higgsfield_ai/status/2101022133753430365",
+    "research": "https://jevable.com/project/2101022133753430365",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Higgsfield model routing",
+      "model-routing",
+      "image",
+      "video"
+    ],
+    "note": "Jev의 역할은 모델 선택입니다. 이미지·영상 생성은 선택된 별도 모델이 수행합니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101022133753430365",
+      "url": "https://video.twimg.com/amplify_video/2101022052279058432/vid/avc1/1280x720/yAG0tstXkAidaJky.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101022052279058432/img/9UB9da_sc74S_NtV.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "upweight-hacker-news",
+    "category": "data",
+    "title": "내가 원하는 읽을거리를, 슬라이더로 위로 올린다.",
+    "summary": "Upweight는 기술적 깊이와 실용성처럼 읽고 싶은 글의 기준을 조절하게 합니다. 여섯 개 슬라이더의 설정에 맞춰 Hacker News 글의 우선순위를 다시 매깁니다.",
+    "metrics": [
+      {
+        "value": "6개 슬라이더",
+        "label": "개인화된 뉴스 정렬"
+      }
+    ],
+    "author": "Vishesh Baghel",
+    "handle": "VisheshBaghell",
+    "source": "https://x.com/VisheshBaghell/status/2100536228827496721",
+    "research": "https://jevable.com/project/2100536228827496721",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Upweight for Hacker News",
+      "hacker-news",
+      "ranking",
+      "personalization"
+    ],
+    "note": "선호 기준에 따른 순위 조정 데모입니다. 기사 내용의 사실 여부나 객관적 품질을 인증하는 기능은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100536228827496721",
+      "url": "https://video.twimg.com/amplify_video/2100535993141239808/vid/avc1/1340x720/8WSFlg7TRe1wvYKF.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100535993141239808/img/Q_giQHiIdU-aAvI6.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "gmail-intent-search",
+    "category": "data",
+    "title": "정확한 단어를 몰라도, 찾던 이메일에 가까이.",
+    "summary": "받은편지함에서 사용자가 찾는 내용의 의도를 기준으로 이메일을 탐색합니다. 단어 일치만으로 찾기 어려운 메일을 후보로 좁히는 검색 시연입니다.",
+    "metrics": [
+      {
+        "value": "의도 기반 검색",
+        "label": "Gmail 받은편지함"
+      }
+    ],
+    "author": "nader dabit",
+    "handle": "dabit3",
+    "source": "https://x.com/dabit3/status/2100960281769738433",
+    "research": "https://jevable.com/project/2100960281769738433",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Search your inbox by intent",
+      "productivity"
+    ],
+    "note": "제작자의 메일 검색 데모입니다. 큰 받은편지함에는 임베딩 등 후보 검색 단계가 추가로 필요할 수 있습니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100960281769738433",
+      "url": "https://video.twimg.com/amplify_video/2100959260616151040/vid/avc1/1280x720/RUXV4DhBpPa_mPg4.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100959260616151040/img/nb1GFqB_cwNesugB.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "ui-flow-capture",
+    "category": "browser",
+    "title": "보고 싶은 제품 흐름을, 그때그때 캡처한다.",
+    "summary": "로그인이나 제품 탐색처럼 원하는 화면 흐름을 브라우저에서 찾아 수집하는 실험입니다. 미리 저장된 자료 대신 현재 동작하는 UI를 레퍼런스로 확보하는 구상입니다.",
+    "metrics": [
+      {
+        "value": "탐색 → 흐름 수집",
+        "label": "UI 레퍼런스"
+      }
+    ],
+    "author": "omar ✌️",
+    "handle": "omarjpeg",
+    "source": "https://x.com/omarjpeg/status/2101047036863037753",
+    "research": "https://jevable.com/project/2101047036863037753",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "On-demand UI flow capture",
+      "design-research",
+      "ui-flows",
+      "browser-agents"
+    ],
+    "note": "Jev와 브라우저 조작 도구를 결합한 제작자 시연입니다. 모든 서비스의 화면 흐름을 자동으로 수집할 수 있다는 뜻은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101047036863037753",
+      "url": "https://video.twimg.com/amplify_video/2101046478685007872/vid/avc1/1058x720/6nM6q7KGzbiOunEb.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101046478685007872/img/gR52RkPOJb99hnPD.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "json-render-ui",
+    "category": "interface",
+    "title": "상황에 맞는 화면을, 준비된 부품으로 조립한다.",
+    "summary": "컴포넌트와 동작, 디자인 규칙을 준비해 두면 Jev가 상황에 맞는 구성을 고릅니다. json-render가 그 선택을 실제 인터페이스로 표현하는 생성형 UI 실험입니다.",
+    "metrics": [
+      {
+        "value": "선택 → 화면 렌더링",
+        "label": "json-render"
+      }
+    ],
+    "author": "Chris Tate",
+    "handle": "ctatedev",
+    "source": "https://x.com/ctatedev/status/2101022101750571357",
+    "research": "https://jevable.com/project/2101022101750571357",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Instant generative UI",
+      "generative-ui",
+      "json-render",
+      "real-time"
+    ],
+    "note": "미리 제공한 컴포넌트와 동작을 구성하는 방식입니다. Jev가 자유 형식의 HTML이나 앱 코드를 직접 작성하는 사례가 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101022101750571357",
+      "url": "https://video.twimg.com/amplify_video/2101022081810911232/vid/avc1/720x720/UafSqlv3vkLW2zFx.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101022081810911232/img/3tKdQ3Y2_ZGSg3Q7.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "moss-litter-pickup",
+    "category": "simulation",
+    "title": "로봇에게, 다음에 주울 쓰레기를 고르게 한다.",
+    "summary": "MOSS는 캔과 병 같은 후보에서 집을 대상을 선택하는 과정을 실험합니다. Jev가 내린 선택을 시뮬레이션에서 재생해 수거 흐름을 살펴봅니다.",
+    "metrics": [
+      {
+        "value": "대상 선택 → 수거",
+        "label": "MOSS 시뮬레이션"
+      }
+    ],
+    "author": "metr0x",
+    "handle": "metrox_eth",
+    "source": "https://x.com/metrox_eth/status/2101021471644733867",
+    "research": "https://jevable.com/project/2101021471644733867",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "MOSS litter-picking simulation",
+      "simulation",
+      "robotics"
+    ],
+    "note": "판단을 시뮬레이션에 재생한 데모입니다. 실제 야외 로봇의 자율 수거나 현장 안전성을 입증한 사례가 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101021471644733867",
+      "url": "https://video.twimg.com/amplify_video/2101021391575457792/vid/avc1/1280x720/FRvjE_0cIVJPzdGs.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101021391575457792/img/x227ubbFebYxck1p.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "session-replay-triage",
+    "category": "work",
+    "title": "막힌 클릭과 오류 기록에서, 고칠 문제를 찾는다.",
+    "summary": "반응 없는 클릭, 반복 클릭, JavaScript 오류 같은 사용 기록을 모아 문제를 추립니다. 우선 살펴볼 버그를 고른 뒤 수정안을 만드는 개발 흐름에 연결합니다.",
+    "metrics": [
+      {
+        "value": "사용 기록 → 수정 후보",
+        "label": "세션 리플레이 분석"
+      }
+    ],
+    "author": "Taras",
+    "handle": "tarasshyn",
+    "source": "https://x.com/tarasshyn/status/2101012033340571952",
+    "research": "https://jevable.com/project/2101012033340571952",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Session replay to bug fixes",
+      "session-replay",
+      "debugging"
+    ],
+    "note": "이벤트 기록과 개발 도구를 결합한 워크플로 데모입니다. Jev가 영상을 직접 시청하거나 수정 코드를 단독으로 작성하는 방식은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101012033340571952",
+      "url": "https://video.twimg.com/amplify_video/2101011544515526656/vid/avc1/1280x720/FYbd0SOrgm2vBRUi.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101011544515526656/img/iSFydnTHWxsRx9hy.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "postgres-query-planner",
+    "category": "data",
+    "title": "같은 쿼리도, 테이블을 어떤 순서로 합칠까.",
+    "summary": "PostgreSQL 쿼리에서 테이블을 결합하는 순서를 고르는 실험입니다. 데이터베이스 실행 계획의 선택 지점에 Jev를 넣어 처리 경로를 바꿔 봅니다.",
+    "metrics": [
+      {
+        "value": "조인 순서 선택",
+        "label": "PostgreSQL 실행 계획"
+      }
+    ],
+    "author": "Michael Malis",
+    "handle": "mmalisper",
+    "source": "https://x.com/mmalisper/status/2101001041903009987",
+    "research": "https://jevable.com/project/2101001041903009987",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "A Jev query planner",
+      "postgres",
+      "query-optimization"
+    ],
+    "note": "제작자의 쿼리 플래너 실험입니다. 공개된 개별 벤치마크의 개선을 모든 쿼리와 데이터베이스 규모에 일반화할 수 없습니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101001041903009987",
+      "url": "https://video.twimg.com/amplify_video/2100995303935791105/vid/avc1/1280x720/Aylab6RPWEsIWpZ_.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100995303935791105/img/eK9B54C5duJ9b-Od.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "agent-environment-router",
+    "category": "work",
+    "title": "이 작업은 어떤 에이전트와 컴퓨터에 맡길까.",
+    "summary": "요청을 보고 사용할 에이전트, 모델, 컴퓨터, 작업 폴더를 선택합니다. 개발 작업의 성격에 맞춰 실행 환경을 연결하는 라우팅 데모입니다.",
+    "metrics": [
+      {
+        "value": "작업 → 실행 환경",
+        "label": "에이전트 라우팅"
+      }
+    ],
+    "author": "Sawyer Hood",
+    "handle": "sawyerhood",
+    "source": "https://x.com/sawyerhood/status/2100994779291259187",
+    "research": "https://jevable.com/project/2100994779291259187",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Automatic agent and model selection",
+      "model-routing",
+      "tool-selection"
+    ],
+    "note": "선택된 에이전트와 컴퓨터가 실제 작업을 수행합니다. Jev가 직접 코드를 고치거나 운영체제를 실행한다는 의미는 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100994779291259187",
+      "url": "https://video.twimg.com/amplify_video/2100990656252661760/vid/avc1/1112x720/OgoSGNORFCHF0fLU.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100990656252661760/img/ceUStNdfX7n8-khU.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "box-incident-triage",
+    "category": "work",
+    "title": "장애 대응의 첫 판단을, 질문별로 구조화한다.",
+    "summary": "Box는 인시던트 분류 흐름에 Jev의 구조화된 판단을 적용했습니다. 사건 상태에 대한 질문에 참·거짓, 선택지, 점수로 응답해 다음 처리 단계와 연결하는 사례입니다.",
+    "metrics": [
+      {
+        "value": "구조화된 질문·응답",
+        "label": "Box 인시던트 분류"
+      }
+    ],
+    "author": "Box",
+    "handle": "Box",
+    "source": "https://x.com/Box/status/2100993278955188320",
+    "research": "https://jevable.com/project/2100993278955188320",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Incident triage in Box",
+      "incident-triage",
+      "documents"
+    ],
+    "note": "Box가 공개한 워크플로 시연입니다. 운영 장애를 자동으로 해결하거나 대응 정확도를 독립 검증한 결과는 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100993278955188320",
+      "url": "https://video.twimg.com/amplify_video/2100986163511357440/vid/avc1/1100x720/v02Lv9o1NIYVlvao.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100986163511357440/img/o0Yzl7VqISwchxkk.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "slack-skill-router",
+    "category": "work",
+    "title": "Slack 요청이 들어오면, 쓸 도구부터 정한다.",
+    "summary": "에이전트가 일을 시작하기 전에 요청에 맞는 스킬과 도구, 전달할 값을 고릅니다. Slack의 자연어 요청을 실행 준비가 된 작업으로 연결하는 데모입니다.",
+    "metrics": [
+      {
+        "value": "요청 → 스킬·도구",
+        "label": "Slack 에이전트"
+      }
+    ],
+    "author": "John Yeo",
+    "handle": "johnyeo_",
+    "source": "https://x.com/johnyeo_/status/2100987661926252737",
+    "research": "https://jevable.com/project/2100987661926252737",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "A faster Slack agent",
+      "slack",
+      "tool-selection"
+    ],
+    "note": "선행 라우팅 단계의 제작자 시연입니다. 실제 도구 호출과 작업 수행 시간은 연결된 서비스에 따라 달라집니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100987661926252737",
+      "url": "https://video.twimg.com/amplify_video/2100986453845028864/vid/avc1/1762x720/I7Urj9eDRfdz9s1Y.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100986453845028864/img/YknQ8SR5kudv19m-.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "jev-reviewer-papers",
+    "category": "data",
+    "title": "문헌 검토에 필요한 정보를, 논문에서 추려 낸다.",
+    "summary": "Jev Reviewer는 체계적 문헌 검토에 쓸 정보를 논문에서 찾고 추출하는 도구입니다. 여러 자료를 비교하기 전에 필요한 항목을 모으는 작업을 지원합니다.",
+    "metrics": [
+      {
+        "value": "논문 → 검토 항목",
+        "label": "Jev Reviewer"
+      }
+    ],
+    "author": "Ahmad Sofi-Mahmudi",
+    "handle": "ASofiMahmudi",
+    "source": "https://x.com/ASofiMahmudi/status/2100985031703269425",
+    "research": "https://jevable.com/project/2100985031703269425",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Jev Reviewer",
+      "research-papers",
+      "open-source"
+    ],
+    "note": "연구 자료 탐색·추출을 지원하는 제작자 시연입니다. 추출 결과의 원문 대조와 최종 연구 판단은 검토자가 수행해야 합니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100985031703269425",
+      "url": "https://video.twimg.com/amplify_video/2100984949104836608/vid/avc1/1280x720/4Cl9nu5Vp0ppybSR.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100984949104836608/img/grrFxuawHqVXDVSV.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "plain-english-logic",
+    "category": "work",
+    "title": "영어로 적은 사실과 규칙을, 실행 가능한 논리로.",
+    "summary": "자연어로 표현한 사실과 규칙을 처리하는 논리 인터프리터에 Jev를 연결했습니다. 인터프리터가 규칙 실행을 조율하고 모델의 판단을 중간 단계에 활용하는 실험입니다.",
+    "metrics": [
+      {
+        "value": "자연어 규칙 + 인터프리터",
+        "label": "논리 실행 실험"
+      }
+    ],
+    "author": "Shawn Simister",
+    "handle": "narphorium",
+    "source": "https://x.com/narphorium/status/2100985027093749764",
+    "research": "https://jevable.com/project/2100985027093749764",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "A plain-English logic interpreter",
+      "logic",
+      "programming-languages"
+    ],
+    "note": "인터프리터와 Jev를 결합한 시스템 데모입니다. 임의의 자연어 규칙을 항상 올바르게 해석하거나 추론한다는 보장은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100985027093749764",
+      "url": "https://video.twimg.com/amplify_video/2100984200820121600/vid/avc1/892x720/_SQLga4pjOTrJfZL.mp4?tag=14",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100984200820121600/img/dXya52zCSiVBJVaF.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "supabase-rls-linter",
+    "category": "work",
+    "title": "데이터 접근 정책을, 배포 전에 한 번 더 점검.",
+    "summary": "Supabase의 행 단위 접근 제어 정책을 살펴보는 실험적 린터입니다. 정책 내용을 평가해 개발자가 검토할 지점을 찾는 흐름에 Jev를 활용합니다.",
+    "metrics": [
+      {
+        "value": "정책 검토 보조",
+        "label": "Supabase RLS"
+      }
+    ],
+    "author": "Ali Waseem",
+    "handle": "softwarecuddler",
+    "source": "https://x.com/softwarecuddler/status/2100981707105284255",
+    "research": "https://jevable.com/project/2100981707105284255",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Supabase RLS linter",
+      "supabase",
+      "security",
+      "linting"
+    ],
+    "note": "제작자의 실험적 점검 도구입니다. 보안 감사, 접근 제어 테스트 또는 취약점 부재의 증명을 대신하지 않습니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100981707105284255",
+      "url": "https://video.twimg.com/amplify_video/2100981261007507456/vid/avc1/1020x720/FthE1f0ZUZOtpnA7.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100981261007507456/img/FLs24JzKRsdrrFER.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "library-index-search",
+    "category": "data",
+    "title": "책 전체 대신 색인에서, 펼쳐 볼 쪽을 찾는다.",
+    "summary": "실물 도서의 색인을 질문과 대조해 관련 내용이 있을 법한 페이지를 고릅니다. 책을 직접 펼쳐 확인하기 전에 탐색 범위를 좁혀 주는 도서 검색 실험입니다.",
+    "metrics": [
+      {
+        "value": "질문 + 책 색인",
+        "label": "관련 페이지 탐색"
+      }
+    ],
+    "author": "Seth Thompson",
+    "handle": "s3ththompson",
+    "source": "https://x.com/s3ththompson/status/2100975114753892550",
+    "research": "https://jevable.com/project/2100975114753892550",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Search a physical library",
+      "books",
+      "semantic-search"
+    ],
+    "note": "색인에 기반한 후보 페이지 선택입니다. 책 전체 내용을 읽고 답변을 생성하거나 해당 페이지에 정답이 있음을 보장하는 방식은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100975114753892550",
+      "url": "https://video.twimg.com/amplify_video/2100974992653500416/vid/avc1/1418x720/DVDF6NSTFR4DGb9b.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100974992653500416/img/7rTO_q-ntbWDGTuR.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "tax-document-classifier",
+    "category": "work",
+    "title": "세금 관련 서류를, 처리 전에 종류별로 정리.",
+    "summary": "문서 처리 파이프라인에서 세무 서류의 유형을 분류합니다. 다음 단계에 맞는 묶음과 경로를 고르는 반복 판단에 Jev를 연결한 시연입니다.",
+    "metrics": [
+      {
+        "value": "서류 유형 분류",
+        "label": "문서 처리 파이프라인"
+      }
+    ],
+    "author": "Nakshatra Saxena",
+    "handle": "nedwize",
+    "source": "https://x.com/nedwize/status/2100973868324417852",
+    "research": "https://jevable.com/project/2100973868324417852",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Tax document classification",
+      "documents",
+      "classification"
+    ],
+    "note": "문서 분류 사례입니다. 세액 계산, 세법 해석 또는 신고 내용의 적정성을 판단한 사례가 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100973868324417852",
+      "url": "https://video.twimg.com/amplify_video/2100973360989773825/vid/avc1/910x720/faIjT1_ejvMXatdy.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100973360989773825/img/yMtL6CxrKMVXQEHV.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "jevals-workbench",
+    "category": "work",
+    "title": "같은 질문을 바꿔 가며, 판단 결과를 비교한다.",
+    "summary": "Jevals는 Jev의 선택형·점수형 등 여러 질문을 로컬에서 시험하는 작업대입니다. 입력과 질문을 수정하고 결과를 비교하며 적용할 구성을 탐색합니다.",
+    "metrics": [
+      {
+        "value": "질문 실험·비교",
+        "label": "Jevals 로컬 도구"
+      }
+    ],
+    "author": "Nick DeJesus 🛒🎉 - Former Unpaid CTO @BTPipeline",
+    "handle": "Dayhaysoos",
+    "source": "https://x.com/Dayhaysoos/status/2100968892591968320",
+    "research": "https://jevable.com/project/2100968892591968320",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Jevals",
+      "evaluation",
+      "testing",
+      "open-source"
+    ],
+    "note": "개발용 평가 도구의 제작자 시연입니다. 도구를 사용하는 것만으로 운영 정확도나 확률 보정이 확보되는 것은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100968892591968320",
+      "url": "https://video.twimg.com/amplify_video/2100965288850145280/vid/avc1/1280x720/zXh33y6lqdagtBJf.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100965288850145280/img/Ik0MohKW-MEyT6p4.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "wakeword-free-assistant",
+    "category": "interface",
+    "title": "깨우는 말 없이, 명령인지 일상 대화인지 구분.",
+    "summary": "음성 전사 결과를 읽고 도우미에게 내린 요청인지 평범한 대화인지 판단합니다. 매번 호출어를 말하지 않는 음성 인터페이스를 실험합니다.",
+    "metrics": [
+      {
+        "value": "전사 → 의도 구분",
+        "label": "호출어 없는 도우미"
+      }
+    ],
+    "author": "Max Blade",
+    "handle": "_MaxBlade",
+    "source": "https://x.com/_MaxBlade/status/2100967959879471519",
+    "research": "https://jevable.com/project/2100967959879471519",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "An assistant without a wake word",
+      "voice",
+      "intent"
+    ],
+    "note": "음성 수집과 전사는 별도 구성 요소가 맡습니다. 주변 대화를 명령으로 오인할 수 있는 실험적 인터페이스입니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100967959879471519",
+      "url": "https://video.twimg.com/amplify_video/2100966551826444288/vid/avc1/1268x720/XAnyA47uXJwbzPJs.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100966551826444288/img/i2s52ZeMNTOO-IRD.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "driving-decision-simulator",
+    "category": "simulation",
+    "title": "차선 변경, 감속, 제동 중 다음 행동을 고른다.",
+    "summary": "주행 환경의 상태를 전달받아 가속·감속·차선 변경 같은 행동을 선택합니다. 연속되는 교통 상황에 작은 판단을 연결하는 운전 시뮬레이션입니다.",
+    "metrics": [
+      {
+        "value": "환경 상태 → 행동",
+        "label": "주행 시뮬레이터"
+      }
+    ],
+    "author": "Cipher",
+    "handle": "cipherwrk",
+    "source": "https://x.com/cipherwrk/status/2100965547454374316",
+    "research": "https://jevable.com/project/2100965547454374316",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "A driving decision simulator",
+      "simulation",
+      "driving"
+    ],
+    "note": "가상 환경의 의사결정 데모입니다. 실제 도로의 자율주행이나 차량 안전 제어에 사용할 수 있음을 입증한 사례가 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100965547454374316",
+      "url": "https://video.twimg.com/amplify_video/2100965500314615808/vid/avc1/1280x624/6JYYPkuqgGn_n3Bi.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100965500314615808/img/19kMbu9jghFUkaBs.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "brand-news-matching",
+    "category": "content",
+    "title": "오늘의 뉴스 중, 우리 브랜드에 맞는 이야기는.",
+    "summary": "여러 뉴스 항목을 브랜드별 관심사와 대조해 관련성을 평가합니다. 콘텐츠 팀이 참고할 주제를 먼저 좁혀 보는 뉴스 매칭 데모입니다.",
+    "metrics": [
+      {
+        "value": "384개 뉴스 · 15개 브랜드",
+        "label": "제작자가 공개한 비교 규모"
+      }
+    ],
+    "author": "Elvis",
+    "handle": "elvissun",
+    "source": "https://x.com/elvissun/status/2100951347080421409",
+    "research": "https://jevable.com/project/2100951347080421409",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "News matching for brands",
+      "news",
+      "matching"
+    ],
+    "note": "내용과 브랜드의 적합성 평가입니다. 뉴스의 진위 검증이나 해당 주제로 만든 콘텐츠의 성과를 보장하지 않습니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100951347080421409",
+      "url": "https://video.twimg.com/amplify_video/2100951319108567040/vid/avc1/1280x720/3zaGFvgW2W4JTrZ2.mp4?tag=16",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100951319108567040/img/AZ1jFv9ySdRV-JYE.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "asteroid-drone",
+    "category": "simulation",
+    "title": "확신이 낮은 순간은, 다른 모델에 넘기는 드론.",
+    "summary": "소행성 구역의 가상 드론이 좌우 이동과 속도 조절을 선택합니다. 판단의 확신도를 표시하고 애매한 상황은 큰 모델로 넘기는 구성을 보여 줍니다.",
+    "metrics": [
+      {
+        "value": "빠른 판단 + 추가 검토",
+        "label": "가상 드론 제어"
+      }
+    ],
+    "author": "Mahmoud",
+    "handle": "MKhordoo",
+    "source": "https://x.com/MKhordoo/status/2100950317852455039",
+    "research": "https://jevable.com/project/2100950317852455039",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "A drone in an asteroid field",
+      "simulation",
+      "navigation"
+    ],
+    "note": "시뮬레이션과 모델 라우팅 실험입니다. 실제 비행의 충돌 회피 성능이나 확률 점수의 안전성을 검증한 사례가 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100950317852455039",
+      "url": "https://video.twimg.com/amplify_video/2100950290618867712/vid/avc1/1280x720/YK3DyW5oTyUuREea.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100950290618867712/img/FY-SPST7ifK3ls5W.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "focus-rail",
+    "category": "games",
+    "title": "달리는 열차가 제 역에 가도록, 선로를 바꾼다.",
+    "summary": "Focus Rail에서 열차와 역의 상태를 보고 분기기를 선택합니다. 여러 열차의 움직임에 맞춰 다음 선로 연결을 고르는 실시간 게임 시연입니다.",
+    "metrics": [
+      {
+        "value": "열차 상태 → 분기기",
+        "label": "Focus Rail"
+      }
+    ],
+    "author": "benkigera",
+    "handle": "benkigera",
+    "source": "https://x.com/benkigera/status/2101035079149449398",
+    "research": "https://jevable.com/project/2101035079149449398",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Focus Rail train routing",
+      "simulation",
+      "strategy"
+    ],
+    "note": "게임 환경의 행동 선택 데모입니다. 실제 철도 운행이나 안전 제어를 위한 시스템이 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101035079149449398",
+      "url": "https://video.twimg.com/amplify_video/2101034877193740288/vid/avc1/720x1280/V4BV3YNfN_q3K-u9.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101034877193740288/img/BZfW41He6nNwOkLN.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "abide-agent-rules",
+    "category": "work",
+    "title": "코딩 에이전트가, 팀의 작업 규칙을 따르는지.",
+    "summary": "Abide는 에이전트의 각 작업 단계를 자연어로 적은 규칙에 비춰 봅니다. 단순한 코드 검사로 표현하기 어려운 지침을 점검하는 보조 도구입니다.",
+    "metrics": [
+      {
+        "value": "작업 단계별 규칙 점검",
+        "label": "Abide"
+      }
+    ],
+    "author": "Ohans Emmanuel",
+    "handle": "OhansEmmanuel",
+    "source": "https://x.com/OhansEmmanuel/status/2101034822760288452",
+    "research": "https://jevable.com/project/2101034822760288452",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Abide coding-agent rules",
+      "code review",
+      "open source"
+    ],
+    "note": "자연어 지침 준수를 평가하는 제작자 실험입니다. 컴파일러, 테스트, 코드 리뷰를 대신하지 않습니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101034822760288452",
+      "url": "https://video.twimg.com/amplify_video/2101034808826851328/vid/avc1/720x720/Vb325UXGTY3bmMCU.mp4?tag=16",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101034808826851328/img/I9qffLGFLpK0-4Tn.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "agentrun-workflows",
+    "category": "work",
+    "title": "한 번 배운 작업을, 다음에는 다시 활용한다.",
+    "summary": "AgentRun은 에이전트가 작업을 수행하며 만든 해결 절차를 재사용하는 흐름입니다. Jev의 판단과 코딩 에이전트를 연결해 반복 작업의 실행 방식을 구성합니다.",
+    "metrics": [
+      {
+        "value": "작업 학습 → 재사용",
+        "label": "AgentRun"
+      }
+    ],
+    "author": "Miguel Ríos Berríos",
+    "handle": "MiguelriosEN",
+    "source": "https://x.com/MiguelriosEN/status/2101033282414768456",
+    "research": "https://jevable.com/project/2101033282414768456",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "AgentRun reusable workflows",
+      "automation",
+      "workflows"
+    ],
+    "note": "여러 구성 요소를 결합한 에이전트 시스템입니다. Jev 단독으로 코드를 생성하거나 모든 반복 작업을 자동 학습하는 기능은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101033282414768456",
+      "url": "https://video.twimg.com/amplify_video/2101032781270917120/vid/avc1/1280x720/oWpgyoF2DlXo7Q8a.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101032781270917120/img/8tGv1qWQd8M9mEec.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "android-e2e-testing",
+    "category": "browser",
+    "title": "Android 앱의 테스트 단계를, 실제 기기에서.",
+    "summary": "Wikipedia 앱을 열고 정해진 흐름을 따라가는 Android 테스트 시연입니다. Jev가 다음 조작을 고르고 기기 제어 도구가 테스트 단계를 실행합니다.",
+    "metrics": [
+      {
+        "value": "15단계",
+        "label": "공개된 Android 테스트"
+      }
+    ],
+    "author": "Kevin Kern",
+    "handle": "kevinkern",
+    "source": "https://x.com/kevinkern/status/2101032931456168098",
+    "research": "https://jevable.com/project/2101032931456168098",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Android end-to-end testing",
+      "testing",
+      "mobile"
+    ],
+    "note": "제작자가 공개한 특정 앱·기기 환경의 실행입니다. 모든 Android 앱에서의 호환성이나 기존 테스트 대비 일반적인 속도 우위를 뜻하지 않습니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101032931456168098",
+      "url": "https://video.twimg.com/amplify_video/2101032303396790272/vid/avc1/1280x720/WXeNlwWL3KjDJIo8.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101032303396790272/img/RbVCCv2UgU7Jox4h.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "voice-beatmaking",
+    "category": "content",
+    "title": "“스네어를 바꿔 줘”, 말로 비트를 다듬는다.",
+    "summary": "음성 요청을 받아 템포와 드럼 구성 같은 음악 작업의 설정을 바꿉니다. Jev가 요청에 맞는 조작을 고르고 음악 도구가 소리를 표현하는 시연입니다.",
+    "metrics": [
+      {
+        "value": "음성 → 음악 도구 조작",
+        "label": "대화형 비트 제작"
+      }
+    ],
+    "author": "Mahir",
+    "handle": "mahirb22",
+    "source": "https://x.com/mahirb22/status/2101023899265692100",
+    "research": "https://jevable.com/project/2101023899265692100",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Making beats by talking",
+      "music",
+      "voice"
+    ],
+    "note": "음성 인식과 음악 제작 도구를 결합한 데모입니다. Jev가 오디오 파형이나 완성된 음악을 직접 생성하는 기능은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101023899265692100",
+      "url": "https://video.twimg.com/amplify_video/2101023732634427392/vid/avc1/1208x720/Sjus3O6MW10lEatb.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101023732634427392/img/Lw8PZXdVXHBvuawd.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "contextual-autofill",
+    "category": "interface",
+    "title": "지금 화면에 맞는 자동 입력 버튼이 나타난다.",
+    "summary": "앱의 현재 맥락에서 채울 만한 값을 고르고 빠른 입력 버튼으로 제공합니다. 별도의 대화를 시작하지 않고 작업 화면 안에서 도움을 받는 인터페이스 실험입니다.",
+    "metrics": [
+      {
+        "value": "화면 맥락 → 빠른 입력",
+        "label": "상황별 자동 완성"
+      }
+    ],
+    "author": "Chris Nicholas",
+    "handle": "ctnicholasdev",
+    "source": "https://x.com/ctnicholasdev/status/2100928133608472817",
+    "research": "https://jevable.com/project/2100928133608472817",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Intelligent autofill buttons",
+      "forms",
+      "interfaces"
+    ],
+    "note": "제작자의 앱 인터페이스 데모입니다. 자동 입력 제안의 적합성은 앱이 제공하는 맥락과 선택지에 따라 달라집니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100928133608472817",
+      "url": "https://video.twimg.com/amplify_video/2100928115648405506/vid/avc1/1060x720/7Ynuvs0K9iLohY5p.mp4?tag=14",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100928115648405506/img/1ddfEiaKJLPA4Xuh.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "cascade-search",
+    "category": "data",
+    "title": "쉬운 검색어는 로컬에서, 애매한 표현만 Jev로.",
+    "summary": "Cascade Search는 입력 중인 검색어를 필터 조건으로 바꿉니다. 작은 로컬 모델이 먼저 처리하고 뜻이 모호한 표현을 Jev에 넘기는 두 단계 검색 실험입니다.",
+    "metrics": [
+      {
+        "value": "로컬 모델 + Jev",
+        "label": "입력 중 검색 필터"
+      }
+    ],
+    "author": "Zaid",
+    "handle": "zaidmukaddam",
+    "source": "https://x.com/zaidmukaddam/status/2100910232255992032",
+    "research": "https://jevable.com/project/2100910232255992032",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Cascade Search typed query filters",
+      "search",
+      "query parsing"
+    ],
+    "note": "제작자가 언급한 0.25ms는 로컬 모델 단계의 수치입니다. Jev 호출이나 전체 검색의 지연 시간으로 해석하면 안 됩니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100910232255992032",
+      "url": "https://video.twimg.com/amplify_video/2100910214530953216/vid/avc1/1280x720/JJClsqHG4jMBohIf.mp4?tag=16",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100910214530953216/img/pZDYHLcrOl_f0pWI.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "clipboard-quick-actions",
+    "category": "interface",
+    "title": "복사한 내용에 맞춰, 다음 동작을 제안한다.",
+    "summary": "Mac의 클립보드에 들어온 내용을 보고 유용한 빠른 동작을 고릅니다. 터미널 명령처럼 후속 작업이 있는 텍스트를 알아보고 실행 선택지를 보여 주는 데모입니다.",
+    "metrics": [
+      {
+        "value": "클립보드 → 동작 제안",
+        "label": "Mac 빠른 작업"
+      }
+    ],
+    "author": "Marcel Pociot 🧪",
+    "handle": "marcelpociot",
+    "source": "https://x.com/marcelpociot/status/2100907261593829675",
+    "research": "https://jevable.com/project/2100907261593829675",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Contextual clipboard quick actions",
+      "macOS",
+      "clipboard"
+    ],
+    "note": "동작을 제안하는 인터페이스 시연입니다. 복사한 모든 명령을 자동 실행하거나 명령의 안전성을 보장하는 기능은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100907261593829675",
+      "url": "https://video.twimg.com/amplify_video/2100907154752282625/vid/avc1/1280x720/PzCsgJIqFAOpOp-8.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100907154752282625/img/ymaN0AxIqCG4H4yU.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "cal-team-scheduling",
+    "category": "work",
+    "title": "팀원이 함께 비는 시간을, 바로 골라 본다.",
+    "summary": "Cal.com의 팀 일정 조율 흐름에서 구성원들이 함께 가능한 시간을 선택합니다. 캘린더 데이터와 빠른 판단을 연결하는 회의 시간 탐색 사례입니다.",
+    "metrics": [
+      {
+        "value": "공통 가능 시간 선택",
+        "label": "Cal.com 일정 조율"
+      }
+    ],
+    "author": "Peer Richelsen",
+    "handle": "peer_rich",
+    "source": "https://x.com/peer_rich/status/2100902559313502602",
+    "research": "https://jevable.com/project/2100902559313502602",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Instant team scheduling with Cal.com",
+      "scheduling",
+      "calendars"
+    ],
+    "note": "전체 응답 시간에는 캘린더 API 왕복도 포함됩니다. 모델 판단 속도를 그대로 회의 예약 완료 시간으로 볼 수 없습니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100902559313502602",
+      "url": "https://video.twimg.com/amplify_video/2100902393894342656/vid/avc1/1012x720/dSXSKXOZIuSHITYW.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100902393894342656/img/22LO2K2E8E9JAhMB.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "maxfusion-ad-shots",
+    "category": "content",
+    "title": "영상 광고를, 장면별 평가표로 살펴본다.",
+    "summary": "Maxfusion에서 가져온 영상 광고의 각 장면을 기준별로 평가하는 도구입니다. 여러 광고를 비교하기 전에 살펴볼 컷을 좁혀 주는 광고 리서치 시연입니다.",
+    "metrics": [
+      {
+        "value": "장면별 평가",
+        "label": "Maxfusion 광고 리서치"
+      }
+    ],
+    "author": "Vlad Dubchak",
+    "handle": "vladdubchak_x",
+    "source": "https://x.com/vladdubchak_x/status/2100870244004683886",
+    "research": "https://jevable.com/project/2100870244004683886",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Scoring every shot in a video ad",
+      "advertising",
+      "video"
+    ],
+    "note": "영상 처리와 Jev를 결합한 파이프라인입니다. Jev가 영상을 직접 입력받는 기능이나 광고 매출·전환율을 예측한 검증 결과가 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100870244004683886",
+      "url": "https://video.twimg.com/amplify_video/2100856866427256833/vid/avc1/1144x720/Q2H7ae2b80gWWLxX.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100856866427256833/img/C3ods4J011QCJLCP.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "orus-strategy-review",
+    "category": "markets",
+    "title": "거래 전에, 제안된 전략을 한 번 더 평가한다.",
+    "summary": "Orus는 매매 전략 제안을 실행 전에 검토하는 단계에 Jev를 활용합니다. 선택한 기준에 따라 계획을 평가하고 거래 흐름에 연결하는 실험입니다.",
+    "metrics": [
+      {
+        "value": "전략 제안 → 검토",
+        "label": "Orus"
+      }
+    ],
+    "author": "Orus Agent",
+    "handle": "Orus_agent",
+    "source": "https://x.com/Orus_agent/status/2100859259915227358",
+    "research": "https://jevable.com/project/2100859259915227358",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Orus trade-strategy review",
+      "decision review",
+      "agents"
+    ],
+    "note": "전략 검토 도구의 제작자 시연입니다. 실거래 수익성이나 손실 방지 성능을 검증한 투자 추천이 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100859259915227358",
+      "url": "https://video.twimg.com/amplify_video/2100852121105006592/vid/avc1/1104x720/PAClylbI7JdtmxEz.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100852121105006592/img/NlvQ4G9nQNYzq8zZ.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "jevcal-thresholds",
+    "category": "work",
+    "title": "어디까지 자동 처리하고, 언제 추가 검토할까.",
+    "summary": "Jevcal은 정답이 붙은 자체 데이터로 판단 기준을 시험합니다. 원하는 정확도와 자동 처리 비율 사이에서 확신도 임계값을 고르고 LLM 이관 범위를 조절합니다.",
+    "metrics": [
+      {
+        "value": "정확도 · 처리 비율",
+        "label": "확신도 임계값 조정"
+      }
+    ],
+    "author": "Abhishek kothari",
+    "handle": "thenightshipper",
+    "source": "https://x.com/thenightshipper/status/2100850610962919551",
+    "research": "https://jevable.com/project/2100850610962919551",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Jevcal confidence-threshold calibration",
+      "calibration",
+      "open source"
+    ],
+    "note": "평가 데이터에 대한 보정 실험입니다. 선택한 임계값이 새 운영 데이터에서도 같은 정확도를 유지한다는 보장은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100850610962919551",
+      "url": "https://video.twimg.com/amplify_video/2100850405668491264/vid/avc1/1280x720/SqQU35q2yaE2fSF-.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100850405668491264/img/f4I89LjtDpd8cdBF.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "action-label-quality",
+    "category": "data",
+    "title": "로봇 학습용 행동 라벨을, 대량으로 점검한다.",
+    "summary": "사람의 행동을 기록한 학습 데이터에서 텍스트 라벨의 품질을 검토합니다. 물리 환경 AI를 위한 데이터 준비 단계에 Jev의 반복 평가를 적용한 사례입니다.",
+    "metrics": [
+      {
+        "value": "58,643개",
+        "label": "제작자가 점검한 행동 라벨"
+      }
+    ],
+    "author": "Peter Wang",
+    "handle": "the_cyw",
+    "source": "https://x.com/the_cyw/status/2100807905859739779",
+    "research": "https://jevable.com/project/2100807905859739779",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Quality checks for physical-AI action labels",
+      "data quality",
+      "robotics"
+    ],
+    "note": "행동 라벨 품질 점검 데모입니다. Jev가 원본 영상을 직접 인식하거나 로봇의 행동 성능을 검증한 결과는 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100807905859739779",
+      "url": "https://video.twimg.com/amplify_video/2100807113576693760/vid/avc1/1280x720/wZJXUzna2aBRFg1g.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100807113576693760/img/8lI0CmDrKghq79Z5.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "mario-branch-retry",
+    "category": "games",
+    "title": "실패한 마리오를, 여러 갈래로 다시 시도한다.",
+    "summary": "Jev가 움직임을 고르고, 캐릭터가 죽으면 microsandbox가 네 개의 가상 실행으로 분기합니다. 살아남은 경로를 이어 가는 게임 재시도 실험입니다.",
+    "metrics": [
+      {
+        "value": "4개 실행으로 분기",
+        "label": "Mario Never Dies"
+      }
+    ],
+    "author": "appcypher",
+    "handle": "theappcypher",
+    "source": "https://x.com/theappcypher/status/2101095181382721998",
+    "research": "https://jevable.com/project/2101095181382721998",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Mario Never Dies",
+      "mario",
+      "microsandbox",
+      "branching-timelines"
+    ],
+    "note": "샌드박스 분기와 게임 복구를 결합한 데모입니다. 처음부터 실패 없이 플레이하거나 최적 전략을 찾았다는 뜻은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101095181382721998",
+      "url": "https://video.twimg.com/amplify_video/2101094095808847872/vid/avc1/1268x720/OqZP0osmxRHKMOCs.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101094095808847872/img/3gUUWv-2l7gtBJLH.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "jev-board",
+    "category": "interface",
+    "title": "키보드에도, 상황을 읽는 작은 인터페이스.",
+    "summary": "Jev board는 키보드를 소재로 한 생성형 UI 실험입니다. 사용 흐름 속에 작은 판단을 넣어 인터페이스가 맥락에 반응하는 모습을 탐색합니다.",
+    "metrics": [
+      {
+        "value": "키보드 × 상황별 UI",
+        "label": "Jev board"
+      }
+    ],
+    "author": "Zahle Khan",
+    "handle": "zahlekhan",
+    "source": "https://x.com/zahlekhan/status/2100681083176226921",
+    "research": "https://jevable.com/project/2100681083176226921",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Jev board",
+      "keyboard",
+      "generative-ui",
+      "ambient-interfaces"
+    ],
+    "note": "제작자가 공개한 인터페이스 탐색 실험입니다. 지원 기능의 범위와 일반 환경에서의 동작은 별도로 검증하지 않았습니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100681083176226921",
+      "url": "https://video.twimg.com/amplify_video/2100679218455789568/vid/avc1/720x1280/9ipUE1IqrbPy1Qc0.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100679218455789568/img/zy8kM6C3lA-2EyJa.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "simulated-audience",
+    "category": "interface",
+    "title": "성격이 다른 가상 청중 100명에게 말해 본다.",
+    "summary": "각기 다른 성향을 부여한 캐릭터가 발화 내용에 반응합니다. Jev가 캐릭터별 반응을 골라 발표를 듣는 가상 청중의 모습을 만드는 실험입니다.",
+    "metrics": [
+      {
+        "value": "100개 가상 성격",
+        "label": "시뮬레이션 청중"
+      }
+    ],
+    "author": "amit",
+    "handle": "legitamit",
+    "source": "https://x.com/legitamit/status/2100713197502173373",
+    "research": "https://jevable.com/project/2100713197502173373",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "An audience of 100 personalities",
+      "voice",
+      "audience-simulation",
+      "multi-agent"
+    ],
+    "note": "설정된 캐릭터들의 모의 반응입니다. 실제 청중의 감정, 주의력, 설득 효과를 측정하거나 예측한 결과가 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100713197502173373",
+      "url": "https://video.twimg.com/amplify_video/2100711545218924544/vid/avc1/1280x720/NMvzmS1Jwo9BkfQQ.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100711545218924544/img/R3UxL8HSq04FnC4R.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "whale-city",
+    "category": "games",
+    "title": "고래 위 도시에서, 다음 이야기를 행동으로 고른다.",
+    "summary": "큰 모델이 설계한 세계에서 Jev가 다음 행동을 선택하고 별도의 영상 모델이 장면을 표현합니다. 세계 설정·행동 선택·영상 생성을 나눈 상호작용 실험입니다.",
+    "metrics": [
+      {
+        "value": "세계 설정 → 행동 → 영상",
+        "label": "고래 위 도시"
+      }
+    ],
+    "author": "gokaygokay",
+    "handle": "gokayfem",
+    "source": "https://x.com/gokayfem/status/2101022590722810271",
+    "research": "https://jevable.com/project/2101022590722810271",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "A city on a whale",
+      "simulation",
+      "decision-making",
+      "video"
+    ],
+    "note": "여러 모델을 결합한 제작자 데모입니다. Jev 자체가 세계관이나 영상을 생성하는 기능은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101022590722810271",
+      "url": "https://video.twimg.com/amplify_video/2101020230071803904/vid/avc1/1280x720/1t6IqPmETDfleBP-.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101020230071803904/img/FWi7MqiT0DI2iQJ9.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "prompt-difficulty",
+    "category": "interface",
+    "title": "쉬운 질문이라면, 빠른 모드를 먼저 제안한다.",
+    "summary": "프롬프트를 입력하는 동안 요청의 난이도를 평가합니다. 간단해 보이는 작업에는 빠른 모드를 선택할 수 있게 안내하는 인터페이스 데모입니다.",
+    "metrics": [
+      {
+        "value": "입력 중 난이도 평가",
+        "label": "빠른 모드 제안"
+      }
+    ],
+    "author": "Kevin Grajeda",
+    "handle": "k_grajeda",
+    "source": "https://x.com/k_grajeda/status/2101021361351131464",
+    "research": "https://jevable.com/project/2101021361351131464",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "A prompt difficulty classifier",
+      "model-routing",
+      "prompt-classification"
+    ],
+    "note": "난이도 추정에 따른 제안이며 사용자가 모드를 선택합니다. 빠른 모델이 같은 답변 품질을 낸다는 보장은 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101021361351131464",
+      "url": "https://video.twimg.com/amplify_video/2101018655794331648/vid/avc1/1426x720/xwwK-VI6311LloAg.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101018655794331648/img/xm_XTf33FJqqEmIb.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "seo-internal-links",
+    "category": "content",
+    "title": "어느 페이지끼리 연결해야, 읽는 흐름이 좋아질까.",
+    "summary": "사이트 페이지들을 대조해 내부 링크로 연결할 만한 관계를 고릅니다. 억지로 연결하지 않고 관련성이 있는 페이지를 찾는 SEO 검토 실험입니다.",
+    "metrics": [
+      {
+        "value": "586개 페이지",
+        "label": "공개된 내부 링크 검토 규모"
+      }
+    ],
+    "author": "borja",
+    "handle": "borjafat",
+    "source": "https://x.com/borjafat/status/2101018783976722479",
+    "research": "https://jevable.com/project/2101018783976722479",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "An internal-link SEO audit",
+      "seo",
+      "classification"
+    ],
+    "note": "페이지 관련성에 따른 추천 데모입니다. 검색 순위 상승이나 트래픽 증가를 측정한 성과는 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2101018783976722479",
+      "url": "https://video.twimg.com/amplify_video/2101018477087592448/vid/avc1/1280x720/8eXtOAxGjTxSVL5Z.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2101018477087592448/img/9YlAHKLLo_h6rgtK.jpg",
+      "evidence": "publisher-video-file"
+    }
+  },
+  {
+    "id": "jevton-town",
+    "category": "games",
+    "title": "120명의 작은 마을, 각자 다음 행동을 고른다.",
+    "summary": "Jevton의 주민들이 도로와 상점이 있는 가상 마을에서 움직입니다. 여러 NPC의 작은 선택을 조합해 하나의 마을 시뮬레이션을 만드는 실험입니다.",
+    "metrics": [
+      {
+        "value": "120명 NPC",
+        "label": "Jevton 가상 마을"
+      }
+    ],
+    "author": "Chizi",
+    "handle": "chiziaruhoma",
+    "source": "https://x.com/chiziaruhoma/status/2100878555047514390",
+    "research": "https://jevable.com/project/2100878555047514390",
+    "reviewed": "2026-09-21",
+    "keywords": [
+      "Jevton: a town of 120 people",
+      "simulation",
+      "characters"
+    ],
+    "note": "설정된 게임 세계의 행동 선택 시연입니다. 실제 주민 행동이나 지역 경제를 예측하는 모델이 아닙니다.",
+    "media": {
+      "type": "mp4",
+      "id": "2100878555047514390",
+      "url": "https://video.twimg.com/amplify_video/2100876059709149184/vid/avc1/1052x720/sXyD3UTnPZN49a2z.mp4",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2100876059709149184/img/jYoCG-SwxUKhp2pf.jpg",
+      "evidence": "publisher-video-file"
+    }
+  }
+]);
+window.JEV_ATLAS = Object.freeze({version:4,reviewed:'2026-09-21',categories:cats,cases});
 })();
