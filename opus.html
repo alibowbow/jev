@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="assets/guide.css?v=7">
 <link rel="stylesheet" href="assets/opus.css?v=1">
 <script src="assets/opus-data.js?v=3" defer></script>
-<script src="assets/app.js?v=12" defer></script>
+<script src="assets/app.js?v=13" defer></script>
 </head>
 <body class="opus-page">
 <a class="skip" href="#cards">사례로 건너뛰기</a>
@@ -31,8 +31,8 @@
 <aside class="model-brief" aria-label="Opus 5.5 한눈에 보기"><p><strong>Claude Opus 5.5</strong> 코드를 쓰고, 도구를 다루고, 긴 작업을 이어가는 Anthropic의 AI 모델.</p><a href="https://www.anthropic.com/claude-opus-5-5" target="_blank" rel="noopener noreferrer">공식 소개 ↗</a></aside>
 <section class="explore" aria-label="활용 사례 탐색">
 <div class="filter-dock"><div class="category-scroller"><nav id="categories" aria-label="분야별 분류"></nav></div><div class="search-wrap"><span data-icon="search"></span><label class="sr-only" for="search">사례 검색</label><input id="search" type="search" placeholder="게임, Blender, 논문…" autocomplete="off" maxlength="120"><kbd>/</kbd></div></div>
-<div class="results-row"><p id="result-status" role="status" aria-live="polite"></p><div><button id="reset" class="quiet-button" hidden>전체 보기 <span aria-hidden="true">↺</span></button><label class="sr-only" for="format">자료 형태</label><select id="format"><option value="all">모든 자료</option><option value="video">영상</option><option value="demo">실행 데모</option><option value="code">코드 공개</option></select><label class="sr-only" for="sort">정렬</label><select id="sort"><option value="curated">에디터 픽 순</option><option value="title">제목순</option><option value="newest">최신 공개순</option></select></div></div>
-<p class="preview-note">소리 포함 원본은 카드에서 바로 재생됩니다. 소리 없는 짧은 클립은 ‘무음 미리보기’로 표시했습니다.</p>
+<div class="results-row"><p id="result-status" role="status" aria-live="polite"></p><div><button id="reset" class="quiet-button" hidden>전체 보기 <span aria-hidden="true">↺</span></button><label class="sr-only" for="format">자료 형태</label><select id="format"><option value="all">모든 자료</option><option value="video">영상</option><option value="audio">소리 있는 영상</option><option value="demo">실행 데모</option><option value="code">코드 공개</option></select><label class="sr-only" for="sort">정렬</label><select id="sort"><option value="curated">에디터 픽 순</option><option value="title">제목순</option><option value="newest">최신 공개순</option></select></div></div>
+<p class="preview-note">‘소리 있는 영상’ 필터로 오디오가 확인된 원본을 모아 보세요. ‘무음 원본’과 ‘무음 미리보기’에는 소리가 없습니다.</p>
 <div class="cards" id="cards"></div>
 <div class="empty" id="empty" hidden><span data-icon="search"></span><h2 id="empty-title">일치하는 사례가 없습니다.</h2><p id="empty-text">검색어를 바꾸거나 다른 분야를 선택해 보세요.</p><button id="empty-reset" class="solid-button">전체 사례 보기 <span aria-hidden="true">↗</span></button></div>
 <noscript><div class="empty"><h2>사례를 표시하려면 JavaScript가 필요합니다.</h2><p><a href="https://www.anthropic.com/claude-opus-5-5">Opus 5.5 공식 소개 보기 ↗</a></p></div></noscript>

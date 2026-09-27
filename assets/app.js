@@ -172,6 +172,7 @@
     const items = data.cases.filter(c => (state.category === 'all' || c.category === state.category) &&
       (!state.savedOnly || saved.has(c.id)) &&
       (state.format === 'all' || (state.format === 'video' && c.media.type === 'mp4') ||
+        (state.format === 'audio' && c.media.type === 'mp4' && c.media.hasAudio === true) ||
         (state.format === 'demo' && c.demo) || (state.format === 'code' && c.code)) &&
       words.every(word => searchIndex.get(c.id).includes(word)));
     if (state.sort === 'title') items.sort((a, b) => a.title.localeCompare(b.title, 'ko'));
@@ -307,7 +308,8 @@
     stopPlayer();
     const epoch = playerEpoch;
     const host = $('player-host');
-    $('retry-player').hidden = true;
+    $('retry-player').hidden = !fallback;
+    $('retry-player').textContent = window.OPUS_ATLAS && activeCase?.media.videoId ? '원본 다시 재생' : '다시 불러오기';
     $('player-status').hidden = false;
     $('player-status').textContent = '영상을 불러오는 중입니다…';
     const url = mediaUrl(c);
@@ -330,12 +332,34 @@
     };
     updateSound();
     audioNote.hidden = c.media.hasAudio !== false;
-    audioNote.textContent = fallback ? '원본을 불러오지 못해 무음 미리보기를 재생합니다. 소리는 아래 ‘영상 파일 열기’에서 확인해 주세요.' : c.media.clipSeconds ? '이 미리보기 파일에는 소리가 없습니다. 전체 원본에서 확인해 주세요.' : '공개된 원본 영상에 오디오 트랙이 없습니다.';
+    audioNote.textContent = fallback ? '선택한 무음 미리보기를 재생 중입니다. ‘원본 다시 재생’으로 돌아갈 수 있습니다.' : c.media.clipSeconds ? '이 미리보기 파일에는 소리가 없습니다. 전체 원본에서 확인해 주세요.' : '공개된 원본 영상에 오디오 트랙이 없습니다.';
+    let needsPlaybackGesture = false;
+    const requestPlayback = () => {
+      if (needsPlaybackGesture) playerTimer = setTimeout(error, 45000);
+      needsPlaybackGesture = false;
+      video.play().catch(error => {
+        if (!isCurrent(epoch) || error.name !== 'NotAllowedError') return;
+        clearTimeout(playerTimer);
+        needsPlaybackGesture = true;
+        const resume = element('button', 'quiet-button', c.media.hasAudio === false ? '영상 재생' : '소리 켜고 재생');
+        resume.type = 'button';
+        resume.addEventListener('click', () => {
+          if (!isCurrent(epoch)) return;
+          video.muted = false;
+          video.volume = 1;
+          requestPlayback();
+          updateSound();
+        }, { once: true });
+        $('player-status').replaceChildren(document.createTextNode('재생 버튼을 한 번 더 눌러 주세요. '), resume);
+        $('player-status').hidden = false;
+      });
+    };
     const toggleSound = () => {
       if (!isCurrent(epoch)) return;
       const audible = !video.muted && video.volume > 0;
       video.muted = audible;
       if (!audible && video.volume === 0) video.volume = 1;
+      if (!audible && video.paused) requestPlayback();
       updateSound();
     };
     sound.addEventListener('click', toggleSound);
@@ -343,16 +367,26 @@
     const poster = safeUrl(c.media.poster, posterHosts);
     if (poster) video.poster = poster;
     video.setAttribute('aria-label', `${c.title} 시연 영상`);
-    const ready = () => {
+    const ready = event => {
       if (!isCurrent(epoch)) return;
       clearTimeout(playerTimer);
+      if (event.type === 'playing') needsPlaybackGesture = false;
+      if (needsPlaybackGesture) return;
       $('player-status').textContent = '';
       $('player-status').hidden = true;
     };
     const error = () => {
       if (!isCurrent(epoch)) return;
       if (window.OPUS_ATLAS && !fallback && c.media.videoId) {
-        startPlayer({ ...c, media: { ...c.media, url: `https://ohmyopus.com/media/${c.id}/highlight.mp4`, hasAudio: false } }, true);
+        failedPlayer(epoch);
+        const failedEpoch = playerEpoch;
+        const preview = element('button', 'quiet-button', '무음 미리보기 보기');
+        preview.type = 'button';
+        preview.addEventListener('click', () => {
+          if (!isCurrent(failedEpoch)) return;
+          startPlayer({ ...c, media: { ...c.media, url: `https://ohmyopus.com/media/${c.id}/highlight.mp4`, hasAudio: false } }, true);
+        }, { once: true });
+        $('player-status').replaceChildren(document.createTextNode('원본 영상을 불러오지 못했습니다. 원본을 다시 재생하거나 무음 미리보기를 선택해 주세요. '), preview);
       } else failedPlayer(epoch);
     };
     video.addEventListener('canplay', ready);
@@ -369,7 +403,7 @@
     video.src = url;
     host.replaceChildren(video);
     // Start from the user's card click; native controls remain available if autoplay is denied.
-    video.play().catch(() => {});
+    requestPlayback();
   }
   function openPlayer(id) {
     const c = caseMap.get(id);

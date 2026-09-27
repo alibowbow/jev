@@ -102,3 +102,12 @@ The paper-plane original also contained nonzero audio samples (first five second
 | trolley-game | Original | 28.053 | audio | [Publisher metadata](https://cdn.syndication.twimg.com/tweet-result?id=2102641525071155565&lang=en&token=0) |
 | life-purpose | Preview | 6.7 | no audio track | [Preview](https://ohmyopus.com/media/life-purpose/highlight.mp4) |
 | pixel-island | Preview | 6 | no audio track | [Preview](https://ohmyopus.com/media/pixel-island/highlight.mp4) |
+
+
+## Follow-up — 2026-09-28 (KST)
+
+The deployed paper-plane source was checked again: the card played the original MP4 unmuted and advanced in the browser, and the downloaded file contained AAC audio with nonzero samples. This does not establish playback on every user's device or every source.
+
+Removed automatic switching from a failed original to a silent highlight. Failure now offers an original retry and an explicitly selected silent preview; the original retry remains available during that preview. Browser `NotAllowedError` now presents a user-gesture play button instead of being ignored, with stale callback protection. A “소리 있는 영상” filter selects the 43 files with verified audio tracks; unknown and silent sources are excluded. The original 18 silent previews and 10 silent originals remain labeled; their missing audio has not been invented or restored.
+
+Validation: 42 tests pass, including explicit fallback selection, returning to the original, blocked-play recovery, filter composition and stale playback callbacks.

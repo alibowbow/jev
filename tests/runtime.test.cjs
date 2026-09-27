@@ -24,7 +24,7 @@ function setup(t, options = {}) {
   w.HTMLElement.prototype.scrollIntoView = function () {};
   w.HTMLDialogElement.prototype.showModal = function () { this.open = true; };
   w.HTMLDialogElement.prototype.close = function () { this.open = false; this.dispatchEvent(new w.Event('close')); };
-  w.HTMLMediaElement.prototype.play = () => Promise.resolve();
+  w.HTMLMediaElement.prototype.play = options.play || (() => Promise.resolve());
   w.HTMLMediaElement.prototype.pause = function () {};
   w.HTMLMediaElement.prototype.load = function () {};
   if (options.saved) w.localStorage.setItem('jev-atlas:saved:v1', options.saved);
@@ -327,6 +327,9 @@ test('Opus format, category and text filters compose and reset; newest sort uses
   input('Turbo'); assert.equal(count(), 1);
   click('#reset'); assert.equal(count(), 100); assert.equal(format.value, 'all');
   selectFormat('code'); assert.equal(count(), 7);
+  selectFormat('audio'); assert.equal(count(), w.OPUS_ATLAS.cases.filter(c => c.media.type === 'mp4' && c.media.hasAudio === true).length);
+  assert.equal(d.querySelector('#case-willowmere'), null);
+  assert.equal(d.querySelector('#case-lens-lab'), null);
   selectFormat('video'); assert.equal(count(), 84);
   click('[data-play="lens-lab"]');
   selectFormat('demo'); assert.equal(d.querySelector('video'), null);
@@ -433,19 +436,58 @@ test('Opus original media must match the verified video ID and safe CDN URL', t 
   }
 });
 
-test('an unavailable Opus original falls back to an explicitly silent preview inside the same card', t => {
+test('an unavailable Opus original offers an explicit silent preview and can retry the original', t => {
   const { d, w, click } = setup(t, { opus: true });
   click('[data-play="paper-planes"]');
   const original = d.querySelector('video');
   original.dispatchEvent(new w.Event('error'));
+  assert.equal(d.querySelector('video'), null, 'never silently replace the audio source');
+  assert.equal(d.getElementById('retry-player').hidden, false);
+  click('#player-status button');
   const preview = d.querySelector('video');
   assert.notEqual(preview, original);
   assert.equal(preview.src, 'https://ohmyopus.com/media/paper-planes/highlight.mp4');
   assert.equal(preview.closest('.card').id, 'case-paper-planes');
   assert.equal(d.getElementById('toggle-sound').hidden, true);
-  assert.match(d.getElementById('player-audio-note').textContent, /원본을 불러오지 못해 무음 미리보기/);
+  assert.match(d.getElementById('player-audio-note').textContent, /선택한 무음 미리보기/);
   assert.match(d.getElementById('player-file').href, /^https:\/\/video\.twimg\.com\//);
-  preview.dispatchEvent(new w.Event('error'));
-  assert.equal(d.querySelector('video'), null);
   assert.equal(d.getElementById('retry-player').hidden, false);
+  click('#retry-player');
+  assert.match(d.querySelector('video').src, /^https:\/\/video\.twimg\.com\//);
+  assert.equal(d.getElementById('toggle-sound').hidden, false);
+  preview.dispatchEvent(new w.Event('error'));
+  assert.match(d.querySelector('video').src, /^https:\/\/video\.twimg\.com\//, 'stale preview cannot replace the retried original');
+});
+
+
+test('blocked audible playback exposes a user gesture retry and ignores stale rejections', async t => {
+  let rejectPlay;
+  let calls = 0;
+  const { d, w, click, timers } = setup(t, { opus: true, play: () => {
+    calls++;
+    return calls === 1 ? new Promise((resolve, reject) => { rejectPlay = reject; }) : Promise.resolve();
+  } });
+  click('[data-play="paper-planes"]');
+  const video = d.querySelector('video');
+  rejectPlay({ name: 'NotAllowedError' });
+  await flush();
+  assert.match(d.getElementById('player-status').textContent, /소리 켜고 재생/);
+  assert.equal([...timers.values()].some(t => t.ms === 45000), false);
+  video.dispatchEvent(new w.Event('canplay'));
+  assert.equal(d.getElementById('player-status').hidden, false, 'canplay does not hide the gesture button');
+  click('#player-status button');
+  assert.equal(calls, 2);
+  assert.equal(video.muted, false);
+  assert.equal(video.volume, 1);
+  video.dispatchEvent(new w.Event('playing'));
+  assert.equal(d.getElementById('player-status').hidden, true);
+
+  let rejectOld;
+  const other = setup(t, { opus: true, play: () => new Promise((resolve, reject) => { rejectOld = reject; }) });
+  other.click('[data-play="paper-planes"]');
+  const staleRejection = rejectOld;
+  other.click('[data-play="bricks"]');
+  staleRejection({ name: 'NotAllowedError' });
+  await flush();
+  assert.equal(other.d.querySelector('#player-status button'), null);
 });
