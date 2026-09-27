@@ -38,7 +38,7 @@ test('100 distinct Opus projects retain original and collection sources, dates a
 test('every existing page links to the separate Opus page and its assets are local', () => {
   for (const file of ['index.html', 'learn.html', 'ideas.html', 'opus.html']) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
-    assert.match(html, /<a href="opus.html"[^>]*>Opus 5.5<\/a>/);
+    assert.match(html, /<a href="opus.html"[^>]*>Opus5.5<\/a>/);
     assert.equal((html.match(/aria-current="page"/g) || []).length, 1);
   }
   const html = fs.readFileSync(path.join(root, 'opus.html'), 'utf8');
