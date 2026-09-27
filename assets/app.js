@@ -1,8 +1,8 @@
-/* Jev Atlas: static catalogue, browser-local bookmarks, on-demand media. */
+/* AI Showcase: static catalogue, browser-local bookmarks, on-demand media. */
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const data = window.OPUS_ATLAS || window.JEV_ATLAS;
+  const data = window.ASTRA_ATLAS || window.OPUS_ATLAS || window.JEV_ATLAS;
   if (!data) {
     $('cards').textContent = '목록을 불러오지 못했습니다. 페이지를 새로고침해 주세요.';
     return;
@@ -115,6 +115,7 @@
     const playable = c.media.type === 'mp4';
     const preview = playable ? button('media-preview', `${c.title} 영상 재생`, 'play', c.id) : externalLink('', c.demo || c.source);
     preview.className = 'media-preview';
+    if (c.media.type === 'svg') preview.dataset.animated = 'true';
     if (playable) {
       preview.setAttribute('aria-expanded', 'false');
       preview.setAttribute('aria-controls', 'inline-player');
@@ -133,7 +134,7 @@
     const play = element('span', 'play-circle');
     play.append(icon(playable ? 'play' : 'share'));
     const mediaBottom = element('span', 'media-bottom');
-    const mediaLabel = playable ? (c.media.clipSeconds ? `무음 미리보기 ${c.media.clipSeconds}초` : c.media.hasAudio === true ? '소리 포함 · 전체 영상' : c.media.hasAudio === false ? '무음 원본 영상' : '공개 시연 영상') : (c.demo ? '데모 직접 열기 ↗' : '이미지·원본 보기 ↗');
+    const mediaLabel = playable ? (c.media.gifId ? 'GIF 애니메이션 · 무음' : c.media.clipSeconds ? `무음 미리보기 ${c.media.clipSeconds}초` : c.media.hasAudio === true ? '소리 포함 · 전체 영상' : c.media.hasAudio === false ? '무음 원본 영상' : '공개 시연 영상') : (c.media.type === 'svg' ? 'SVG 애니메이션 · 무음' : c.demo ? '데모 직접 열기 ↗' : '이미지·원본 보기 ↗');
     mediaBottom.append(element('span', 'video-label', mediaLabel),
       element('span', 'media-credit', c.author));
     preview.append(play, mediaBottom);
@@ -155,7 +156,7 @@
     actions.append(share);
     footer.append(element('span', 'author-mark', Array.from(c.author)[0]), element('span', 'author', c.author), actions);
     const disclosure = element('p', 'metric-disclosure', '제작자 공개 자료 · 독립 재현 아님');
-    if (window.OPUS_ATLAS) {
+    if ((window.OPUS_ATLAS || window.ASTRA_ATLAS) && c.research) {
       const research = externalLink('수집 출처 ↗', c.research);
       research.className = 'research-link';
       disclosure.append(document.createTextNode(' · '), research);
@@ -283,11 +284,12 @@
     $('retry-player').hidden = false;
   }
   function mediaUrl(c) {
-    if (window.OPUS_ATLAS) {
-      const value = safeUrl(c.media.url, ['ohmyopus.com', 'video.twimg.com']);
+    if (window.OPUS_ATLAS || window.ASTRA_ATLAS) {
+      const value = safeUrl(c.media.url, window.OPUS_ATLAS ? ['ohmyopus.com', 'video.twimg.com'] : ['video.twimg.com']);
       if (!value || c.media.type !== 'mp4') return null;
       const url = new URL(value);
       if (url.hostname === 'video.twimg.com') {
+        if (c.media.gifId) return /^[\w-]+$/.test(c.media.gifId) && url.pathname === `/tweet_video/${c.media.gifId}.mp4` && !url.search && !url.hash ? value : null;
         const videoId = url.pathname.match(/^\/(?:amplify_video|ext_tw_video)\/(\d+)\/(?:pu\/)?vid\/avc1\/\d+x\d+\/[\w-]+\.mp4$/)?.[1];
         return videoId && videoId === c.media.videoId && (!url.search || /^\?tag=\d+$/.test(url.search)) && !url.hash ? value : null;
       }
@@ -317,6 +319,7 @@
     const video = element('video');
     video.controls = true;
     video.playsInline = true;
+    video.loop = c.media.loop === true;
     video.preload = 'metadata';
     video.muted = false;
     video.defaultMuted = false;
@@ -377,7 +380,7 @@
     };
     const error = () => {
       if (!isCurrent(epoch)) return;
-      if (window.OPUS_ATLAS && !fallback && c.media.videoId) {
+      if (window.OPUS_ATLAS && !fallback && c.media.videoId && c.media.previewFallback !== false) {
         failedPlayer(epoch);
         const failedEpoch = playerEpoch;
         const preview = element('button', 'quiet-button', '무음 미리보기 보기');

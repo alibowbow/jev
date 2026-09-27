@@ -1,6 +1,6 @@
-# Jev Atlas
+# AI Showcase
 
-A Korean, video-first collection of published Jev demonstrations. Independent of TypeSafe AI.
+A Korean collection of published Jev, Claude Opus 5.5 and GPT-6 Astra demonstrations. Independent of the model providers.
 
 ## Features
 
@@ -50,6 +50,14 @@ Jevable's public card player supplies a `/media/<post ID>/0` video route alongsi
 
 ## Opus 5.5 collection
 
-[Open the separate Opus 5.5 page](https://alibowbow.github.io/jev/opus.html): 100 published projects across seven categories, with 84 inline videos, demo/code filters and separate bookmarks. See [selection and source ledger](docs/opus-2026-09-27.md). Data lives in `assets/opus-data.js`; both collections share `assets/app.js`.
+[Open the separate Opus 5.5 page](https://alibowbow.github.io/jev/opus.html): 150 published projects across seven categories, with 123 inline videos (including one silent GIF) and 11 animated SVG originals, demo/code filters and separate bookmarks. See [selection and source ledger](docs/opus-2026-09-27.md). Data lives in `assets/opus-data.js`; all collections share `assets/app.js`.
 
 The Opus player now prefers 66 publisher-original full videos over silent highlights. Remaining clips are labeled as silent previews; see [audio verification and correction](docs/opus-audio-2026-09-27.md). The inline player has an explicit sound toggle.
+
+The September 28 update adds 50 animation/art projects, bringing that category to 76. New sources retain their full original media and do not fall back to fabricated highlight URLs. See [new art sources](docs/opus-art-2026-09-28.md).
+
+## GPT-6 Astra collection
+
+[Open GPT-6 Astra](https://alibowbow.github.io/jev/astra.html): 140 distinct published projects including 59 animation/art cases and 132 original inline videos. Sources, Korean descriptions and media metadata are documented in [the source ledger](docs/astra-2026-09-28.md). Data lives in `assets/astra-data.js`; Astra bookmarks use a separate local storage key.
+
+The shared AI Showcase header offers three model tabs. Catalogue headings contain only the model, page type and counts.

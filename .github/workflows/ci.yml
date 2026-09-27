@@ -22,6 +22,8 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check assets/data.js
+          node --check assets/opus-data.js
+          node --check assets/astra-data.js
           node --check assets/guide.js
           node --check assets/comparison.js
           node --check assets/app.js

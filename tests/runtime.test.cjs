@@ -12,8 +12,9 @@ function setup(t, options = {}) {
   const errors = [];
   const vc = new VirtualConsole();
   vc.on('jsdomError', error => errors.push(error.message));
-  const dom = new JSDOM(source(options.opus ? 'opus.html' : 'index.html'), {
-    url: `https://example.com/jev/${options.opus ? 'opus.html' : ''}${options.hash || ''}`, runScripts: 'outside-only', virtualConsole: vc
+  const page = options.astra ? 'astra.html' : options.opus ? 'opus.html' : 'index.html';
+  const dom = new JSDOM(source(page), {
+    url: `https://example.com/jev/${page === 'index.html' ? '' : page}${options.hash || ''}`, runScripts: 'outside-only', virtualConsole: vc
   });
   const w = dom.window;
   const d = w.document;
@@ -28,10 +29,11 @@ function setup(t, options = {}) {
   w.HTMLMediaElement.prototype.pause = function () {};
   w.HTMLMediaElement.prototype.load = function () {};
   if (options.saved) w.localStorage.setItem('jev-atlas:saved:v1', options.saved);
+  if (options.astraSaved) w.localStorage.setItem('astra-atlas:saved:v1', options.astraSaved);
   if (options.opusSaved) w.localStorage.setItem('opus-atlas:saved:v1', options.opusSaved);
   if (options.blockStorage) Object.defineProperty(w, 'localStorage', { get() { throw new Error('Storage blocked'); } });
-  w.eval(source(options.opus ? 'assets/opus-data.js' : 'assets/data.js'));
-  if (options.mutate) options.mutate(w.OPUS_ATLAS || w.JEV_ATLAS);
+  w.eval(source(options.astra ? 'assets/astra-data.js' : options.opus ? 'assets/opus-data.js' : 'assets/data.js'));
+  if (options.mutate) options.mutate(w.ASTRA_ATLAS || w.OPUS_ATLAS || w.JEV_ATLAS);
   w.eval(source('assets/app.js'));
   t.after(() => { dom.window.close(); assert.deepEqual(errors, [], 'no unhandled DOM runtime errors'); });
   return {
@@ -45,6 +47,68 @@ function setup(t, options = {}) {
     }
   };
 }
+
+test('Astra categories, search, formats and bookmarks work independently of other models', t => {
+  const { d, w, count, click, input } = setup(t, { astra: true, saved: '["flight-search"]', opusSaved: '["bricks"]' });
+  assert.equal(count(), 140);
+  assert.equal(d.querySelectorAll('[data-play]').length, 132);
+  assert.equal(d.querySelectorAll('video, iframe').length, 0);
+  click('[data-category="motion"]'); assert.equal(count(), 59);
+  input('Houdini'); assert.equal(count(), 1);
+  click('[data-save="gist-a290"]');
+  assert.equal(w.localStorage.getItem('astra-atlas:saved:v1'), '["gist-a290"]');
+  assert.equal(w.localStorage.getItem('opus-atlas:saved:v1'), '["bricks"]');
+  assert.equal(w.localStorage.getItem('jev-atlas:saved:v1'), '["flight-search"]');
+  click('#reset');
+  const format = d.getElementById('format'); format.value = 'video'; format.dispatchEvent(new w.Event('change'));
+  assert.equal(count(), 132);
+  click('#saved-toggle'); assert.equal(count(), 1);
+  w.dispatchEvent(new w.StorageEvent('storage', { key: 'opus-atlas:saved:v1', newValue: '[]' }));
+  assert.equal(count(), 1);
+  w.dispatchEvent(new w.StorageEvent('storage', { key: 'astra-atlas:saved:v1', newValue: '[]' }));
+  assert.equal(count(), 0);
+});
+
+test('Astra originals play audibly inside cards and failures never invent silent preview paths', t => {
+  const { d, w, click, input } = setup(t, { astra: true });
+  const c = w.ASTRA_ATLAS.cases[0];
+  click(`[data-play="${c.id}"]`);
+  const video = d.querySelector('video');
+  assert.equal(video.src, c.media.url);
+  assert.equal(video.closest('.card').dataset.id, c.id);
+  assert.equal(video.muted, false); assert.equal(video.volume, 1);
+  click('#toggle-sound'); assert.equal(video.muted, true);
+  click('#toggle-sound'); assert.equal(video.muted, false);
+  video.dispatchEvent(new w.Event('error'));
+  assert.equal(d.querySelector('video'), null);
+  assert.ok(!d.getElementById('player-status').textContent.includes('무음 미리보기'));
+  click('#retry-player'); assert.equal(d.querySelector('video').src, c.media.url);
+  input('Houdini'); assert.equal(d.querySelector('video'), null);
+  assert.equal(d.querySelectorAll('iframe, dialog[open]').length, 0);
+  const invalid = setup(t, { astra: true, mutate: data => { data.cases[0].media.url = 'https://ohmyopus.com/media/fake/highlight.mp4'; } });
+  invalid.click(`[data-play="${c.id}"]`);
+  assert.equal(invalid.d.querySelector('video'), null);
+});
+
+test('new Opus art retains correct SVG/GIF behavior and does not offer unavailable highlights', t => {
+  const { d, w, click } = setup(t, { opus: true });
+  const svg = d.getElementById('case-svg-panda-scooter');
+  assert.equal(svg.querySelector('[data-play]'), null);
+  assert.equal(svg.querySelector('.media-preview').dataset.animated, 'true');
+  assert.match(svg.querySelector('.video-label').textContent, /SVG.*무음/);
+  click('[data-play="art-2102761406315839798"]');
+  assert.equal(d.querySelector('video').src, 'https://video.twimg.com/tweet_video/HS6BlwZasAA0q6p.mp4');
+  assert.equal(d.querySelector('video').loop, true);
+  assert.equal(d.getElementById('toggle-sound').hidden, true);
+  click('[data-play="art-2103099194693271874"]');
+  d.querySelector('video').dispatchEvent(new w.Event('error'));
+  assert.ok(!d.getElementById('player-status').textContent.includes('무음 미리보기'));
+  click('#retry-player');
+  assert.ok(d.querySelector('video').src.includes('video.twimg.com'));
+  const invalid = setup(t, { opus: true, mutate: data => { data.cases.find(c => c.media.gifId).media.url = 'https://video.twimg.com/tweet_video/wrong.mp4'; } });
+  invalid.click('[data-play="art-2102761406315839798"]');
+  assert.equal(invalid.d.querySelector('video'), null);
+});
 
 test('new shell boots all catalogue cards without loading players; filters, search, sorting and reset work', t => {
   const { d, w, count, input, click } = setup(t);
@@ -299,17 +363,17 @@ test('directory media must match the current post and publisher media must match
 
 test('Opus mixes real video previews and source cards without loading any player initially', t => {
   const { d, w, count } = setup(t, { opus: true });
-  assert.equal(count(), 100);
+  assert.equal(count(), 150);
   assert.equal(d.querySelectorAll('video, iframe').length, 0);
-  assert.equal(d.querySelectorAll('[data-play]').length, 84);
-  assert.equal(d.getElementById('video-count').textContent, '84');
+  assert.equal(d.querySelectorAll('[data-play]').length, 123);
+  assert.equal(d.getElementById('video-count').textContent, '123');
   for (const c of w.OPUS_ATLAS.cases) {
     const card = d.getElementById(`case-${c.id}`);
     assert.ok([...card.querySelectorAll('a')].some(a => a.href === new URL(c.source).href), c.id);
     assert.equal(card.querySelector('.research-link').href, c.research);
     if (c.media.type === 'mp4') {
       const label = card.querySelector('.video-label').textContent;
-      assert.match(label, c.media.clipSeconds ? /무음 미리보기 [\d.]+초/ : c.media.hasAudio ? /소리 포함 · 전체 영상/ : c.media.hasAudio === false ? /무음 원본 영상/ : /공개 시연 영상/);
+      assert.match(label, c.media.gifId ? /GIF 애니메이션 · 무음/ : c.media.clipSeconds ? /무음 미리보기 [\d.]+초/ : c.media.hasAudio ? /소리 포함 · 전체 영상/ : c.media.hasAudio === false ? /무음 원본 영상/ : /공개 시연 영상/);
     }
     else {
       assert.equal(card.querySelector('[data-play]'), null);
@@ -322,15 +386,15 @@ test('Opus format, category and text filters compose and reset; newest sort uses
   const { d, w, count, click, input } = setup(t, { opus: true });
   const format = d.getElementById('format');
   const selectFormat = value => { format.value = value; format.dispatchEvent(new w.Event('change')); };
-  selectFormat('demo'); assert.equal(count(), 6);
+  selectFormat('demo'); assert.equal(count(), 17);
   click('[data-category="game"]'); assert.equal(count(), 5);
   input('Turbo'); assert.equal(count(), 1);
-  click('#reset'); assert.equal(count(), 100); assert.equal(format.value, 'all');
-  selectFormat('code'); assert.equal(count(), 7);
+  click('#reset'); assert.equal(count(), 150); assert.equal(format.value, 'all');
+  selectFormat('code'); assert.equal(count(), 18);
   selectFormat('audio'); assert.equal(count(), w.OPUS_ATLAS.cases.filter(c => c.media.type === 'mp4' && c.media.hasAudio === true).length);
   assert.equal(d.querySelector('#case-willowmere'), null);
   assert.equal(d.querySelector('#case-lens-lab'), null);
-  selectFormat('video'); assert.equal(count(), 84);
+  selectFormat('video'); assert.equal(count(), 123);
   click('[data-play="lens-lab"]');
   selectFormat('demo'); assert.equal(d.querySelector('video'), null);
   click('#reset');
