@@ -20,6 +20,7 @@ test('100 distinct Opus projects retain original and collection sources, dates a
     assert.ok(c.author && c.note);
     assert.match(c.published, /^2026-09-2[2-7]$/);
     assert.equal(c.reviewed, '2026-09-27');
+    if (c.code) assert.ok(['github.com', 'gist.github.com'].includes(new URL(c.code).hostname), `${c.id}: code must point to a repository, not a hosted demo`);
     for (const key of ['source', 'research', 'demo', 'code', 'fullVideo']) if (c[key]) {
       const u = new URL(c[key]);
       assert.equal(u.protocol, 'https:');
