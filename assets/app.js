@@ -303,7 +303,7 @@
     const posterId = c.media.poster?.match(/\/(?:amplify_video_thumb|ext_tw_video_thumb)\/(\d+)\//)?.[1];
     return videoId && videoId === posterId ? value : null;
   }
-  function startPlayer(c) {
+  function startPlayer(c, fallback = false) {
     stopPlayer();
     const epoch = playerEpoch;
     const host = $('player-host');
@@ -330,7 +330,7 @@
     };
     updateSound();
     audioNote.hidden = c.media.hasAudio !== false;
-    audioNote.textContent = c.media.clipSeconds ? '이 미리보기 파일에는 소리가 없습니다. 전체 원본에서 확인해 주세요.' : '공개된 원본 영상에 오디오 트랙이 없습니다.';
+    audioNote.textContent = fallback ? '원본을 불러오지 못해 무음 미리보기를 재생합니다. 소리는 아래 ‘영상 파일 열기’에서 확인해 주세요.' : c.media.clipSeconds ? '이 미리보기 파일에는 소리가 없습니다. 전체 원본에서 확인해 주세요.' : '공개된 원본 영상에 오디오 트랙이 없습니다.';
     const toggleSound = () => {
       if (!isCurrent(epoch)) return;
       const audible = !video.muted && video.volume > 0;
@@ -349,7 +349,12 @@
       $('player-status').textContent = '';
       $('player-status').hidden = true;
     };
-    const error = () => failedPlayer(epoch);
+    const error = () => {
+      if (!isCurrent(epoch)) return;
+      if (window.OPUS_ATLAS && !fallback && c.media.videoId) {
+        startPlayer({ ...c, media: { ...c.media, url: `https://ohmyopus.com/media/${c.id}/highlight.mp4`, hasAudio: false } }, true);
+      } else failedPlayer(epoch);
+    };
     video.addEventListener('canplay', ready);
     video.addEventListener('playing', ready);
     video.addEventListener('error', error);
@@ -360,7 +365,7 @@
       video.removeEventListener('playing', ready);
       video.removeEventListener('error', error);
     };
-    playerTimer = setTimeout(() => failedPlayer(epoch), 45000);
+    playerTimer = setTimeout(error, 45000);
     video.src = url;
     host.replaceChildren(video);
     // Start from the user's card click; native controls remain available if autoplay is denied.

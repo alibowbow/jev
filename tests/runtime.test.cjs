@@ -432,3 +432,20 @@ test('Opus original media must match the verified video ID and safe CDN URL', t 
     assert.equal(d.querySelector('video'), null);
   }
 });
+
+test('an unavailable Opus original falls back to an explicitly silent preview inside the same card', t => {
+  const { d, w, click } = setup(t, { opus: true });
+  click('[data-play="paper-planes"]');
+  const original = d.querySelector('video');
+  original.dispatchEvent(new w.Event('error'));
+  const preview = d.querySelector('video');
+  assert.notEqual(preview, original);
+  assert.equal(preview.src, 'https://ohmyopus.com/media/paper-planes/highlight.mp4');
+  assert.equal(preview.closest('.card').id, 'case-paper-planes');
+  assert.equal(d.getElementById('toggle-sound').hidden, true);
+  assert.match(d.getElementById('player-audio-note').textContent, /원본을 불러오지 못해 무음 미리보기/);
+  assert.match(d.getElementById('player-file').href, /^https:\/\/video\.twimg\.com\//);
+  preview.dispatchEvent(new w.Event('error'));
+  assert.equal(d.querySelector('video'), null);
+  assert.equal(d.getElementById('retry-player').hidden, false);
+});
