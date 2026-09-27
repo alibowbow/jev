@@ -47,3 +47,7 @@ See [Jevable selection and media checks](docs/jevable-update-2026-09-21.md), [gu
 The card play button starts a native video in the thumbnail area. Full X post widgets are never loaded, including on failure. Source links remain available outside the player. The player reserves the same 16:9 space and contains portrait/square videos without cropping. Only one media element is active; switching, filtering, sorting or collapsing stops and unloads it.
 
 Jevable's public card player supplies a `/media/<post ID>/0` video route alongside its CDN source. Those published video endpoints are used for the 66 matching records. The other 18 publisher URLs are extracted from their original Made with Jev build pages and matched against each existing thumbnail's video ID. No iframe clipping, referrer spoofing or new media proxy is used.
+
+## Opus 5.5 collection
+
+[Open the separate Opus 5.5 page](https://alibowbow.github.io/jev/opus.html): 100 published projects across seven categories, with 84 inline video previews, demo/code filters and separate bookmarks. See [selection and source ledger](docs/opus-2026-09-27.md). Data lives in `assets/opus-data.js`; both collections share `assets/app.js`.

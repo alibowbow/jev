@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const data = window.JEV_ATLAS;
+  const data = window.OPUS_ATLAS || window.JEV_ATLAS;
   if (!data) {
     $('cards').textContent = '목록을 불러오지 못했습니다. 페이지를 새로고침해 주세요.';
     return;
@@ -41,7 +41,7 @@
   }
   function externalLink(label, value) {
     const link = element('a', '', label);
-    const url = safeUrl(value, ['x.com', 'github.com', 'madewithjev.com']);
+    const url = safeUrl(value, linkHosts);
     if (url) link.href = url;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
@@ -55,10 +55,12 @@
     return node;
   }
 
+  const linkHosts = data.linkHosts || ['x.com', 'github.com', 'madewithjev.com'];
+  const posterHosts = data.posterHosts || ['pbs.twimg.com', 'raw.githubusercontent.com'];
   const categoryMap = new Map(data.categories.map(c => [c.id, c]));
   const caseMap = new Map(data.cases.map(c => [c.id, c]));
   const validIds = new Set(caseMap.keys());
-  const storageKey = 'jev-atlas:saved:v1';
+  const storageKey = data.storageKey || 'jev-atlas:saved:v1';
   function readSaved(raw) {
     try {
       const values = JSON.parse(raw || '[]');
@@ -67,7 +69,7 @@
   }
   let saved = new Set();
   try { saved = readSaved(localStorage.getItem(storageKey)); } catch { /* Storage is optional. */ }
-  const state = { category: 'all', query: '', sort: 'curated', savedOnly: false };
+  const state = { category: 'all', query: '', sort: 'curated', savedOnly: false, format: 'all' };
   const normalize = value => String(value).normalize('NFKC').toLocaleLowerCase('ko');
   const searchIndex = new Map(data.cases.map(c => [c.id, normalize([
     c.title, c.summary, c.author, c.handle, categoryMap.get(c.category).name,
@@ -110,10 +112,14 @@
       element('span', 'card-number', String(data.cases.indexOf(c) + 1).padStart(2, '0')), save);
     head.append(top, element('h2', '', c.title), element('p', 'summary', c.summary));
     const media = element('div', 'card-media');
-    const preview = button('media-preview', `${c.title} 영상 재생`, 'play', c.id);
-    preview.setAttribute('aria-expanded', 'false');
-    preview.setAttribute('aria-controls', 'inline-player');
-    const poster = safeUrl(c.media.poster, ['pbs.twimg.com', 'raw.githubusercontent.com']);
+    const playable = c.media.type === 'mp4';
+    const preview = playable ? button('media-preview', `${c.title} 영상 재생`, 'play', c.id) : externalLink('', c.demo || c.source);
+    preview.className = 'media-preview';
+    if (playable) {
+      preview.setAttribute('aria-expanded', 'false');
+      preview.setAttribute('aria-controls', 'inline-player');
+    } else preview.setAttribute('aria-label', `${c.title} ${c.demo ? '데모' : '원본'} 열기`);
+    const poster = safeUrl(c.media.poster, posterHosts);
     if (poster) {
       const img = element('img');
       img.alt = '';
@@ -123,11 +129,12 @@
       img.src = poster;
       preview.append(img);
     } else preview.classList.add('image-failed');
-    preview.append(element('span', 'image-fallback', '미리보기 없이 영상 열기'), element('span', 'media-shade'));
+    preview.append(element('span', 'image-fallback', playable ? '미리보기 없이 영상 열기' : c.title), element('span', 'media-shade'));
     const play = element('span', 'play-circle');
-    play.append(icon('play'));
+    play.append(icon(playable ? 'play' : 'share'));
     const mediaBottom = element('span', 'media-bottom');
-    mediaBottom.append(element('span', 'video-label', '공개 시연 영상'),
+    const mediaLabel = playable ? (c.media.clipSeconds ? `미리보기 ${c.media.clipSeconds}초` : '공개 시연 영상') : (c.demo ? '데모 직접 열기 ↗' : '이미지·원본 보기 ↗');
+    mediaBottom.append(element('span', 'video-label', mediaLabel),
       element('span', 'media-credit', c.author));
     preview.append(play, mediaBottom);
     const bottom = element('div', 'card-bottom');
@@ -139,13 +146,21 @@
     }
     const footer = element('div', 'card-footer');
     const actions = element('div', 'card-actions');
+    if (c.demo) actions.append(externalLink('데모 ↗', c.demo));
     if (c.code) actions.append(externalLink('코드 ↗', c.code));
+    if (c.fullVideo) actions.append(externalLink('전체 영상 ↗', c.fullVideo));
     actions.append(externalLink('원본 ↗', c.source));
     const share = button('share-button', `${c.title} 링크 복사`, 'share', c.id);
     share.append(icon('share'));
     actions.append(share);
     footer.append(element('span', 'author-mark', Array.from(c.author)[0]), element('span', 'author', c.author), actions);
-    bottom.append(metrics, element('p', 'metric-disclosure', '제작자 공개 시연 · 독립 재현 아님'), footer);
+    const disclosure = element('p', 'metric-disclosure', '제작자 공개 자료 · 독립 재현 아님');
+    if (window.OPUS_ATLAS) {
+      const research = externalLink('수집 출처 ↗', c.research);
+      research.className = 'research-link';
+      disclosure.append(document.createTextNode(' · '), research);
+    }
+    bottom.append(metrics, disclosure, footer);
     media.append(preview);
     article.append(head, media, bottom);
     return article;
@@ -155,8 +170,12 @@
     closePlayer(false);
     const words = normalize(state.query).trim().split(/\s+/).filter(Boolean);
     const items = data.cases.filter(c => (state.category === 'all' || c.category === state.category) &&
-      (!state.savedOnly || saved.has(c.id)) && words.every(word => searchIndex.get(c.id).includes(word)));
+      (!state.savedOnly || saved.has(c.id)) &&
+      (state.format === 'all' || (state.format === 'video' && c.media.type === 'mp4') ||
+        (state.format === 'demo' && c.demo) || (state.format === 'code' && c.code)) &&
+      words.every(word => searchIndex.get(c.id).includes(word)));
     if (state.sort === 'title') items.sort((a, b) => a.title.localeCompare(b.title, 'ko'));
+    if (state.sort === 'newest') items.sort((a, b) => (b.published || '').localeCompare(a.published || ''));
     $('cards').replaceChildren(...items.map(card));
     $('empty').hidden = items.length > 0;
     $('empty-title').textContent = state.savedOnly && !saved.size ? '아직 저장한 사례가 없습니다.' : '일치하는 사례가 없습니다.';
@@ -164,14 +183,15 @@
     const label = state.category === 'all' ? '전체' : categoryMap.get(state.category).name;
     $('result-status').replaceChildren(document.createTextNode(`${label}${state.savedOnly ? ' · 저장한 사례' : ''} `),
       element('b', '', String(items.length)), document.createTextNode('개 사례'));
-    $('reset').hidden = state.category === 'all' && !state.query && !state.savedOnly && state.sort === 'curated';
+    $('reset').hidden = state.category === 'all' && !state.query && !state.savedOnly && state.sort === 'curated' && state.format === 'all';
     document.querySelectorAll('[data-category]').forEach(node => node.setAttribute('aria-pressed', String(node.dataset.category === state.category)));
     updateSavedUI();
   }
   function reset() {
-    Object.assign(state, { category: 'all', query: '', sort: 'curated', savedOnly: false });
+    Object.assign(state, { category: 'all', query: '', sort: 'curated', savedOnly: false, format: 'all' });
     $('search').value = '';
     $('sort').value = 'curated';
+    if ($('format')) $('format').value = 'all';
     render();
   }
   function toggleSave(id) {
@@ -260,6 +280,12 @@
     $('retry-player').hidden = false;
   }
   function mediaUrl(c) {
+    if (window.OPUS_ATLAS) {
+      const value = safeUrl(c.media.url, ['ohmyopus.com']);
+      if (!value || c.media.type !== 'mp4') return null;
+      const url = new URL(value);
+      return url.pathname === `/media/${c.id}/highlight.mp4` && !url.search && !url.hash ? value : null;
+    }
     const value = safeUrl(c.media.url, ['raw.githubusercontent.com', 'jevable.com', 'video.twimg.com']);
     if (!value || c.media.type !== 'mp4') return null;
     const url = new URL(value);
@@ -284,7 +310,7 @@
     video.controls = true;
     video.playsInline = true;
     video.preload = 'metadata';
-    const poster = safeUrl(c.media.poster, ['pbs.twimg.com', 'raw.githubusercontent.com']);
+    const poster = safeUrl(c.media.poster, posterHosts);
     if (poster) video.poster = poster;
     video.setAttribute('aria-label', `${c.title} 시연 영상`);
     const ready = () => {
@@ -311,7 +337,7 @@
   function openPlayer(id) {
     const c = caseMap.get(id);
     const article = $(`case-${id}`);
-    if (!c || !article) return;
+    if (!c || !article || c.media.type !== 'mp4') return;
     closePlayer(false);
     activeCase = c;
     activePreview = article.querySelector('[data-play]');
@@ -323,7 +349,7 @@
     $('player-title').textContent = c.title;
     $('player-note').textContent = c.note;
     $('player-details').open = false;
-    const source = safeUrl(c.source, ['x.com', 'github.com']);
+    const source = safeUrl(c.fullVideo || c.source, linkHosts);
     if (source) $('player-source').href = source;
     else $('player-source').removeAttribute('href');
     const file = mediaUrl(c);
@@ -363,6 +389,7 @@
   });
   $('search').addEventListener('input', event => { state.query = event.target.value; render(); });
   $('sort').addEventListener('change', event => { state.sort = event.target.value; render(); });
+  $('format')?.addEventListener('change', event => { state.format = event.target.value; render(); });
   $('saved-toggle').addEventListener('click', () => {
     const next = !state.savedOnly;
     reset();
@@ -396,11 +423,12 @@
     const article = $(`case-${id}`);
     article.classList.add('highlight');
     article.scrollIntoView({ block: 'center', behavior: 'instant' });
-    article.querySelector('[data-play]').focus({ preventScroll: true });
+    article.querySelector('.media-preview').focus({ preventScroll: true });
     // A shared link highlights its card; third-party players still require a click.
   }
   window.addEventListener('hashchange', readHash);
   $('total-count').textContent = String(data.cases.length);
+  if ($('video-count')) $('video-count').textContent = String(data.cases.filter(c => c.media.type === 'mp4').length);
   renderCategories();
   render();
   readHash();

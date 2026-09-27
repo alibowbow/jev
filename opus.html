@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f7f8">
+<meta name="description" content="Claude Opus 5.5로 만든 게임, 3D, 웹, 영상, 연구·업무 사례 100개. 한국어 설명과 제작자 원본, 카드 안 영상 미리보기로 탐색하세요.">
+<meta property="og:title" content="Opus 5.5 Atlas — 실제 활용사례 100선">
+<meta property="og:description" content="Opus 5.5의 실제 활용사례 100개를 분야별로 살펴보세요.">
+<meta property="og:type" content="website">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Opus 5.5 Atlas — 실제 활용사례 100선</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css?v=6">
+<link rel="stylesheet" href="assets/guide.css?v=6">
+<link rel="stylesheet" href="assets/opus.css?v=1">
+<script src="assets/opus-data.js?v=1" defer></script>
+<script src="assets/app.js?v=10" defer></script>
+</head>
+<body class="opus-page">
+<a class="skip" href="#cards">사례로 건너뛰기</a>
+<header class="header"><div class="wrap header-inner">
+<a class="brand" href="./" aria-label="Jev Atlas 홈"><span class="brand-symbol" aria-hidden="true">j<span>↗</span></span><strong>jev<span class="brand-divider">/</span>atlas</strong></a>
+<nav class="site-nav" aria-label="주 메뉴"><a href="./">Jev 영상 시연</a><a href="learn.html">Jev 쉽게 이해하기</a><a href="ideas.html">활용 아이디어</a><a href="opus.html" aria-current="page">Opus 5.5</a></nav>
+<div class="header-actions"><button type="button" id="saved-toggle" class="saved-toggle" aria-pressed="false"><span data-icon="bookmark"></span><span>저장한 사례</span><b id="saved-count">0</b></button></div>
+</div></header>
+<main class="wrap">
+<section class="intro opus-intro" aria-labelledby="page-title"><div><p class="eyebrow"><span class="status-dot"></span> CLAUDE OPUS 5.5 · THE COLLECTION</p><h1 id="page-title">상상이 <span>작품이 되는 순간.</span></h1><p class="intro-copy">Opus 5.5로 어디까지 만들 수 있을까?<br>게임부터 연구까지, 실제 공개된 100개의 활용사례를 모았습니다.</p><div class="opus-meta"><span>7개 분야</span><span>영상 미리보기 <b id="video-count">84</b>개</span><span>2026.09.27 수집</span></div></div><div class="collection-stamp"><span>OPUS 5.5 ATLAS</span><strong id="total-count">100</strong><span>공개 활용사례</span></div></section>
+<aside class="model-brief" aria-label="Opus 5.5 한눈에 보기"><p><strong>Claude Opus 5.5</strong> 코드를 쓰고, 도구를 다루고, 긴 작업을 이어가는 Anthropic의 AI 모델.</p><a href="https://www.anthropic.com/claude-opus-5-5" target="_blank" rel="noopener noreferrer">공식 소개 ↗</a></aside>
+<section class="explore" aria-label="활용 사례 탐색">
+<div class="filter-dock"><div class="category-scroller"><nav id="categories" aria-label="분야별 분류"></nav></div><div class="search-wrap"><span data-icon="search"></span><label class="sr-only" for="search">사례 검색</label><input id="search" type="search" placeholder="게임, Blender, 논문…" autocomplete="off" maxlength="120"><kbd>/</kbd></div></div>
+<div class="results-row"><p id="result-status" role="status" aria-live="polite"></p><div><button id="reset" class="quiet-button" hidden>전체 보기 <span aria-hidden="true">↺</span></button><label class="sr-only" for="format">자료 형태</label><select id="format"><option value="all">모든 자료</option><option value="video">영상 미리보기</option><option value="demo">실행 데모</option><option value="code">코드 공개</option></select><label class="sr-only" for="sort">정렬</label><select id="sort"><option value="curated">에디터 픽 순</option><option value="title">제목순</option><option value="newest">최신 공개순</option></select></div></div>
+<p class="preview-note">영상은 카드 안에서 짧게 미리 봅니다. 전체 영상과 제작 기록은 각 카드의 원본에서 확인하세요.</p>
+<div class="cards" id="cards"></div>
+<div class="empty" id="empty" hidden><span data-icon="search"></span><h2 id="empty-title">일치하는 사례가 없습니다.</h2><p id="empty-text">검색어를 바꾸거나 다른 분야를 선택해 보세요.</p><button id="empty-reset" class="solid-button">전체 사례 보기 <span aria-hidden="true">↗</span></button></div>
+<noscript><div class="empty"><h2>사례를 표시하려면 JavaScript가 필요합니다.</h2><p><a href="https://www.anthropic.com/claude-opus-5-5">Opus 5.5 공식 소개 보기 ↗</a></p></div></noscript>
+</section>
+<footer class="footer"><div><a class="brand footer-brand" href="./"><strong>jev<span class="brand-divider">/</span>atlas</strong></a><p>아이디어에서 실행까지, 새로운 가능성을 모읍니다.</p></div><div class="footer-links"><button id="about" class="quiet-button">출처·미디어 안내</button><a href="https://github.com/alibowbow/jev" target="_blank" rel="noopener noreferrer">GitHub ↗</a><span>REVIEWED 2026.09.27</span></div></footer>
+</main>
+<div id="player-parking" hidden>
+<section id="inline-player" class="inline-player" aria-labelledby="player-title" hidden>
+<h3 id="player-title" class="sr-only"></h3>
+<div id="player-host" class="player-host"></div>
+<p id="player-status" role="status"></p>
+<div class="player-actions"><button type="button" id="close-player" class="quiet-button" aria-label="영상 접기">영상 접기 <span data-icon="close"></span></button><a id="player-source" target="_blank" rel="noopener noreferrer">전체 원본 보기 <span aria-hidden="true">↗</span></a><a id="player-file" target="_blank" rel="noopener noreferrer" hidden>영상 파일 열기 ↗</a><button type="button" id="retry-player" class="quiet-button" hidden>다시 불러오기</button></div>
+<details id="player-details" class="player-details"><summary>시연 참고사항</summary><p id="player-note" class="player-note"></p></details>
+</section>
+</div>
+<dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-top"><span class="eyebrow">ABOUT THE COLLECTION</span><button id="close-about" class="icon-button" aria-label="안내 닫기"><span data-icon="close"></span></button></div><h2 id="about-title">Opus 5.5가 만든, 100개의 가능성.</h2><p>Jev Atlas의 독립적인 Opus 5.5 컬렉션입니다. 공식 발표, 제작자 게시물·저장소와 공개 사례 모음을 참고해 2026년 9월 27일 기준 100개의 프로젝트를 한국어로 정리했습니다. 여러 결과물을 묶은 제작 프로젝트는 한 사례로 셉니다.</p><p>모델 사용과 결과에 대한 설명은 제작자 공개 자료를 바탕으로 합니다. 모든 작업을 독립 재현하거나 성능을 검증한 것은 아닙니다. 원본과 수집 출처를 카드마다 연결했습니다.</p><p>카드의 영상은 ohmyopus가 공개한 짧은 미리보기이며 길이를 표시합니다. 재생하면 해당 외부 호스트에 접속합니다. 전체 영상·코드·실행 데모는 별도 링크로 연결하며, 제3자 이미지와 영상은 이 저장소에 복제하지 않습니다. 외부 자료가 삭제되거나 접속이 제한되면 원본에서 확인해 주세요.</p><p>저장한 사례는 이 브라우저에 보관되며 Jev의 저장 목록과 따로 관리됩니다.</p><a class="about-source" href="https://www.anthropic.com/claude-opus-5-5" target="_blank" rel="noopener noreferrer">Anthropic 공식 발표 ↗</a><a class="about-source" href="https://ohmyopus.com/en" target="_blank" rel="noopener noreferrer">사례·미리보기 수집: ohmyopus ↗</a><a class="about-source" href="https://github.com/alibowbow/jev/blob/main/docs/opus-2026-09-27.md" target="_blank" rel="noopener noreferrer">선정 기준과 출처 기록 ↗</a></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body></html>

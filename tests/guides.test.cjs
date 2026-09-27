@@ -21,7 +21,7 @@ test('all menu routes, assets and related-demo links resolve under a project sub
   for (const file of ['index.html', 'learn.html', 'ideas.html']) {
     const d = setup(t, file);
     const menu = d.querySelector('nav[aria-label="주 메뉴"]');
-    assert.equal(menu.querySelectorAll('a').length, 3);
+    assert.equal(menu.querySelectorAll('a').length, 4);
     assert.equal(menu.querySelectorAll('[aria-current="page"]').length, 1);
     const current = new URL(menu.querySelector('[aria-current="page"]').href).pathname;
     assert.equal(current, `/jev/${file === 'index.html' ? '' : file}`);
