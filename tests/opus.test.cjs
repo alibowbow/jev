@@ -28,9 +28,19 @@ test('100 distinct Opus projects retain original and collection sources, dates a
       assert.equal(u.username + u.password, '');
     }
     if (c.media.type === 'mp4') {
-      assert.equal(c.media.url, `https://ohmyopus.com/media/${c.id}/highlight.mp4`);
-      assert.ok(c.media.clipSeconds > 0 && c.media.clipSeconds <= c.media.sourceSeconds + 0.1);
-      assert.match(c.note, /미리보기/);
+      assert.ok([true, false, null].includes(c.media.hasAudio));
+      assert.equal(c.media.audioVerifiedAt, c.media.hasAudio === null ? null : '2026-09-27');
+      if (c.media.clipSeconds) {
+        assert.equal(c.media.url, `https://ohmyopus.com/media/${c.id}/highlight.mp4`);
+        assert.ok(c.media.clipSeconds > 0 && c.media.clipSeconds <= c.media.sourceSeconds + 0.1);
+        assert.equal(c.media.hasAudio, false);
+        assert.match(c.note, /무음 미리보기/);
+      } else {
+        assert.equal(new URL(c.media.url).hostname, 'video.twimg.com');
+        assert.ok(c.media.url.includes(`/${c.media.videoId}/`));
+        assert.ok(c.media.duration > 0);
+        assert.match(c.media.evidence, /^https:\/\/cdn\.syndication\.twimg\.com\//);
+      }
     }
   }
 });
