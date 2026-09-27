@@ -307,7 +307,10 @@ test('Opus mixes real video previews and source cards without loading any player
     const card = d.getElementById(`case-${c.id}`);
     assert.ok([...card.querySelectorAll('a')].some(a => a.href === new URL(c.source).href), c.id);
     assert.equal(card.querySelector('.research-link').href, c.research);
-    if (c.media.type === 'mp4') assert.match(card.querySelector('.video-label').textContent, /미리보기 [\d.]+초/);
+    if (c.media.type === 'mp4') {
+      const label = card.querySelector('.video-label').textContent;
+      assert.match(label, c.media.clipSeconds ? /무음 미리보기 [\d.]+초/ : c.media.hasAudio ? /소리 포함 · 전체 영상/ : c.media.hasAudio === false ? /무음 원본 영상/ : /공개 시연 영상/);
+    }
     else {
       assert.equal(card.querySelector('[data-play]'), null);
       assert.equal(card.querySelector('.media-preview').tagName, 'A');
@@ -348,12 +351,12 @@ test('Opus bookmarks are isolated from existing Jev bookmarks and storage events
 });
 
 test('Opus previews play inside cards and reject mismatched paths and lookalike hosts', t => {
-  const { d, click } = setup(t, { opus: true });
+  const { d, w, click } = setup(t, { opus: true });
   click('[data-play="lens-lab"]');
   const video = d.querySelector('video');
   assert.equal(video.closest('.card').id, 'case-lens-lab');
   assert.equal(video.controls, true); assert.equal(video.playsInline, true);
-  assert.equal(video.src, 'https://ohmyopus.com/media/lens-lab/highlight.mp4');
+  assert.equal(video.src, w.OPUS_ATLAS.cases[0].media.url);
   click('[data-play="bricks"]');
   assert.equal(video.hasAttribute('src'), false);
   assert.equal(d.querySelectorAll('video').length, 1);
@@ -376,4 +379,56 @@ test('a shared Opus image case focuses its demo link and retains the separate pa
   Object.defineProperty(w.navigator, 'clipboard', { value: { writeText: async text => { copied = text; } } });
   click('[data-share="lens-lab"]'); await flush();
   assert.equal(copied, 'https://example.com/jev/opus.html#case=lens-lab');
+});
+
+test('sound starts enabled, toggles in the card and follows native volume changes', t => {
+  const { d, w, click } = setup(t, { opus: true });
+  click('[data-play="paper-planes"]');
+  const video = d.querySelector('video');
+  const sound = d.getElementById('toggle-sound');
+  assert.equal(video.muted, false);
+  assert.equal(video.defaultMuted, false);
+  assert.equal(video.volume, 1);
+  assert.equal(sound.hidden, false);
+  assert.equal(sound.textContent, '소리 끄기');
+  click('#toggle-sound');
+  assert.equal(video.muted, true);
+  assert.equal(sound.textContent, '소리 켜기');
+  assert.equal(sound.getAttribute('aria-pressed'), 'false');
+  click('#toggle-sound');
+  assert.equal(video.muted, false);
+  video.volume = 0; video.dispatchEvent(new w.Event('volumechange'));
+  assert.equal(sound.textContent, '소리 켜기');
+  click('#toggle-sound');
+  assert.equal(video.volume, 1);
+  assert.equal(video.muted, false);
+  click('[data-play="lens-lab"]');
+  video.dispatchEvent(new w.Event('volumechange'));
+  assert.equal(sound.hidden, true, 'silent source has no misleading sound toggle');
+  assert.equal(d.getElementById('player-audio-note').hidden, false);
+  assert.match(d.getElementById('player-audio-note').textContent, /원본 영상에 오디오 트랙이 없습니다/);
+});
+
+test('silent previews disclose absent audio and shared player restores controls for an audio source', t => {
+  const { d, click } = setup(t, { opus: true });
+  click('[data-play="willowmere"]');
+  assert.equal(d.getElementById('toggle-sound').hidden, true);
+  assert.match(d.getElementById('player-audio-note').textContent, /미리보기 파일에는 소리가 없습니다/);
+  click('[data-play="paper-planes"]');
+  assert.equal(d.getElementById('toggle-sound').hidden, false);
+  assert.equal(d.getElementById('player-audio-note').hidden, true);
+  click('#close-player');
+  assert.equal(d.querySelector('video'), null);
+  assert.equal(d.getElementById('toggle-sound').hidden, true);
+});
+
+test('Opus original media must match the verified video ID and safe CDN URL', t => {
+  const invalid = ['https://video.twimg.com/amplify_video/123/vid/avc1/1080x1080/file.mp4',
+    'https://video.twimg.com.evil.example/amplify_video/2102437792425070592/vid/avc1/1080x1080/file.mp4',
+    'https://video.twimg.com/amplify_video/2102437792425070592/vid/avc1/1080x1080/file.mp4?url=https://evil.example'];
+  for (const url of invalid) {
+    const { d, click } = setup(t, { opus: true, mutate: data => { data.cases.find(c => c.id === 'paper-planes').media.url = url; } });
+    click('[data-play="paper-planes"]');
+    assert.equal(d.querySelector('video'), null);
+  }
 });

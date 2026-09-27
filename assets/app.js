@@ -133,7 +133,7 @@
     const play = element('span', 'play-circle');
     play.append(icon(playable ? 'play' : 'share'));
     const mediaBottom = element('span', 'media-bottom');
-    const mediaLabel = playable ? (c.media.clipSeconds ? `미리보기 ${c.media.clipSeconds}초` : '공개 시연 영상') : (c.demo ? '데모 직접 열기 ↗' : '이미지·원본 보기 ↗');
+    const mediaLabel = playable ? (c.media.clipSeconds ? `무음 미리보기 ${c.media.clipSeconds}초` : c.media.hasAudio === true ? '소리 포함 · 전체 영상' : c.media.hasAudio === false ? '무음 원본 영상' : '공개 시연 영상') : (c.demo ? '데모 직접 열기 ↗' : '이미지·원본 보기 ↗');
     mediaBottom.append(element('span', 'video-label', mediaLabel),
       element('span', 'media-credit', c.author));
     preview.append(play, mediaBottom);
@@ -250,6 +250,8 @@
     clearTimeout(playerTimer);
     mediaCleanup();
     mediaCleanup = () => {};
+    if ($('toggle-sound')) $('toggle-sound').hidden = true;
+    if ($('player-audio-note')) $('player-audio-note').hidden = true;
     $('player-host').querySelectorAll('video').forEach(video => {
       video.pause();
       video.removeAttribute('src');
@@ -281,9 +283,13 @@
   }
   function mediaUrl(c) {
     if (window.OPUS_ATLAS) {
-      const value = safeUrl(c.media.url, ['ohmyopus.com']);
+      const value = safeUrl(c.media.url, ['ohmyopus.com', 'video.twimg.com']);
       if (!value || c.media.type !== 'mp4') return null;
       const url = new URL(value);
+      if (url.hostname === 'video.twimg.com') {
+        const videoId = url.pathname.match(/^\/(?:amplify_video|ext_tw_video)\/(\d+)\/(?:pu\/)?vid\/avc1\/\d+x\d+\/[\w-]+\.mp4$/)?.[1];
+        return videoId && videoId === c.media.videoId && (!url.search || /^\?tag=\d+$/.test(url.search)) && !url.hash ? value : null;
+      }
       return url.pathname === `/media/${c.id}/highlight.mp4` && !url.search && !url.hash ? value : null;
     }
     const value = safeUrl(c.media.url, ['raw.githubusercontent.com', 'jevable.com', 'video.twimg.com']);
@@ -310,6 +316,30 @@
     video.controls = true;
     video.playsInline = true;
     video.preload = 'metadata';
+    video.muted = false;
+    video.defaultMuted = false;
+    video.volume = 1;
+    const sound = $('toggle-sound');
+    const audioNote = $('player-audio-note');
+    const updateSound = () => {
+      if (!isCurrent(epoch)) return;
+      sound.hidden = c.media.hasAudio === false;
+      const audible = !video.muted && video.volume > 0;
+      sound.textContent = audible ? '소리 끄기' : '소리 켜기';
+      sound.setAttribute('aria-pressed', String(audible));
+    };
+    updateSound();
+    audioNote.hidden = c.media.hasAudio !== false;
+    audioNote.textContent = c.media.clipSeconds ? '이 미리보기 파일에는 소리가 없습니다. 전체 원본에서 확인해 주세요.' : '공개된 원본 영상에 오디오 트랙이 없습니다.';
+    const toggleSound = () => {
+      if (!isCurrent(epoch)) return;
+      const audible = !video.muted && video.volume > 0;
+      video.muted = audible;
+      if (!audible && video.volume === 0) video.volume = 1;
+      updateSound();
+    };
+    sound.addEventListener('click', toggleSound);
+    video.addEventListener('volumechange', updateSound);
     const poster = safeUrl(c.media.poster, posterHosts);
     if (poster) video.poster = poster;
     video.setAttribute('aria-label', `${c.title} 시연 영상`);
@@ -324,6 +354,8 @@
     video.addEventListener('playing', ready);
     video.addEventListener('error', error);
     mediaCleanup = () => {
+      sound.removeEventListener('click', toggleSound);
+      video.removeEventListener('volumechange', updateSound);
       video.removeEventListener('canplay', ready);
       video.removeEventListener('playing', ready);
       video.removeEventListener('error', error);

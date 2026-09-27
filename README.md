@@ -50,4 +50,6 @@ Jevable's public card player supplies a `/media/<post ID>/0` video route alongsi
 
 ## Opus 5.5 collection
 
-[Open the separate Opus 5.5 page](https://alibowbow.github.io/jev/opus.html): 100 published projects across seven categories, with 84 inline video previews, demo/code filters and separate bookmarks. See [selection and source ledger](docs/opus-2026-09-27.md). Data lives in `assets/opus-data.js`; both collections share `assets/app.js`.
+[Open the separate Opus 5.5 page](https://alibowbow.github.io/jev/opus.html): 100 published projects across seven categories, with 84 inline videos, demo/code filters and separate bookmarks. See [selection and source ledger](docs/opus-2026-09-27.md). Data lives in `assets/opus-data.js`; both collections share `assets/app.js`.
+
+The Opus player now prefers 66 publisher-original full videos over silent highlights. Remaining clips are labeled as silent previews; see [audio verification and correction](docs/opus-audio-2026-09-27.md). The inline player has an explicit sound toggle.
