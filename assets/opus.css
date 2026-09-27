@@ -1,0 +1,32 @@
+/* Same catalogue, a warm accent for the Opus collection. */
+.opus-page{--green:#a34e35;--lime:#f6d6bd;--bg:#f8f7f4;--border:#e5e1da;--ink:#282822;background:var(--bg)}
+.opus-intro{padding-top:48px;align-items:flex-end}
+.opus-intro h1{font-size:clamp(30px,3.1vw,48px);letter-spacing:-1.8px}
+.opus-intro .collection-stamp{min-width:135px;padding-left:30px}
+.opus-intro .collection-stamp strong{font-size:64px;color:var(--green);line-height:1.1}
+.opus-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:19px;color:var(--muted);font-size:11px}
+.opus-meta span+span{border-left:1px solid #d8d2c9;padding-left:18px}
+.model-brief{display:flex;gap:20px;align-items:center;justify-content:space-between;padding:18px 22px;border:1px solid var(--border);background:#f0ede6;border-radius:12px;margin-bottom:14px}
+.model-brief p{margin:0;font-size:12px;line-height:1.9;color:#6f695e;word-break:keep-all}
+.model-brief strong{display:inline-block;color:#493d32;margin-right:12px;font-size:13px}
+.model-brief a{color:var(--green);font-size:12px;white-space:nowrap}
+.opus-page .filter-dock{background:rgba(248,247,244,.97);gap:12px;flex-wrap:wrap}
+.opus-page .category-scroller{flex-basis:100%;order:2}
+.opus-page .search-wrap{width:100%;max-width:320px;margin-left:auto}
+.opus-page .category{padding-inline:12px}
+.opus-page .preview-note{margin:-2px 0 22px;font-size:12px;line-height:1.7;color:var(--muted);word-break:keep-all}
+.opus-page .card-head{min-height:220px}
+.opus-page .card h2{font-size:25px}
+.opus-page .metric strong{font-size:17px}
+.opus-page .card-actions{gap:11px;flex-wrap:wrap;justify-content:flex-end}
+.opus-page .author{max-width:36%;white-space:normal;line-height:1.6}
+.opus-page .card-footer{align-items:center;min-height:45px}
+.opus-page .card.is-playing{border-color:#c99c7d;box-shadow:0 0 0 2px #efdfd2}
+.opus-page .media-preview .image-fallback{background:#e9e4da;color:#615749;line-height:1.8;text-align:center;font-size:17px;padding:25px 25px 100px}
+.opus-page a.media-preview .play-circle svg{fill:none;stroke-width:1.8;margin-left:0}
+.opus-page .metric-disclosure{line-height:1.7;color:#72766f}
+.research-link{text-decoration:underline;text-underline-offset:3px}
+.opus-page .about-source{display:block}
+@media(min-width:1300px){.opus-page .filter-dock{flex-wrap:nowrap}.opus-page .category-scroller{flex-basis:auto;order:0}.opus-page .search-wrap{width:200px}.opus-page .category{padding-inline:10px;font-size:12px;gap:5px}}
+@media(max-width:700px){.opus-intro{align-items:flex-start;padding-top:30px}.opus-intro .collection-stamp{min-width:80px;padding-left:16px}.opus-intro .collection-stamp strong{font-size:44px}.opus-intro .collection-stamp span:first-child{font-size:8px}.opus-intro .intro-copy{font-size:13px}.opus-meta{gap:7px 11px}.opus-meta span+span{padding-left:11px}.model-brief{padding:15px;gap:12px;align-items:flex-start}.model-brief strong{display:block}.model-brief a{margin-top:4px}.opus-page .card-head{min-height:0}.opus-page .card h2{font-size:22px}.opus-page .results-row{align-items:flex-start;gap:8px}.opus-page .results-row>div{gap:8px;flex-wrap:wrap;justify-content:flex-end}.opus-page .results-row select{max-width:120px}.opus-page .preview-note{font-size:11px}.opus-page .search-wrap{max-width:none}.opus-page .card-actions{gap:9px}.opus-page .metric strong{font-size:16px}}
+@media(max-width:430px){.opus-intro .collection-stamp{display:none}.opus-page .author{max-width:30%}.opus-meta{font-size:10px}.opus-page .results-row p{white-space:nowrap;padding-top:6px}}

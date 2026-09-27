@@ -12,8 +12,8 @@ function setup(t, options = {}) {
   const errors = [];
   const vc = new VirtualConsole();
   vc.on('jsdomError', error => errors.push(error.message));
-  const dom = new JSDOM(source('index.html'), {
-    url: `https://example.com/jev/${options.hash || ''}`, runScripts: 'outside-only', virtualConsole: vc
+  const dom = new JSDOM(source(options.opus ? 'opus.html' : 'index.html'), {
+    url: `https://example.com/jev/${options.opus ? 'opus.html' : ''}${options.hash || ''}`, runScripts: 'outside-only', virtualConsole: vc
   });
   const w = dom.window;
   const d = w.document;
@@ -28,9 +28,10 @@ function setup(t, options = {}) {
   w.HTMLMediaElement.prototype.pause = function () {};
   w.HTMLMediaElement.prototype.load = function () {};
   if (options.saved) w.localStorage.setItem('jev-atlas:saved:v1', options.saved);
+  if (options.opusSaved) w.localStorage.setItem('opus-atlas:saved:v1', options.opusSaved);
   if (options.blockStorage) Object.defineProperty(w, 'localStorage', { get() { throw new Error('Storage blocked'); } });
-  w.eval(source('assets/data.js'));
-  if (options.mutate) options.mutate(w.JEV_ATLAS);
+  w.eval(source(options.opus ? 'assets/opus-data.js' : 'assets/data.js'));
+  if (options.mutate) options.mutate(w.OPUS_ATLAS || w.JEV_ATLAS);
   w.eval(source('assets/app.js'));
   t.after(() => { dom.window.close(); assert.deepEqual(errors, [], 'no unhandled DOM runtime errors'); });
   return {
@@ -294,4 +295,85 @@ test('directory media must match the current post and publisher media must match
     assert.equal(d.getElementById('player-file').hasAttribute('href'), false);
     assert.equal(d.getElementById('retry-player').hidden, false);
   }
+});
+
+test('Opus mixes real video previews and source cards without loading any player initially', t => {
+  const { d, w, count } = setup(t, { opus: true });
+  assert.equal(count(), 100);
+  assert.equal(d.querySelectorAll('video, iframe').length, 0);
+  assert.equal(d.querySelectorAll('[data-play]').length, 84);
+  assert.equal(d.getElementById('video-count').textContent, '84');
+  for (const c of w.OPUS_ATLAS.cases) {
+    const card = d.getElementById(`case-${c.id}`);
+    assert.ok([...card.querySelectorAll('a')].some(a => a.href === new URL(c.source).href), c.id);
+    assert.equal(card.querySelector('.research-link').href, c.research);
+    if (c.media.type === 'mp4') assert.match(card.querySelector('.video-label').textContent, /미리보기 [\d.]+초/);
+    else {
+      assert.equal(card.querySelector('[data-play]'), null);
+      assert.equal(card.querySelector('.media-preview').tagName, 'A');
+    }
+  }
+});
+
+test('Opus format, category and text filters compose and reset; newest sort uses publication dates', t => {
+  const { d, w, count, click, input } = setup(t, { opus: true });
+  const format = d.getElementById('format');
+  const selectFormat = value => { format.value = value; format.dispatchEvent(new w.Event('change')); };
+  selectFormat('demo'); assert.equal(count(), 6);
+  click('[data-category="game"]'); assert.equal(count(), 5);
+  input('Turbo'); assert.equal(count(), 1);
+  click('#reset'); assert.equal(count(), 100); assert.equal(format.value, 'all');
+  selectFormat('code'); assert.equal(count(), 7);
+  selectFormat('video'); assert.equal(count(), 84);
+  click('[data-play="lens-lab"]');
+  selectFormat('demo'); assert.equal(d.querySelector('video'), null);
+  click('#reset');
+  const sort = d.getElementById('sort'); sort.value = 'newest'; sort.dispatchEvent(new w.Event('change'));
+  const ids = [...d.querySelectorAll('.card')].map(c => c.dataset.id);
+  const dates = ids.map(id => w.OPUS_ATLAS.cases.find(c => c.id === id).published);
+  assert.deepEqual(dates, [...dates].sort().reverse());
+});
+
+test('Opus bookmarks are isolated from existing Jev bookmarks and storage events', t => {
+  const { d, w, click, count } = setup(t, { opus: true, saved: '["flight-search"]', opusSaved: '["lens-lab","invalid"]' });
+  assert.equal(d.getElementById('saved-count').textContent, '1');
+  click('[data-save="bricks"]');
+  assert.equal(w.localStorage.getItem('jev-atlas:saved:v1'), '["flight-search"]');
+  assert.deepEqual(JSON.parse(w.localStorage.getItem('opus-atlas:saved:v1')), ['lens-lab', 'bricks']);
+  click('#saved-toggle'); assert.equal(count(), 2);
+  w.dispatchEvent(new w.StorageEvent('storage', { key: 'jev-atlas:saved:v1', newValue: '[]' }));
+  assert.equal(count(), 2);
+  w.dispatchEvent(new w.StorageEvent('storage', { key: 'opus-atlas:saved:v1', newValue: '["turbo-kart"]' }));
+  assert.equal(count(), 1);
+});
+
+test('Opus previews play inside cards and reject mismatched paths and lookalike hosts', t => {
+  const { d, click } = setup(t, { opus: true });
+  click('[data-play="lens-lab"]');
+  const video = d.querySelector('video');
+  assert.equal(video.closest('.card').id, 'case-lens-lab');
+  assert.equal(video.controls, true); assert.equal(video.playsInline, true);
+  assert.equal(video.src, 'https://ohmyopus.com/media/lens-lab/highlight.mp4');
+  click('[data-play="bricks"]');
+  assert.equal(video.hasAttribute('src'), false);
+  assert.equal(d.querySelectorAll('video').length, 1);
+  assert.equal(d.querySelectorAll('iframe, dialog[open]').length, 0);
+  assert.equal(d.getElementById('player-source').href, 'https://www.youtube.com/watch?v=lCR9epzSNGc');
+  for (const url of ['https://ohmyopus.com.evil.example/media/lens-lab/highlight.mp4', 'https://ohmyopus.com/media/bricks/highlight.mp4', 'https://ohmyopus.com/media/lens-lab/highlight.mp4?url=https://evil.example']) {
+    const s = setup(t, { opus: true, mutate: data => { data.cases[0].media.url = url; } });
+    s.click('[data-play="lens-lab"]');
+    assert.equal(s.d.querySelector('video'), null);
+    assert.equal(s.d.getElementById('retry-player').hidden, false);
+  }
+});
+
+test('a shared Opus image case focuses its demo link and retains the separate page when shared', async t => {
+  const { d, w, click } = setup(t, { opus: true, hash: '#case=turbo-kart' });
+  assert.equal(d.activeElement.className, 'media-preview');
+  assert.equal(d.activeElement.href, 'https://bridge-mind.github.io/turbo-kart-rally/');
+  assert.equal(d.querySelector('video'), null);
+  let copied;
+  Object.defineProperty(w.navigator, 'clipboard', { value: { writeText: async text => { copied = text; } } });
+  click('[data-share="lens-lab"]'); await flush();
+  assert.equal(copied, 'https://example.com/jev/opus.html#case=lens-lab');
 });
