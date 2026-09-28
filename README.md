@@ -64,4 +64,15 @@ The September 28 update adds 50 animation/art projects, bringing that category t
 
 [Open GPT-6 Astra](https://alibowbow.github.io/jev/astra.html): 140 distinct published projects including 59 animation/art cases and 132 original inline videos. Sources, Korean descriptions and media metadata are documented in [the source ledger](docs/astra-2026-09-28.md). Data lives in `assets/astra-data.js`; Astra bookmarks use a separate local storage key.
 
-The shared AI Showcase header offers three model tabs. Catalogue headings contain only the model, page type and counts.
+The shared AI Showcase header offers four model tabs. Catalogue headings contain only the model, page type and counts.
+
+
+### Astra HTML 100 submenu
+
+[GPT-6 Astra HTML 100](https://alibowbow.github.io/jev/astra-html100.html) adds MiaAI-Lab’s separate set of 100 standalone works alongside the existing 140-project catalogue. Each card includes its original number, Korean description, screenshot, execution link, source code and original prompt. Six categories include 34 animation/art works. Data: `assets/astra-html-data.js`; bookmarks: `astra-html100:saved:v1`.
+
+## Fable 5.1 collection
+
+[Fable 5.1 HTML 100](https://alibowbow.github.io/jev/fable.html) is the fourth model tab, with 100 original MiaAI-Lab works including 42 animation/art pieces. It uses the same cards, six categories, Korean/English/number search and direct source links. Data: `assets/fable-data.js`; bookmarks: `fable-html100:saved:v1`.
+
+Both additions link to the creator’s original files rather than copying or embedding executable third-party HTML. Original screenshots load lazily; selecting a thumbnail opens the work in a new tab. Audio-capable originals start sound through their own controls. Existing Jev, Opus and Astra records and media behavior are preserved. See [source and validation notes](docs/html-collections-2026-09-28.md).
