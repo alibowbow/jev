@@ -12,7 +12,7 @@ function setup(t, options = {}) {
   const errors = [];
   const vc = new VirtualConsole();
   vc.on('jsdomError', error => errors.push(error.message));
-  const page = options.astra ? 'astra.html' : options.opus ? 'opus.html' : 'index.html';
+  const page = options.html100 ? 'opus-html100.html' : options.astra ? 'astra.html' : options.opus ? 'opus.html' : 'index.html';
   const dom = new JSDOM(source(page), {
     url: `https://example.com/jev/${page === 'index.html' ? '' : page}${options.hash || ''}`, runScripts: 'outside-only', virtualConsole: vc
   });
@@ -31,9 +31,10 @@ function setup(t, options = {}) {
   if (options.saved) w.localStorage.setItem('jev-atlas:saved:v1', options.saved);
   if (options.astraSaved) w.localStorage.setItem('astra-atlas:saved:v1', options.astraSaved);
   if (options.opusSaved) w.localStorage.setItem('opus-atlas:saved:v1', options.opusSaved);
+  if (options.htmlSaved) w.localStorage.setItem('opus-html100:saved:v1', options.htmlSaved);
   if (options.blockStorage) Object.defineProperty(w, 'localStorage', { get() { throw new Error('Storage blocked'); } });
-  w.eval(source(options.astra ? 'assets/astra-data.js' : options.opus ? 'assets/opus-data.js' : 'assets/data.js'));
-  if (options.mutate) options.mutate(w.ASTRA_ATLAS || w.OPUS_ATLAS || w.JEV_ATLAS);
+  w.eval(source(options.html100 ? 'assets/opus-html-data.js' : options.astra ? 'assets/astra-data.js' : options.opus ? 'assets/opus-data.js' : 'assets/data.js'));
+  if (options.mutate) options.mutate(w.OPUS_HTML_ATLAS || w.ASTRA_ATLAS || w.OPUS_ATLAS || w.JEV_ATLAS);
   w.eval(source('assets/app.js'));
   t.after(() => { dom.window.close(); assert.deepEqual(errors, [], 'no unhandled DOM runtime errors'); });
   return {
@@ -47,6 +48,46 @@ function setup(t, options = {}) {
     }
   };
 }
+
+test('HTML 100 uses shared cards, links, search and isolated bookmarks without loading all demos', t => {
+  const { d, w, count, click, input } = setup(t, { html100: true, opusSaved: '["bricks"]', astraSaved: '["gist-a235"]' });
+  assert.equal(count(), 100);
+  assert.equal(d.querySelectorAll('iframe, video').length, 0);
+  assert.equal(d.querySelectorAll('[data-play]').length, 0);
+  for (const c of w.OPUS_HTML_ATLAS.cases) {
+    const card = d.getElementById(`case-${c.id}`);
+    assert.equal(card.querySelector('.card-number').textContent, c.number);
+    assert.equal(card.querySelector('.media-preview').href, c.demo);
+    assert.equal(card.querySelector('.media-preview').target, '_blank');
+    const links = [...card.querySelectorAll('.card-actions a')];
+    assert.deepEqual(links.map(a => a.href), [c.demo, c.code, c.prompt]);
+    assert.ok(links.every(a => a.rel.includes('noopener')));
+  }
+  click('[data-category="music"]'); assert.equal(count(), 5);
+  input('피아노'); assert.equal(count(), 1);
+  click('[data-save="html-080"]');
+  assert.equal(w.localStorage.getItem('opus-html100:saved:v1'), '["html-080"]');
+  assert.equal(w.localStorage.getItem('opus-atlas:saved:v1'), '["bricks"]');
+  assert.equal(w.localStorage.getItem('astra-atlas:saved:v1'), '["gist-a235"]');
+  click('#reset'); input('100'); assert.equal(count(), 1);
+  input('Aurora Glass'); assert.equal(count(), 1);
+  input('없는작품123'); assert.equal(count(), 0);
+  click('#empty-reset'); assert.equal(count(), 100);
+  click('#saved-toggle'); assert.equal(count(), 1);
+  w.dispatchEvent(new w.StorageEvent('storage', { key: 'opus-atlas:saved:v1', newValue: '[]' }));
+  assert.equal(count(), 1);
+  w.dispatchEvent(new w.StorageEvent('storage', { key: 'opus-html100:saved:v1', newValue: '[]' }));
+  assert.equal(count(), 0);
+});
+
+test('HTML 100 deep links and restored bookmarks target the original numbered work', t => {
+  const { d, count, click } = setup(t, { html100: true, hash: '#case=html-065', htmlSaved: '["html-065","missing"]' });
+  assert.equal(count(), 100);
+  assert.equal(d.querySelector('.card.highlight').id, 'case-html-065');
+  assert.equal(d.querySelector('#saved-count').textContent, '1');
+  click('#saved-toggle'); assert.equal(count(), 1);
+  assert.match(d.querySelector('#cards h2').textContent, /조각 이불/);
+});
 
 test('Astra categories, search, formats and bookmarks work independently of other models', t => {
   const { d, w, count, click, input } = setup(t, { astra: true, saved: '["flight-search"]', opusSaved: '["bricks"]' });

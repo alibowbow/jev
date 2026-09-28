@@ -56,6 +56,10 @@ The Opus player now prefers 66 publisher-original full videos over silent highli
 
 The September 28 update adds 50 animation/art projects, bringing that category to 76. New sources retain their full original media and do not fall back to fabricated highlight URLs. See [new art sources](docs/opus-art-2026-09-28.md).
 
+### HTML 100 submenu
+
+[HTML 100](https://alibowbow.github.io/jev/opus-html100.html) presents MiaAI-Lab's 100 standalone HTML works as individual cards using the existing catalogue renderer. Original numbering, Korean descriptions, six category filters, Korean/English/number search, screenshots, direct execution links, code and exact-prompt links are included. The original files and thumbnails remain on the creator's host. Data is in `assets/opus-html-data.js`; bookmarks use `opus-html100:saved:v1` independently of the main Opus collection. See [source and preservation notes](docs/opus-html100-2026-09-28.md).
+
 ## GPT-6 Astra collection
 
 [Open GPT-6 Astra](https://alibowbow.github.io/jev/astra.html): 140 distinct published projects including 59 animation/art cases and 132 original inline videos. Sources, Korean descriptions and media metadata are documented in [the source ledger](docs/astra-2026-09-28.md). Data lives in `assets/astra-data.js`; Astra bookmarks use a separate local storage key.
