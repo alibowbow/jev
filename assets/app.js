@@ -2,11 +2,12 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const data = window.ASTRA_ATLAS || window.OPUS_ATLAS || window.JEV_ATLAS;
+  const data = window.OPUS_HTML_ATLAS || window.ASTRA_ATLAS || window.OPUS_ATLAS || window.JEV_ATLAS;
   if (!data) {
     $('cards').textContent = '목록을 불러오지 못했습니다. 페이지를 새로고침해 주세요.';
     return;
   }
+  const htmlCollection = data.kind === 'html-collection';
 
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -109,7 +110,7 @@
     const save = button('save-button', `${c.title} 저장`, 'save', c.id);
     save.append(icon('bookmark'));
     top.append(element('span', 'category-label', categoryMap.get(c.category).name),
-      element('span', 'card-number', String(data.cases.indexOf(c) + 1).padStart(2, '0')), save);
+      element('span', 'card-number', c.number || String(data.cases.indexOf(c) + 1).padStart(2, '0')), save);
     head.append(top, element('h2', '', c.title), element('p', 'summary', c.summary));
     const media = element('div', 'card-media');
     const playable = c.media.type === 'mp4';
@@ -119,7 +120,7 @@
     if (playable) {
       preview.setAttribute('aria-expanded', 'false');
       preview.setAttribute('aria-controls', 'inline-player');
-    } else preview.setAttribute('aria-label', `${c.title} ${c.demo ? '데모' : '원본'} 열기`);
+    } else preview.setAttribute('aria-label', `${c.title} ${htmlCollection ? '작품 실행' : c.demo ? '데모 열기' : '원본 열기'}`);
     const poster = safeUrl(c.media.poster, posterHosts);
     if (poster) {
       const img = element('img');
@@ -134,7 +135,7 @@
     const play = element('span', 'play-circle');
     play.append(icon(playable ? 'play' : 'share'));
     const mediaBottom = element('span', 'media-bottom');
-    const mediaLabel = playable ? (c.media.gifId ? 'GIF 애니메이션 · 무음' : c.media.clipSeconds ? `무음 미리보기 ${c.media.clipSeconds}초` : c.media.hasAudio === true ? '소리 포함 · 전체 영상' : c.media.hasAudio === false ? '무음 원본 영상' : '공개 시연 영상') : (c.media.type === 'svg' ? 'SVG 애니메이션 · 무음' : c.demo ? '데모 직접 열기 ↗' : '이미지·원본 보기 ↗');
+    const mediaLabel = playable ? (c.media.gifId ? 'GIF 애니메이션 · 무음' : c.media.clipSeconds ? `무음 미리보기 ${c.media.clipSeconds}초` : c.media.hasAudio === true ? '소리 포함 · 전체 영상' : c.media.hasAudio === false ? '무음 원본 영상' : '공개 시연 영상') : (htmlCollection ? '작품 실행 ↗' : c.media.type === 'svg' ? 'SVG 애니메이션 · 무음' : c.demo ? '데모 직접 열기 ↗' : '이미지·원본 보기 ↗');
     mediaBottom.append(element('span', 'video-label', mediaLabel),
       element('span', 'media-credit', c.author));
     preview.append(play, mediaBottom);
@@ -147,15 +148,16 @@
     }
     const footer = element('div', 'card-footer');
     const actions = element('div', 'card-actions');
-    if (c.demo) actions.append(externalLink('데모 ↗', c.demo));
+    if (c.demo) actions.append(externalLink(htmlCollection ? '실행 ↗' : '데모 ↗', c.demo));
     if (c.code) actions.append(externalLink('코드 ↗', c.code));
+    if (c.prompt) actions.append(externalLink('프롬프트 ↗', c.prompt));
     if (c.fullVideo) actions.append(externalLink('전체 영상 ↗', c.fullVideo));
-    actions.append(externalLink('원본 ↗', c.source));
+    if (!htmlCollection) actions.append(externalLink('원본 ↗', c.source));
     const share = button('share-button', `${c.title} 링크 복사`, 'share', c.id);
     share.append(icon('share'));
     actions.append(share);
     footer.append(element('span', 'author-mark', Array.from(c.author)[0]), element('span', 'author', c.author), actions);
-    const disclosure = element('p', 'metric-disclosure', '제작자 공개 자료 · 독립 재현 아님');
+    const disclosure = element('p', 'metric-disclosure', htmlCollection ? c.originalTitle : '제작자 공개 자료 · 독립 재현 아님');
     if ((window.OPUS_ATLAS || window.ASTRA_ATLAS) && c.research) {
       const research = externalLink('수집 출처 ↗', c.research);
       research.className = 'research-link';
