@@ -25,6 +25,8 @@ jobs:
           node --check assets/opus-data.js
           node --check assets/opus-html-data.js
           node --check assets/astra-data.js
+          node --check assets/astra-html-data.js
+          node --check assets/fable-data.js
           node --check assets/guide.js
           node --check assets/comparison.js
           node --check assets/app.js

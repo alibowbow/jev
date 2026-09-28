@@ -12,7 +12,7 @@ function setup(t, options = {}) {
   const errors = [];
   const vc = new VirtualConsole();
   vc.on('jsdomError', error => errors.push(error.message));
-  const page = options.html100 ? 'opus-html100.html' : options.astra ? 'astra.html' : options.opus ? 'opus.html' : 'index.html';
+  const page = options.fable ? 'fable.html' : options.astraHtml ? 'astra-html100.html' : options.html100 ? 'opus-html100.html' : options.astra ? 'astra.html' : options.opus ? 'opus.html' : 'index.html';
   const dom = new JSDOM(source(page), {
     url: `https://example.com/jev/${page === 'index.html' ? '' : page}${options.hash || ''}`, runScripts: 'outside-only', virtualConsole: vc
   });
@@ -31,10 +31,12 @@ function setup(t, options = {}) {
   if (options.saved) w.localStorage.setItem('jev-atlas:saved:v1', options.saved);
   if (options.astraSaved) w.localStorage.setItem('astra-atlas:saved:v1', options.astraSaved);
   if (options.opusSaved) w.localStorage.setItem('opus-atlas:saved:v1', options.opusSaved);
+  if (options.fableSaved) w.localStorage.setItem('fable-html100:saved:v1', options.fableSaved);
+  if (options.astraHtmlSaved) w.localStorage.setItem('astra-html100:saved:v1', options.astraHtmlSaved);
   if (options.htmlSaved) w.localStorage.setItem('opus-html100:saved:v1', options.htmlSaved);
   if (options.blockStorage) Object.defineProperty(w, 'localStorage', { get() { throw new Error('Storage blocked'); } });
-  w.eval(source(options.html100 ? 'assets/opus-html-data.js' : options.astra ? 'assets/astra-data.js' : options.opus ? 'assets/opus-data.js' : 'assets/data.js'));
-  if (options.mutate) options.mutate(w.OPUS_HTML_ATLAS || w.ASTRA_ATLAS || w.OPUS_ATLAS || w.JEV_ATLAS);
+  w.eval(source(options.fable ? 'assets/fable-data.js' : options.astraHtml ? 'assets/astra-html-data.js' : options.html100 ? 'assets/opus-html-data.js' : options.astra ? 'assets/astra-data.js' : options.opus ? 'assets/opus-data.js' : 'assets/data.js'));
+  if (options.mutate) options.mutate(w.FABLE_ATLAS || w.ASTRA_HTML_ATLAS || w.OPUS_HTML_ATLAS || w.ASTRA_ATLAS || w.OPUS_ATLAS || w.JEV_ATLAS);
   w.eval(source('assets/app.js'));
   t.after(() => { dom.window.close(); assert.deepEqual(errors, [], 'no unhandled DOM runtime errors'); });
   return {
@@ -596,3 +598,42 @@ test('blocked audible playback exposes a user gesture retry and ignores stale re
   await flush();
   assert.equal(other.d.querySelector('#player-status button'), null);
 });
+
+for (const collection of [
+  { option: 'fable', global: 'FABLE_ATLAS', key: 'fable-html100:saved:v1', id: 'fable-089', term: '미니 신시사이저', music: 5 },
+  { option: 'astraHtml', global: 'ASTRA_HTML_ATLAS', key: 'astra-html100:saved:v1', id: 'astra-html-089', term: 'vinyl-evening', music: 4 }
+]) {
+  test(`${collection.global}: 100 linked cards, filtered search and isolated bookmarks`, t => {
+    const { d, w, count, click, input } = setup(t, { [collection.option]: true, htmlSaved: '["html-080"]', astraSaved: '["gist-a235"]' });
+    assert.equal(count(), 100);
+    assert.equal(d.querySelectorAll('iframe, video, [data-play]').length, 0);
+    for (const c of w[collection.global].cases) {
+      const card = d.getElementById(`case-${c.id}`);
+      assert.equal(card.querySelector('.card-number').textContent, c.number);
+      assert.equal(card.querySelector('.media-preview').href, c.demo);
+      assert.equal(card.querySelector('.media-preview').target, '_blank');
+      assert.deepEqual([...card.querySelectorAll('.card-actions a')].map(a => a.href), [c.demo, c.code, c.prompt]);
+    }
+    click('[data-category="music"]'); assert.equal(count(), collection.music);
+    input(collection.term); assert.equal(count(), 1);
+    click(`[data-save="${collection.id}"]`);
+    assert.equal(w.localStorage.getItem(collection.key), JSON.stringify([collection.id]));
+    assert.equal(w.localStorage.getItem('opus-html100:saved:v1'), '["html-080"]');
+    assert.equal(w.localStorage.getItem('astra-atlas:saved:v1'), '["gist-a235"]');
+    click('#reset'); input('100'); assert.equal(count(), 1);
+    input('없는작품123'); assert.equal(count(), 0);
+    click('#empty-reset'); assert.equal(count(), 100);
+    click('#saved-toggle'); assert.equal(count(), 1);
+    w.dispatchEvent(new w.StorageEvent('storage', { key: 'opus-html100:saved:v1', newValue: '[]' }));
+    assert.equal(count(), 1);
+    w.dispatchEvent(new w.StorageEvent('storage', { key: collection.key, newValue: '[]' }));
+    assert.equal(count(), 0);
+  });
+  test(`${collection.global}: shared links highlight the matching collection card`, t => {
+    const { d, w } = setup(t, { [collection.option]: true, hash: `#case=${collection.id}` });
+    assert.equal(d.querySelector('.card.highlight').id, `case-${collection.id}`);
+    assert.equal(d.querySelector('video, iframe'), null);
+    const music = w[collection.global].cases.find(c => c.id === collection.id);
+    assert.equal(music.category, 'music');
+  });
+}

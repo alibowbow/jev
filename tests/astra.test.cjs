@@ -48,10 +48,11 @@ test('Astra has 140 sourced projects, 59 art cases and 132 original videos witho
 });
 
 test('all pages share the new identity and model navigation, without catalogue slogans', () => {
-  for (const file of ['index.html', 'opus.html', 'astra.html', 'learn.html', 'ideas.html']) {
+  for (const file of ['index.html', 'opus.html', 'opus-html100.html', 'astra.html', 'astra-html100.html', 'fable.html', 'learn.html', 'ideas.html']) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
     assert.match(html, /<title>[^<]*AI Showcase<\/title>/);
     assert.match(html, /href="astra.html"[^>]*>GPT‑6 Astra<\/a>/);
+    assert.match(html, /href="fable.html"[^>]*>Fable 5.1<\/a>/);
     assert.ok(!html.includes('상상이 <span>작품이 되는 순간.'));
     assert.ok(!html.includes('어디까지 만들 수 있을까?'));
     assert.ok(!html.includes('brand-divider'));

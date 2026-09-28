@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const data = window.OPUS_HTML_ATLAS || window.ASTRA_ATLAS || window.OPUS_ATLAS || window.JEV_ATLAS;
+  const data = window.FABLE_ATLAS || window.ASTRA_HTML_ATLAS || window.OPUS_HTML_ATLAS || window.ASTRA_ATLAS || window.OPUS_ATLAS || window.JEV_ATLAS;
   if (!data) {
     $('cards').textContent = '목록을 불러오지 못했습니다. 페이지를 새로고침해 주세요.';
     return;
