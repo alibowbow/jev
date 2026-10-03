@@ -18,14 +18,14 @@ test('all menu routes, assets and related-demo links resolve under a project sub
   t.after(() => data.window.close());
   data.window.eval(read('assets/data.js'));
   const ids = new Set(data.window.JEV_ATLAS.cases.map(c => c.id));
-  for (const file of ['index.html', 'learn.html', 'ideas.html', 'opus.html', 'opus-html100.html', 'astra.html', 'astra-html100.html', 'fable.html']) {
+  for (const file of ['index.html', 'learn.html', 'ideas.html', 'opus.html', 'opus-html100.html', 'astra.html', 'astra-html100.html', 'fable.html', 'sonnet.html', 'sonnet-html100.html']) {
     const d = setup(t, file);
     const menu = d.querySelector('nav[aria-label="모델 선택"]');
-    assert.deepEqual([...menu.querySelectorAll('a')].map(a => a.textContent), ['Jev', 'Opus5.5', 'GPT‑6 Astra', 'Fable 5.1']);
+    assert.deepEqual([...menu.querySelectorAll('a')].map(a => a.textContent), ['Jev', 'Opus5.5', 'GPT‑6 Astra', 'Fable 5.1', 'Sonnet 5.5']);
     assert.equal(menu.querySelectorAll('[aria-current="true"]').length, 1);
-    assert.equal(menu.querySelector('[aria-current="true"]').textContent, file.startsWith('opus') ? 'Opus5.5' : file.startsWith('astra') ? 'GPT‑6 Astra' : file === 'fable.html' ? 'Fable 5.1' : 'Jev');
+    assert.equal(menu.querySelector('[aria-current="true"]').textContent, file.startsWith('sonnet') ? 'Sonnet 5.5' : file.startsWith('opus') ? 'Opus5.5' : file.startsWith('astra') ? 'GPT‑6 Astra' : file === 'fable.html' ? 'Fable 5.1' : 'Jev');
     const submenu = d.querySelector('.site-subnav');
-    assert.equal(submenu.querySelectorAll('a').length, file.startsWith('opus') || file.startsWith('astra') ? 2 : file === 'fable.html' ? 1 : 3);
+    assert.equal(submenu.querySelectorAll('a').length, file.startsWith('opus') || file.startsWith('astra') || file.startsWith('sonnet') ? 2 : file === 'fable.html' ? 1 : 3);
     assert.equal(submenu.querySelectorAll('[aria-current="page"]').length, 1);
     const current = new URL(submenu.querySelector('[aria-current="page"]').href).pathname;
     assert.equal(current, `/jev/${file === 'index.html' ? '' : file}`);

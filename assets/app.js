@@ -2,12 +2,14 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const data = window.FABLE_ATLAS || window.ASTRA_HTML_ATLAS || window.OPUS_HTML_ATLAS || window.ASTRA_ATLAS || window.OPUS_ATLAS || window.JEV_ATLAS;
+  const data = window.SONNET_HTML_ATLAS || window.SONNET_ATLAS || window.FABLE_ATLAS || window.ASTRA_HTML_ATLAS || window.OPUS_HTML_ATLAS || window.ASTRA_ATLAS || window.OPUS_ATLAS || window.JEV_ATLAS;
   if (!data) {
     $('cards').textContent = '목록을 불러오지 못했습니다. 페이지를 새로고침해 주세요.';
     return;
   }
   const htmlCollection = data.kind === 'html-collection';
+  const sonnetCollection = Boolean(window.SONNET_ATLAS || window.SONNET_HTML_ATLAS);
+  const originNames = { community: '커뮤니티 제작·테스트', 'official-demo': '공식 데모', 'partner-report': '파트너 자체평가', 'creator-collection': '제작자 HTML 작품' };
 
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -58,6 +60,11 @@
 
   const linkHosts = data.linkHosts || ['x.com', 'github.com', 'madewithjev.com'];
   const posterHosts = data.posterHosts || ['pbs.twimg.com', 'raw.githubusercontent.com'];
+  function safePoster(value) {
+    // Locally authored report covers are not third-party execution HTML.
+    if (sonnetCollection && /^assets\/sonnet-thumbs\/[a-z0-9-]+\.svg$/.test(value)) return value;
+    return safeUrl(value, posterHosts);
+  }
   const categoryMap = new Map(data.categories.map(c => [c.id, c]));
   const caseMap = new Map(data.cases.map(c => [c.id, c]));
   const validIds = new Set(caseMap.keys());
@@ -70,7 +77,7 @@
   }
   let saved = new Set();
   try { saved = readSaved(localStorage.getItem(storageKey)); } catch { /* Storage is optional. */ }
-  const state = { category: 'all', query: '', sort: 'curated', savedOnly: false, format: 'all' };
+  const state = { category: 'all', query: '', sort: 'curated', savedOnly: false, format: 'all', origin: 'all' };
   const normalize = value => String(value).normalize('NFKC').toLocaleLowerCase('ko');
   const searchIndex = new Map(data.cases.map(c => [c.id, normalize([
     c.title, c.summary, c.author, c.handle, categoryMap.get(c.category).name,
@@ -121,10 +128,10 @@
       preview.setAttribute('aria-expanded', 'false');
       preview.setAttribute('aria-controls', 'inline-player');
     } else preview.setAttribute('aria-label', `${c.title} ${htmlCollection ? '작품 실행' : c.demo ? '데모 열기' : '원본 열기'}`);
-    const poster = safeUrl(c.media.poster, posterHosts);
+    const poster = safePoster(c.media.poster);
     if (poster) {
       const img = element('img');
-      img.alt = '';
+      img.alt = sonnetCollection ? c.media.alt || '' : '';
       img.loading = 'lazy';
       img.decoding = 'async';
       img.addEventListener('error', () => preview.classList.add('image-failed'), { once: true });
@@ -135,7 +142,7 @@
     const play = element('span', 'play-circle');
     play.append(icon(playable ? 'play' : 'share'));
     const mediaBottom = element('span', 'media-bottom');
-    const mediaLabel = playable ? (c.media.gifId ? 'GIF 애니메이션 · 무음' : c.media.clipSeconds ? `무음 미리보기 ${c.media.clipSeconds}초` : c.media.hasAudio === true ? '소리 포함 · 전체 영상' : c.media.hasAudio === false ? '무음 원본 영상' : '공개 시연 영상') : (htmlCollection ? '작품 실행 ↗' : c.media.type === 'svg' ? 'SVG 애니메이션 · 무음' : c.demo ? '데모 직접 열기 ↗' : '이미지·원본 보기 ↗');
+    const mediaLabel = playable ? (c.media.gifId ? 'GIF 애니메이션 · 무음' : c.media.clipSeconds ? `무음 미리보기 ${c.media.clipSeconds}초` : c.media.hasAudio === true ? '소리 포함 · 전체 영상' : c.media.hasAudio === false ? '무음 원본 영상' : '공개 시연 영상') : (htmlCollection ? '작품 실행 ↗' : c.media.type === 'report' ? '초기 테스트 보고 · 공개 데모 없음' : c.media.type === 'svg' ? 'SVG 애니메이션 · 무음' : c.demo ? '데모 직접 열기 ↗' : '이미지·원본 보기 ↗');
     mediaBottom.append(element('span', 'video-label', mediaLabel),
       element('span', 'media-credit', c.author));
     preview.append(play, mediaBottom);
@@ -153,11 +160,16 @@
     if (c.prompt) actions.append(externalLink('프롬프트 ↗', c.prompt));
     if (c.fullVideo) actions.append(externalLink('전체 영상 ↗', c.fullVideo));
     if (!htmlCollection) actions.append(externalLink('원본 ↗', c.source));
+    if (c.evidence && $('case-dialog')) {
+      const details = button('case-detail-button', `${c.title} 상세·출처`, 'details', c.id);
+      details.textContent = '상세·출처';
+      actions.append(details);
+    }
     const share = button('share-button', `${c.title} 링크 복사`, 'share', c.id);
     share.append(icon('share'));
     actions.append(share);
     footer.append(element('span', 'author-mark', Array.from(c.author)[0]), element('span', 'author', c.author), actions);
-    const disclosure = element('p', 'metric-disclosure', htmlCollection ? c.originalTitle : '제작자 공개 자료 · 독립 재현 아님');
+    const disclosure = element('p', 'metric-disclosure', htmlCollection ? c.originalTitle : sonnetCollection ? `${originNames[c.evidence.origin]} · 독립 재현 아님` : '제작자 공개 자료 · 독립 재현 아님');
     if ((window.OPUS_ATLAS || window.ASTRA_ATLAS) && c.research) {
       const research = externalLink('수집 출처 ↗', c.research);
       research.className = 'research-link';
@@ -174,6 +186,7 @@
     const words = normalize(state.query).trim().split(/\s+/).filter(Boolean);
     const items = data.cases.filter(c => (state.category === 'all' || c.category === state.category) &&
       (!state.savedOnly || saved.has(c.id)) &&
+      (state.origin === 'all' || c.evidence?.origin === state.origin) &&
       (state.format === 'all' || (state.format === 'video' && c.media.type === 'mp4') ||
         (state.format === 'audio' && c.media.type === 'mp4' && c.media.hasAudio === true) ||
         (state.format === 'demo' && c.demo) || (state.format === 'code' && c.code)) &&
@@ -186,16 +199,17 @@
     $('empty-text').textContent = state.savedOnly && !saved.size ? '카드의 북마크 버튼으로 관심 있는 사례를 모아 보세요.' : '검색어를 바꾸거나 다른 분야를 선택해 보세요.';
     const label = state.category === 'all' ? '전체' : categoryMap.get(state.category).name;
     $('result-status').replaceChildren(document.createTextNode(`${label}${state.savedOnly ? ' · 저장한 사례' : ''} `),
-      element('b', '', String(items.length)), document.createTextNode('개 사례'));
-    $('reset').hidden = state.category === 'all' && !state.query && !state.savedOnly && state.sort === 'curated' && state.format === 'all';
+      element('b', '', String(items.length)), document.createTextNode(window.SONNET_ATLAS ? '개 자료' : '개 사례'));
+    $('reset').hidden = state.category === 'all' && !state.query && !state.savedOnly && state.sort === 'curated' && state.format === 'all' && state.origin === 'all';
     document.querySelectorAll('[data-category]').forEach(node => node.setAttribute('aria-pressed', String(node.dataset.category === state.category)));
     updateSavedUI();
   }
   function reset() {
-    Object.assign(state, { category: 'all', query: '', sort: 'curated', savedOnly: false, format: 'all' });
+    Object.assign(state, { category: 'all', query: '', sort: 'curated', savedOnly: false, format: 'all', origin: 'all' });
     $('search').value = '';
     $('sort').value = 'curated';
     if ($('format')) $('format').value = 'all';
+    if ($('origin')) $('origin').value = 'all';
     render();
   }
   function toggleSave(id) {
@@ -235,6 +249,7 @@
 
   const player = $('inline-player');
   const about = $('about-dialog');
+  const caseDialog = $('case-dialog');
   let activeCase = null;
   let activePreview = null;
   let playerEpoch = 0;
@@ -248,6 +263,31 @@
     document.body.classList.add('modal-open');
     dialog.scrollTop = 0;
     dialog.querySelector('button').focus({ preventScroll: true });
+  }
+  function showCaseDetails(id) {
+    const c = caseMap.get(id);
+    if (!caseDialog || !c?.evidence) return;
+    $('case-title').textContent = c.title;
+    $('case-origin').textContent = originNames[c.evidence.origin];
+    const facts = element('dl', 'case-facts');
+    for (const [key, label] of [['purpose', '작업 목적'], ['input', '입력'], ['workflow', '진행 방식'], ['result', '공개·보고된 결과'], ['tools', '모델·도구 역할'], ['modelEvidence', '모델 사용 근거'], ['status', '검증 상태'], ['limitations', '한계'], ['access', '원문·미디어 확인']]) {
+      if (c.evidence[key]) facts.append(element('dt', '', label), element('dd', '', c.evidence[key]));
+    }
+    facts.append(element('dt', '', '원문 게시일'), element('dd', '', c.published ? `${c.published}${c.published.includes('T') ? ' (UTC)' : ''}` : '미상'),
+      element('dt', '', '확인일'), element('dd', '', `${c.reviewed} (UTC)`));
+    const sources = element('ul', 'case-sources');
+    const links = [...(c.evidence.sources || []), ...[['원문', c.source], ['원본 실행', c.demo], ['코드', c.code], ['원문 프롬프트', c.prompt]].filter(([,url]) => url).map(([label,url]) => ({label,url}))];
+    const seen = new Set();
+    for (const {label,url} of links) {
+      const safe = safeUrl(url, linkHosts);
+      if (!safe || seen.has(safe)) continue;
+      seen.add(safe);
+      const li = element('li');
+      li.append(externalLink(`${label} ↗`, safe));
+      sources.append(li);
+    }
+    $('case-body').replaceChildren(facts, element('h3', '', '출처·원본 링크'), sources);
+    openDialog(caseDialog);
   }
   function stopPlayer() {
     ++playerEpoch;
@@ -286,7 +326,7 @@
     $('retry-player').hidden = false;
   }
   function mediaUrl(c) {
-    if (window.OPUS_ATLAS || window.ASTRA_ATLAS) {
+    if (window.OPUS_ATLAS || window.ASTRA_ATLAS || window.SONNET_ATLAS) {
       const value = safeUrl(c.media.url, window.OPUS_ATLAS ? ['ohmyopus.com', 'video.twimg.com'] : ['video.twimg.com']);
       if (!value || c.media.type !== 'mp4') return null;
       const url = new URL(value);
@@ -369,7 +409,7 @@
     };
     sound.addEventListener('click', toggleSound);
     video.addEventListener('volumechange', updateSound);
-    const poster = safeUrl(c.media.poster, posterHosts);
+    const poster = safePoster(c.media.poster);
     if (poster) video.poster = poster;
     video.setAttribute('aria-label', `${c.title} 시연 영상`);
     const ready = event => {
@@ -436,11 +476,14 @@
     startPlayer(c);
     $('close-player').focus({ preventScroll: true });
   }
-  about.addEventListener('close', () => {
+  function restoreDialogFocus(dialog) {
     document.body.classList.remove('modal-open');
-    const focus = previousFocus.get(about);
+    const focus = previousFocus.get(dialog);
     if (focus?.isConnected) focus.focus({ preventScroll: true });
-  });
+  }
+  about.addEventListener('close', () => restoreDialogFocus(about));
+  caseDialog?.addEventListener('close', () => restoreDialogFocus(caseDialog));
+  $('close-case')?.addEventListener('click', () => caseDialog.close());
   about.addEventListener('click', event => {
     if (event.target !== about) return;
     const r = about.getBoundingClientRect();
@@ -456,6 +499,7 @@
     if (target.dataset.save) toggleSave(target.dataset.save);
     if (target.dataset.play) openPlayer(target.dataset.play);
     if (target.dataset.share) shareCase(target.dataset.share);
+    if (target.dataset.details) showCaseDetails(target.dataset.details);
   });
   $('categories').addEventListener('click', event => {
     const target = event.target.closest('[data-category]');
@@ -466,6 +510,7 @@
   $('search').addEventListener('input', event => { state.query = event.target.value; render(); });
   $('sort').addEventListener('change', event => { state.sort = event.target.value; render(); });
   $('format')?.addEventListener('change', event => { state.format = event.target.value; render(); });
+  $('origin')?.addEventListener('change', event => { state.origin = event.target.value; render(); });
   $('saved-toggle').addEventListener('click', () => {
     const next = !state.savedOnly;
     reset();
@@ -475,11 +520,16 @@
   $('reset').addEventListener('click', () => { reset(); $('search').focus(); });
   $('empty-reset').addEventListener('click', () => { reset(); $('search').focus(); });
   document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && caseDialog?.open) {
+      event.preventDefault();
+      caseDialog.close();
+      return;
+    }
     if (event.key === 'Escape' && activeCase && !about.open) {
       event.preventDefault();
       closePlayer();
     }
-    if (event.key === '/' && !event.ctrlKey && !event.metaKey && !event.altKey && !about.open &&
+    if (event.key === '/' && !event.ctrlKey && !event.metaKey && !event.altKey && !about.open && !caseDialog?.open &&
         !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable) {
       event.preventDefault();
       $('search').focus();
