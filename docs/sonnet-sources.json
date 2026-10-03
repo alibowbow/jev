@@ -1,0 +1,678 @@
+{
+  "reviewed": "2026-10-03",
+  "reviewTimezone": "UTC",
+  "discovery": {
+    "url": "https://cheerselfai.com/en/usecase/claude-sonnet-5-5",
+    "role": "탐색용. 중복·진행 중 테스트·한계 보고를 독립 성공 사례로 복사하지 않음."
+  },
+  "counts": {
+    "community": 12,
+    "officialDemo": 3,
+    "partnerReport": 5
+  },
+  "runtimeReproduced": false,
+  "cases": [
+    {
+      "id": "sonnet-goldilocks",
+      "origin": "community",
+      "source": "https://x.com/WinterArc2125/status/2104659846838513699",
+      "published": "2026-09-28T19:49:44.000Z",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "제작자 원문에서 Sonnet 5.5 사용을 명시합니다. 모델 실행 로그 전체를 확인한 것은 아닙니다.",
+      "sources": [
+        {
+          "label": "제작자 원문",
+          "url": "https://x.com/WinterArc2125/status/2104659846838513699"
+        }
+      ],
+      "media": {
+        "type": "mp4",
+        "url": "https://video.twimg.com/amplify_video/2104658461220904960/vid/avc1/1280x720/BYlL7Z8K4Swxlwpb.mp4",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2104658461220904960/img/rTwG_TOWynxtZ40f.jpg",
+        "videoId": "2104658461220904960",
+        "hasAudio": true,
+        "alt": "Winter의 원문 시연 영상"
+      },
+      "audioProbe": {
+        "id": "2104659846838513699",
+        "url": "https://video.twimg.com/amplify_video/2104658461220904960/vid/avc1/1280x720/BYlL7Z8K4Swxlwpb.mp4",
+        "hasAudio": true,
+        "probeExit": 0,
+        "streams": [
+          {
+            "codec_type": "video"
+          },
+          {
+            "codec_type": "audio"
+          }
+        ]
+      },
+      "limitations": "실행 HTML·코드는 공개되지 않았습니다. 음성·음악까지 Sonnet이 단독 생성했는지는 확인할 수 없습니다.",
+      "access": "X 공개 메타데이터에서 원본 MP4·썸네일을 대조하고 미디어 스트림을 검사했습니다."
+    },
+    {
+      "id": "sonnet-clawdnam",
+      "origin": "community",
+      "source": "https://x.com/LLMJunky/status/2104659862663618566",
+      "published": "2026-09-28T19:49:48.000Z",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "제작자 원문에서 Sonnet 5.5 사용을 명시합니다. 모델 실행 로그 전체를 확인한 것은 아닙니다.",
+      "sources": [
+        {
+          "label": "제작자 원문",
+          "url": "https://x.com/LLMJunky/status/2104659862663618566"
+        },
+        {
+          "label": "공개 프롬프트",
+          "url": "https://x.com/LLMJunky/status/2104659866304516101"
+        },
+        {
+          "label": "모델 역할 분담",
+          "url": "https://x.com/LLMJunky/status/2104660772227875031"
+        },
+        {
+          "label": "공용 제작 엔진 (작품 코드 아님)",
+          "url": "https://github.com/JohnHeibel/ClaudeAnimationBase"
+        }
+      ],
+      "media": {
+        "type": "mp4",
+        "url": "https://video.twimg.com/amplify_video/2104659136344424449/vid/avc1/1280x720/uAyCkTRtaRll4HiS.mp4",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2104659136344424449/img/mjzSFYCZUrRNcWb8.jpg",
+        "videoId": "2104659136344424449",
+        "hasAudio": true,
+        "alt": "am.will의 원문 시연 영상"
+      },
+      "audioProbe": {
+        "id": "2104659862663618566",
+        "url": "https://video.twimg.com/amplify_video/2104659136344424449/vid/avc1/1280x720/uAyCkTRtaRll4HiS.mp4",
+        "hasAudio": true,
+        "probeExit": 0,
+        "streams": [
+          {
+            "codec_type": "video"
+          },
+          {
+            "codec_type": "audio"
+          }
+        ]
+      },
+      "limitations": "공유된 저장소는 공용 애니메이션 엔진입니다. 이 작품의 전체 프로젝트 코드나 작업 로그는 공개되지 않았습니다.",
+      "access": "X 공개 메타데이터에서 원본 MP4·썸네일을 대조하고 미디어 스트림을 검사했습니다."
+    },
+    {
+      "id": "sonnet-lyric-video",
+      "origin": "community",
+      "source": "https://x.com/original_ngv/status/2104660974288699505",
+      "published": "2026-09-28T19:54:13.000Z",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "제작자 원문에서 Sonnet 5.5 사용을 명시합니다. 모델 실행 로그 전체를 확인한 것은 아닙니다.",
+      "sources": [
+        {
+          "label": "제작자 원문",
+          "url": "https://x.com/original_ngv/status/2104660974288699505"
+        }
+      ],
+      "media": {
+        "type": "mp4",
+        "url": "https://video.twimg.com/amplify_video/2104660531974115328/vid/avc1/1280x720/ULm_CEUU9kB2xcLc.mp4",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2104660531974115328/img/hcqJFr-59h02f5-H.jpg",
+        "videoId": "2104660531974115328",
+        "hasAudio": true,
+        "alt": "enji vi의 원문 시연 영상"
+      },
+      "audioProbe": {
+        "id": "2104660974288699505",
+        "url": "https://video.twimg.com/amplify_video/2104660531974115328/vid/avc1/1280x720/ULm_CEUU9kB2xcLc.mp4",
+        "hasAudio": true,
+        "probeExit": 0,
+        "streams": [
+          {
+            "codec_type": "video"
+          },
+          {
+            "codec_type": "audio"
+          }
+        ]
+      },
+      "limitations": "음악은 제작자의 자작곡입니다. 작업 시간·한 번의 요청이라는 설명은 독립 검증하지 않았으며 편집 코드도 미공개입니다.",
+      "access": "X 공개 메타데이터에서 원본 MP4·썸네일을 대조하고 미디어 스트림을 검사했습니다."
+    },
+    {
+      "id": "sonnet-strategy-game",
+      "origin": "community",
+      "source": "https://x.com/ForwardEditor/status/2104665557144322555",
+      "published": "2026-09-28T20:12:26.000Z",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "제작자 원문에서 Sonnet 5.5 사용을 명시합니다. 모델 실행 로그 전체를 확인한 것은 아닙니다.",
+      "sources": [
+        {
+          "label": "제작자 원문",
+          "url": "https://x.com/ForwardEditor/status/2104665557144322555"
+        }
+      ],
+      "media": {
+        "type": "mp4",
+        "url": "https://video.twimg.com/amplify_video/2104663902415949824/vid/avc1/1280x720/EdzdZXJlD07aYRTH.mp4",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2104663902415949824/img/Lt9CdLGuUQUqJB7K.jpg",
+        "videoId": "2104663902415949824",
+        "hasAudio": true,
+        "alt": "FutureBrian의 원문 시연 영상"
+      },
+      "audioProbe": {
+        "id": "2104665557144322555",
+        "url": "https://video.twimg.com/amplify_video/2104663902415949824/vid/avc1/1280x720/EdzdZXJlD07aYRTH.mp4",
+        "hasAudio": true,
+        "probeExit": 0,
+        "streams": [
+          {
+            "codec_type": "video"
+          },
+          {
+            "codec_type": "audio"
+          }
+        ]
+      },
+      "limitations": "제작자 실행 링크는 초기 확인에서 403, 재확인에서 200을 반환했습니다. 멀티플레이·게임 규칙·지속 동작은 재현하지 못했습니다.",
+      "access": "X 공개 메타데이터에서 원본 MP4·썸네일을 대조하고 미디어 스트림을 검사했습니다. 제작자 실행 링크는 확인 환경에서 HTTP 403: 실행 미검증. 원본 실행 링크 HEAD 재확인: HTTP 200. 응답은 실행·정확성 검증이 아닙니다."
+    },
+    {
+      "id": "sonnet-bmw-threejs",
+      "origin": "community",
+      "source": "https://x.com/k2sbhai/status/2104662506891546798",
+      "published": "2026-09-28T20:00:19.000Z",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "제작자 원문에서 Sonnet 5.5 사용을 명시합니다. 모델 실행 로그 전체를 확인한 것은 아닙니다.",
+      "sources": [
+        {
+          "label": "제작자 원문",
+          "url": "https://x.com/k2sbhai/status/2104662506891546798"
+        }
+      ],
+      "media": {
+        "type": "mp4",
+        "url": "https://video.twimg.com/amplify_video/2104661825866596352/vid/avc1/1172x720/aczI3xvfHou9N3QH.mp4",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2104661825866596352/img/834YiBFgB2sVJLUr.jpg",
+        "videoId": "2104661825866596352",
+        "hasAudio": false,
+        "alt": "K2S의 원문 시연 영상"
+      },
+      "audioProbe": {
+        "id": "2104662506891546798",
+        "url": "https://video.twimg.com/amplify_video/2104661825866596352/vid/avc1/1172x720/aczI3xvfHou9N3QH.mp4",
+        "hasAudio": false,
+        "probeExit": 0,
+        "streams": [
+          {
+            "codec_type": "video"
+          }
+        ]
+      },
+      "limitations": "코드·실행 데모가 미공개입니다. 실제 차의 치수·형상 정확성이나 제작 과정의 재현은 확인하지 않았습니다.",
+      "access": "X 공개 메타데이터에서 원본 MP4·썸네일을 대조하고 미디어 스트림을 검사했습니다."
+    },
+    {
+      "id": "sonnet-deskworlds",
+      "origin": "community",
+      "source": "https://x.com/chaseleantj/status/2104669620871536998",
+      "published": "2026-09-28T20:28:35.000Z",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "제작자 원문에서 Sonnet 5.5 사용을 명시합니다. 모델 실행 로그 전체를 확인한 것은 아닙니다.",
+      "sources": [
+        {
+          "label": "제작자 원문",
+          "url": "https://x.com/chaseleantj/status/2104669620871536998"
+        },
+        {
+          "label": "Deskworlds 코드·README",
+          "url": "https://github.com/chaseleantj/deskworlds"
+        }
+      ],
+      "media": {
+        "type": "mp4",
+        "url": "https://video.twimg.com/amplify_video/2104669049468694528/vid/avc1/1108x720/F8B8I59AgwCc9HsB.mp4",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2104669049468694528/img/27jj60Nxc0_zj9ax.jpg",
+        "videoId": "2104669049468694528",
+        "hasAudio": false,
+        "alt": "Chase Lean의 원문 시연 영상"
+      },
+      "audioProbe": {
+        "id": "2104669620871536998",
+        "url": "https://video.twimg.com/amplify_video/2104669049468694528/vid/avc1/1108x720/F8B8I59AgwCc9HsB.mp4",
+        "hasAudio": false,
+        "probeExit": 0,
+        "streams": [
+          {
+            "codec_type": "video"
+          }
+        ]
+      },
+      "limitations": "코드를 설치·실행하지 않았습니다. 배경화면 앱은 macOS 13 이상용이며 배터리 사용량·장기 안정성은 미검증입니다.",
+      "access": "X 공개 메타데이터에서 원본 MP4·썸네일을 대조하고 미디어 스트림을 검사했습니다."
+    },
+    {
+      "id": "sonnet-tornado",
+      "origin": "community",
+      "source": "https://x.com/ivanainai/status/2104677250603868415",
+      "published": "2026-09-28T20:58:54.000Z",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "제작자 원문에서 Sonnet 5.5 사용을 명시합니다. 모델 실행 로그 전체를 확인한 것은 아닙니다.",
+      "sources": [
+        {
+          "label": "제작자 원문",
+          "url": "https://x.com/ivanainai/status/2104677250603868415"
+        },
+        {
+          "label": "스타일화된 물리·원문 프롬프트",
+          "url": "https://x.com/ivanainai/status/2104677452966772958"
+        }
+      ],
+      "media": {
+        "type": "mp4",
+        "url": "https://video.twimg.com/amplify_video/2104673284981698560/vid/avc1/1280x720/Icr5LBtYWoT9iaE3.mp4",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2104673284981698560/img/CJvmnsS4URUmDBsS.jpg",
+        "videoId": "2104673284981698560",
+        "hasAudio": true,
+        "alt": "Ivana의 원문 시연 영상"
+      },
+      "audioProbe": {
+        "id": "2104677250603868415",
+        "url": "https://video.twimg.com/amplify_video/2104673284981698560/vid/avc1/1280x720/Icr5LBtYWoT9iaE3.mp4",
+        "hasAudio": true,
+        "probeExit": 0,
+        "streams": [
+          {
+            "codec_type": "video"
+          },
+          {
+            "codec_type": "audio"
+          }
+        ]
+      },
+      "limitations": "실행 링크는 초기 확인에서 403, 재확인에서 200을 반환했습니다. 실행을 독립 재현하지 않았습니다. 원문 프롬프트는 과학적으로 정확한 날씨 모델이 아닌 스타일화된 물리임을 명시합니다.",
+      "access": "X 공개 메타데이터에서 원본 MP4·썸네일을 대조하고 미디어 스트림을 검사했습니다. 제작자 실행 링크는 확인 환경에서 HTTP 403: 실행 미검증. 원본 실행 링크 HEAD 재확인: HTTP 200. 응답은 실행·정확성 검증이 아닙니다."
+    },
+    {
+      "id": "sonnet-personal-site",
+      "origin": "community",
+      "source": "https://x.com/_tenZdhon_/status/2104680469451157900",
+      "published": "2026-09-28T21:11:41.000Z",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "제작자 원문에서 Sonnet 5.5 사용을 명시합니다. 모델 실행 로그 전체를 확인한 것은 아닙니다.",
+      "sources": [
+        {
+          "label": "제작자 원문",
+          "url": "https://x.com/_tenZdhon_/status/2104680469451157900"
+        }
+      ],
+      "media": {
+        "type": "mp4",
+        "url": "https://video.twimg.com/amplify_video/2104679747779203072/vid/avc1/1112x720/elXGOcx_dOZVoBKH.mp4",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2104679747779203072/img/7csRuXE_SBNPL47K.jpg",
+        "videoId": "2104679747779203072",
+        "hasAudio": true,
+        "alt": "Tenzin Dhonyoe의 원문 시연 영상"
+      },
+      "audioProbe": {
+        "id": "2104680469451157900",
+        "url": "https://video.twimg.com/amplify_video/2104679747779203072/vid/avc1/1112x720/elXGOcx_dOZVoBKH.mp4",
+        "hasAudio": true,
+        "probeExit": 0,
+        "streams": [
+          {
+            "codec_type": "video"
+          },
+          {
+            "codec_type": "audio"
+          }
+        ]
+      },
+      "limitations": "사이트의 모든 상호작용·접근성·성능은 재검증하지 않았습니다. 이후 사이트가 변경될 수 있습니다.",
+      "access": "X 공개 메타데이터에서 원본 MP4·썸네일을 대조하고 미디어 스트림을 검사했습니다. 제작자 사이트 HTML은 HTTP 200. 전체 기능은 미검증. 원본 실행 링크 HEAD 재확인: HTTP 200. 응답은 실행·정확성 검증이 아닙니다."
+    },
+    {
+      "id": "sonnet-pelican-svg",
+      "origin": "community",
+      "source": "https://x.com/GKev1n/status/2104680736372736409",
+      "published": "2026-09-28T21:12:45.000Z",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "제작자 원문에서 Sonnet 5.5 사용을 명시합니다. 모델 실행 로그 전체를 확인한 것은 아닙니다.",
+      "sources": [
+        {
+          "label": "제작자 원문",
+          "url": "https://x.com/GKev1n/status/2104680736372736409"
+        }
+      ],
+      "media": {
+        "type": "mp4",
+        "url": "https://video.twimg.com/amplify_video/2104680681926438912/vid/avc1/1394x720/8KStEmurP6CClFsF.mp4",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2104680681926438912/img/EQ7XWsAL0x_JD4z6.jpg",
+        "videoId": "2104680681926438912",
+        "hasAudio": true,
+        "alt": "gKev1n의 원문 시연 영상"
+      },
+      "audioProbe": {
+        "id": "2104680736372736409",
+        "url": "https://video.twimg.com/amplify_video/2104680681926438912/vid/avc1/1394x720/8KStEmurP6CClFsF.mp4",
+        "hasAudio": true,
+        "probeExit": 0,
+        "streams": [
+          {
+            "codec_type": "video"
+          },
+          {
+            "codec_type": "audio"
+          }
+        ]
+      },
+      "limitations": "SVG 파일 자체는 공개 링크가 없습니다. 제작자는 새의 모습과 깃털 표현이 평면적이라고 지적했습니다. 카드는 SVG가 아닌 원문 시연 MP4를 재생합니다.",
+      "access": "X 공개 메타데이터에서 원본 MP4·썸네일을 대조하고 미디어 스트림을 검사했습니다."
+    },
+    {
+      "id": "sonnet-cpp-skate",
+      "origin": "community",
+      "source": "https://x.com/bijanbowen/status/2104684289241616458",
+      "published": "2026-09-28T21:26:52.000Z",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "제작자 원문에서 Sonnet 5.5 사용을 명시합니다. 모델 실행 로그 전체를 확인한 것은 아닙니다.",
+      "sources": [
+        {
+          "label": "제작자 원문",
+          "url": "https://x.com/bijanbowen/status/2104684289241616458"
+        }
+      ],
+      "media": {
+        "type": "image",
+        "poster": "https://pbs.twimg.com/media/HTVXI21XQAAJaWg.jpg",
+        "alt": "Bijan Bowen의 원문 스크린샷"
+      },
+      "audioProbe": null,
+      "limitations": "영상·코드·실행 파일이 공개 링크로 제공되지 않습니다. 컴파일 성공이나 실제 플레이는 검증하지 못했습니다.",
+      "access": "X 공개 메타데이터에서 이미지 원본을 대조했습니다. 실행 가능한 데모는 미공개입니다."
+    },
+    {
+      "id": "sonnet-defect-test",
+      "origin": "community",
+      "source": "https://x.com/SKatalystAI/status/2104688696658162111",
+      "published": "2026-09-28T21:44:23.000Z",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "제작자 원문에서 Sonnet 5.5 사용을 명시합니다. 모델 실행 로그 전체를 확인한 것은 아닙니다.",
+      "sources": [
+        {
+          "label": "제작자 원문",
+          "url": "https://x.com/SKatalystAI/status/2104688696658162111"
+        }
+      ],
+      "media": {
+        "type": "image",
+        "poster": "https://pbs.twimg.com/media/HTVZrnSXUAEZ0_9.jpg",
+        "alt": "Sinda의 원문 스크린샷"
+      },
+      "audioProbe": null,
+      "limitations": "코드·테스트 결과 파일이 미공개이며 독립 실행하지 않았습니다. 정적 흔적이 달라졌다는 사실만으로 런타임 정확성을 입증할 수 없습니다.",
+      "access": "X 공개 메타데이터에서 이미지 원본을 대조했습니다. 실행 가능한 데모는 미공개입니다."
+    },
+    {
+      "id": "sonnet-puzzle-game",
+      "origin": "community",
+      "source": "https://x.com/The_Alex/status/2104693073418826205",
+      "published": "2026-09-28T22:01:46.000Z",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "제작자 원문에서 Sonnet 5.5 사용을 명시합니다. 모델 실행 로그 전체를 확인한 것은 아닙니다.",
+      "sources": [
+        {
+          "label": "제작자 원문",
+          "url": "https://x.com/The_Alex/status/2104693073418826205"
+        },
+        {
+          "label": "제작자 배포 안내 (다운로드형)",
+          "url": "https://x.com/The_Alex/status/2104705004506595472"
+        }
+      ],
+      "media": {
+        "type": "mp4",
+        "url": "https://video.twimg.com/amplify_video/2104635298999369728/vid/avc1/1280x720/2AY63uCwxTiVNfyc.mp4",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2104635298999369728/img/QmMCXnKk--mSwBMR.jpg",
+        "videoId": "2104635298999369728",
+        "hasAudio": true,
+        "alt": "Alex의 원문 시연 영상"
+      },
+      "audioProbe": {
+        "id": "2104693073418826205",
+        "url": "https://video.twimg.com/amplify_video/2104635298999369728/vid/avc1/1280x720/2AY63uCwxTiVNfyc.mp4",
+        "hasAudio": true,
+        "probeExit": 0,
+        "streams": [
+          {
+            "codec_type": "video"
+          },
+          {
+            "codec_type": "audio"
+          }
+        ]
+      },
+      "limitations": "배포 안내는 다운로드형 파일입니다. 브라우저 실행 데모로 표시하지 않으며 설치·실행하지 않았습니다. 추적하는 적은 구현에서 빠졌다고 제작자가 설명했습니다.",
+      "access": "X 공개 메타데이터에서 원본 MP4·썸네일을 대조하고 미디어 스트림을 검사했습니다."
+    },
+    {
+      "id": "sonnet-official-murmuration",
+      "origin": "official-demo",
+      "source": "https://www.anthropic.com/claude-sonnet-5-5",
+      "published": "2026-09-28",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "Anthropic의 Sonnet 5.5 발표 페이지에 프롬프트·데모가 함께 수록되어 있습니다.",
+      "sources": [
+        {
+          "label": "공식 발표·데모 프롬프트",
+          "url": "https://www.anthropic.com/claude-sonnet-5-5#cost"
+        },
+        {
+          "label": "공식 모델 문서",
+          "url": "https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5"
+        }
+      ],
+      "media": {
+        "type": "demo",
+        "poster": "https://www-cdn.anthropic.com/images/4zrzovbb/website/cf0eae4b26b6fbe29e370d300ecac766cb94bc2d-1600x1000.png?rect=0%2C0%2C1600%2C1000",
+        "alt": "Anthropic 공식 데모 이미지"
+      },
+      "audioProbe": null,
+      "limitations": "공식 제공 시연입니다. 모든 상호작용이나 수치·물리 정확성을 검증한 결과가 아닙니다.",
+      "access": "공식 발표에서 원본 실행 링크와 이미지를 직접 확인했습니다. 원본 실행 링크 HEAD 재확인: HTTP 200. 응답은 실행·정확성 검증이 아닙니다."
+    },
+    {
+      "id": "sonnet-official-dunes",
+      "origin": "official-demo",
+      "source": "https://www.anthropic.com/claude-sonnet-5-5",
+      "published": "2026-09-28",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "Anthropic의 Sonnet 5.5 발표 페이지에 프롬프트·데모가 함께 수록되어 있습니다.",
+      "sources": [
+        {
+          "label": "공식 발표·데모 프롬프트",
+          "url": "https://www.anthropic.com/claude-sonnet-5-5#cost"
+        },
+        {
+          "label": "공식 모델 문서",
+          "url": "https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5"
+        }
+      ],
+      "media": {
+        "type": "demo",
+        "poster": "https://www-cdn.anthropic.com/images/4zrzovbb/website/d71a0217af7efe761f190d4bceea9a38e9a7dbad-1600x1000.png?rect=0%2C0%2C1600%2C1000",
+        "alt": "Anthropic 공식 데모 이미지"
+      },
+      "audioProbe": null,
+      "limitations": "공식 제공 시연입니다. 모든 상호작용이나 수치·물리 정확성을 검증한 결과가 아닙니다.",
+      "access": "공식 발표에서 원본 실행 링크와 이미지를 직접 확인했습니다. 원본 실행 링크 HEAD 재확인: HTTP 200. 응답은 실행·정확성 검증이 아닙니다."
+    },
+    {
+      "id": "sonnet-official-clock",
+      "origin": "official-demo",
+      "source": "https://www.anthropic.com/claude-sonnet-5-5",
+      "published": "2026-09-28",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "Anthropic의 Sonnet 5.5 발표 페이지에 프롬프트·데모가 함께 수록되어 있습니다.",
+      "sources": [
+        {
+          "label": "공식 발표·데모 프롬프트",
+          "url": "https://www.anthropic.com/claude-sonnet-5-5#cost"
+        },
+        {
+          "label": "공식 모델 문서",
+          "url": "https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5"
+        }
+      ],
+      "media": {
+        "type": "demo",
+        "poster": "https://www-cdn.anthropic.com/images/4zrzovbb/website/b521482c2a09be87ac40f01e8949c216c426eeaa-1600x1000.png?rect=0%2C0%2C1600%2C1000",
+        "alt": "Anthropic 공식 데모 이미지"
+      },
+      "audioProbe": null,
+      "limitations": "공식 제공 시연입니다. 모든 상호작용이나 수치·물리 정확성을 검증한 결과가 아닙니다.",
+      "access": "공식 발표에서 원본 실행 링크와 이미지를 직접 확인했습니다. 원본 실행 링크 HEAD 재확인: HTTP 200. 응답은 실행·정확성 검증이 아닙니다."
+    },
+    {
+      "id": "sonnet-partner-epic",
+      "origin": "partner-report",
+      "source": "https://www.anthropic.com/claude-sonnet-5-5#performance",
+      "published": "2026-09-28",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "Anthropic 발표에 Epic Games의 Sonnet 5.5 초기 테스트 설명이 실려 있습니다.",
+      "sources": [
+        {
+          "label": "Epic Games 초기 평가를 인용한 공식 발표",
+          "url": "https://www.anthropic.com/claude-sonnet-5-5#performance"
+        }
+      ],
+      "media": {
+        "type": "report",
+        "poster": "assets/sonnet-thumbs/epic.svg",
+        "alt": "Epic Games 자체평가 안내 표지 (결과 화면 아님)"
+      },
+      "audioProbe": null,
+      "limitations": "Anthropic 공식 발표에 인용된 파트너 자체평가입니다. 개별 프로젝트·코드·평가 데이터는 공개되지 않았고 독립 재현하지 않았습니다. 커뮤니티 완성 작품이나 실행 데모로 세지 않습니다.",
+      "access": "공식 발표의 회사 이름·인용 설명을 대조했습니다. 공개 실행 데모·프로젝트 코드 링크는 없습니다."
+    },
+    {
+      "id": "sonnet-partner-unity",
+      "origin": "partner-report",
+      "source": "https://www.anthropic.com/claude-sonnet-5-5#performance",
+      "published": "2026-09-28",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "Anthropic 발표에 Unity의 Sonnet 5.5 초기 테스트 설명이 실려 있습니다.",
+      "sources": [
+        {
+          "label": "Unity 초기 평가를 인용한 공식 발표",
+          "url": "https://www.anthropic.com/claude-sonnet-5-5#performance"
+        }
+      ],
+      "media": {
+        "type": "report",
+        "poster": "assets/sonnet-thumbs/unity.svg",
+        "alt": "Unity 자체평가 안내 표지 (결과 화면 아님)"
+      },
+      "audioProbe": null,
+      "limitations": "Anthropic 공식 발표에 인용된 파트너 자체평가입니다. 개별 프로젝트·코드·평가 데이터는 공개되지 않았고 독립 재현하지 않았습니다. 커뮤니티 완성 작품이나 실행 데모로 세지 않습니다.",
+      "access": "공식 발표의 회사 이름·인용 설명을 대조했습니다. 공개 실행 데모·프로젝트 코드 링크는 없습니다."
+    },
+    {
+      "id": "sonnet-partner-base44",
+      "origin": "partner-report",
+      "source": "https://www.anthropic.com/claude-sonnet-5-5#performance",
+      "published": "2026-09-28",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "Anthropic 발표에 Base44의 Sonnet 5.5 초기 테스트 설명이 실려 있습니다.",
+      "sources": [
+        {
+          "label": "Base44 초기 평가를 인용한 공식 발표",
+          "url": "https://www.anthropic.com/claude-sonnet-5-5#performance"
+        }
+      ],
+      "media": {
+        "type": "report",
+        "poster": "assets/sonnet-thumbs/base44.svg",
+        "alt": "Base44 자체평가 안내 표지 (결과 화면 아님)"
+      },
+      "audioProbe": null,
+      "limitations": "Anthropic 공식 발표에 인용된 파트너 자체평가입니다. 개별 프로젝트·코드·평가 데이터는 공개되지 않았고 독립 재현하지 않았습니다. 커뮤니티 완성 작품이나 실행 데모로 세지 않습니다.",
+      "access": "공식 발표의 회사 이름·인용 설명을 대조했습니다. 공개 실행 데모·프로젝트 코드 링크는 없습니다."
+    },
+    {
+      "id": "sonnet-partner-slack",
+      "origin": "partner-report",
+      "source": "https://www.anthropic.com/claude-sonnet-5-5#performance",
+      "published": "2026-09-28",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "Anthropic 발표에 Slack의 Sonnet 5.5 초기 테스트 설명이 실려 있습니다.",
+      "sources": [
+        {
+          "label": "Slack 초기 평가를 인용한 공식 발표",
+          "url": "https://www.anthropic.com/claude-sonnet-5-5#performance"
+        }
+      ],
+      "media": {
+        "type": "report",
+        "poster": "assets/sonnet-thumbs/slack.svg",
+        "alt": "Slack 자체평가 안내 표지 (결과 화면 아님)"
+      },
+      "audioProbe": null,
+      "limitations": "Anthropic 공식 발표에 인용된 파트너 자체평가입니다. 개별 프로젝트·코드·평가 데이터는 공개되지 않았고 독립 재현하지 않았습니다. 커뮤니티 완성 작품이나 실행 데모로 세지 않습니다.",
+      "access": "공식 발표의 회사 이름·인용 설명을 대조했습니다. 공개 실행 데모·프로젝트 코드 링크는 없습니다."
+    },
+    {
+      "id": "sonnet-partner-zendesk",
+      "origin": "partner-report",
+      "source": "https://www.anthropic.com/claude-sonnet-5-5#performance",
+      "published": "2026-09-28",
+      "reviewed": "2026-10-03",
+      "modelEvidence": "Anthropic 발표에 Zendesk의 Sonnet 5.5 초기 테스트 설명이 실려 있습니다.",
+      "sources": [
+        {
+          "label": "Zendesk 초기 평가를 인용한 공식 발표",
+          "url": "https://www.anthropic.com/claude-sonnet-5-5#performance"
+        }
+      ],
+      "media": {
+        "type": "report",
+        "poster": "assets/sonnet-thumbs/zendesk.svg",
+        "alt": "Zendesk 자체평가 안내 표지 (결과 화면 아님)"
+      },
+      "audioProbe": null,
+      "limitations": "Anthropic 공식 발표에 인용된 파트너 자체평가입니다. 개별 프로젝트·코드·평가 데이터는 공개되지 않았고 독립 재현하지 않았습니다. 커뮤니티 완성 작품이나 실행 데모로 세지 않습니다.",
+      "access": "공식 발표의 회사 이름·인용 설명을 대조했습니다. 공개 실행 데모·프로젝트 코드 링크는 없습니다."
+    }
+  ],
+  "httpChecks": [
+    {
+      "url": "https://assets.claude.ai/brand/artifacts/models//beluga/murmuration-latest.html",
+      "status": 200,
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://assets.claude.ai/brand/artifacts/models/beluga/clock-latest.html",
+      "status": 200,
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://assets.claude.ai/brand/artifacts/models/beluga/dunes-latest.html",
+      "status": 200,
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://ivanainai.com/tornado",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://saffron-flint-kkcm.here.now/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.10zin.ca/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8"
+    }
+  ]
+}

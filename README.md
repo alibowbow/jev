@@ -1,6 +1,6 @@
 # AI Showcase
 
-A Korean collection of published Jev, Claude Opus 5.5 and GPT-6 Astra demonstrations. Independent of the model providers.
+A Korean collection of published Jev, Claude Opus 5.5, GPT-6 Astra, Fable 5.1 and Sonnet 5.5 demonstrations. Independent of the model providers.
 
 ## Features
 
@@ -21,10 +21,7 @@ The video-first runtime is integrated with the current page and data schema. No 
 ```sh
 npm ci
 npm test
-node --check assets/app.js
-node --check assets/data.js
-node --check assets/guide.js
-node --check assets/comparison.js
+for file in assets/*.js; do node --check "$file" || exit 1; done
 python3 -m http.server 8080
 ```
 
@@ -76,3 +73,11 @@ The shared AI Showcase header offers four model tabs. Catalogue headings contain
 [Fable 5.1 HTML 100](https://alibowbow.github.io/jev/fable.html) is the fourth model tab, with 100 original MiaAI-Lab works including 42 animation/art pieces. It uses the same cards, six categories, Korean/English/number search and direct source links. Data: `assets/fable-data.js`; bookmarks: `fable-html100:saved:v1`.
 
 Both additions link to the creator’s original files rather than copying or embedding executable third-party HTML. Original screenshots load lazily; selecting a thumbnail opens the work in a new tab. Audio-capable originals start sound through their own controls. Existing Jev, Opus and Astra records and media behavior are preserved. See [source and validation notes](docs/html-collections-2026-09-28.md).
+
+## Sonnet 5.5 collection
+
+[Sonnet use cases](https://alibowbow.github.io/jev/sonnet.html) contains 20 primary-source records across five fields: 12 community projects/tests, three official HTML demos and five partner early-test reports. Source-type filters and each card's detail dialog distinguish author reports, official demos and partner self-evaluations. Ten original X videos play in cards; eight have verified audio tracks and two are labeled silent. Published and reviewed dates, model/tool roles, limits and primary links are kept per case. See [selection and sources](docs/sonnet-2026-10-03.md) and [validation scope](docs/sonnet-validation.md).
+
+[Sonnet HTML 100](https://alibowbow.github.io/jev/sonnet-html100.html) links MiaAI-Lab's 100 numbered works with independently written Korean copy. All HTML/TXT/thumbnail pairs and exact prompt matches were checked against creator commit `d50dc15f93a552cd1cfef8bddb63c3f2e94b7f7d`. Code links are pinned; execution and prompt links use the original creator Pages. The license is unconfirmed, so execution files, prompts and screenshots are not rehosted. Individual publication dates are unknown. [The source manifest](docs/sonnet-html100-sources.json) records file hashes, prompt matching and HTTP checks; these do not establish runtime correctness.
+
+Both Sonnet pages share `assets/app.js`; their bookmarks use `sonnet-showcase:saved:v1` and `sonnet-html100:saved:v1`. The previous six collections retain their data unchanged.

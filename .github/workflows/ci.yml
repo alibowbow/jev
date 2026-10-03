@@ -21,12 +21,4 @@ jobs:
           npm test
       - name: Check JavaScript syntax
         run: |
-          node --check assets/data.js
-          node --check assets/opus-data.js
-          node --check assets/opus-html-data.js
-          node --check assets/astra-data.js
-          node --check assets/astra-html-data.js
-          node --check assets/fable-data.js
-          node --check assets/guide.js
-          node --check assets/comparison.js
-          node --check assets/app.js
+          for file in assets/*.js; do node --check "$file" || exit 1; done
