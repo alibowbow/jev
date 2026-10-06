@@ -2,14 +2,15 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const data = window.SONNET_HTML_ATLAS || window.SONNET_ATLAS || window.FABLE_ATLAS || window.ASTRA_HTML_ATLAS || window.OPUS_HTML_ATLAS || window.ASTRA_ATLAS || window.OPUS_ATLAS || window.JEV_ATLAS;
+  const data = window.FABLE55_ATLAS || window.SONNET_HTML_ATLAS || window.SONNET_ATLAS || window.FABLE_ATLAS || window.ASTRA_HTML_ATLAS || window.OPUS_HTML_ATLAS || window.ASTRA_ATLAS || window.OPUS_ATLAS || window.JEV_ATLAS;
   if (!data) {
     $('cards').textContent = '목록을 불러오지 못했습니다. 페이지를 새로고침해 주세요.';
     return;
   }
   const htmlCollection = data.kind === 'html-collection';
   const sonnetCollection = Boolean(window.SONNET_ATLAS || window.SONNET_HTML_ATLAS);
-  const originNames = { community: '커뮤니티 제작·테스트', 'official-demo': '공식 데모', 'partner-report': '파트너 자체평가', 'creator-collection': '제작자 HTML 작품' };
+  const evidenceCollection = sonnetCollection || Boolean(window.FABLE55_ATLAS);
+  const originNames = { 'community-claimed': '제작자 주장 · 모델 미확인', community: '커뮤니티 제작·테스트', 'official-demo': '공식 데모', 'partner-report': '파트너 자체평가', 'creator-collection': '제작자 HTML 작품' };
 
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -131,7 +132,7 @@
     const poster = safePoster(c.media.poster);
     if (poster) {
       const img = element('img');
-      img.alt = sonnetCollection ? c.media.alt || '' : '';
+      img.alt = evidenceCollection ? c.media.alt || '' : '';
       img.loading = 'lazy';
       img.decoding = 'async';
       img.addEventListener('error', () => preview.classList.add('image-failed'), { once: true });
@@ -169,7 +170,7 @@
     share.append(icon('share'));
     actions.append(share);
     footer.append(element('span', 'author-mark', Array.from(c.author)[0]), element('span', 'author', c.author), actions);
-    const disclosure = element('p', 'metric-disclosure', htmlCollection ? c.originalTitle : sonnetCollection ? `${originNames[c.evidence.origin]} · 독립 재현 아님` : '제작자 공개 자료 · 독립 재현 아님');
+    const disclosure = element('p', 'metric-disclosure', htmlCollection ? c.originalTitle : evidenceCollection ? `${originNames[c.evidence.origin]}${c.evidence.origin === 'community-claimed' ? '' : ' · 독립 재현 아님'}` : '제작자 공개 자료 · 독립 재현 아님');
     if ((window.OPUS_ATLAS || window.ASTRA_ATLAS) && c.research) {
       const research = externalLink('수집 출처 ↗', c.research);
       research.className = 'research-link';
@@ -326,7 +327,7 @@
     $('retry-player').hidden = false;
   }
   function mediaUrl(c) {
-    if (window.OPUS_ATLAS || window.ASTRA_ATLAS || window.SONNET_ATLAS) {
+    if (window.OPUS_ATLAS || window.ASTRA_ATLAS || window.SONNET_ATLAS || window.FABLE55_ATLAS) {
       const value = safeUrl(c.media.url, window.OPUS_ATLAS ? ['ohmyopus.com', 'video.twimg.com'] : ['video.twimg.com']);
       if (!value || c.media.type !== 'mp4') return null;
       const url = new URL(value);

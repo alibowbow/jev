@@ -1,6 +1,6 @@
 # AI Showcase
 
-A Korean collection of published Jev, Claude Opus 5.5, GPT-6 Astra, Fable 5.1 and Sonnet 5.5 demonstrations. Independent of the model providers.
+A Korean collection of published Jev, Claude Opus 5.5, GPT-6 Astra, Fable 5.1, Sonnet 5.5 and community-attributed Fable 5.5 demonstrations. Independent of the model providers.
 
 ## Features
 
@@ -61,7 +61,7 @@ The September 28 update adds 50 animation/art projects, bringing that category t
 
 [Open GPT-6 Astra](https://alibowbow.github.io/jev/astra.html): 140 distinct published projects including 59 animation/art cases and 132 original inline videos. Sources, Korean descriptions and media metadata are documented in [the source ledger](docs/astra-2026-09-28.md). Data lives in `assets/astra-data.js`; Astra bookmarks use a separate local storage key.
 
-The shared AI Showcase header offers four model tabs. Catalogue headings contain only the model, page type and counts.
+The shared AI Showcase header offers six model tabs. Catalogue headings contain only the model, page type and counts.
 
 
 ### Astra HTML 100 submenu
@@ -81,3 +81,11 @@ Both additions link to the creator’s original files rather than copying or emb
 [Sonnet HTML 100](https://alibowbow.github.io/jev/sonnet-html100.html) links MiaAI-Lab's 100 numbered works with independently written Korean copy. All HTML/TXT/thumbnail pairs and exact prompt matches were checked against creator commit `d50dc15f93a552cd1cfef8bddb63c3f2e94b7f7d`. Code links are pinned; execution and prompt links use the original creator Pages. The license is unconfirmed, so execution files, prompts and screenshots are not rehosted. Individual publication dates are unknown. [The source manifest](docs/sonnet-html100-sources.json) records file hashes, prompt matching and HTTP checks; these do not establish runtime correctness.
 
 Both Sonnet pages share `assets/app.js`; their bookmarks use `sonnet-showcase:saved:v1` and `sonnet-html100:saved:v1`. The previous six collections retain their data unchanged.
+
+## Fable 5.5 community-attributed collection
+
+[Fable 5.5 use cases](https://alibowbow.github.io/jev/fable55.html) adds 20 distinct creator-published works by 16 creators across five categories, with 20 original inline videos (15 with verified audio, five silent), four creator-linked demo pages and one original code snapshot. Each creator explicitly names Fable 5.5 in their own post. The official Anthropic model catalogue checked on October 6, 2026 lists Fable 5.1, not Fable 5.5; actual model identity, private testing and silent routing are not established. The page and cards therefore label attribution as **creator-claimed / model unconfirmed**.
+
+The collection includes driving and pixel games, interactive architecture, Blender films, motion design and scientific visualizations. It does not present creator claims as independent accuracy or performance evaluations. The three-body record links the original code commit and distinguishes later Opus 5.5 changes. A disabled Pokémon/Minecraft demo (HTTP 402) is excluded from runnable links while its creator video remains available.
+
+Data: `assets/fable55-data.js`; bookmarks: `fable55-showcase:saved:v1`, separate from Fable 5.1. All eight earlier data files remain unchanged. Original media remain on creator hosts; source code, prompts and videos are not rehosted. See [selection and validation](docs/fable55-2026-10-06.md) and [public evidence ledger](docs/fable55-sources.json).

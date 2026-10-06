@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f7f8">
+<meta name="description" content="제작자가 Fable 5.5로 표기한 공개 활용사례. 공식 모델은 미확인이며, 원문·영상·실행 데모와 제작 도구를 함께 살펴보세요.">
+<meta property="og:title" content="Fable 5.5 활용사례 · 제작자 주장 — AI Showcase">
+<meta property="og:description" content="제작자가 Fable 5.5로 표기한 공개 작품 20개. 공식 모델은 미확인이며 원문·영상·제작 도구와 함께 소개합니다.">
+<meta property="og:type" content="website">
+<meta name="referrer" content="no-referrer">
+<title>Fable 5.5 활용사례 — AI Showcase</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css?v=6">
+<link rel="stylesheet" href="assets/guide.css?v=7">
+<link rel="stylesheet" href="assets/opus.css?v=1">
+<script src="assets/fable55-data.js?v=1" defer></script>
+<script src="assets/app.js?v=18" defer></script>
+<link rel="stylesheet" href="assets/sonnet.css?v=1">
+<link rel="stylesheet" href="assets/catalogue.css?v=4">
+</head>
+<body class="opus-page sonnet-page fable-page fable55-page">
+<a class="skip" href="#cards">사례로 건너뛰기</a>
+<header class="header"><div class="wrap header-inner">
+<a class="brand" href="./" aria-label="AI Showcase 홈"><span class="brand-symbol" aria-hidden="true">ai</span><strong>AI Showcase</strong></a>
+<nav class="site-nav" aria-label="모델 선택"><a href="./">Jev</a><a href="opus.html">Opus5.5</a><a href="astra.html">GPT‑6 Astra</a><a href="fable.html">Fable 5.1</a><a href="sonnet.html">Sonnet 5.5</a><a href="fable55.html" aria-current="true">Fable 5.5</a></nav>
+<div class="header-actions"><button type="button" id="saved-toggle" class="saved-toggle" aria-pressed="false"><span data-icon="bookmark"></span><span>저장한 사례</span><b id="saved-count">0</b></button></div>
+</div>
+<div class="subnav-bar"><nav class="wrap site-subnav" aria-label="Fable 5.5 하위 메뉴"><a href="fable55.html" aria-current="page">활용사례</a></nav></div>
+</header>
+<main class="wrap">
+<section class="catalogue-heading" aria-labelledby="page-title"><h1 id="page-title">Fable 5.5 <span>활용사례</span></h1><div class="catalogue-meta"><span><b id="total-count">20</b>개 공개 자료</span><span>영상 <b id="video-count">20</b>개</span></div></section>
+
+<section class="explore" aria-label="활용 사례 탐색">
+<div class="filter-dock"><div class="category-scroller"><nav id="categories" aria-label="분야별 분류"></nav></div><div class="search-wrap"><span data-icon="search"></span><label class="sr-only" for="search">사례 검색</label><input id="search" type="search" placeholder="애니메이션, Three.js, Blender…" autocomplete="off" maxlength="120"><kbd>/</kbd></div></div>
+<div class="results-row"><p id="result-status" role="status" aria-live="polite"></p><div><button id="reset" class="quiet-button" hidden>전체 보기 <span aria-hidden="true">↺</span></button><label class="sr-only" for="format">자료 형태</label><select id="format"><option value="all">모든 자료</option><option value="video">영상</option><option value="audio">소리 있는 영상</option><option value="demo">실행 데모</option><option value="code">코드 공개</option></select><label class="sr-only" for="sort">정렬</label><select id="sort"><option value="curated">에디터 픽 순</option><option value="title">제목순</option><option value="newest">최신 공개순</option></select></div></div>
+<p class="preview-note"><strong>제작자 주장 · 모델 미확인</strong> 원작성자가 Fable 5.5라고 표기한 공개 작품입니다. 2026.10.06 기준 공식 모델 문서에는 Fable 5.1까지만 기재되어 있으며, 실제 사용 모델과 결과를 독립 검증한 컬렉션은 아닙니다. <a href="https://platform.claude.com/docs/en/models/overview" target="_blank" rel="noopener noreferrer">공식 모델 목록 ↗</a></p>
+<div class="cards" id="cards"></div>
+<div class="empty" id="empty" hidden><span data-icon="search"></span><h2 id="empty-title">일치하는 사례가 없습니다.</h2><p id="empty-text">검색어를 바꾸거나 다른 분야를 선택해 보세요.</p><button id="empty-reset" class="solid-button">전체 사례 보기 <span aria-hidden="true">↗</span></button></div>
+<noscript><div class="empty"><h2>사례를 표시하려면 JavaScript가 필요합니다.</h2><p><a href="https://platform.claude.com/docs/en/models/overview">Anthropic 공식 모델 목록 보기 ↗</a></p></div></noscript>
+</section>
+<footer class="footer"><div><a class="brand footer-brand" href="./"><strong>AI Showcase</strong></a></div><div class="footer-links"><button id="about" class="quiet-button">출처·미디어 안내</button><a href="https://github.com/alibowbow/jev" target="_blank" rel="noopener noreferrer">GitHub ↗</a><span>REVIEWED 2026.10.06 UTC</span></div></footer>
+</main>
+<div id="player-parking" hidden>
+<section id="inline-player" class="inline-player" aria-labelledby="player-title" hidden>
+<h3 id="player-title" class="sr-only"></h3>
+<div id="player-host" class="player-host"></div>
+<p id="player-status" role="status"></p>
+<p id="player-audio-note" class="player-note" hidden></p>
+<div class="player-actions"><button type="button" id="toggle-sound" class="quiet-button" aria-pressed="true" hidden>소리 끄기</button><button type="button" id="close-player" class="quiet-button" aria-label="영상 접기">영상 접기 <span data-icon="close"></span></button><a id="player-source" target="_blank" rel="noopener noreferrer">전체 원본 보기 <span aria-hidden="true">↗</span></a><a id="player-file" target="_blank" rel="noopener noreferrer" hidden>영상 파일 열기 ↗</a><button type="button" id="retry-player" class="quiet-button" hidden>다시 불러오기</button></div>
+<details id="player-details" class="player-details"><summary>시연 참고사항</summary><p id="player-note" class="player-note"></p></details>
+</section>
+</div>
+<dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-top"><span class="eyebrow">ABOUT THE COLLECTION</span><button id="close-about" class="icon-button" aria-label="안내 닫기"><span data-icon="close"></span></button></div><h2 id="about-title">Fable 5.5 · 출처·미디어 안내</h2><p>제작자 원문에서 Fable 5.5 사용을 명시한 작품만 모았습니다. 정식 출시, 비공개 테스트 참여, Fable 5.1에서의 자동 전환은 확인되지 않았습니다. 모델 이름은 제작자의 주장을 그대로 구분해 표시하며, 공식 모델 ID나 전체 실행 로그가 확인되었다는 뜻이 아닙니다.</p><p>원문 게시일과 확인일(UTC)을 따로 기록하고, 공개된 제작 도구·실행 링크·작업 한계를 ‘상세·출처’에서 확인할 수 있습니다. 다른 모델이나 음성·음악 도구가 함께 사용된 경우 역할을 기록했습니다. 영상의 존재나 링크 응답은 결과 정확성 검증과 다릅니다.</p><p>영상과 썸네일은 제작자가 공개한 외부 원본에 연결합니다. 재생을 누르면 원본 MP4를 불러옵니다. 실행 데모는 새 탭에서 열며, 파일을 복제하거나 제삼자 코드를 이 사이트에 삽입하지 않습니다. 게시물이 삭제되거나 외부 호스트 접속이 제한될 수 있습니다.</p><p>북마크는 이 브라우저에만 별도로 저장됩니다. 기존 Fable 5.1 HTML 100의 저장 항목과 섞이지 않습니다.</p><a class="about-source" href="https://platform.claude.com/docs/en/models/overview" target="_blank" rel="noopener noreferrer">Anthropic 공식 모델 목록 ↗</a><a class="about-source" href="https://github.com/alibowbow/jev/blob/main/docs/fable55-2026-10-06.md" target="_blank" rel="noopener noreferrer">선정 기준·출처 원장 ↗</a></dialog>
+<dialog id="case-dialog" aria-labelledby="case-title"><div class="dialog-top"><span id="case-origin" class="eyebrow"></span><button id="close-case" class="icon-button" aria-label="상세 닫기"><span data-icon="close"></span></button></div><h2 id="case-title"></h2><div id="case-body"></div></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body></html>

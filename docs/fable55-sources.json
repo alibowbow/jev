@@ -1,0 +1,702 @@
+{
+  "reviewedAt": "2026-10-06",
+  "scope": "20 distinct creator-authored demonstrations explicitly attributed to Fable 5.5; no official model identity or benchmark claims.",
+  "verificationLimits": [
+    "Public X metadata mirrors verify creator attribution, not the model running behind the interface.",
+    "Media streams and sampled frames were checked; complete generation logs and end-to-end functionality were not independently reproduced.",
+    "HTTP 200 confirms page availability only. Creator rights remain with the original creator; videos are linked at their original host."
+  ],
+  "officialStatus": {
+    "modelCatalogue": "https://platform.claude.com/docs/en/models/overview",
+    "newsroom": "https://www.anthropic.com/news",
+    "finding": "The checked official catalogue lists Fable 5.1 with ID claude-fable-5-1; it also lists Opus 5.5 and Sonnet 5.5. No Fable 5.5 entry or announcement was found in these sources.",
+    "checkedAt": "2026-10-06"
+  },
+  "discoverySources": [
+    {
+      "url": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "use": "Discovery of original creator links only. Korean descriptions were authored from the creator posts and sampled video frames."
+    }
+  ],
+  "duplicateCheck": {
+    "existingDataFiles": 8,
+    "originalSourceAndVideoIdDuplicates": 0,
+    "selectedSourceAndVideoIdDuplicates": 0
+  },
+  "cases": [
+    {
+      "caseId": "fable55-waymo-lombard",
+      "creator": "Mindblown 🤯",
+      "handle": "@mindblown_ai",
+      "originalPost": "https://x.com/mindblown_ai/status/2106112279079199037",
+      "publishedAt": "2026-10-02T20:01:11Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "built with fable 5.5 + threejs",
+      "excerptWordCount": 6,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2106111913264611328",
+        "url": "https://video.twimg.com/amplify_video/2106111913264611328/vid/avc1/1280x720/IDn-YsBibs90EPMh.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2106111913264611328/img/-gl_fHBWEzxZh4bI.jpg",
+        "durationSeconds": 72.701678,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [
+        {
+          "url": "https://teleoperator.mindblown.ai",
+          "httpStatus": 200,
+          "status": "reachable; interactive functionality not fully tested",
+          "exposedAsDemo": true,
+          "checkedAt": "2026-10-06",
+          "browserObservation": "Page rendered; displayed WEBGPU DID NOT START / No WebGPU adapter in the review browser. Gameplay was not verified; this does not establish failure on other devices."
+        }
+      ],
+      "limitations": "검토 브라우저에서 페이지는 열렸지만 WebGPU 어댑터를 사용할 수 없어 게임이 시작되지 않았습니다. 다른 기기에서의 동작 여부는 확인하지 못했습니다."
+    },
+    {
+      "caseId": "fable55-hugging-face-film",
+      "creator": "Chetaslua",
+      "handle": "@chetaslua",
+      "originalPost": "https://x.com/chetaslua/status/2105884276864782557",
+      "publishedAt": "2026-10-02T04:55:11Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Hugging Face Incident Imagined by Fable 5.5",
+      "excerptWordCount": 7,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2105883581038153728",
+        "url": "https://video.twimg.com/amplify_video/2105883581038153728/vid/avc1/1280x720/izGCS_nMq_fS2Hio.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2105883581038153728/img/qel3389CG0vTxWFX.jpg",
+        "durationSeconds": 220.992,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "사건을 소재로 한 창작 영상이며 사실관계 검증 자료가 아닙니다. 생성 코드와 전체 작업 기록은 확인하지 못했습니다."
+    },
+    {
+      "caseId": "fable55-human-progress-film",
+      "creator": "imjustnewatai",
+      "handle": "@imjustnewatai",
+      "originalPost": "https://x.com/imjustnewatai/status/2106081142143168580",
+      "publishedAt": "2026-10-02T17:57:28Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "I gave Claude fable 5.5 one prompt",
+      "excerptWordCount": 7,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2106080680471834624",
+        "url": "https://video.twimg.com/amplify_video/2106080680471834624/vid/avc1/1280x720/0NtOwm8I5CqQO3AH.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2106080680471834624/img/XbejF3z_IpBdCzsz.jpg",
+        "durationSeconds": 189.056,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "미래 장면은 창작적 전망입니다. 영상·음악의 전체 제작 과정과 모델 실행 기록은 공개되지 않았습니다."
+    },
+    {
+      "caseId": "fable55-manhattan-timeline",
+      "creator": "Nathan Rozendaal",
+      "handle": "@nroze22",
+      "originalPost": "https://x.com/nroze22/status/2106183281293381661",
+      "publishedAt": "2026-10-03T00:43:19Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "I asked Fable 5.5 for something cool and accurate",
+      "excerptWordCount": 9,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2106183224498294784",
+        "url": "https://video.twimg.com/amplify_video/2106183224498294784/vid/avc1/720x900/f5qXwTH8Tp_wxoTV.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2106183224498294784/img/nvz5iYkwY01y8hqF.jpg",
+        "durationSeconds": 22.100651,
+        "hasAudio": false,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 720,
+        "height": 900
+      },
+      "demoAvailability": [
+        {
+          "url": "https://claude.ai/artifact/Tx5L1sQeXd4e7vp9DifrwK",
+          "httpStatus": 200,
+          "status": "reachable; interactive functionality not fully tested",
+          "exposedAsDemo": true,
+          "checkedAt": "2026-10-06",
+          "browserObservation": "Artifact page rendered; displayed a WebGL requirement because WebGL was unavailable in the review browser. Interactive visualization was not verified."
+        }
+      ],
+      "limitations": "건물 높이·준공 연도·축척의 정확성은 독립 검증하지 않았습니다. 검토 브라우저에 WebGL이 없어 Artifact 실행을 확인하지 못했습니다."
+    },
+    {
+      "caseId": "fable55-three-bodies-bend",
+      "creator": "Adriel",
+      "handle": "@zAdrielsan",
+      "originalPost": "https://x.com/zAdrielsan/status/2105822678519001360",
+      "publishedAt": "2026-10-02T00:50:25Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Asked Fable 5.5 for the three-body problem. One-shot.",
+      "excerptWordCount": 8,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2105821738743267328",
+        "url": "https://video.twimg.com/amplify_video/2105821738743267328/vid/avc1/1226x720/DrXW9SLV6Cw2He81.mp4?tag=14",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2105821738743267328/img/QHPQGu2BCTYGJhoj.jpg",
+        "durationSeconds": 133.666667,
+        "hasAudio": false,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1226,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "후속 저장소에는 Opus 5.5가 추가한 증명과 물리 구현 변경이 포함됩니다. 이 사례는 최초 공개 버전에 한정하며 물리 법칙 전체가 증명됐다는 뜻이 아닙니다.",
+      "codeSnapshot": {
+        "url": "https://github.com/AdrielSantana/three-bodies/tree/ccfc2a5a5e6d4dade7e100912d6c245f1a82a6d9",
+        "commit": "ccfc2a5a5e6d4dade7e100912d6c245f1a82a6d9",
+        "scope": "Original one-shot and four program/UI laws. Subsequent Opus 5.5 changes are excluded from model attribution.",
+        "laterOpusCommit": "https://github.com/AdrielSantana/three-bodies/commit/e66863d672a83575ddf5bc775021282bdac69482"
+      }
+    },
+    {
+      "caseId": "fable55-clawd-pixel-game",
+      "creator": "bluedev",
+      "handle": "@blueemi99",
+      "originalPost": "https://x.com/blueemi99/status/2107108802440900621",
+      "publishedAt": "2026-10-05T14:01:01Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Claude Fable 5.5 made me this pixel game",
+      "excerptWordCount": 8,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2107108711537745920",
+        "url": "https://video.twimg.com/amplify_video/2107108711537745920/vid/avc1/1280x720/rrI5TCv5HWjXmRev.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2107108711537745920/img/0e0hH7adfbKywwB8.jpg",
+        "durationSeconds": 83.690667,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [
+        {
+          "url": "https://claude.ai/artifact/Bor4eKVfaKakr6QSfoT8UZ",
+          "httpStatus": 200,
+          "status": "reachable; interactive functionality not fully tested",
+          "exposedAsDemo": true,
+          "checkedAt": "2026-10-06",
+          "browserObservation": "Artifact rendered and the start control launched the animated intro. Full gameplay and levels were not tested."
+        }
+      ],
+      "limitations": "공개 Artifact 화면과 시작 버튼을 눌렀을 때의 인트로 애니메이션을 확인했습니다. 전체 레벨·조작·밸런스는 검증하지 않았습니다."
+    },
+    {
+      "caseId": "fable55-sun-machine",
+      "creator": "Pankaj Kumar",
+      "handle": "@pankajkumar_dev",
+      "originalPost": "https://x.com/pankajkumar_dev/status/2106762987872850092",
+      "publishedAt": "2026-10-04T15:06:52Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Fable 5.5 output : The Sun Machine",
+      "excerptWordCount": 7,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2106761625105788928",
+        "url": "https://video.twimg.com/amplify_video/2106761625105788928/vid/avc1/1280x720/TpVz9GvSWBMcLegy.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2106761625105788928/img/pWgEaxtNl8OZfVLg.jpg",
+        "durationSeconds": 74.616667,
+        "hasAudio": false,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "플레이 링크나 소스 코드는 원문에 없습니다. 조작 범위는 제작자 설명과 공개 시연에 근거합니다."
+    },
+    {
+      "caseId": "fable55-depths-of-despair",
+      "creator": "Rich · Atom Tan Studio",
+      "handle": "@atomtanstudio",
+      "originalPost": "https://x.com/atomtanstudio/status/2106900686764134654",
+      "publishedAt": "2026-10-05T00:14:02Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Discovering I've been routed to Fable 5.5",
+      "excerptWordCount": 7,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2106899731813416960",
+        "url": "https://video.twimg.com/amplify_video/2106899731813416960/vid/avc1/1280x720/VWksrxiZIx3HocvX.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2106899731813416960/img/q8zxGw96mXoO2lSX.jpg",
+        "durationSeconds": 126.826667,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [
+        {
+          "url": "https://threecade.games",
+          "httpStatus": 200,
+          "status": "reachable; interactive functionality not fully tested",
+          "exposedAsDemo": true,
+          "checkedAt": "2026-10-06"
+        }
+      ],
+      "limitations": "기존 게임의 개선 사례로, 전체 게임을 Fable 5.5로 새로 만들었다는 뜻이 아닙니다. 라우팅 및 재미 개선 주장은 독립 검증되지 않았습니다. 데모 링크는 제작자 홈입니다. The Depths of Despair의 Play를 선택하세요. 검토 브라우저의 WebGL 2 제한으로 실행은 확인하지 못했습니다.",
+      "browserObservation": {
+        "date": "2026-10-06",
+        "result": "Creator home lists the named game; Play navigation reaches a practice launcher, but this cloud browser lacks WebGL 2. The direct /play/the-depths-of-despair route returns HTTP 404 on a fresh server request, so the collection keeps the original homepage URL as the demo entry point.",
+        "runtimeVerified": false
+      }
+    },
+    {
+      "caseId": "fable55-cool-animation",
+      "creator": "Tak 🦞",
+      "handle": "@cherry_mx_reds",
+      "originalPost": "https://x.com/cherry_mx_reds/status/2105816670896009224",
+      "publishedAt": "2026-10-02T00:26:33Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "FABLE 5.5 IS SO GOOD AT THESE.",
+      "excerptWordCount": 7,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2105815801198501888",
+        "url": "https://video.twimg.com/amplify_video/2105815801198501888/vid/avc1/1280x720/mOiFDyQILb2yErig.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2105815801198501888/img/ykn_wTXzU2IN_ooi.jpg",
+        "durationSeconds": 17.109333,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "제작 시간과 단일 요청 여부는 제작자 설명입니다. 코드나 구체적인 제작 도구는 공개되지 않았습니다."
+    },
+    {
+      "caseId": "fable55-superman-art-styles",
+      "creator": "Chetaslua",
+      "handle": "@chetaslua",
+      "originalPost": "https://x.com/chetaslua/status/2105757136219504862",
+      "publishedAt": "2026-10-01T20:29:59Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Welcome To the era of Super intelligence : Fable 5.5",
+      "excerptWordCount": 10,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2105756947442257920",
+        "url": "https://video.twimg.com/amplify_video/2105756947442257920/vid/avc1/1280x720/FMBxehabMgEUYmWy.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2105756947442257920/img/oLyYXG6pv6p-S7eC.jpg",
+        "durationSeconds": 40.042667,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "팬 창작 시연입니다. 상세 프롬프트·코드·수정 과정은 원문에 없습니다."
+    },
+    {
+      "caseId": "fable55-glucose-svg",
+      "creator": "Olddonkey",
+      "handle": "@olddonkeyblog",
+      "originalPost": "https://x.com/olddonkeyblog/status/2106508425211330750",
+      "publishedAt": "2026-10-03T22:15:20Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Third prompt for Fable 5.5 Max",
+      "excerptWordCount": 6,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2106508020528160768",
+        "url": "https://video.twimg.com/amplify_video/2106508020528160768/vid/avc1/1280x720/rg62YDTyXx7hiE59.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2106508020528160768/img/HUwJkVJ3i7BBPrS_.jpg",
+        "durationSeconds": 59.0,
+        "hasAudio": false,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "교육용 시각화 사례이며 생화학적 정확성은 별도 검증하지 않았습니다. HTML 원본은 공개 게시물에서 확인하지 못했습니다."
+    },
+    {
+      "caseId": "fable55-imagined-switch-demo",
+      "creator": "Mathis Blanc",
+      "handle": "@mathisbuilds",
+      "originalPost": "https://x.com/mathisbuilds/status/2106407842240418097",
+      "publishedAt": "2026-10-03T15:35:39Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Was Fable 5.5 max, worked for 4 hours.",
+      "excerptWordCount": 8,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2106406199998476288",
+        "url": "https://video.twimg.com/amplify_video/2106406199998476288/vid/avc1/1280x720/1BPA4KtF5u_E7lOO.mp4?tag=14",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2106406199998476288/img/3VSwzhtX8g5dlfrj.jpg",
+        "durationSeconds": 86.308571,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "실제 Nintendo 제품 발표나 유출 정보가 아닌 상상 콘셉트입니다. 제작 시간과 모델 설정은 제작자 주장입니다."
+    },
+    {
+      "caseId": "fable55-oil-painting-timelapse",
+      "creator": "bluedev",
+      "handle": "@blueemi99",
+      "originalPost": "https://x.com/blueemi99/status/2106755903223664708",
+      "publishedAt": "2026-10-04T14:38:43Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Fable 5.5 made this oil painting and the timelapse",
+      "excerptWordCount": 9,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2106694897860317184",
+        "url": "https://video.twimg.com/amplify_video/2106694897860317184/vid/avc1/1008x720/a-A_vzYUQF20jdIQ.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2106694897860317184/img/8HBr0jvQAIToY8B4.jpg",
+        "durationSeconds": 79.0,
+        "hasAudio": false,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1008,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "실물 유화 제작으로 확인된 사례는 아닙니다. 사용 도구와 중간 산출물은 공개되지 않았습니다."
+    },
+    {
+      "caseId": "fable55-vizzbees-brand-motion",
+      "creator": "Blushney",
+      "handle": "@Blushneyy",
+      "originalPost": "https://x.com/Blushneyy/status/2106893568828928305",
+      "publishedAt": "2026-10-04T23:45:45Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Fable 5.5 is... AMAZING!!!",
+      "excerptWordCount": 4,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2106892720765558784",
+        "url": "https://video.twimg.com/amplify_video/2106892720765558784/vid/avc1/1280x720/qPOWnenfrEInfkJb.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2106892720765558784/img/kJTB8L1HEYhxUnx3.jpg",
+        "durationSeconds": 64.085333,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "입력 자산의 사용 범위와 상세 제작 과정은 공개되지 않았습니다. 서비스 효능에 대한 검증 사례가 아닙니다."
+    },
+    {
+      "caseId": "fable55-pokemon-redstone",
+      "creator": "Maximus Spritius",
+      "handle": "@MozeTech",
+      "originalPost": "https://x.com/MozeTech/status/2106590326634983710",
+      "publishedAt": "2026-10-04T03:40:47Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "using fable 5.5 (rerouting) in just one shot!",
+      "excerptWordCount": 8,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2106587381331816448",
+        "url": "https://video.twimg.com/amplify_video/2106587381331816448/vid/avc1/1080x720/mpnDJZNyqL6Y1wZH.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2106587381331816448/img/uKxjgj6i8lMnKnel.jpg",
+        "durationSeconds": 158.890667,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1080,
+        "height": 720
+      },
+      "demoAvailability": [
+        {
+          "url": "https://pokemon-redstone.vercel.app",
+          "httpStatus": 402,
+          "status": "DEPLOYMENT_DISABLED",
+          "exposedAsDemo": false,
+          "checkedAt": "2026-10-06"
+        }
+      ],
+      "limitations": "2026-10-06 확인 당시 데모는 HTTP 402 DEPLOYMENT_DISABLED로 열리지 않아 시연 영상만 제공합니다. 기능 전체는 테스트하지 못했습니다."
+    },
+    {
+      "caseId": "fable55-rube-goldberg",
+      "creator": "imjustnewatai",
+      "handle": "@imjustnewatai",
+      "originalPost": "https://x.com/imjustnewatai/status/2105889407056109991",
+      "publishedAt": "2026-10-02T05:15:34Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Gave Claude Fable 5.5 one prompt",
+      "excerptWordCount": 6,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2105889292841029633",
+        "url": "https://video.twimg.com/amplify_video/2105889292841029633/vid/avc1/1280x720/j9OyM1SXZ0Qv8-Vm.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2105889292841029633/img/iz68iBAHIRdyp316.jpg",
+        "durationSeconds": 60.053333,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "물리 정확성이나 AAA급 그래픽은 프롬프트의 요구 사항이며 검증된 성능 수치가 아닙니다. 코드와 실행 데모는 공개되지 않았습니다."
+    },
+    {
+      "caseId": "fable55-dead-frame-mechs",
+      "creator": "Ben Sutcliffe",
+      "handle": "@BenSutc02184861",
+      "originalPost": "https://x.com/BenSutc02184861/status/2106741529297699145",
+      "publishedAt": "2026-10-04T13:41:36Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Made with Cluade fable 5.5, Unity and Higgisfield",
+      "excerptWordCount": 8,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2106741105655984128",
+        "url": "https://video.twimg.com/amplify_video/2106741105655984128/vid/avc1/1280x720/gi-FU3dRBySOSalk.mp4?tag=14",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2106741105655984128/img/eluT_wcG1UKYCNML.jpg",
+        "durationSeconds": 39.424,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "개발 중 시연이며 완성·출시된 게임으로 확인하지 않았습니다. 그래픽과 게임 코드 전부가 Fable 단독 결과라는 의미는 아닙니다."
+    },
+    {
+      "caseId": "fable55-blender-character-animation",
+      "creator": "Jayden Davis",
+      "handle": "@JaydenDavisNC",
+      "originalPost": "https://x.com/JaydenDavisNC/status/2107086714820870617",
+      "publishedAt": "2026-10-05T12:33:15Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Fable 5.5 made me a delightful animation in blender.",
+      "excerptWordCount": 9,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2107086270514044928",
+        "url": "https://video.twimg.com/amplify_video/2107086270514044928/vid/avc1/1280x720/AdiYNb7YVujcWcWB.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2107086270514044928/img/zujM-sQh4dqJNAEW.jpg",
+        "durationSeconds": 16.554667,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "음악과 자산의 전체 제작 과정 및 모델 실행 로그는 확인하지 못했습니다. 원본 결과 영상만 검토했습니다."
+    },
+    {
+      "caseId": "fable55-universe-looks-at-itself",
+      "creator": "Luis Mejia",
+      "handle": "@l_mejiaC",
+      "originalPost": "https://x.com/l_mejiaC/status/2105988529671360673",
+      "publishedAt": "2026-10-02T11:49:27Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "Fable 5.5",
+      "excerptWordCount": 2,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2105988393146478592",
+        "url": "https://video.twimg.com/amplify_video/2105988393146478592/vid/avc1/1280x720/NpDyt_bqtZoBJ-4-.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2105988393146478592/img/ISIc0mpNHBYYIs56.jpg",
+        "durationSeconds": 202.048,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "과학적 축척과 역사 내용은 별도로 검증하지 않았습니다. 실행 코드·제작 도구·반복 과정은 공개되지 않았습니다."
+    },
+    {
+      "caseId": "fable55-black-hole-renderer",
+      "creator": "imjustnewatai",
+      "handle": "@imjustnewatai",
+      "originalPost": "https://x.com/imjustnewatai/status/2106925762582323550",
+      "publishedAt": "2026-10-05T01:53:41Z",
+      "reviewedAt": "2026-10-06",
+      "modelClaimExcerpt": "I asked Claude fable 5.5 for the hardest edit it could make.",
+      "excerptWordCount": 12,
+      "modelAttribution": "creator-claimed; backend model unconfirmed",
+      "discoverySource": "https://github.com/coolbat/awesome-fable-5.5-usecase",
+      "originalPostAccess": {
+        "method": "public X metadata via api.fxtwitter.com",
+        "status": 200,
+        "authorAndExplicitModelClaimChecked": true
+      },
+      "media": {
+        "videoId": "2106925718034591744",
+        "url": "https://video.twimg.com/amplify_video/2106925718034591744/vid/avc1/1280x720/aErzAnsLaunxOwVy.mp4?tag=29",
+        "poster": "https://pbs.twimg.com/amplify_video_thumb/2106925718034591744/img/dC27ROGDVOfCQ-RO.jpg",
+        "durationSeconds": 30.058667,
+        "hasAudio": true,
+        "audioVerification": "ffprobe of this exact MP4 variant",
+        "downloadedSuccessfully": true,
+        "sampleFrameReviewed": true,
+        "width": 1280,
+        "height": 720
+      },
+      "demoAvailability": [],
+      "limitations": "방정식 구현의 정확성·소요 시간·자원 사용량은 독립 검증하지 않았습니다. 소스 코드가 공개된 사례는 아닙니다."
+    }
+  ]
+}
