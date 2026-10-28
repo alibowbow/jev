@@ -1,0 +1,1014 @@
+{
+  "reviewed": "2026-10-28",
+  "repository": "https://github.com/MiaAI-Lab/Gemini-4-Argon-HTML-Files",
+  "commit": "d0ffae725103e0995f40ba80074bdf615a925470",
+  "repositoryCreatedAt": "2026-10-14T07:26:08Z",
+  "license": null,
+  "checks": {
+    "files": 100,
+    "promptMatches": 100,
+    "runtimeReproduced": false
+  },
+  "files": [
+    {
+      "number": "001",
+      "file": "001-glassmorphism-aurora.html",
+      "promptFile": "001-glassmorphism-aurora.txt",
+      "thumbnail": "thumbs/001-glassmorphism-aurora.jpg",
+      "htmlSha256": "cb709f0dca55e55014d5a630923119de04a118c6b08e52b556f8d17f94faed5f",
+      "txtSha256": "bb69c71d8f4dbad67f1f83a98303a3da7405f1f100d941a38c5ccc5fde8044e1",
+      "thumbnailSha256": "1dc88e5a5b3983049ff5901cc1d86dd55c560cad8df7dcade4ca4e5f745d961d",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "002",
+      "file": "002-neon-cyberpunk.html",
+      "promptFile": "002-neon-cyberpunk.txt",
+      "thumbnail": "thumbs/002-neon-cyberpunk.jpg",
+      "htmlSha256": "adccb9ae6e493389e1b0626a139ab784ab7f0cb55b72795983941d062f1bf521",
+      "txtSha256": "5c5bdcc380c4a03435d20dc210b8b79239686a618922e21b9d350ab92d6ec39c",
+      "thumbnailSha256": "76f6e0b5c89b6ff2055d0ee6185716d691e336645defa1573645a2858f4d4227",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "003",
+      "file": "003-brutalist-swiss-poster.html",
+      "promptFile": "003-brutalist-swiss-poster.txt",
+      "thumbnail": "thumbs/003-brutalist-swiss-poster.jpg",
+      "htmlSha256": "1a792ae37da639ec5ffcd4f3fa9652a777c662ab12b1765861a0ca74ae1c58ab",
+      "txtSha256": "6e1924d69150e295dea7a037265f0546bf02f87e004e7f5a49645694959dce8a",
+      "thumbnailSha256": "5cd11cab4b66e31de3c660d3cf95f19090cb318c23859dd31c5439ea8b1d9c99",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "004",
+      "file": "004-neumorphic-tactile-synth.html",
+      "promptFile": "004-neumorphic-tactile-synth.txt",
+      "thumbnail": "thumbs/004-neumorphic-tactile-synth.jpg",
+      "htmlSha256": "6aaff3e70a745ae08e6d1940d5c2d0517756c42bac655b9573070f76a8aa400b",
+      "txtSha256": "dbafa7b4d33f53c0992a1d196fd2b27e6e0bc49cb0f37d894281665d3b69d4c6",
+      "thumbnailSha256": "32f13a641b8a2f2d69969e3a146210588e61c95558152939e7cf09c3589f362e",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "005",
+      "file": "005-editorial-haute-couture.html",
+      "promptFile": "005-editorial-haute-couture.txt",
+      "thumbnail": "thumbs/005-editorial-haute-couture.jpg",
+      "htmlSha256": "5514dde22120d47bd2aae9b76701d6a1b332e3d0fee969ddf2dee60a19e2ae3e",
+      "txtSha256": "a55bc512ae064d660b0a65fc1abc9e65f395369f7ac75b775a8f9efd6459817a",
+      "thumbnailSha256": "9d81f3ce9a1ba7c05e60394a367fba875b7bf73f91069b98061791be34f068ff",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "006",
+      "file": "006-bioluminescent-abyss.html",
+      "promptFile": "006-bioluminescent-abyss.txt",
+      "thumbnail": "thumbs/006-bioluminescent-abyss.jpg",
+      "htmlSha256": "5dd572b9996d754e092f84054dd6570735a41d593910789cf1cd75713a5de581",
+      "txtSha256": "c87a0e83b16668f25bd48c1b87e4638be44dbfc729b9186e4ac865791a5ac41d",
+      "thumbnailSha256": "dd97983898eebd62cdad25fc2ed700783570eff3155c055e59eb1d185b865337",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "007",
+      "file": "007-minimal-japanese-zen-garden.html",
+      "promptFile": "007-minimal-japanese-zen-garden.txt",
+      "thumbnail": "thumbs/007-minimal-japanese-zen-garden.jpg",
+      "htmlSha256": "8e2a4f3122833178068728c12f0eabd9dd1d396fc53dc3a44f87d40d0ab6cc4a",
+      "txtSha256": "17552d6fba84936a09aa1a61ea493c357b36c9a911d09b58b922901241027c30",
+      "thumbnailSha256": "805cdfbb99dd2c35040c79753e5852dc711d27a53f9df83c58340bf9835400ef",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "008",
+      "file": "008-retro-cassette-futurism.html",
+      "promptFile": "008-retro-cassette-futurism.txt",
+      "thumbnail": "thumbs/008-retro-cassette-futurism.jpg",
+      "htmlSha256": "b9b61c94ed518ff6835a652902188e116b8bbdc5454709a330ba91bef0ce8c0f",
+      "txtSha256": "108342dcdfb84615ad5d97b799e743bb4867aee65448602e146c5cf05884d432",
+      "thumbnailSha256": "d9ea8c15b0120028f59a8e10fc8de1526d199b129277bc72d44eb9cf9cec6292",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "009",
+      "file": "009-liquid-ferrofluid-sculpture.html",
+      "promptFile": "009-liquid-ferrofluid-sculpture.txt",
+      "thumbnail": "thumbs/009-liquid-ferrofluid-sculpture.jpg",
+      "htmlSha256": "eba72484403b81638695d9a64beb4089923c20835237fcd64174e08dd1e05bee",
+      "txtSha256": "0733a30844be572b87589f6634543a1d31b7cd9afd1f4d1a4f3ec07c1899b957",
+      "thumbnailSha256": "9bc3c4fc609300ca08759629f17c67e403b352d2b628d860fa84fb9d324c4271",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "010",
+      "file": "010-botanical-herbarium-pressed.html",
+      "promptFile": "010-botanical-herbarium-pressed.txt",
+      "thumbnail": "thumbs/010-botanical-herbarium-pressed.jpg",
+      "htmlSha256": "9ea7353f9fc653760462e666b7b8b73bcd07e29bce247becb3c5953598425fc5",
+      "txtSha256": "e89ee8e52a2047bb291171091a869b70455c0e66f2a8d695e34399fe803d335e",
+      "thumbnailSha256": "df5586d746679fe2f5f99c9c72a75509f4dc2eb8b5cca31e1decd60c81267475",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "011",
+      "file": "011-kinetic-variable-type-foundry.html",
+      "promptFile": "011-kinetic-variable-type-foundry.txt",
+      "thumbnail": "thumbs/011-kinetic-variable-type-foundry.jpg",
+      "htmlSha256": "d54d3223063c53aee12509d6129bd7f1e4283dd211956fd0c466fe3f78cadcf4",
+      "txtSha256": "c7cf396d555537ba433684782bf86535905c369cd3d256ebfb954e089bc4d4de",
+      "thumbnailSha256": "9b68229cd47bcacc4e3d1a4d728924d41a6786f3bc4ffaaab4491d9bfea928af",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "012",
+      "file": "012-solarpunk-arcology-dashboard.html",
+      "promptFile": "012-solarpunk-arcology-dashboard.txt",
+      "thumbnail": "thumbs/012-solarpunk-arcology-dashboard.jpg",
+      "htmlSha256": "718a791744fb306539cbec0c2980449ac2a39a1fe477d69eb973d42e237c39f7",
+      "txtSha256": "5380570d06260d90e2882d176f5e1c2bb2fe37c697dbd5f27cdcdc171e6cc5ba",
+      "thumbnailSha256": "0604449814a5cbbdd75d832c043faf4af7d9c15031eaa0dd8b60675945a102f3",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "013",
+      "file": "013-art-deco-grand-hotel.html",
+      "promptFile": "013-art-deco-grand-hotel.txt",
+      "thumbnail": "thumbs/013-art-deco-grand-hotel.jpg",
+      "htmlSha256": "f6b0a54e4541860b1b76f9b7cc5fc0fef268b648f621c39330742614ffac0d55",
+      "txtSha256": "461d3d7ccb8a5f768ef33880c82cd50db047d7d2d0904bf64a539ae70ccb51b3",
+      "thumbnailSha256": "13456241add2893942033d591b311f07f51553c318d13e13e7b5a7338c34813f",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "014",
+      "file": "014-quantum-entanglement-visualizer.html",
+      "promptFile": "014-quantum-entanglement-visualizer.txt",
+      "thumbnail": "thumbs/014-quantum-entanglement-visualizer.jpg",
+      "htmlSha256": "7bf52b8e494ce3bdcfdc98e33854a3727afb7a2b7df1aa50da5048da0aa9b24b",
+      "txtSha256": "afd3e78e6f5d4181025413fbaea3decd129540f3d5894ca7a760f1bef2c54638",
+      "thumbnailSha256": "1a42025a3e0367160110de644bdb18616b40e09e976ebf85ad60e2a12b8764ef",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "015",
+      "file": "015-bauhaus-weaving-workshop.html",
+      "promptFile": "015-bauhaus-weaving-workshop.txt",
+      "thumbnail": "thumbs/015-bauhaus-weaving-workshop.jpg",
+      "htmlSha256": "0dc314df8d6ac515ef22430ea6310e567f2e2112be4613c267ea0458ed878b8b",
+      "txtSha256": "e37ab0911d8e06d0a271e75430b424652bf32f4211e4132da676cbd6b49a513d",
+      "thumbnailSha256": "8c2df5cdd48be6316888c6845718915ec5c92cb4d2895d6ecb8503ea933b08b0",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "016",
+      "file": "016-horology-tourbillon-chronograph.html",
+      "promptFile": "016-horology-tourbillon-chronograph.txt",
+      "thumbnail": "thumbs/016-horology-tourbillon-chronograph.jpg",
+      "htmlSha256": "6576b9380ad3a049cd6a9f5fb647e7f49a77f482efe15da17514aff63924f729",
+      "txtSha256": "a72429ef70c4914afcd73959f8283871ad41d744cf86cbc6db06ae1404a22ed3",
+      "thumbnailSha256": "86fd3c412c4ee887298e8487b3f29bd52b4cda9287c4dc7b7cd3c83e02f2dc06",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "017",
+      "file": "017-psychedelic-liquid-light-show.html",
+      "promptFile": "017-psychedelic-liquid-light-show.txt",
+      "thumbnail": "thumbs/017-psychedelic-liquid-light-show.jpg",
+      "htmlSha256": "5aba620c0ba59ce9883b28843f403b1f1cf8ad1be204039d43741b17255d5ebd",
+      "txtSha256": "086307d9d6e9bc6fbbc9e4cab7188b4258128b315c20c1e56740f904973fbf4c",
+      "thumbnailSha256": "c2ec79a951f3605370275dc732cc70053f894997a363c696f9b81be272b945fe",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "018",
+      "file": "018-nordic-architectural-sauna.html",
+      "promptFile": "018-nordic-architectural-sauna.txt",
+      "thumbnail": "thumbs/018-nordic-architectural-sauna.jpg",
+      "htmlSha256": "00a50788f5865c254d78a95e7f2b7a61efe3cc2ca972f6cdc6c465d21ce68153",
+      "txtSha256": "7ba4552acf448929877d915187d53772dc789a6ada79a287bab36cc35de8f2ed",
+      "thumbnailSha256": "e0697246df99846bd0a0ab65bddbaf9f6ec6a7dc0a3a491ff54eee2f2132763e",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "019",
+      "file": "019-celestial-astrolabe-orrery.html",
+      "promptFile": "019-celestial-astrolabe-orrery.txt",
+      "thumbnail": "thumbs/019-celestial-astrolabe-orrery.jpg",
+      "htmlSha256": "959b3c865482982f55533619dcc879e306021e714a0f48df57b7ec00d6389ba2",
+      "txtSha256": "7685044848726ceccfe0d8077ce8b6d8a7d122f539b7f87c1a642d0291c8c62e",
+      "thumbnailSha256": "e86e4cfe2ab27cfe39596aca229070e8943480587853069e5569f4da2b0838c3",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "020",
+      "file": "020-memphis-milano-playground.html",
+      "promptFile": "020-memphis-milano-playground.txt",
+      "thumbnail": "thumbs/020-memphis-milano-playground.jpg",
+      "htmlSha256": "09518ea1f67f2d073f174609a039fa20bce4b0639da0614c3dfbac28df444cd0",
+      "txtSha256": "b3969027810ca56056aeedaf64d94b1af58b5e5f6b5095cba5f4db16b91073cf",
+      "thumbnailSha256": "e1f7c3809c1762b80466770b4ce921f0e8d5dd4c1c66815be322c58d201552a3",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "021",
+      "file": "021-stained-glass-cathedral-rose.html",
+      "promptFile": "021-stained-glass-cathedral-rose.txt",
+      "thumbnail": "thumbs/021-stained-glass-cathedral-rose.jpg",
+      "htmlSha256": "514931901bcbee7658fbc82886152aa2c4fc401b6b638ff58658e1d695c4018f",
+      "txtSha256": "b451730d8add9a0dc6c4cbf842211bce04f475620c4c8faf2ebd818dfa798a27",
+      "thumbnailSha256": "840adf3a9ccf819c195053ed77bbb5ba56dd998e521729681c10e18a6a6af60c",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "022",
+      "file": "022-seismograph-tectonic-observatory.html",
+      "promptFile": "022-seismograph-tectonic-observatory.txt",
+      "thumbnail": "thumbs/022-seismograph-tectonic-observatory.jpg",
+      "htmlSha256": "31ab4f12e41dd5aec90a415b65515978b47d3872d3b007f4684c8653427ddec4",
+      "txtSha256": "d0993b6be39340c209eab5901d07a31a1fa2648f91d79ec292e11badc4c9c171",
+      "thumbnailSha256": "f8b9d465c38c274cf68140f536bb87b70b6fc148e2b9db29db083c0f420b8e46",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "023",
+      "file": "023-perfume-olfactory-alchemy.html",
+      "promptFile": "023-perfume-olfactory-alchemy.txt",
+      "thumbnail": "thumbs/023-perfume-olfactory-alchemy.jpg",
+      "htmlSha256": "a46108c97324d7a34b791aecd7ce58fda7e588e11d52d8497316bb1b4ac0d84f",
+      "txtSha256": "b0523a061a7e69caf953611166d87f349f3ae84f5d478570858095d349562875",
+      "thumbnailSha256": "861f32cddfe80b2b9d5416a1c4457e1027b727b1b0bd7f72a5c7c39ffea2aa77",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "024",
+      "file": "024-origami-tessellation-folder.html",
+      "promptFile": "024-origami-tessellation-folder.txt",
+      "thumbnail": "thumbs/024-origami-tessellation-folder.jpg",
+      "htmlSha256": "e8f604e8305ba95c4ff4b4df82dfd1e4c64a630edee03ea188806bbd848af7cf",
+      "txtSha256": "888b0aeec4efd1695ec27c55e9562102d1e92763f6238e560bf7577a20054b26",
+      "thumbnailSha256": "7884124f60d6c580dd10e42e095cd14b8c6d8b5273f93b98fb58b99a0fd8d067",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "025",
+      "file": "025-vinyl-mastering-lathe.html",
+      "promptFile": "025-vinyl-mastering-lathe.txt",
+      "thumbnail": "thumbs/025-vinyl-mastering-lathe.jpg",
+      "htmlSha256": "85aa42f5e67122f735cd57c193886976a1622a276bbb608914b95a8d32e27585",
+      "txtSha256": "da0dec23e0dd6de57806d983c117e15b5a5d8f4ca4e0dfb4d502cb84f77f041d",
+      "thumbnailSha256": "786a011db12ef0b34573859307180a6bc4a417db75e840da38ad97f9716e2702",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "026",
+      "file": "026-brutalist-concrete-monolith.html",
+      "promptFile": "026-brutalist-concrete-monolith.txt",
+      "thumbnail": "thumbs/026-brutalist-concrete-monolith.jpg",
+      "htmlSha256": "2bfbedccfad988878c2cf86e33ed1265b747d55e0542628565c5f29f67cedc28",
+      "txtSha256": "fac45367e72b60ec97f603d29cd13d0b740123bf97aac35258eca3ea04cff6cf",
+      "thumbnailSha256": "13f76d1e41846e86872b5636eb8261141a3f060b041fc521c4876606dcca0913",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "027",
+      "file": "027-biomorphic-coral-reef-calcifier.html",
+      "promptFile": "027-biomorphic-coral-reef-calcifier.txt",
+      "thumbnail": "thumbs/027-biomorphic-coral-reef-calcifier.jpg",
+      "htmlSha256": "f06ac13d0f37b61140b3b19954bace6e2cea4208d3ddf9ddda0b68fc96f3ffd3",
+      "txtSha256": "f38e7ba98484f97b40cebb190940e5915b1039a5f99774463b90b5d19d925eac",
+      "thumbnailSha256": "6793ebd90d120448228eb8e39afe360b89af34becfdf81133724cd3a7c9c6e84",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "028",
+      "file": "028-vintage-airline-timetable-1964.html",
+      "promptFile": "028-vintage-airline-timetable-1964.txt",
+      "thumbnail": "thumbs/028-vintage-airline-timetable-1964.jpg",
+      "htmlSha256": "fccad87405af0e321a20b80dfaf5e30c71688ce4a2761a672257027dd0b0a4ff",
+      "txtSha256": "06effe5ac75479e925dac9244d625b6b6eb71d37efb507b6829c59b8c58ff69e",
+      "thumbnailSha256": "9696041a14b1991a07db5c61298c360e3aa86d322a404b2a0f75d3ed6f20472a",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "029",
+      "file": "029-cymatics-chladni-plate.html",
+      "promptFile": "029-cymatics-chladni-plate.txt",
+      "thumbnail": "thumbs/029-cymatics-chladni-plate.jpg",
+      "htmlSha256": "610163a4fd222b6f925d57383da65561f9f99327dd2dbbb1dbce208018ac8423",
+      "txtSha256": "f2da38638c61f258d05584106060953380c4081e7c43221cc13bb7b63c8a3af8",
+      "thumbnailSha256": "8134870903a72f8ee3806ca53f1088228970645cb2321592e3545701b23e3328",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "030",
+      "file": "030-topographic-cartography-contours.html",
+      "promptFile": "030-topographic-cartography-contours.txt",
+      "thumbnail": "thumbs/030-topographic-cartography-contours.jpg",
+      "htmlSha256": "157b88dc7ad6c401d38ee8092ac32552d6b2200d0478461a9ef6d39da0e1ed33",
+      "txtSha256": "7352733d7e403966833a456f9a9c7ba71f49cc57f0ab2f62936fd801e5641bc5",
+      "thumbnailSha256": "4267f477bf14c5dcf3dfed5849ae8cda4c35e45e8f16a2a64a29f9e91c4f9258",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "031",
+      "file": "031-espresso-extraction-barista.html",
+      "promptFile": "031-espresso-extraction-barista.txt",
+      "thumbnail": "thumbs/031-espresso-extraction-barista.jpg",
+      "htmlSha256": "45525709906bb80592e49c90e74460f2cacd90ec459ea17d6318c09c5b9a4ee6",
+      "txtSha256": "6c497731e9d8fd55646eb952ae8ff16f0fbb063a51616b8efa34f8aa1f7ca0ff",
+      "thumbnailSha256": "b17f9d61ea955d0e71068ea58669feb5135a29669f3ddeead7d858ff57cff77e",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "032",
+      "file": "032-stellar-black-hole-lensing.html",
+      "promptFile": "032-stellar-black-hole-lensing.txt",
+      "thumbnail": "thumbs/032-stellar-black-hole-lensing.jpg",
+      "htmlSha256": "0fa94ec273478ac0a82536818bc78460c8a0e49b9ced6ffba47b29b2011de143",
+      "txtSha256": "f90572b40d322ecb25c1018c615cfb4e6e336f9e0d1217160bb93110f3999107",
+      "thumbnailSha256": "35ead77730e3f1e1a51af04cce1e3f27fc08edee04bd8809202ddec2c7d2ac68",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "033",
+      "file": "033-kintsugi-ceramic-restoration.html",
+      "promptFile": "033-kintsugi-ceramic-restoration.txt",
+      "thumbnail": "thumbs/033-kintsugi-ceramic-restoration.jpg",
+      "htmlSha256": "a6faea0f6d231e555dc11c3b8a870d3513a4a779412495d508862e7ab66f9787",
+      "txtSha256": "b7f83ab0cfc690d44128002aeac617e01a036806c0b8feb79ad67d766ca0f561",
+      "thumbnailSha256": "5b043d406f1a919160a4ebb520f1a84af6d53987931e49f2772f6721bbd43210",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "034",
+      "file": "034-sub-zero-cryo-seed-vault.html",
+      "promptFile": "034-sub-zero-cryo-seed-vault.txt",
+      "thumbnail": "thumbs/034-sub-zero-cryo-seed-vault.jpg",
+      "htmlSha256": "caa850ec2716ae043838ab497d2bd8844d3ff9b261ed0d42d945d8ea71debd66",
+      "txtSha256": "c5d146b8ff82d4bb68bb5aa9c09118d5716a1d80804350d67fe2bd109b56dd37",
+      "thumbnailSha256": "b05666890b43d0e63c5efc1ba13f843edbbc50be8c6d6f14e0c02dd5f8976d82",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "035",
+      "file": "035-modular-eurorack-patchbay.html",
+      "promptFile": "035-modular-eurorack-patchbay.txt",
+      "thumbnail": "thumbs/035-modular-eurorack-patchbay.jpg",
+      "htmlSha256": "e7fee307a06ddb32189caefe058d75852521c65c51066e6458ba681b3640b1f1",
+      "txtSha256": "d2bc90b296910632421bd99f1d9fe2d77e03c1e9856394f0c51b2f2a52b2d6cf",
+      "thumbnailSha256": "ff9bacd0558479ce21e0ee9cf0b3095021576189de319388f81d36bb7afd978e",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "036",
+      "file": "036-renaissance-anatomical-codex.html",
+      "promptFile": "036-renaissance-anatomical-codex.txt",
+      "thumbnail": "thumbs/036-renaissance-anatomical-codex.jpg",
+      "htmlSha256": "78a9fab2a0da4d4d7c6a33db7bd52b4021be854b9794f8825da8479612cd6fd3",
+      "txtSha256": "74d19659f7fdc913264cf9636a75ee0756d787277d046f7203086842b63029b2",
+      "thumbnailSha256": "58bb472945732d457e4184cf5220d388a41b687817b440bfb13fff3c27c9c33f",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "037",
+      "file": "037-neon-pinball-bumper-physics.html",
+      "promptFile": "037-neon-pinball-bumper-physics.txt",
+      "thumbnail": "thumbs/037-neon-pinball-bumper-physics.jpg",
+      "htmlSha256": "4ebdb715a343a3e52508496af9bea6434c59b8e575ada92e4d11efe8d2541e5b",
+      "txtSha256": "4005363d5bee7a6ba6837fc50167417ddd8a958b83f0d87e4c72a98ae975811e",
+      "thumbnailSha256": "792b397771d9377a3a2cc8f7ada981d8baf9ddb145cf2f8135d01eb39f978266",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "038",
+      "file": "038-art-nouveau-botanical-conservatory.html",
+      "promptFile": "038-art-nouveau-botanical-conservatory.txt",
+      "thumbnail": "thumbs/038-art-nouveau-botanical-conservatory.jpg",
+      "htmlSha256": "75d23ee151f60c81470769fbbd34fc52189244e66dfa3ee8dbe75f7fd9e3f6e3",
+      "txtSha256": "9180472bad07eb9df3ffe1ad7da7c6b6b6414c2a4ef04551a23af3968e5048e6",
+      "thumbnailSha256": "9acdc28820cbaf055f146d92487a7af6d9bf0cf421d5e11a85d9e66204353eb3",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "039",
+      "file": "039-chromatography-spectrum-analyzer.html",
+      "promptFile": "039-chromatography-spectrum-analyzer.txt",
+      "thumbnail": "thumbs/039-chromatography-spectrum-analyzer.jpg",
+      "htmlSha256": "9a2203591a51a4b9bd9b2cee40fedc3129bdec9e87919ab4c0788c74e45e3ef9",
+      "txtSha256": "8d1f94d1a2403530fbea9d9fef01b8dd1ac36a38af899a38c71c367bb26c164d",
+      "thumbnailSha256": "610ca263cc552756435a5f6dedcf31d9581ac57dbd8c3b0884492331eee00e9c",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "040",
+      "file": "040-kinetic-mobile-calder-sculpture.html",
+      "promptFile": "040-kinetic-mobile-calder-sculpture.txt",
+      "thumbnail": "thumbs/040-kinetic-mobile-calder-sculpture.jpg",
+      "htmlSha256": "a977a3df06adafcc19b9634ef47b866ae66aa3a8d19fa36e934012b19b82635b",
+      "txtSha256": "c55da2c5324529189dbfe5ac1b99386a459158c85d9e4d2fe6bf7a5ff4e5bbbd",
+      "thumbnailSha256": "2699609412cd242947805f38857d2a1a06d07d6d02cbb5fd8090e2e273cc9157",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "041",
+      "file": "041-murano-blown-glass-kiln.html",
+      "promptFile": "041-murano-blown-glass-kiln.txt",
+      "thumbnail": "thumbs/041-murano-blown-glass-kiln.jpg",
+      "htmlSha256": "759c5cac295684b75290e2497691dcd2a9f64ec621acd60b9b39b0670858a508",
+      "txtSha256": "80dd97d69e74f9000e2e9853f8919a4b270f17e9f83eb78ee223df99edf451eb",
+      "thumbnailSha256": "68f483295de47e44507b330613f4d70900dfe2e3ef7502f3e2943a25c5e4eb8a",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "042",
+      "file": "042-aerodynamic-wind-tunnel-cfd.html",
+      "promptFile": "042-aerodynamic-wind-tunnel-cfd.txt",
+      "thumbnail": "thumbs/042-aerodynamic-wind-tunnel-cfd.jpg",
+      "htmlSha256": "265ddcedce4eb0a63a4fbf4b47efd29c38bf6c3a7d36f15e119f210f6b58a518",
+      "txtSha256": "28ebe937ed32cf9f5520ac98f439c6fe3523e9640df575b4ffd51ab1cf050720",
+      "thumbnailSha256": "6778415fcc6ae746326236da45f2ef2216dd8a2bf07bd8e27e8a55d786e3d329",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "043",
+      "file": "043-typography-letterpress-typesetter.html",
+      "promptFile": "043-typography-letterpress-typesetter.txt",
+      "thumbnail": "thumbs/043-typography-letterpress-typesetter.jpg",
+      "htmlSha256": "bd5fcf783a97b85a2dc809990263691b8bfb0e6b1ade35423f981ac37e0bca22",
+      "txtSha256": "3802cd403efa14eda414b60972ba2a25ef3d7702f714849bfc948f18b4cf6dec",
+      "thumbnailSha256": "18de48326239feab9f5292a1472c01d99cd4eb18a638131b5ef509bf8ca6de52",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "044",
+      "file": "044-mycelium-neural-forest-network.html",
+      "promptFile": "044-mycelium-neural-forest-network.txt",
+      "thumbnail": "thumbs/044-mycelium-neural-forest-network.jpg",
+      "htmlSha256": "0d887eb8513dbf74cae565dfbd104e0145cf02710b1c508a18f12be5178cecf5",
+      "txtSha256": "35e37d8ac167c2a05a09a1a6046c748d5272b74b5daf92cb44c508ccc8fb7a05",
+      "thumbnailSha256": "837815a622e38e171e42cd9f38052122a28e6ad1a55c041827f5be49f73c357c",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "045",
+      "file": "045-de-stijl-neoplastic-canvas.html",
+      "promptFile": "045-de-stijl-neoplastic-canvas.txt",
+      "thumbnail": "thumbs/045-de-stijl-neoplastic-canvas.jpg",
+      "htmlSha256": "c882d862c47d358f0146fc0a3ff8554cfa77db03a4dba998a80bd87c6fdcf75d",
+      "txtSha256": "7d128672ff8d5900d27b96b8f948e114389ce66a7257e244f4db23988effc461",
+      "thumbnailSha256": "f5eea5fb0acf2613395fa34d6e0098542607d9e618e957cb9bdb927fb714910c",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "046",
+      "file": "046-sonar-bathymetry-submarine-bridge.html",
+      "promptFile": "046-sonar-bathymetry-submarine-bridge.txt",
+      "thumbnail": "thumbs/046-sonar-bathymetry-submarine-bridge.jpg",
+      "htmlSha256": "3482f51f5aba19dc4e7889559dd032a8862da0349ef501d466cab397da1d527e",
+      "txtSha256": "3879a360d4b962340a98488caece7d7e4a0f5c2458ec444233956a77c880a88a",
+      "thumbnailSha256": "e42ea9e8c1fa57ddbd52f0efce381b940819d67aaaa9323feb7e002557595de5",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "047",
+      "file": "047-holographic-iridescent-foil-mint.html",
+      "promptFile": "047-holographic-iridescent-foil-mint.txt",
+      "thumbnail": "thumbs/047-holographic-iridescent-foil-mint.jpg",
+      "htmlSha256": "3f470d45c8a7a0138a34c41681ec18908b576d5f79c04bb782a685ad260dd9a8",
+      "txtSha256": "830fe7522b1819db685654220f75d1820fb51927bdc9d77f8d457fd49f5e0f35",
+      "thumbnailSha256": "786218deeb7a33126277c03806b22ef0f74e1e63a937f07fa20cc19988ea40b7",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "048",
+      "file": "048-chronophotography-muybridge-zoetrope.html",
+      "promptFile": "048-chronophotography-muybridge-zoetrope.txt",
+      "thumbnail": "thumbs/048-chronophotography-muybridge-zoetrope.jpg",
+      "htmlSha256": "580c00b59f24da50aff4d24d6eff1b99b63509bedd8ac597e133982c4f347147",
+      "txtSha256": "bbc024c1e157f89acd2b7c3c2a01a4543297dea762d8ddea97b17fe63c284d9d",
+      "thumbnailSha256": "b48d576e0939771887f38ccfc0efa638498063226f20e233a5d6833b07429583",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "049",
+      "file": "049-geothermal-magma-plume-chamber.html",
+      "promptFile": "049-geothermal-magma-plume-chamber.txt",
+      "thumbnail": "thumbs/049-geothermal-magma-plume-chamber.jpg",
+      "htmlSha256": "42d9ceb92cef80f8df5e6364b62de3fed867c6e81b8cc9de421876d67bdfc96b",
+      "txtSha256": "6ee7e705916361621eac3ba6bc97f1adeb730a291ee3360d6a4f474a8db75014",
+      "thumbnailSha256": "b31aee1cc597b26e9455dfb477f52d3105b29798e898db1d1d35a59491ae279b",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "050",
+      "file": "050-minimal-luxury-archival-eyewear.html",
+      "promptFile": "050-minimal-luxury-archival-eyewear.txt",
+      "thumbnail": "thumbs/050-minimal-luxury-archival-eyewear.jpg",
+      "htmlSha256": "c35578e1c491901d9a82bb54091e961d36c328a48d8f7d02629187139c49400e",
+      "txtSha256": "8571b6d14de1fa557c5a687793b48754eecebbaf504da2748051f465de63c4d4",
+      "thumbnailSha256": "670a678c01b67e7c4479c4c71060b34c3c64c945bf6c992a6ce31a14aa253cd6",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "051",
+      "file": "051-islamic-girih-star-tiling.html",
+      "promptFile": "051-islamic-girih-star-tiling.txt",
+      "thumbnail": "thumbs/051-islamic-girih-star-tiling.jpg",
+      "htmlSha256": "bf623122748c742812a76b298623a1979b79e11816b15cd852e6a9ee92d51c8a",
+      "txtSha256": "6f7e9137732af65fb24019df4694c2c1bc284514a88317b948c243a4cbe498df",
+      "thumbnailSha256": "c6909260edbe2afb32a548634f7bc6f4ed6b6588fe92e3452b5b1833725bf708",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "052",
+      "file": "052-particle-collider-cern-calorimeter.html",
+      "promptFile": "052-particle-collider-cern-calorimeter.txt",
+      "thumbnail": "thumbs/052-particle-collider-cern-calorimeter.jpg",
+      "htmlSha256": "9e7854083651220313f1ad7ff7389a6ba3d6ec190e1506987cea175f2f613d47",
+      "txtSha256": "671f8c7416f91d1b8e40b623d2c502704e12f478ab424fc1c7e0fa41303fd847",
+      "thumbnailSha256": "94975388d276e774a4975f81686bc1c62fedc17a4f05ff0c03ea0af740d43262",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "053",
+      "file": "053-vintage-railway-bradshaw-pullman.html",
+      "promptFile": "053-vintage-railway-bradshaw-pullman.txt",
+      "thumbnail": "thumbs/053-vintage-railway-bradshaw-pullman.jpg",
+      "htmlSha256": "0b54f1b457f6c829cd2bc2330e7bbb79a7c9c07667b513b1db699a898b624a00",
+      "txtSha256": "fcdcbe5d4c5f90a1fc1914d7d1a222386e7490b8109ad29085883c65f70ccd3d",
+      "thumbnailSha256": "fcd4f6cafe372cf24d23006c9a35fe412c1b829bbe6b7c98e866eb5581ea50f2",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "054",
+      "file": "054-reaction-diffusion-turing-morph.html",
+      "promptFile": "054-reaction-diffusion-turing-morph.txt",
+      "thumbnail": "thumbs/054-reaction-diffusion-turing-morph.jpg",
+      "htmlSha256": "2b0d12af911711a89d22aa059ca72f99b8c46b7556a7ce5ccbb5bf5c8e99b91b",
+      "txtSha256": "3fb5684c93e2fbef05b54188604e34a8750b0d4b9f508daf7d3d0b1f1bb4836d",
+      "thumbnailSha256": "463828ba5da62972cd8170ea4b7b6c505782ebc9b28155b720a075dd70d446d3",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "055",
+      "file": "055-architectural-acoustics-concert-hall.html",
+      "promptFile": "055-architectural-acoustics-concert-hall.txt",
+      "thumbnail": "thumbs/055-architectural-acoustics-concert-hall.jpg",
+      "htmlSha256": "8d64db1919516b80f4425fda2748304416cfaf21968cc3ff6e0a7724bb98f7e2",
+      "txtSha256": "7ace0cd38ef20369d2440411d2e9798f8bf529a940a11e83e1de88ef48b4884a",
+      "thumbnailSha256": "f3cf6a7430951a28831ab0816908f004a6a75155894439a6a73b39df6371a1ae",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "056",
+      "file": "056-ukiyo-e-woodblock-wave-print.html",
+      "promptFile": "056-ukiyo-e-woodblock-wave-print.txt",
+      "thumbnail": "thumbs/056-ukiyo-e-woodblock-wave-print.jpg",
+      "htmlSha256": "cedf1d7a5bb18a8fd47dadbe89b2c802eb84b1902e503dae1a863120b16895a9",
+      "txtSha256": "06d8bdd5f10c2f633323c6d66951dc6569daecb163e3d5ebaffb4c759f20da16",
+      "thumbnailSha256": "3162cc5d39d564b4cb0233ccbf960ae7d0743960352f484acbcdd7e42e8d38c4",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "057",
+      "file": "057-cybernetic-exoskeleton-biomechanics.html",
+      "promptFile": "057-cybernetic-exoskeleton-biomechanics.txt",
+      "thumbnail": "thumbs/057-cybernetic-exoskeleton-biomechanics.jpg",
+      "htmlSha256": "1349c800f5f81c6c681c0c10621161207a7de3c3b535976dc06a64a8539fbe11",
+      "txtSha256": "fbd45d7e9e576ecb8db1d4f90ae2c34c4ca503ddd112a6325241c78802ef72af",
+      "thumbnailSha256": "94940999d2a89e4166325381c0f3c724b4357282fb8c3dbecac442497a41c0ca",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "058",
+      "file": "058-alchemical-celestial-herbarium-1618.html",
+      "promptFile": "058-alchemical-celestial-herbarium-1618.txt",
+      "thumbnail": "thumbs/058-alchemical-celestial-herbarium-1618.jpg",
+      "htmlSha256": "b270207e6222ffdc94e0506bb1a451694b91bca58c4ee88d9ad159a45ac84850",
+      "txtSha256": "22b65b28246308590a734ed18511ef08084d6613df9a03ab032fff6340777a41",
+      "thumbnailSha256": "1874baf5cfe9cc66b6e97508bbd3031ea43f4ba93c611812b70b99455e65e3e5",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "059",
+      "file": "059-pastel-dreamscape-cloud-observatory.html",
+      "promptFile": "059-pastel-dreamscape-cloud-observatory.txt",
+      "thumbnail": "thumbs/059-pastel-dreamscape-cloud-observatory.jpg",
+      "htmlSha256": "421d139ff7cc1fd0d398088e4674562c1d26d40dc343f39836e1475c9639ea2c",
+      "txtSha256": "a679cf9aabd3e0138a807fe861172130bdd84788d1561a9752f7400b8b5ba505",
+      "thumbnailSha256": "a815e821ce909d7b41bb18b6f718ce3c0abef215b1f715d90bb5613c11aa5e4f",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "060",
+      "file": "060-brutalist-modular-drum-machine.html",
+      "promptFile": "060-brutalist-modular-drum-machine.txt",
+      "thumbnail": "thumbs/060-brutalist-modular-drum-machine.jpg",
+      "htmlSha256": "987b77d4c2372b1cbcfdabf6a0b294c274e61e8377b1923b77eec793684350fa",
+      "txtSha256": "df3478989a3a288fda6028706d9018767759aa8c0baab4398bcdd3794070fd27",
+      "thumbnailSha256": "490cbcc241864b9b3eb3a34deed26896a8e955c5ba3a0f92d2c2c0f6a1d45e8a",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "061",
+      "file": "061-terrazzo-venetian-mineral-slab.html",
+      "promptFile": "061-terrazzo-venetian-mineral-slab.txt",
+      "thumbnail": "thumbs/061-terrazzo-venetian-mineral-slab.jpg",
+      "htmlSha256": "702204f899f4d553651fce91c9a193e4c119be5f6f2e722547c995f1cea7cee5",
+      "txtSha256": "40893e2ab6d60c6518861c3eeab6f5a3f0efe7ce71188e212cd33e15d9b753db",
+      "thumbnailSha256": "d94d4b7ecc3351179b7632244bddd81c715924cdf5946fd48d5a32eb03d1a271",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "062",
+      "file": "062-aurora-polar-ice-core-paleoclimate.html",
+      "promptFile": "062-aurora-polar-ice-core-paleoclimate.txt",
+      "thumbnail": "thumbs/062-aurora-polar-ice-core-paleoclimate.jpg",
+      "htmlSha256": "89dfc0f7fe4147113ea47e1ee4df07fd76669dbc6aaec4330f0471b06987ed1c",
+      "txtSha256": "8262cab3f5ede5eecfa1c90254a96d9e75942a50e454e3a459e4b4a44a9f15aa",
+      "thumbnailSha256": "7f62b5a7f0d2a3dcbb14718c52010724d972d61cd9cd2fcd9be8963404075af1",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "063",
+      "file": "063-vintage-oscilloscope-lissajous-xy.html",
+      "promptFile": "063-vintage-oscilloscope-lissajous-xy.txt",
+      "thumbnail": "thumbs/063-vintage-oscilloscope-lissajous-xy.jpg",
+      "htmlSha256": "b0d59482bd4a61c50677b19d4dafe67bbbdd670df307b7aafe018081c57e5be3",
+      "txtSha256": "71c1d7b70c1fcd0f5a4bf0bebc9b331daad72d9c065c075017970e390d12dae3",
+      "thumbnailSha256": "45c76bc7bb551758dbb0cb39b12de1495ee14e53a8180592d73e479add4f837c",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "064",
+      "file": "064-editorial-gastronomy-tasting-menu.html",
+      "promptFile": "064-editorial-gastronomy-tasting-menu.txt",
+      "thumbnail": "thumbs/064-editorial-gastronomy-tasting-menu.jpg",
+      "htmlSha256": "c1eb3ea00345fff61b8950f1e310e1985bbf4ae226a634f4fc55687ce3469c20",
+      "txtSha256": "9763ac8b57247989688ae6212b5d7e5d5a2f6840e3edbbe2ed92ce25c0dbc2cf",
+      "thumbnailSha256": "609d3297512f592d462b836d3507d56d7902a6cad3b907a022883b99af60b9b6",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "065",
+      "file": "065-isometric-brutalist-habitat-67.html",
+      "promptFile": "065-isometric-brutalist-habitat-67.txt",
+      "thumbnail": "thumbs/065-isometric-brutalist-habitat-67.jpg",
+      "htmlSha256": "e001fc2c5549531f52e37f14021067a7c6597235db966264b9bea59a1066da35",
+      "txtSha256": "66744c112efbeea32cb5e8f1e1de65539349c13982aa6923332f43166b8977cc",
+      "thumbnailSha256": "2af46693aafedc1072fc2a0cb1ee88a75efb5229495d1d391f69caf66b620128",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "066",
+      "file": "066-deep-space-voyager-golden-record.html",
+      "promptFile": "066-deep-space-voyager-golden-record.txt",
+      "thumbnail": "thumbs/066-deep-space-voyager-golden-record.jpg",
+      "htmlSha256": "775a07c0f59f696ddb53493f09027983e5eb7241c920e90023ab6d92ed3bbbf9",
+      "txtSha256": "55d6f81c0d6b6b0c89c6acd55233c21e0ed12bf7db8a4b2696a8abfc1e0cfbcf",
+      "thumbnailSha256": "177d63e4d0f55e41f695424f1403cdb36677ff3480cc719987a367ab9c22c335",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "067",
+      "file": "067-silk-screen-andy-pop-halftone.html",
+      "promptFile": "067-silk-screen-andy-pop-halftone.txt",
+      "thumbnail": "thumbs/067-silk-screen-andy-pop-halftone.jpg",
+      "htmlSha256": "f9b64b1b084f5aa31c5bd086463fd0c1c39cbb76bdaa6ff615d7b2e1b36cd973",
+      "txtSha256": "6ce770ee95bd092b7010fe873cb7c0fe6fa36a9ea0d96d576a15d960aae9c1d5",
+      "thumbnailSha256": "77dab9323e6d5bb8ba4087796f624f4bcda029a637f133da0e05b34d55f071be",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "068",
+      "file": "068-kinetic-wind-sculpture-strandbeest.html",
+      "promptFile": "068-kinetic-wind-sculpture-strandbeest.txt",
+      "thumbnail": "thumbs/068-kinetic-wind-sculpture-strandbeest.jpg",
+      "htmlSha256": "e5770b29fe6630f6d4a28460c092ba8ac4b3cbee1f8ee25871df0fc35512079c",
+      "txtSha256": "68c371e7fa28701333a787e8910ed3989e8f62330afaf564ebcb5930b5cc3d14",
+      "thumbnailSha256": "2fdfa8f1dad477496b4c2dec91e439411f00992430a6a12463b4c0c155c87665",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "069",
+      "file": "069-watchmaker-enamel-cloisonne-dial.html",
+      "promptFile": "069-watchmaker-enamel-cloisonne-dial.txt",
+      "thumbnail": "thumbs/069-watchmaker-enamel-cloisonne-dial.jpg",
+      "htmlSha256": "7fe67028a4a058a99c3f6055bf2d291f2164068bed82201d1563c2c9f09dc0ee",
+      "txtSha256": "d0d94a2ba9fa9e250425933a522d5b70a49c53a7c8cf5f6e7b03018c72156b27",
+      "thumbnailSha256": "8e464fea9cc1e3f7a8c1acb6f2982c62aa6cbada123406b5f7b51f8a996d1a57",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "070",
+      "file": "070-cyber-genetics-crispr-helix.html",
+      "promptFile": "070-cyber-genetics-crispr-helix.txt",
+      "thumbnail": "thumbs/070-cyber-genetics-crispr-helix.jpg",
+      "htmlSha256": "a05f449f177bffe51f1cdc88a66a6314654669ef46e17e34a07361353f6dbe52",
+      "txtSha256": "b6c55340266ba2012be7364413b1bbe721e136be996f469a81692a90e0e53824",
+      "thumbnailSha256": "487b6cc48739a2c7bef4a3c5b89f93532ed961e3615e35d8690c8d2ba685bffe",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "071",
+      "file": "071-hydrological-river-meander-delta.html",
+      "promptFile": "071-hydrological-river-meander-delta.txt",
+      "thumbnail": "thumbs/071-hydrological-river-meander-delta.jpg",
+      "htmlSha256": "e8b5097dd676c3bfdeb2a0ea0ce7cf2167e2dfd15e35c49e4fec3f65f312cc47",
+      "txtSha256": "18db1cdaa08daa723b972d6d73d0ad5730c4c89c01517c0a54267e9724034fac",
+      "thumbnailSha256": "597f1d4e0516c350bb3660584f758cd20eae2191db9b2f2c449cd9a48ad00fb5",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "072",
+      "file": "072-mid-century-eames-plywood-lounge.html",
+      "promptFile": "072-mid-century-eames-plywood-lounge.txt",
+      "thumbnail": "thumbs/072-mid-century-eames-plywood-lounge.jpg",
+      "htmlSha256": "e34f8ce619ccac334388d0ed31e46424860ff19003da7f56df98a8b36d512b8e",
+      "txtSha256": "2b7b7cf1f285041d71b48d0b45c7ce249b0b9617fc7fa078d05c63ffb0ef3c89",
+      "thumbnailSha256": "f811a3701d02230d5a542368a295a8104e372415653b88d0dc3ec97694e809fa",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "073",
+      "file": "073-aurora-fractal-mandelbrot-explorer.html",
+      "promptFile": "073-aurora-fractal-mandelbrot-explorer.txt",
+      "thumbnail": "thumbs/073-aurora-fractal-mandelbrot-explorer.jpg",
+      "htmlSha256": "b1f15d8dad7564febdc5d9d7140733ddbcfcb8944550b72c3c3d0fa72e2927bd",
+      "txtSha256": "06fe16bbe434183f589b089c0862fe0b08ca422f4ac82993abcc562ba88ff602",
+      "thumbnailSha256": "e540adffee0caff9f809288abb9072983cbfb3cdad190c17f9ba3ef8642835fa",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "074",
+      "file": "074-byzantine-mosaic-gold-tesserae.html",
+      "promptFile": "074-byzantine-mosaic-gold-tesserae.txt",
+      "thumbnail": "thumbs/074-byzantine-mosaic-gold-tesserae.jpg",
+      "htmlSha256": "245ba4c27062e77f54c68cf35960f1e2e2c3b29502f0c0ea9aefc6b143ad47d1",
+      "txtSha256": "c652b017f8c335090f6c59d4ba983e90ef5e4b6b2973f10e736c4516d3fbaad0",
+      "thumbnailSha256": "ae268a2d335522c0f451ce83ff75edc3df04ba6fc6ed5feac46f3690336eaa37",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "075",
+      "file": "075-futuristic-tokamak-fusion-reactor.html",
+      "promptFile": "075-futuristic-tokamak-fusion-reactor.txt",
+      "thumbnail": "thumbs/075-futuristic-tokamak-fusion-reactor.jpg",
+      "htmlSha256": "3c894ead7117c60e9215248e32b8ece5df731ac25e62b1e46d4c04b69ad8ae29",
+      "txtSha256": "4bdf5db07aa65090f8433394f6075626170bc01368dc8df255e23d283b3c22f4",
+      "thumbnailSha256": "7e84456021159c53498d313575b6580787744cf93c9cf30b19f7ab8550df14d5",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "076",
+      "file": "076-desert-dune-aeolian-ripples.html",
+      "promptFile": "076-desert-dune-aeolian-ripples.txt",
+      "thumbnail": "thumbs/076-desert-dune-aeolian-ripples.jpg",
+      "htmlSha256": "0320e52978cb8654a1fd1428d622ee0b1bda8d84764e6d33536d03432c68e3c3",
+      "txtSha256": "2b122e045f22d062675245685800e473ec5e6af81828fe2e93def65e60a49ff4",
+      "thumbnailSha256": "5166de4ab9bb7fcb9b75d52d44f07eb9ef6197bf1fe0dab1bfcd7d32adc01c7a",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "077",
+      "file": "077-vintage-teletype-enigma-rotor.html",
+      "promptFile": "077-vintage-teletype-enigma-rotor.txt",
+      "thumbnail": "thumbs/077-vintage-teletype-enigma-rotor.jpg",
+      "htmlSha256": "a8805d8f9515ac98713dd70a43431c144c052f1b408baaaf366ce29fb70493c0",
+      "txtSha256": "b87efff4aaf62d5fc3f00303309c0221c657c1d35c9e4c4311cb0ac4706530a6",
+      "thumbnailSha256": "c1388fd2951c54739d95b34ba6d299da392e1e9d86a7aadba39150b4d0ecf014",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "078",
+      "file": "078-minimal-swiss-railway-clock.html",
+      "promptFile": "078-minimal-swiss-railway-clock.txt",
+      "thumbnail": "thumbs/078-minimal-swiss-railway-clock.jpg",
+      "htmlSha256": "ba894e503feef9a764f3d5f022843b64b161211c0b1f066bd4b8d4e574b94008",
+      "txtSha256": "c4e749441c94cafc0925afdcb2d797b9aea78b5a74cd6983d4702b8647c21069",
+      "thumbnailSha256": "5b962f5bd6309236c881c485c727564fccccd02d18bf4c8e07b2d027e2409219",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "079",
+      "file": "079-bioluminescent-fungi-spore-print.html",
+      "promptFile": "079-bioluminescent-fungi-spore-print.txt",
+      "thumbnail": "thumbs/079-bioluminescent-fungi-spore-print.jpg",
+      "htmlSha256": "a56a6149677e78e499c90ccc5fe2b409e657f060776941e2826bddcb9b763d9e",
+      "txtSha256": "7f7834009055a7a47f5eab64d89fb3566800706ecae19635438c5dda73e63b3b",
+      "thumbnailSha256": "75b94bb25185b2f3c7067ab5ebf062a3b8d52f8dc39bbbb970b470ef2ffbd78e",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "080",
+      "file": "080-architectural-tensile-freilichttheater.html",
+      "promptFile": "080-architectural-tensile-freilichttheater.txt",
+      "thumbnail": "thumbs/080-architectural-tensile-freilichttheater.jpg",
+      "htmlSha256": "e1677ea3700cf49582ecb4ab7c9297b724d715a6f11438b6e050b1d5a5cf9c9c",
+      "txtSha256": "1608a9a51f6df47c9e28909175ee7278c671f3e29a439392413cb7473cdf394a",
+      "thumbnailSha256": "2a812d347b23401d0e87a0496e166ece79dda95268ce7fdd36bff4886ead2d29",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "081",
+      "file": "081-ancient-cuneiform-clay-tablet.html",
+      "promptFile": "081-ancient-cuneiform-clay-tablet.txt",
+      "thumbnail": "thumbs/081-ancient-cuneiform-clay-tablet.jpg",
+      "htmlSha256": "9cb588c7b0c6870b8791aba8ce3ca6f8220402efa1473030044ddf12d7ff8b47",
+      "txtSha256": "f908e8afab7508c4d4857a5acfc2ace065e51f4bae4486bd124bf09984623b27",
+      "thumbnailSha256": "2667e8264048bc6f88cc6391faa46a96657f297eef78698af043d3d9fe45bc83",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "082",
+      "file": "082-lofi-cassette-tape-four-track.html",
+      "promptFile": "082-lofi-cassette-tape-four-track.txt",
+      "thumbnail": "thumbs/082-lofi-cassette-tape-four-track.jpg",
+      "htmlSha256": "09307027acb7e9b533816d7e08ba854ca489df0eb162ecd73cd958fe61b7fb23",
+      "txtSha256": "431820db4c2909ddba7f65cd17c579b93527e51c9557520f06e6f76568858bff",
+      "thumbnailSha256": "d595eb048a07b80eb5debf8b51dc3d03c513a3ec631e048158e646cb6ef1e32f",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "083",
+      "file": "083-stained-agate-geode-crystallography.html",
+      "promptFile": "083-stained-agate-geode-crystallography.txt",
+      "thumbnail": "thumbs/083-stained-agate-geode-crystallography.jpg",
+      "htmlSha256": "8a58d2aa19296c78e5f4f18b15dc993e57bc7a2e9f647ec6063d86219983cfc9",
+      "txtSha256": "3befad9672361af2cf1e4119a0a1d6e793c2653ae847d65c06b0d3017dee77ab",
+      "thumbnailSha256": "95b86f3daf5fb1730241a424d21a1c387caa0309ad1b5ec1baffd9c95043e983",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "084",
+      "file": "084-bauhaus-oskar-schlemmer-triadic.html",
+      "promptFile": "084-bauhaus-oskar-schlemmer-triadic.txt",
+      "thumbnail": "thumbs/084-bauhaus-oskar-schlemmer-triadic.jpg",
+      "htmlSha256": "290e5a3b2a0840a942d4919a0f48d02be308a033dca9cd00cc099c9efb4e8e3f",
+      "txtSha256": "95f0c71a1e127bc83eb91a9b39cd6ddc8ce00f963020c2c3092538b16ef84cc4",
+      "thumbnailSha256": "8b2bae88a8dbed1945482a19a9b5f130d35e70f9d1ac5ded708ecfd08bf9c4ff",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "085",
+      "file": "085-oceanic-thermohaline-conveyor.html",
+      "promptFile": "085-oceanic-thermohaline-conveyor.txt",
+      "thumbnail": "thumbs/085-oceanic-thermohaline-conveyor.jpg",
+      "htmlSha256": "bad20f1d7e6e3a0ac6ee0c7ee6fbe31e0f260dd76f2694ea34260c732fbb3a33",
+      "txtSha256": "33d8315ec6f143f19d776c12d01bad6c833d29dda84da7f0187e2550553da7da",
+      "thumbnailSha256": "f00f381b298b5dffd42ced2b84c1b483d9710a2573f9c4657486212413714872",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "086",
+      "file": "086-luxury-fountain-pen-nib-calligraphy.html",
+      "promptFile": "086-luxury-fountain-pen-nib-calligraphy.txt",
+      "thumbnail": "thumbs/086-luxury-fountain-pen-nib-calligraphy.jpg",
+      "htmlSha256": "485f724e2477e2b67e6f2d955ad5f63422d2fbbfb381983d9a64df06cde0b71b",
+      "txtSha256": "b3138645c1ee21c7d50d470cbc356d2cacf076dc03d1c414a4fb91a4308767f3",
+      "thumbnailSha256": "cdadc31e51d8c9a15b35e4340280e5a93a9c2dadf73a7b65a0a0cf3b4e980c19",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "087",
+      "file": "087-radio-telescope-pulsar-waterfall.html",
+      "promptFile": "087-radio-telescope-pulsar-waterfall.txt",
+      "thumbnail": "thumbs/087-radio-telescope-pulsar-waterfall.jpg",
+      "htmlSha256": "afb0d4a88b584cb8d3e4523efdcbb138b17bcc37533caa6e2bc3b4fafa21d0a9",
+      "txtSha256": "1934a0a71976e7926b4a3f7310e97124b7d5a3156405724d3694f20fd8160d2a",
+      "thumbnailSha256": "41090909613608614a9763df970346bb9c99c1e90e309133a3801c6801d964eb",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "088",
+      "file": "088-paper-marbling-suminagashi-tank.html",
+      "promptFile": "088-paper-marbling-suminagashi-tank.txt",
+      "thumbnail": "thumbs/088-paper-marbling-suminagashi-tank.jpg",
+      "htmlSha256": "28a8ca3229293d302836f351eced1be482f04b78c5a267a6206f26fddd7a9019",
+      "txtSha256": "66cd99fa4c88e919c591f56aba7476992f5504f572a0b2a6b89c3d22a4e753ba",
+      "thumbnailSha256": "50b8052b988f7508d582ac7c3fd7c5a4f2c3e3588165347a8f1387ce14689240",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "089",
+      "file": "089-vintage-apothecaries-botanical-elixir.html",
+      "promptFile": "089-vintage-apothecaries-botanical-elixir.txt",
+      "thumbnail": "thumbs/089-vintage-apothecaries-botanical-elixir.jpg",
+      "htmlSha256": "97716cee1eb021437a30f56b04084874ed93d2c2ccde923f169c1ba33a2d635b",
+      "txtSha256": "f213d01d7e9d871263127797d47cc2473ae064c3c7f99b5a6f6cda830336c5fd",
+      "thumbnailSha256": "07fbeedcec916fab7f991c52ec381c8a68d49bea706a8cbc9b41c20c4fe188ea",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "090",
+      "file": "090-futuristic-orbital-tether-elevator.html",
+      "promptFile": "090-futuristic-orbital-tether-elevator.txt",
+      "thumbnail": "thumbs/090-futuristic-orbital-tether-elevator.jpg",
+      "htmlSha256": "633124ed802dfde6f5b8612aad0971c95300d68721e6da791429d9eeb38f9023",
+      "txtSha256": "0c5cfb374dd6f22b659732ad3ea1d39cf14b4bf0e9581d43e572bd89381c573a",
+      "thumbnailSha256": "e39d04571cf5b74462c2fe1ae43b0c394d2bf0e034da3484f407872d489cfcc9",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "091",
+      "file": "091-kinetic-op-art-vasarely-spheres.html",
+      "promptFile": "091-kinetic-op-art-vasarely-spheres.txt",
+      "thumbnail": "thumbs/091-kinetic-op-art-vasarely-spheres.jpg",
+      "htmlSha256": "7678c439e439c5af78af9767e1cf2d3d70e53ae6550311d33c45e165e3b70874",
+      "txtSha256": "08aaf130466084cfee1f88f9621f6195641ae7d0a1a4847a6bd89abe10153b33",
+      "thumbnailSha256": "2c91013bd660b02b1bbe6ed5b2a2f48d15443941833e8ba0d0840400eaf6e59c",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "092",
+      "file": "092-art-deco-transatlantic-ocean-liner.html",
+      "promptFile": "092-art-deco-transatlantic-ocean-liner.txt",
+      "thumbnail": "thumbs/092-art-deco-transatlantic-ocean-liner.jpg",
+      "htmlSha256": "37cf15730c297cd9409ab1a98514fb791e73339322524565f521c1100d66985b",
+      "txtSha256": "32f44814ab66099463e4e7f12a3ed0a24e7ce15a11acc77ec533ab0b493f79f8",
+      "thumbnailSha256": "491b269b9bc6cd4308c623ffebe472164024bf9d09ba05b60dbe3c11a1bbec77",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "093",
+      "file": "093-biophilic-living-wall-terrarium.html",
+      "promptFile": "093-biophilic-living-wall-terrarium.txt",
+      "thumbnail": "thumbs/093-biophilic-living-wall-terrarium.jpg",
+      "htmlSha256": "09167e5e5c41e41d8caec83fece30ba58e99afb15e9e3cc058498f217238f08f",
+      "txtSha256": "9986cb901195270cb04c6193d6005e1c482cef408f5529cd273d725d950faef4",
+      "thumbnailSha256": "5aa24b876da8acc5313917006203268f933ed6be874f343d3793fa46b4fb49a9",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "094",
+      "file": "094-vintage-nixie-tube-chronometer.html",
+      "promptFile": "094-vintage-nixie-tube-chronometer.txt",
+      "thumbnail": "thumbs/094-vintage-nixie-tube-chronometer.jpg",
+      "htmlSha256": "401c31fff5e84582d6a7fa20089fe147f027bc09f474b01d0d7729fa504d7f01",
+      "txtSha256": "b370fd3185bc0300b98696fd444a4dd4a7fc4a0aef69acf321141ac7438649de",
+      "thumbnailSha256": "df015c2d8b40f3f5e0075a3177fce67381669bdd83cc69c888c090244aed1201",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "095",
+      "file": "095-bauhaus-color-wheel-johannes-itten.html",
+      "promptFile": "095-bauhaus-color-wheel-johannes-itten.txt",
+      "thumbnail": "thumbs/095-bauhaus-color-wheel-johannes-itten.jpg",
+      "htmlSha256": "5448012c640811b98ebea5698f35e036ca6834230d3655533015fd8491a49258",
+      "txtSha256": "527ca0a06fb5f21a925828818ca2b3ce4190572a5239edc4575301626949366f",
+      "thumbnailSha256": "7bc1b8979aaa4f07220551de11f7a7c7ebdd95f82e566079da8a39010112ea4c",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "096",
+      "file": "096-glacier-calving-fjord-acoustics.html",
+      "promptFile": "096-glacier-calving-fjord-acoustics.txt",
+      "thumbnail": "thumbs/096-glacier-calving-fjord-acoustics.jpg",
+      "htmlSha256": "a52610f74471ac395d1c8a28cc0a776420beb942d9e945dee8d378cd1af9b837",
+      "txtSha256": "ad34a391b1ef48c819170d6ecc77168f167ae74fbc916175dcad7bb1f5b0bd24",
+      "thumbnailSha256": "47512549bb2713bb64849e6a96e2414a19ed18d31febed6e7b651e5422662290",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "097",
+      "file": "097-silk-jacquard-punched-card-loom.html",
+      "promptFile": "097-silk-jacquard-punched-card-loom.txt",
+      "thumbnail": "thumbs/097-silk-jacquard-punched-card-loom.jpg",
+      "htmlSha256": "0f351672c1d791395446ecd890723e35798c8944110e048c2839956af1ca3552",
+      "txtSha256": "6304559f95e6b30d5ed9de51a06731cb603b071e8384445f4eaeec875c092617",
+      "thumbnailSha256": "b858db71d8ec1fca2b528a411bfcd5fd7fd9ce46d60202d511e033d725132a49",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "098",
+      "file": "098-architectural-stained-alabaster-vault.html",
+      "promptFile": "098-architectural-stained-alabaster-vault.txt",
+      "thumbnail": "thumbs/098-architectural-stained-alabaster-vault.jpg",
+      "htmlSha256": "f563c0d5a4c855366b2a9c1c0a687698780ae270bb8f31e44bed3c7143ea6d7d",
+      "txtSha256": "08d3803e179cf96857fafafc2b437d2d97c56ee2ef0fbe4f4f85a498bcf916d1",
+      "thumbnailSha256": "5f8d4d320553902ac642f054652db86ac53df458f35292c1868b410f1cd55381",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "099",
+      "file": "099-quantum-chladni-levitation-trap.html",
+      "promptFile": "099-quantum-chladni-levitation-trap.txt",
+      "thumbnail": "thumbs/099-quantum-chladni-levitation-trap.jpg",
+      "htmlSha256": "183e6d3a8d846979bd74caff7906bcba25669a82378f64982103a2668d7d1315",
+      "txtSha256": "154d09ba50c86a157eadbe4351596994f46efd4bfb9d2c1807b062bb23d341a7",
+      "thumbnailSha256": "b336f80c66afabff2bed7ae3631ba23115a80f50a0d42a648e594b2076e06da5",
+      "promptMatchesIndex": true
+    },
+    {
+      "number": "100",
+      "file": "100-organic-wave-lab.html",
+      "promptFile": "100-organic-wave-lab.txt",
+      "thumbnail": "thumbs/100-organic-wave-lab.jpg",
+      "htmlSha256": "50bc46c71f46dac2e1398dabfa6b5ce3775b16710abdd61150d1069192b9e639",
+      "txtSha256": "632ff3e21a3675612a12529524d37266b1c7feb3290c5f62bd23f196ab799ff6",
+      "thumbnailSha256": "3f7f6c4a0c387c20af570951a2481b1cd3ae25b9ae74633bdb089db1a2e02e7e",
+      "promptMatchesIndex": true
+    }
+  ]
+}

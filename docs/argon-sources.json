@@ -1,0 +1,343 @@
+{
+  "reviewed": "2026-10-28",
+  "discovery": "https://github.com/sandbase-lab/awesome-gemini4-argon",
+  "note": "FxTwitter 메타데이터로 원 게시물의 표기·영상 주소를 대조; 성능 독립 재현은 아님.",
+  "cases": [
+    {
+      "id": "argon-2110097921014378606",
+      "source": "https://x.com/LuminaBench/status/2110097921014378606",
+      "published": "2026-10-13T19:58:42.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110097413767671808/vid/avc1/1054x720/VdiqBLte88k5jAd7.mp4?tag=29",
+      "videoId": "2110097413767671808",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110097413767671808/img/-TvYtVKHCt0shGXv.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110097413767671808/vid/avc1/1054x720/VdiqBLte88k5jAd7.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": false,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110367201786314935",
+      "source": "https://x.com/chongdashu/status/2110367201786314935",
+      "published": "2026-10-14T13:48:44.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110366826270269440/vid/avc1/1280x720/427AtEWBzSPVwlCM.mp4?tag=29",
+      "videoId": "2110366826270269440",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110366826270269440/img/u-ItyFK4N95OBuWY.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110366826270269440/vid/avc1/1280x720/427AtEWBzSPVwlCM.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": true,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110109640419926325",
+      "source": "https://x.com/maxescu/status/2110109640419926325",
+      "published": "2026-10-13T20:45:16.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110108617948962816/vid/avc1/1280x720/P-IylRzhLnAPbnOk.mp4?tag=29",
+      "videoId": "2110108617948962816",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110108617948962816/img/-kSYkFx3sLwMRTmm.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110108617948962816/vid/avc1/1280x720/P-IylRzhLnAPbnOk.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": true,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110040063656812976",
+      "source": "https://x.com/ai_for_success/status/2110040063656812976",
+      "published": "2026-10-13T16:08:48.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110039142621233152/vid/avc1/1280x720/tSHZbNf0zmjggQks.mp4?tag=29",
+      "videoId": "2110039142621233152",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110039142621233152/img/KwVzyGa2drZKOpWN.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110039142621233152/vid/avc1/1280x720/tSHZbNf0zmjggQks.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": false,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110973461690802487",
+      "source": "https://x.com/ai_for_success/status/2110973461690802487",
+      "published": "2026-10-16T05:57:47.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110972982877388800/vid/avc1/1280x720/OeRx2K68ZGo7RLzC.mp4?tag=29",
+      "videoId": "2110972982877388800",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110972982877388800/img/afUkG1qRNGBziF2t.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110972982877388800/vid/avc1/1280x720/OeRx2K68ZGo7RLzC.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": true,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110343012421181485",
+      "source": "https://x.com/fofrAI/status/2110343012421181485",
+      "published": "2026-10-14T12:12:37.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110341696881840128/vid/avc1/1200x760/XMO3ArIm1bTXD73I.mp4?tag=29",
+      "videoId": "2110341696881840128",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110341696881840128/img/gJnLVqJZnNPYKqAh.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110341696881840128/vid/avc1/1200x760/XMO3ArIm1bTXD73I.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": false,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110045963951956250",
+      "source": "https://x.com/fofrAI/status/2110045963951956250",
+      "published": "2026-10-13T16:32:15.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110044557593251840/vid/avc1/1280x720/N7i7UQpOZnuvtUVF.mp4?tag=29",
+      "videoId": "2110044557593251840",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110044557593251840/img/8-lnoKuE2UUZonEg.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110044557593251840/vid/avc1/1280x720/N7i7UQpOZnuvtUVF.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": true,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110041557021950348",
+      "source": "https://x.com/doe_naps/status/2110041557021950348",
+      "published": "2026-10-13T16:14:44.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110041201701462016/vid/avc1/1230x720/VpPd70SnOGKaezmi.mp4?tag=29",
+      "videoId": "2110041201701462016",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110041201701462016/img/I7h_H6T9CnhAnLMf.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110041201701462016/vid/avc1/1230x720/VpPd70SnOGKaezmi.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": true,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110078691204374833",
+      "source": "https://x.com/0xbenderxbt/status/2110078691204374833",
+      "published": "2026-10-13T18:42:18.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110078420269096960/vid/avc1/1392x1106/c-4yiF78wEgOanDi.mp4?tag=29",
+      "videoId": "2110078420269096960",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110078420269096960/img/5qfiINLrJWshSepS.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110078420269096960/vid/avc1/1392x1106/c-4yiF78wEgOanDi.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": false,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110223641111888338",
+      "source": "https://x.com/NovaXCode/status/2110223641111888338",
+      "published": "2026-10-14T04:18:16.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110223456197615616/vid/avc1/1160x720/Q4E0ynbImQYXm5xu.mp4?tag=29",
+      "videoId": "2110223456197615616",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110223456197615616/img/QqSssSwzlA7SZrHO.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110223456197615616/vid/avc1/1160x720/Q4E0ynbImQYXm5xu.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": false,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110039909851685300",
+      "source": "https://x.com/jackcheng/status/2110039909851685300",
+      "published": "2026-10-13T16:08:11.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110037383026536448/vid/avc1/1280x720/Aj7_fopaXxLt-wEv.mp4?tag=29",
+      "videoId": "2110037383026536448",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110037383026536448/img/hqe_HPbC-FHenJT8.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110037383026536448/vid/avc1/1280x720/Aj7_fopaXxLt-wEv.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": false,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110097633922662752",
+      "source": "https://x.com/_satyam_ai/status/2110097633922662752",
+      "published": "2026-10-13T19:57:34.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110094250113413120/vid/avc1/1280x720/p6qhLUKiM7ie8rpF.mp4?tag=29",
+      "videoId": "2110094250113413120",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110094250113413120/img/QRBRSSC3BeGDgznF.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110094250113413120/vid/avc1/1280x720/p6qhLUKiM7ie8rpF.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": true,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110243527355736460",
+      "source": "https://x.com/alwayspriyesh/status/2110243527355736460",
+      "published": "2026-10-14T05:37:18.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110243441125040128/vid/avc1/1488x720/kwzYbiGRiInClJbz.mp4?tag=29",
+      "videoId": "2110243441125040128",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110243441125040128/img/G4L7NUhwxS6L41T_.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110243441125040128/vid/avc1/1488x720/kwzYbiGRiInClJbz.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": false,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110609385546547532",
+      "source": "https://x.com/Saboo_Shubham_/status/2110609385546547532",
+      "published": "2026-10-15T05:51:05.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110609346606624768/vid/avc1/1158x720/DdCuwjLzUbF3nQi0.mp4?tag=16",
+      "videoId": "2110609346606624768",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110609346606624768/img/JNpX2kGGQctX-X_g.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110609346606624768/vid/avc1/1158x720/DdCuwjLzUbF3nQi0.mp4?tag=16",
+        "exit": 0,
+        "hasAudio": false,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110627037266477497",
+      "source": "https://x.com/thebuggeddev/status/2110627037266477497",
+      "published": "2026-10-15T07:01:13.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110626328802394112/vid/avc1/1104x720/j7Wezxvfix6ZSXaD.mp4?tag=29",
+      "videoId": "2110626328802394112",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110626328802394112/img/Zsha27MQvZZ1KE5q.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110626328802394112/vid/avc1/1104x720/j7Wezxvfix6ZSXaD.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": false,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110093152854151192",
+      "source": "https://x.com/parada_car88104/status/2110093152854151192",
+      "published": "2026-10-13T19:39:45.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110092799479562240/vid/avc1/1280x720/ZqodBvmnXqehcqLQ.mp4?tag=29",
+      "videoId": "2110092799479562240",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110092799479562240/img/9ZKwQyBDYKFc8QBq.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110092799479562240/vid/avc1/1280x720/ZqodBvmnXqehcqLQ.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": true,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110096143342268664",
+      "source": "https://x.com/parada_car88104/status/2110096143342268664",
+      "published": "2026-10-13T19:51:38.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110096054783729664/vid/avc1/1444x624/RhRgruZmYHsqifJU.mp4?tag=29",
+      "videoId": "2110096054783729664",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110096054783729664/img/QVql7CK30nbrgiaE.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110096054783729664/vid/avc1/1444x624/RhRgruZmYHsqifJU.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": false,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110698310705074655",
+      "source": "https://x.com/skalskip92/status/2110698310705074655",
+      "published": "2026-10-15T11:44:26.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110698254627160064/vid/avc1/1440x720/odBMeBvXP0Cvzj1r.mp4?tag=29",
+      "videoId": "2110698254627160064",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110698254627160064/img/8JmnK0Ne-nX7WHA-.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110698254627160064/vid/avc1/1440x720/odBMeBvXP0Cvzj1r.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": false,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110128337037213928",
+      "source": "https://x.com/procesor_x/status/2110128337037213928",
+      "published": "2026-10-13T21:59:34.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110121164093677568/vid/avc1/1152x720/Nr4-8fJe_yR-YG1x.mp4?tag=29",
+      "videoId": "2110121164093677568",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110121164093677568/img/EX--h2nmYBxk2pJS.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110121164093677568/vid/avc1/1152x720/Nr4-8fJe_yR-YG1x.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": false,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110257225210167523",
+      "source": "https://x.com/doe_naps/status/2110257225210167523",
+      "published": "2026-10-14T06:31:43.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110256984020930560/vid/avc1/1280x720/s1mON7T0ws2w9Dlr.mp4?tag=29",
+      "videoId": "2110256984020930560",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110256984020930560/img/XR0yfVsQ7rRlsqCf.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110256984020930560/vid/avc1/1280x720/s1mON7T0ws2w9Dlr.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": true,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2112494073261265023",
+      "source": "https://x.com/soumyadesign/status/2112494073261265023",
+      "published": "2026-10-20T10:40:09.000Z",
+      "video": "https://video.twimg.com/amplify_video/2112493583890878464/vid/avc1/1170x720/StxUYoyW8RztXZqx.mp4?tag=29",
+      "videoId": "2112493583890878464",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2112493583890878464/img/Ib8bCA9x6wUJlvTY.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2112493583890878464/vid/avc1/1170x720/StxUYoyW8RztXZqx.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": true,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110302514600157279",
+      "source": "https://x.com/HIX_AI_/status/2110302514600157279",
+      "published": "2026-10-14T09:31:41.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110301293600485376/vid/avc1/1080x1920/ogHARjQUX9qZRWx0.mp4?tag=29",
+      "videoId": "2110301293600485376",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110301293600485376/img/RXsNFLk6-Z2HfAwQ.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110301293600485376/vid/avc1/1080x1920/ogHARjQUX9qZRWx0.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": true,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110382089476407630",
+      "source": "https://x.com/0xRhinoX/status/2110382089476407630",
+      "published": "2026-10-14T14:47:53.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110381448989401088/vid/avc1/1184x720/V0D_mf4gpZgsT1eo.mp4?tag=29",
+      "videoId": "2110381448989401088",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110381448989401088/img/w9wCPRUUQPKJ3zhO.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110381448989401088/vid/avc1/1184x720/V0D_mf4gpZgsT1eo.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": true,
+        "error": ""
+      }
+    },
+    {
+      "id": "argon-2110803894028960087",
+      "source": "https://x.com/shengzheyao/status/2110803894028960087",
+      "published": "2026-10-15T18:43:59.000Z",
+      "video": "https://video.twimg.com/amplify_video/2110803823136784384/vid/avc1/1280x720/RhO27ZRrLs7JjR9_.mp4?tag=29",
+      "videoId": "2110803823136784384",
+      "poster": "https://pbs.twimg.com/amplify_video_thumb/2110803823136784384/img/FYFiufW34UaZxDXM.jpg",
+      "probe": {
+        "url": "https://video.twimg.com/amplify_video/2110803823136784384/vid/avc1/1280x720/RhO27ZRrLs7JjR9_.mp4?tag=29",
+        "exit": 0,
+        "hasAudio": false,
+        "error": ""
+      }
+    }
+  ]
+}

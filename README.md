@@ -1,6 +1,6 @@
 # AI Showcase
 
-A Korean collection of published Jev, Claude Opus 5.5, GPT-6 Astra, Fable 5.1 and Sonnet 5.5 demonstrations. Independent of the model providers.
+A Korean collection of published Jev, Claude Opus 5.5, GPT-6 Astra, Fable 5.1, Sonnet 5.5 and Gemini 4 Argon demonstrations, with a Fable 5.5 status page. Independent of the model providers.
 
 ## Features
 
@@ -61,7 +61,7 @@ The September 28 update adds 50 animation/art projects, bringing that category t
 
 [Open GPT-6 Astra](https://alibowbow.github.io/jev/astra.html): 140 distinct published projects including 59 animation/art cases and 132 original inline videos. Sources, Korean descriptions and media metadata are documented in [the source ledger](docs/astra-2026-09-28.md). Data lives in `assets/astra-data.js`; Astra bookmarks use a separate local storage key.
 
-The shared AI Showcase header offers four model tabs. Catalogue headings contain only the model, page type and counts.
+The shared AI Showcase header links the model collections and the Fable 5.5 status page. Catalogue headings contain only the model, page type and counts.
 
 
 ### Astra HTML 100 submenu
@@ -81,3 +81,10 @@ Both additions link to the creator’s original files rather than copying or emb
 [Sonnet HTML 100](https://alibowbow.github.io/jev/sonnet-html100.html) links MiaAI-Lab's 100 numbered works with independently written Korean copy. All HTML/TXT/thumbnail pairs and exact prompt matches were checked against creator commit `d50dc15f93a552cd1cfef8bddb63c3f2e94b7f7d`. Code links are pinned; execution and prompt links use the original creator Pages. The license is unconfirmed, so execution files, prompts and screenshots are not rehosted. Individual publication dates are unknown. [The source manifest](docs/sonnet-html100-sources.json) records file hashes, prompt matching and HTTP checks; these do not establish runtime correctness.
 
 Both Sonnet pages share `assets/app.js`; their bookmarks use `sonnet-showcase:saved:v1` and `sonnet-html100:saved:v1`. The previous six collections retain their data unchanged.
+
+
+## Gemini 4 Argon and Fable 5.5
+
+[Gemini 4 Argon use cases](https://alibowbow.github.io/jev/argon.html) contains 24 sourced public videos (11 with audio tracks and 13 silent), covering creative work, games, development and robotics. Creator reports, research-team demonstrations and comparisons are labeled with their limits. Each case retains its original X post, reviewed date and tool roles. [Gemini HTML 100](https://alibowbow.github.io/jev/argon-html100.html) presents MiaAI-Lab's 100 numbered works with Korean descriptions and links to the creator's originals; the 100 HTML/TXT/JPG pairs and prompt texts were checked. Only 15 Pages URLs were sampled, not all 300, and the works were not exhaustively run. Both collections use separate bookmark keys. See the [source and validation ledger](docs/argon-2026-10-28.md).
+
+[Fable 5.5 status](https://alibowbow.github.io/jev/fable55.html) records that no Anthropic announcement for that model was found in the official model list or news as of 2026-10-28. It links official sources and the existing Fable 5.1 collection without attributing 5.1 works or specifications to 5.5.

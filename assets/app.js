@@ -2,13 +2,14 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const data = window.SONNET_HTML_ATLAS || window.SONNET_ATLAS || window.FABLE_ATLAS || window.ASTRA_HTML_ATLAS || window.OPUS_HTML_ATLAS || window.ASTRA_ATLAS || window.OPUS_ATLAS || window.JEV_ATLAS;
+  const data = window.ARGON_HTML_ATLAS || window.ARGON_ATLAS || window.SONNET_HTML_ATLAS || window.SONNET_ATLAS || window.FABLE_ATLAS || window.ASTRA_HTML_ATLAS || window.OPUS_HTML_ATLAS || window.ASTRA_ATLAS || window.OPUS_ATLAS || window.JEV_ATLAS;
   if (!data) {
     $('cards').textContent = '목록을 불러오지 못했습니다. 페이지를 새로고침해 주세요.';
     return;
   }
   const htmlCollection = data.kind === 'html-collection';
   const sonnetCollection = Boolean(window.SONNET_ATLAS || window.SONNET_HTML_ATLAS);
+  const evidenceCollection = sonnetCollection || Boolean(window.ARGON_ATLAS || window.ARGON_HTML_ATLAS);
   const originNames = { community: '커뮤니티 제작·테스트', 'official-demo': '공식 데모', 'partner-report': '파트너 자체평가', 'creator-collection': '제작자 HTML 작품' };
 
   function element(tag, className, text) {
@@ -131,7 +132,7 @@
     const poster = safePoster(c.media.poster);
     if (poster) {
       const img = element('img');
-      img.alt = sonnetCollection ? c.media.alt || '' : '';
+      img.alt = evidenceCollection ? c.media.alt || '' : '';
       img.loading = 'lazy';
       img.decoding = 'async';
       img.addEventListener('error', () => preview.classList.add('image-failed'), { once: true });
@@ -169,7 +170,7 @@
     share.append(icon('share'));
     actions.append(share);
     footer.append(element('span', 'author-mark', Array.from(c.author)[0]), element('span', 'author', c.author), actions);
-    const disclosure = element('p', 'metric-disclosure', htmlCollection ? c.originalTitle : sonnetCollection ? `${originNames[c.evidence.origin]} · 독립 재현 아님` : '제작자 공개 자료 · 독립 재현 아님');
+    const disclosure = element('p', 'metric-disclosure', htmlCollection ? c.originalTitle : evidenceCollection ? `${originNames[c.evidence.origin]} · 독립 재현 아님` : '제작자 공개 자료 · 독립 재현 아님');
     if ((window.OPUS_ATLAS || window.ASTRA_ATLAS) && c.research) {
       const research = externalLink('수집 출처 ↗', c.research);
       research.className = 'research-link';
@@ -199,7 +200,7 @@
     $('empty-text').textContent = state.savedOnly && !saved.size ? '카드의 북마크 버튼으로 관심 있는 사례를 모아 보세요.' : '검색어를 바꾸거나 다른 분야를 선택해 보세요.';
     const label = state.category === 'all' ? '전체' : categoryMap.get(state.category).name;
     $('result-status').replaceChildren(document.createTextNode(`${label}${state.savedOnly ? ' · 저장한 사례' : ''} `),
-      element('b', '', String(items.length)), document.createTextNode(window.SONNET_ATLAS ? '개 자료' : '개 사례'));
+      element('b', '', String(items.length)), document.createTextNode((window.SONNET_ATLAS || window.ARGON_ATLAS) ? '개 자료' : '개 사례'));
     $('reset').hidden = state.category === 'all' && !state.query && !state.savedOnly && state.sort === 'curated' && state.format === 'all' && state.origin === 'all';
     document.querySelectorAll('[data-category]').forEach(node => node.setAttribute('aria-pressed', String(node.dataset.category === state.category)));
     updateSavedUI();
@@ -326,7 +327,7 @@
     $('retry-player').hidden = false;
   }
   function mediaUrl(c) {
-    if (window.OPUS_ATLAS || window.ASTRA_ATLAS || window.SONNET_ATLAS) {
+    if (window.OPUS_ATLAS || window.ASTRA_ATLAS || window.SONNET_ATLAS || window.ARGON_ATLAS) {
       const value = safeUrl(c.media.url, window.OPUS_ATLAS ? ['ohmyopus.com', 'video.twimg.com'] : ['video.twimg.com']);
       if (!value || c.media.type !== 'mp4') return null;
       const url = new URL(value);
