@@ -2,15 +2,15 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const data = window.FABLE55_ATLAS || window.ARGON_HTML_ATLAS || window.ARGON_ATLAS || window.SONNET_HTML_ATLAS || window.SONNET_ATLAS || window.FABLE_ATLAS || window.ASTRA_HTML_ATLAS || window.OPUS_HTML_ATLAS || window.ASTRA_ATLAS || window.OPUS_ATLAS || window.JEV_ATLAS;
+  const data = window.DECISIONS_ATLAS || window.FABLE55_ATLAS || window.ARGON_HTML_ATLAS || window.ARGON_ATLAS || window.SONNET_HTML_ATLAS || window.SONNET_ATLAS || window.FABLE_ATLAS || window.ASTRA_HTML_ATLAS || window.OPUS_HTML_ATLAS || window.ASTRA_ATLAS || window.OPUS_ATLAS || window.JEV_ATLAS;
   if (!data) {
     $('cards').textContent = '목록을 불러오지 못했습니다. 페이지를 새로고침해 주세요.';
     return;
   }
   const htmlCollection = data.kind === 'html-collection';
   const sonnetCollection = Boolean(window.SONNET_ATLAS || window.SONNET_HTML_ATLAS);
-  const evidenceCollection = sonnetCollection || Boolean(window.ARGON_ATLAS || window.ARGON_HTML_ATLAS || window.FABLE55_ATLAS);
-  const originNames = { community: '커뮤니티 제작·테스트', 'official-demo': '공식 데모', 'partner-report': '파트너 자체평가', 'creator-collection': '제작자 HTML 작품' };
+  const evidenceCollection = sonnetCollection || Boolean(window.DECISIONS_ATLAS || window.ARGON_ATLAS || window.ARGON_HTML_ATLAS || window.FABLE55_ATLAS);
+  const originNames = { 'official-use': 'OpenAI 내부 활용', recipe: '공개 예제·설계', community: '커뮤니티 제작·테스트', 'official-demo': '공식 데모', 'partner-report': '파트너 자체평가', 'creator-collection': '제작자 HTML 작품' };
 
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -64,6 +64,7 @@
   function safePoster(value) {
     // Locally authored report covers are not third-party execution HTML.
     if (sonnetCollection && /^assets\/sonnet-thumbs\/[a-z0-9-]+\.svg$/.test(value)) return value;
+    if (window.DECISIONS_ATLAS && /^assets\/decisions-thumbs\/[a-z0-9-]+\.svg$/.test(value)) return value;
     return safeUrl(value, posterHosts);
   }
   const categoryMap = new Map(data.categories.map(c => [c.id, c]));
@@ -143,7 +144,7 @@
     const play = element('span', 'play-circle');
     play.append(icon(playable ? 'play' : 'share'));
     const mediaBottom = element('span', 'media-bottom');
-    const mediaLabel = playable ? (c.media.gifId ? 'GIF 애니메이션 · 무음' : c.media.clipSeconds ? `무음 미리보기 ${c.media.clipSeconds}초` : c.media.hasAudio === true ? '소리 포함 · 전체 영상' : c.media.hasAudio === false ? '무음 원본 영상' : '공개 시연 영상') : (htmlCollection ? '작품 실행 ↗' : c.media.type === 'report' ? '초기 테스트 보고 · 공개 데모 없음' : c.media.type === 'svg' ? 'SVG 애니메이션 · 무음' : c.demo ? '데모 직접 열기 ↗' : '이미지·원본 보기 ↗');
+    const mediaLabel = playable ? (c.media.gifId ? 'GIF 애니메이션 · 무음' : c.media.clipSeconds ? `무음 미리보기 ${c.media.clipSeconds}초` : c.media.hasAudio === true ? '소리 포함 · 전체 영상' : c.media.hasAudio === false ? '무음 원본 영상' : '공개 시연 영상') : (window.DECISIONS_ATLAS ? c.media.label : htmlCollection ? '작품 실행 ↗' : c.media.type === 'report' ? '초기 테스트 보고 · 공개 데모 없음' : c.media.type === 'svg' ? 'SVG 애니메이션 · 무음' : c.demo ? '데모 직접 열기 ↗' : '이미지·원본 보기 ↗');
     mediaBottom.append(element('span', 'video-label', mediaLabel),
       element('span', 'media-credit', c.author));
     preview.append(play, mediaBottom);
@@ -188,7 +189,7 @@
     const items = data.cases.filter(c => (state.category === 'all' || c.category === state.category) &&
       (!state.savedOnly || saved.has(c.id)) &&
       (state.origin === 'all' || c.evidence?.origin === state.origin) &&
-      (state.format === 'all' || (state.format === 'video' && c.media.type === 'mp4') ||
+      (state.format === 'all' || (state.format === 'video' && (c.media.type === 'mp4' || (window.DECISIONS_ATLAS && c.fullVideo))) ||
         (state.format === 'audio' && c.media.type === 'mp4' && c.media.hasAudio === true) ||
         (state.format === 'demo' && c.demo) || (state.format === 'code' && c.code)) &&
       words.every(word => searchIndex.get(c.id).includes(word)));
@@ -200,7 +201,7 @@
     $('empty-text').textContent = state.savedOnly && !saved.size ? '카드의 북마크 버튼으로 관심 있는 사례를 모아 보세요.' : '검색어를 바꾸거나 다른 분야를 선택해 보세요.';
     const label = state.category === 'all' ? '전체' : categoryMap.get(state.category).name;
     $('result-status').replaceChildren(document.createTextNode(`${label}${state.savedOnly ? ' · 저장한 사례' : ''} `),
-      element('b', '', String(items.length)), document.createTextNode((window.SONNET_ATLAS || window.ARGON_ATLAS || window.FABLE55_ATLAS) ? '개 자료' : '개 사례'));
+      element('b', '', String(items.length)), document.createTextNode((window.DECISIONS_ATLAS || window.SONNET_ATLAS || window.ARGON_ATLAS || window.FABLE55_ATLAS) ? '개 자료' : '개 사례'));
     $('reset').hidden = state.category === 'all' && !state.query && !state.savedOnly && state.sort === 'curated' && state.format === 'all' && state.origin === 'all';
     document.querySelectorAll('[data-category]').forEach(node => node.setAttribute('aria-pressed', String(node.dataset.category === state.category)));
     updateSavedUI();

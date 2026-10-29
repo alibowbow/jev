@@ -21,7 +21,7 @@ test('all menu routes, assets and related-demo links resolve under a project sub
   for (const file of ['index.html', 'learn.html', 'ideas.html', 'opus.html', 'opus-html100.html', 'astra.html', 'astra-html100.html', 'fable.html', 'sonnet.html', 'sonnet-html100.html', 'argon.html', 'argon-html100.html', 'fable55.html', 'fable55-status.html']) {
     const d = setup(t, file);
     const menu = d.querySelector('nav[aria-label="모델 선택"]');
-    assert.deepEqual([...menu.querySelectorAll('a')].map(a => a.textContent), ['Jev', 'Opus5.5', 'GPT‑6 Astra', 'Fable 5.1', 'Sonnet 5.5', 'Gemini 4 Argon', 'Fable 5.5']);
+    assert.deepEqual([...menu.querySelectorAll('a')].map(a => a.textContent), ['Jev', 'Opus5.5', 'GPT‑6 Astra', 'Fable 5.1', 'Sonnet 5.5', 'Gemini 4 Argon', 'Fable 5.5', 'OpenAI Decisions']);
     assert.equal(menu.querySelectorAll('[aria-current="true"]').length, 1);
     assert.equal(menu.querySelector('[aria-current="true"]').textContent, file.startsWith('argon') ? 'Gemini 4 Argon' : file.startsWith('fable55') ? 'Fable 5.5' : file.startsWith('sonnet') ? 'Sonnet 5.5' : file.startsWith('opus') ? 'Opus5.5' : file.startsWith('astra') ? 'GPT‑6 Astra' : file === 'fable.html' ? 'Fable 5.1' : 'Jev');
     const submenu = d.querySelector('.site-subnav');

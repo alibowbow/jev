@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f7f8">
+<meta name="description" content="OpenAI Decisions API의 실제 도입 사례, 공개 시연과 공식 예제를 살펴보세요.">
+<meta property="og:title" content="OpenAI Decisions 활용사례 — AI Showcase">
+<meta property="og:description" content="OpenAI Decisions API의 도입 사례와 공개 시연을 탐색하세요.">
+<meta property="og:type" content="website">
+<meta name="referrer" content="no-referrer">
+<title>OpenAI Decisions 활용사례 — AI Showcase</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css?v=6">
+<link rel="stylesheet" href="assets/guide.css?v=7">
+<link rel="stylesheet" href="assets/opus.css?v=1">
+<script src="assets/decisions-data.js?v=1" defer></script>
+<script src="assets/app.js?v=20" defer></script>
+<link rel="stylesheet" href="assets/catalogue.css?v=5">
+<link rel="stylesheet" href="assets/sonnet.css?v=1">
+<link rel="stylesheet" href="assets/decisions.css?v=1">
+</head>
+<body class="opus-page decisions-page">
+<a class="skip" href="#cards">사례로 건너뛰기</a>
+<header class="header"><div class="wrap header-inner">
+<a class="brand" href="./" aria-label="AI Showcase 홈"><span class="brand-symbol" aria-hidden="true">ai</span><strong>AI Showcase</strong></a>
+<nav class="site-nav" aria-label="모델 선택"><a href="./">Jev</a><a href="opus.html">Opus5.5</a><a href="astra.html">GPT‑6 Astra</a><a href="fable.html">Fable 5.1</a><a href="sonnet.html">Sonnet 5.5</a><a href="argon.html">Gemini 4 Argon</a><a href="fable55.html">Fable 5.5</a><a href="decisions.html" aria-current="true">OpenAI Decisions</a></nav>
+<div class="header-actions"><button type="button" id="saved-toggle" class="saved-toggle" aria-pressed="false"><span data-icon="bookmark"></span><span>저장한 사례</span><b id="saved-count">0</b></button></div>
+</div>
+
+</header>
+<main class="wrap">
+<section class="decisions-hero" aria-labelledby="page-title">
+  <div><p class="eyebrow">OPENAI · DECISIONS API</p><h1 id="page-title">작은 판단을 빠르게,<br><span>OpenAI Decisions</span></h1><p class="decisions-lead">텍스트·이미지·JSON을 보고 정해진 질문에 답하는 API. 실제 도입과 공개된 실험, 직접 살펴볼 수 있는 데모를 모았습니다.</p><div class="hero-actions"><a href="#cards">활용사례 살펴보기 ↓</a><a href="https://developers.openai.com/api/docs/guides/decisions" target="_blank" rel="noopener noreferrer">OpenAI 공식 가이드 ↗</a></div></div>
+  <div class="decision-sample" aria-label="판단 결과의 세 가지 형태"><span>한 번의 질문, 정해진 답</span><div><b>Predicate</b><small>조건이 참일 확률</small></div><div><b>Choice</b><small>미리 정한 선택지</small></div><div><b>Score</b><small>순서가 있는 기준의 점수</small></div></div>
+</section>
+<section class="decisions-facts" aria-label="API 핵심 정보"><div><strong>정식 출시</strong><span>2026.10.22 · GPT-6 Luna</span></div><div><strong>최대 400개</strong><span>한 요청의 질문 수</span></div><div><strong>최대 10배</strong><span>동일 모델 Responses API 대비 · OpenAI 발표</span></div><div><strong>$0.10 / 100만</strong><span>비캐시 입력 토큰 · 캐시 쓰기 등 별도</span></div></section>
+<p class="decisions-intro">공식 발표는 캐시 읽기 입력을 100만 토큰당 $0.01로 안내합니다. 캐시 쓰기와 이미지·음성 등 전체 작업 비용은 별도로 확인하세요. 속도와 정확도는 데이터와 환경에 따라 다릅니다. <a href="https://openai.com/index/decisions-api/" target="_blank" rel="noopener noreferrer">가격·출시 안내 ↗</a></p>
+<div class="catalogue-heading"><h2>활용사례 <span>한눈에 살펴보기</span></h2><div class="catalogue-meta"><span><b id="total-count">30</b>개 공개 자료</span></div></div>
+<section class="explore" aria-label="활용 사례 탐색">
+<div class="filter-dock"><div class="category-scroller"><nav id="categories" aria-label="분야별 분류"></nav></div><div class="search-wrap"><span data-icon="search"></span><label class="sr-only" for="search">사례 검색</label><input id="search" type="search" placeholder="음성, 브라우저, 분류, Jev…" autocomplete="off" maxlength="120"><kbd>/</kbd></div></div>
+<div class="results-row"><p id="result-status" role="status" aria-live="polite"></p><div><button id="reset" class="quiet-button" hidden>전체 보기 <span aria-hidden="true">↺</span></button><label class="sr-only" for="origin">출처 유형</label><select id="origin"><option value="all">모든 출처</option><option value="official-use">OpenAI 내부 활용</option><option value="partner-report">기업 도입·자체 평가</option><option value="community">커뮤니티 제작·실험</option><option value="official-demo">OpenAI 공개 데모</option><option value="recipe">공개 예제·설계</option></select><label class="sr-only" for="format">자료 형태</label><select id="format"><option value="all">모든 자료</option><option value="video">원본 영상 링크</option><option value="demo">실행 데모</option><option value="code">코드 공개</option></select><label class="sr-only" for="sort">정렬</label><select id="sort"><option value="curated">에디터 픽 순</option><option value="title">제목순</option><option value="newest">최신 공개순</option></select></div></div>
+<p class="preview-note">도입 보고, 제작자 실험, 공식 데모와 예제를 구분했습니다. 수치와 결과는 각 발표자의 보고이며 독립 재현하지 않았습니다. 카드의 그림은 내용을 설명하기 위해 만든 표지입니다.</p>
+<div class="cards" id="cards"></div>
+<div class="empty" id="empty" hidden><span data-icon="search"></span><h2 id="empty-title">일치하는 사례가 없습니다.</h2><p id="empty-text">검색어를 바꾸거나 다른 분야를 선택해 보세요.</p><button id="empty-reset" class="solid-button">전체 사례 보기 <span aria-hidden="true">↗</span></button></div>
+<noscript><div class="empty"><h2>사례를 표시하려면 JavaScript가 필요합니다.</h2><p><a href="https://developers.openai.com/api/docs/guides/decisions">OpenAI Decisions 공식 가이드 보기 ↗</a></p></div></noscript>
+</section>
+<footer class="footer"><div><a class="brand footer-brand" href="./"><strong>AI Showcase</strong></a></div><div class="footer-links"><button id="about" class="quiet-button">출처·미디어 안내</button><a href="https://github.com/alibowbow/jev" target="_blank" rel="noopener noreferrer">GitHub ↗</a><span>REVIEWED 2026.10.29</span></div></footer>
+</main>
+<div id="player-parking" hidden>
+<section id="inline-player" class="inline-player" aria-labelledby="player-title" hidden>
+<h3 id="player-title" class="sr-only"></h3>
+<div id="player-host" class="player-host"></div>
+<p id="player-status" role="status"></p>
+<p id="player-audio-note" class="player-note" hidden></p>
+<div class="player-actions"><button type="button" id="toggle-sound" class="quiet-button" aria-pressed="true" hidden>소리 끄기</button><button type="button" id="close-player" class="quiet-button" aria-label="영상 접기">영상 접기 <span data-icon="close"></span></button><a id="player-source" target="_blank" rel="noopener noreferrer">전체 원본 보기 <span aria-hidden="true">↗</span></a><a id="player-file" target="_blank" rel="noopener noreferrer" hidden>영상 파일 열기 ↗</a><button type="button" id="retry-player" class="quiet-button" hidden>다시 불러오기</button></div>
+<details id="player-details" class="player-details"><summary>시연 참고사항</summary><p id="player-note" class="player-note"></p></details>
+</section>
+</div>
+<dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-top"><span class="eyebrow">ABOUT THE COLLECTION</span><button id="close-about" class="icon-button" aria-label="안내 닫기"><span data-icon="close"></span></button></div><h2 id="about-title">OpenAI Decisions · 출처 안내</h2><p>OpenAI 공식 발표와 공개 데모, 제작자가 공개한 실험과 코드를 정리했습니다. 기업의 수치와 제작자의 결과는 각자의 자체 보고이며 독립 검증하지 않았습니다.</p><p>예제는 실제 서비스 도입 사례와 구분합니다. 표지는 이해를 돕는 창작 도식이며 원본 스크린샷이나 시연 영상이 아닙니다. 외부 영상과 실행 데모는 링크로 열립니다.</p><p>저장은 이 브라우저에만 보관됩니다. Decisions는 판단 결과를 반환하며 브라우저 조작이나 영상 편집은 별도 프로그램이 수행합니다.</p><a class="about-source" href="https://developers.openai.com/api/docs/guides/decisions" target="_blank" rel="noopener noreferrer">공식 가이드 ↗</a><a class="about-source" href="https://github.com/alibowbow/jev/blob/main/docs/decisions-2026-10-29.md" target="_blank" rel="noopener noreferrer">선정·출처 원장 ↗</a></dialog>
+<dialog id="case-dialog" aria-labelledby="case-title"><div class="dialog-top"><span id="case-origin" class="eyebrow"></span><button id="close-case" class="icon-button" aria-label="상세 닫기"><span data-icon="close"></span></button></div><h2 id="case-title"></h2><div id="case-body"></div></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body></html>
